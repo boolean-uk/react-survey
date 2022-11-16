@@ -1,16 +1,17 @@
 import "./styles/styles.css";
+
 import { useState } from "react";
 
 import Header from "./components/Header";
 import Main from "./components/Main";
 
 const initialFormState = {
-  bestFeatures: '',
-  worstFeaturs: '',
+  bestFeatures: false,
+  worstFeaturs: false,
   consistency: '',
   colour: '',
   logo: '',
-  spedTime: 'Swiming',
+  spedTime: false,
   additional: '',
   name: '',
   email: ''
