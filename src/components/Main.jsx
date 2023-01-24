@@ -5,7 +5,12 @@ const initalFormData = {
   email: "",
   review: "",
   colourRating: "",
-  activities: "",
+  spendTime: {
+    swimming: false,
+    bathing: false,
+    chatting: false,
+    noTime: false
+  }
 
 }
 
@@ -42,6 +47,22 @@ function Main() {
 
     if (name === "color") {
       newFormState.colourRating = value
+    }
+
+    if (name === "spend-time" && value === "swimming") {
+      newFormState.spendTime.swimming = checked
+    }
+
+    if (name === "spend-time" && value === "bathing") {
+      newFormState.spendTime.bathing = checked
+    }
+
+    if (name === "spend-time" && value === "chatting") {
+      newFormState.spendTime.chatting = checked
+    }
+
+    if (name === "spend-time" && value === "noTime") {
+      newFormState.spendTime.noTime = checked
     }
 
     setFormState(newFormState)
@@ -82,25 +103,25 @@ function Main() {
             <ul>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="swimming" />
+                  <input onChange={handleChange} name="spend-time" type="checkbox" value="swimming" checked={formState.spendTime.swimming}/>
                   Swimming
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="bathing" />
+                  <input onChange={handleChange} name="spend-time" type="checkbox" value="bathing" checked={formState.spendTime.bathing}/>
                   Bathing
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="chatting" />
+                  <input onChange={handleChange} name="spend-time" type="checkbox" value="chatting" checked={formState.spendTime.chatting} />
                   Chatting
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="noTime" />I
+                  <input onChange={handleChange} name="spend-time" type="checkbox" value="noTime" checked={formState.spendTime.noTime} />I
                   don't like to spend time with it
                 </label>
               </li>
