@@ -11,34 +11,32 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
-      ))}
+      {list.map((item, index) => {
+      if (item === true) {
+        return <li key={index}>{answersSet[index]}</li>
+      }
+    })}
     </ul>
   );
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
-}) {
+export default function AnswersItem({answerItem}) {
   return (
     <li>
       <article className="answer">
-        <h3>{username || "Anon"} said:</h3>
+        <h3>{answerItem.username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <span className="answer__line">{answerItem.color}</span>
         </p>
-        <p>
+        <div>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
-        </p>
+            <ItemsList list={answerItem.timespent} />
+        </div>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
-          <span className="answer__line">{review}</span>
+          <span className="answer__line">{answerItem.review}</span>
         </p>
       </article>
     </li>
