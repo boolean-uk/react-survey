@@ -11,31 +11,51 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
-      ))}
+      {list.map((item, index) => {
+        return <li key={index}>{answersSet[item]}</li>
+      })}
     </ul>
   );
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
-}) {
+export default function AnswersItem(props) {
+
+  const answerItem = props.answerItem
+  const { color, spendTime, review, username } = answerItem
+  const index = props.index
+  const setformInfo = props.setformInfo
+  const initalInfo = props.initalInfo
+  const isEditing = props.isEditing
+  const setisEditing = props.setisEditing
+  const seteditIndex = props.seteditIndex
+
+  const handelEdit = (event) => {
+    if(!isEditing) {
+      setisEditing(true)
+      event.target.className = "editButton selected"
+      setformInfo(answerItem)
+      seteditIndex(index)
+    } else {
+      setisEditing(false)
+      event.target.className = "editButton"
+      setformInfo(initalInfo)
+    }
+  }
+
   return (
     <li>
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
+        <button onClick={handelEdit} className="editButton">Edit</button>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <span className="answer__line">{color}</span>
         </p>
-        <p>
+        <div>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
-        </p>
+          <ItemsList list={spendTime} />
+        </div>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>

@@ -196,3 +196,19 @@ h2 {
 .form__submit:hover {
   background-color: white;
 }
+
+.editButton {
+  display: flex;
+  margin-left: auto;
+  padding: .2rem 1rem; 
+  position: relative;
+  top: -1.6rem;
+
+  background-color: white;
+  border: solid black 2px;
+  border-radius: 5px;
+}
+
+.selected {
+  background-color: grey;
+}
