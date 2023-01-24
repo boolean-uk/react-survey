@@ -11,9 +11,9 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
-      ))}
+      {list.map((item) => {
+       return <li>{answersSet[item]}</li>
+      })}
     </ul>
   );
 }

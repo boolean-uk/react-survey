@@ -1,57 +1,76 @@
+import AnswersList from "./AnswersList"
 import { useState } from "react";
-import AnswersList from "./AnswersList";
+
 
 const initialFormState = {
   username: "", 
   colour: "", 
-  timeSpent: "", 
   review:"",
-  email: ""
+  email: "",
+  timeSpent: {
+    swimming: false,
+    bathing: false,
+    chatting: false,
+    noTime: false
+  }
+  
+  
 } 
 
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formState, setFormState] = useState(initialFormState)
+  const [answersList, setAnswerList] = useState([])
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  
+    setAnswerList([...answersList, formState])
+    setFormState(initialFormState)
+    console.log(answersList)
+  }
 
   const handleChange = (event) => {
     const value = event.target.value 
-    const color = event.tartget.color
-    const timeSpent = event.target[spend-time]
+    const inputName = event.target.name
     const checked = event.target.checked
-    const review = event.target.review
-    const username = event.target.username
-    const email = event.target.email
+    
 
     const newFormState = {...formState}
 
-    if(color === 'color'){
+    if(inputName === 'color'){
       newFormState.colour = value
     }
-    if(checked === 'spend-time'){
-      newFormState.timeSpent = value
-    }
-    if(review === 'review'){
+    if(inputName === 'review'){
       newFormState.review = value
     }
-    if(username === 'username'){
+    if(inputName === 'username'){
       newFormState.username = value
     }
-    if(email === 'email'){
+    if(inputName === 'email'){
       newFormState.email = value
+    }
+    if(inputName === 'spend-time' && value === "swimming"){
+      newFormState.timeSpent.swimming = checked
+    }
+    if(inputName === 'spend-time' && value === 'bathing'){
+      newFormState.timeSpent.bathing = checked
+    }
+    if(inputName === 'spend-time' && value === 'chatting'){
+      newFormState.timeSpent.chatting = checked
+    }
+    if(inputName === 'spend-time' && value === 'noTime'){
+      newFormState.timeSpent.noTime = checked
     }
     setFormState(newFormState)
   }
-  const handleSubmit = (event) => {
-    event.preventDefault()
-
-    setFormState(initialFormState)
-  }
+  
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={formState}/>
+        <AnswersList answersList={answersList}/>
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -62,22 +81,22 @@ function Main() {
               <li>
                 <input id="color-one" type="radio" name="color" value="1" onChange={handleChange}/>
                 <label
-                  for="color-one"
+                  htmlFor="color-one"
                 >1</label>
               </li>
               <li>
                 <input id="color-two" type="radio" name="color" value="2" onChange={handleChange}/><label
-                  for="color-two"
+                  htmlFor="color-two"
                 >2</label>
               </li>
               <li>
                 <input id="color-three" type="radio" name="color" value="3" onChange={handleChange}/><label
-                  for="color-three"
+                  htmlFor="color-three"
                 >3</label>
               </li>
               <li>
                 <input id="color-four" type="radio" name="color" value="4" onChange={handleChange}/><label
-                  for="color-four"
+                  htmlFor="color-four"
                 >4</label>
               </li>
             </ul>
@@ -129,16 +148,17 @@ function Main() {
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text"
+            <input 
+              type="text"
               name="username"
-              value="" 
-              onChange={handleChange}/>
+              onChange={handleChange}
+              />
           </label>
           <label>Email:
             <input type="email"
               name="email"
-              value="" 
-              onChange={handleChange}/>
+              onChange={handleChange}
+              />
           </label>
           <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
