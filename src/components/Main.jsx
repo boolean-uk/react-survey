@@ -16,8 +16,8 @@ function Main() {
   const [answers, setAnswers] = useState([
     {
       username: "Rose",
-      timeSpent: ["chatting"],
-      colour: '4',
+      spent: ["chatting"],
+      color: '4',
       review: 'Review of my hero',
       email: 'rose@rose.com'
     }
@@ -49,10 +49,10 @@ function Main() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setAnswers([...answers, formData])
-    setFormData(initialFormData)
+    setAnswers([formData])
+    console.log(answers)
   }
 
   return (
