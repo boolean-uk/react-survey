@@ -11,8 +11,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, i) => (
+        <li key={i}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,8 +22,12 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: {id, username, colour, timeSpent, review }, updateForm
 }) {
+      const handleEdit = () => {
+         updateForm({id, username, colour, timeSpent, review})
+      }
+
   return (
     <li>
       <article className="answer">
@@ -34,12 +38,13 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
         </p>
+          <ItemsList list={timeSpent} />
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button type="submit" onClick={handleEdit}>Edit</button>
       </article>
     </li>
   );

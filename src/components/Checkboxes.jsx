@@ -1,25 +1,19 @@
 import React from "react";
 
 function Checkboxes({ formData, setFormData }) {
-  //  if(checked) {
-  //   newData.timeSpent.push()
-  //  } else {
-  //   const filterdItems = hobbies.filter(item => item !== e.target.value)
-  //   newData.timeSpent = [...filterdItems]
-  //  }
+
   const handleChange = (e) => {
     const newData = { ...formData };
-    const { name, value, checked } = e.target
+    const { value, checked } = e.target
 
-    const temp = {...newData.timeSpent}
-    newData.timeSpent = temp
+    newData.timeSpent = [...newData.timeSpent]
     if (checked) {
-      newData.timeSpent[value] = true
+      newData.timeSpent.push(value)
     } else {
-      newData.timeSpent[value] = false
+      const filteredItems = formData['timeSpent'].filter(item => item !== value)
+      newData.timeSpent = [...filteredItems]
     }
-    // console.log(newData)
-    setFormData(newData)
+    setFormData({ ...newData })
   };
 
   return (
@@ -32,7 +26,7 @@ function Checkboxes({ formData, setFormData }) {
               type="checkbox"
               value="swimming"
               onChange={handleChange}
-              checked={formData.timeSpent.swimming}//{formData.timeSpent.includes("swimming")}
+              checked={formData.timeSpent.includes("swimming")}
             />
             Swimming
           </label>
@@ -44,7 +38,7 @@ function Checkboxes({ formData, setFormData }) {
               type="checkbox"
               value="bathing"
               onChange={handleChange}
-              checked={formData.timeSpent.bathing}
+              checked={formData.timeSpent.includes("bathing")}
             />
             Bathing
           </label>
@@ -56,7 +50,7 @@ function Checkboxes({ formData, setFormData }) {
               type="checkbox"
               value="chatting"
               onChange={handleChange}
-              checked={formData.timeSpent.chatting}
+              checked={formData.timeSpent.includes("chatting")}
             />
             Chatting
           </label>
@@ -68,7 +62,7 @@ function Checkboxes({ formData, setFormData }) {
               type="checkbox"
               value="noTime"
               onChange={handleChange}
-              checked={formData.timeSpent.noTime}
+              checked={formData.timeSpent.includes("noTime")}
             />
             I don't like to spend time with it
           </label>
