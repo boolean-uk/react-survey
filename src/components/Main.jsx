@@ -11,12 +11,11 @@ const initialForm = {
   email: ''
 }
 
-const initialAnswers = [initialForm]
 
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData , setFormData] = useState(initialForm)
-  const [answersList, setAnswersList] = useState(initialAnswers)
+  const [answersList, setAnswersList] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -27,11 +26,12 @@ function Main() {
       username: '',
       email: ''
     })
+    setAnswersList([...answersList,formData])
   }
 
   const handleChange = (e) => { 
     const {name,type, value, checked} = e.target
-    console.log(name, value);
+    // console.log(name, value);
     const arr = formData.timeSpent
     if (name === "timeSpent" && !arr.some(item => item === value)) {
       setFormData({...formData,[name] : [...formData.timeSpent,value]})
@@ -53,7 +53,7 @@ function Main() {
         <form className="form" onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
-            <h3>How do you rate your rubber duck colour?</h3>
+            <h3>How do you rate your rubber duck color?</h3>
             <RadioButtons handleChange={handleChange} formData={formData} />
           </div>
           <div className="form__group">
