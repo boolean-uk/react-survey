@@ -40,7 +40,6 @@ function Main() {
     } else {
       setFormData({...formData,[name] : value})
     }
-    console.log(formData.timeSpent);
   }
 
   return (
