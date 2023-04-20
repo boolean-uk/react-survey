@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 const initialData = {
-  colorRate: '',
+  color: '',
   'spend-time': {
     swimming: false,
     bathing: false,
     chatting: false,
     noTime: false
   },
-  info: '',
-  name: '',
+  review: '',
+  username: '',
   email: ''
 }
 
@@ -20,10 +20,22 @@ function Main() {
   const handleChange = (e) =>{
     const {type, name, checked,value} = e.target
     if(type === 'checkbox'){
-      console.log(name)
-      setData({...data, [name[value]]: checked})
+      
+      let newVal = data[name]
+      newVal[value] = checked
+      // console.log(newVal)
+      
+      setData({...data, [name]: newVal})
+    }else{
+      setData({...data, [name]: value})
+
     }
-    // console.log(data['spend-time']);
+
+  }
+
+  const handleSubmit = (e) =>{
+      e.preventDefault()
+      setData(initialData)
 
   }
 
@@ -31,12 +43,14 @@ function Main() {
 
   return (
     <main className="main">
+    {console.log(data)}
+
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
       </section>
       <section className="main__form">
-      <form class="form">
+      <form class="form" onSubmit={handleSubmit}>
   <h2>Tell us what you think about your rubber duck!</h2>
   
   <div class="form__group radio">
@@ -61,24 +75,24 @@ function Main() {
 
     <ul>
       <li>
-        <label><input name="spend-time" type="checkbox" value="swimming" onChange={handleChange}/>Swimming</label>
+        <label><input name="spend-time" type="checkbox" value="swimming" onChange={handleChange} checked={data['spend-time'].swimming}/>Swimming</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="bathing" onChange={handleChange}/>Bathing</label>
+        <label><input name="spend-time" type="checkbox" value="bathing" onChange={handleChange} checked={data['spend-time'].bathing}/>Bathing</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="chatting" onChange={handleChange}/>Chatting</label>
+        <label><input name="spend-time" type="checkbox" value="chatting" onChange={handleChange} checked={data['spend-time'].chatting}/>Chatting</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="noTime" onChange={handleChange}/>I don't like to
+        <label><input name="spend-time" type="checkbox" value="noTime" onChange={handleChange} checked={data['spend-time'].noTime}/>I don't like to
           spend time with it</label>
       </li>
     </ul>
   </div>
   <label>What else have you got to say about your rubber duck?<textarea name="review" cols="30"
-      rows="10"></textarea></label><label>Put your name here (if you feel like it):<input type="text" name="username"
-      value="" onChange={handleChange}/></label><label>Leave us your email pretty please??<input type="email" name="email"
-      value="" onChange={handleChange}/></label><input class="form__submit" type="submit" value="Submit Survey!" />
+      rows="10" onChange={handleChange} value={data.review}></textarea></label><label>Put your name here (if you feel like it):<input type="text" name="username"
+      value={data.username} onChange={handleChange}/></label><label>Leave us your email pretty please??<input type="email" name="email"
+      value={data.email} onChange={handleChange}/></label><input class="form__submit" type="submit" value="Submit Survey!" />
   </form>
       </section>
     </main>
