@@ -4,6 +4,7 @@ import Checkboxes from "./Checkboxes";
 import RadioButtons from "./RadioButtons";
 
 const initialForm = {
+  id: null ,
   color: '',
   timeSpent: [],
   review: '',
@@ -11,14 +12,40 @@ const initialForm = {
   email: ''
 }
 
+let id = 1
 
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData , setFormData] = useState(initialForm)
   const [answersList, setAnswersList] = useState([])
 
+  const [oldFormData, setOldFormData] = useState(initialForm)
+  const [editCard, setEditCard] = useState(false)
+  
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (editCard) {
+      const editedAnswers = answersList.map((answerItem) => {
+        console.log(1);
+        if (answerItem.id === oldFormData.id) {
+          
+          setEditCard(false)
+          answerItem.color = formData.color
+          answerItem.timeSpent = formData.timeSpent
+          answerItem.review = formData.review
+          answerItem.username = formData.username
+          answerItem.email = formData.email
+        }
+        // console.log(answerItem);
+        return answerItem
+      })
+      setAnswersList(editedAnswers)
+    } else {
+      formData.id = id
+      setAnswersList([...answersList,formData])
+      id++
+    }
     setFormData({
       color: '',
       timeSpent: [],
@@ -26,7 +53,6 @@ function Main() {
       username: '',
       email: ''
     })
-    setAnswersList([...answersList,formData])
   }
 
   const handleChange = (e) => { 
@@ -42,12 +68,20 @@ function Main() {
     }
   }
 
+  function handleEditData(formData) {
+    setFormData(formData)
+    console.log(formData); 
+    setOldFormData(formData)
+    setEditCard(true)
+  }
+
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         <AnswersList 
-        answersList={answersList} />
+        answersList={answersList}
+        handleEditData={handleEditData} />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
