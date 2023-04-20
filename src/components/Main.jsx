@@ -29,7 +29,7 @@ function Main() {
       const editedAnswers = answersList.map((answerItem) => {
         console.log(1);
         if (answerItem.id === oldFormData.id) {
-          
+          // Editing the props of formData when submitting
           setEditCard(false)
           answerItem.color = formData.color
           answerItem.timeSpent = formData.timeSpent
@@ -37,11 +37,11 @@ function Main() {
           answerItem.username = formData.username
           answerItem.email = formData.email
         }
-        // console.log(answerItem);
         return answerItem
       })
       setAnswersList(editedAnswers)
     } else {
+      // Manually assigning an id to the answer before pushing to answersList
       formData.id = id
       setAnswersList([...answersList,formData])
       id++
@@ -68,12 +68,20 @@ function Main() {
     }
   }
 
-  function handleEditData(formData) {
+  const handleEditData = (formData) => {
     setFormData(formData)
     console.log(formData); 
     setOldFormData(formData)
     setEditCard(true)
   }
+
+  const handleDeleteData = (idTodelete) => {
+    console.log(idTodelete);
+    const deletedAnswer = answersList.filter(answerItem => answerItem.id !== idTodelete)
+    setAnswersList(deletedAnswer)
+  }
+
+
 
   return (
     <main className="main">
@@ -81,7 +89,8 @@ function Main() {
         <h2>Answers list</h2>
         <AnswersList 
         answersList={answersList}
-        handleEditData={handleEditData} />
+        handleEditData={handleEditData}
+        handleDeleteData={handleDeleteData} />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>

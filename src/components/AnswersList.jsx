@@ -5,11 +5,16 @@ export default function AnswersList(props) {
 
   const {answersList} = props;
   const {handleEditData} = props;
+  const {handleDeleteData} = props;
 
   return (
     <ul>
       {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} handleEditData={handleEditData} key={i} />
+        <AnswersItem 
+        answerItem={answerItem} 
+        handleEditData={handleEditData} 
+        handleDeleteData={handleDeleteData}
+        key={i} />
       ))}
     </ul>
   );

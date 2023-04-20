@@ -199,8 +199,23 @@ h2 {
 }
 
 /* Answers Button */
-.edit {
+.answer-buttons {
   display:block;
   float: right;
   padding: 10px;
+  margin:2px;
+}
+
+.answer-buttons:hover {
+  cursor: pointer;
+}
+
+.delete {
+  background-color: rgb(255, 68, 68);
+  border-radius: 5px;
+  color: white
+}
+
+.delete:hover {
+  background-color:rgb(255, 107, 107);
 }

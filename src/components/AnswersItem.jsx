@@ -23,7 +23,7 @@ export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: { username, color, timeSpent, review , email, id}
-, handleEditData}) {
+, handleEditData,handleDeleteData}) {
 
   const handleEdit = () => {
     handleEditData(
@@ -36,6 +36,10 @@ export default function AnswersItem({
         id: id
       }
     )
+  }
+
+  const handleDelete = () => {
+    handleDeleteData(id)
   }
 
   return (
@@ -55,7 +59,8 @@ export default function AnswersItem({
           <span className="answer__line">{review}</span>
         </p>
         <div>
-          <button onClick={handleEdit} className="edit">Edit</button>
+          <button onClick={handleDelete} className="answer-buttons delete">Delete</button>
+          <button onClick={handleEdit} className="answer-buttons">Edit</button>
         </div>
       </article>
     </li>
