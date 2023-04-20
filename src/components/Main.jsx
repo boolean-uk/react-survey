@@ -1,30 +1,32 @@
 import { useState } from "react";
 
+import AnswersList from './AnswersList'
+
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
-  const [rate, setRate] = useState("");
-  const [TimeWithDuck, setTimeWithDuck] = useState("");
-  const [text,setText] = useState("")
-  const [name,setName] = useState("")
+  const [colour, setColour] = useState("");
+  const [timeSpent, setTimeSpent] = useState("");
+  const [review,setReview] = useState("")
+  const [userName,setUserName] = useState("")
   const [email,setEmail] = useState("")
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({rate,TimeWithDuck,text,name,email});
+    console.log({colour,timeSpent,review,userName,email});
   };
 
-  const handleRate = (e) => {
-    setRate(e.target.value);
+  const handleColour = (e) => {
+    setColour(e.target.value);
   };
-  const handleTimeWithDuck = (e) => {
-    setTimeWithDuck(e.target.value);
+  const handleTimeSpent = (e) => {
+    setTimeSpent(e.target.value);
   };
-  const handleText = (e) =>{
-    setText(e.target.value)
+  const handleReview = (e) =>{
+    setReview(e.target.value)
     
   }
-  const handleName = (e) =>{
-    setName(e.target.value)
+  const handleUserName = (e) =>{
+    setUserName(e.target.value)
     
   }
   const handleEmail = (e) =>{
@@ -37,6 +39,7 @@ function Main() {
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
+        <AnswersList />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -51,7 +54,7 @@ function Main() {
                   type="radio"
                   name="color"
                   value="1"
-                  onChange={handleRate}
+                  onChange={handleColour}
                 />
                 <label for="color-one">1</label>
               </li>
@@ -61,7 +64,7 @@ function Main() {
                   type="radio"
                   name="color"
                   value="2"
-                  onChange={handleRate}
+                  onChange={handleColour}
                 />
                 <label for="color-two">2</label>
               </li>
@@ -71,7 +74,7 @@ function Main() {
                   type="radio"
                   name="color"
                   value="3"
-                  onChange={handleRate}
+                  onChange={handleColour}
                 />
                 <label for="color-three">3</label>
               </li>
@@ -81,7 +84,7 @@ function Main() {
                   type="radio"
                   name="color"
                   value="4"
-                  onChange={handleRate}
+                  onChange={handleColour}
                 />
                 <label for="color-four">4</label>
               </li>
@@ -96,7 +99,7 @@ function Main() {
                     name="spend-time"
                     type="checkbox"
                     value="swimming"
-                    onChange={handleTimeWithDuck}
+                    onChange={handleTimeSpent}
                   />
                   Swimming
                 </label>
@@ -107,7 +110,7 @@ function Main() {
                     name="spend-time"
                     type="checkbox"
                     value="bathing"
-                    onChange={handleTimeWithDuck}
+                    onChange={handleTimeSpent}
                   />
                   Bathing
                 </label>
@@ -118,7 +121,7 @@ function Main() {
                     name="spend-time"
                     type="checkbox"
                     value="chatting"
-                    onChange={handleTimeWithDuck}
+                    onChange={handleTimeSpent}
                   />
                   Chatting
                 </label>
@@ -129,7 +132,7 @@ function Main() {
                     name="spend-time"
                     type="checkbox"
                     value="noTime"
-                    onChange={handleTimeWithDuck}
+                    onChange={handleTimeSpent}
                   />
                   I don't like to spend time with it
                 </label>
@@ -138,11 +141,11 @@ function Main() {
           </div>
           <label>
             What else have you got to say about your rubber duck?
-            <textarea name="review" cols="30" rows="10" onChange={handleText}></textarea>
+            <textarea name="review" cols="30" rows="10" onChange={handleReview}></textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" value={name} onChange={handleName}/>
+            <input type="text" name="username" value={userName} onChange={handleUserName}/>
           </label>
           <label>
             Leave us your email pretty please??
