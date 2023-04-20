@@ -9,10 +9,11 @@ const answersSet = {
 };
 
 function ItemsList({ list }) {
+
   return (
     <ul>
-      {list.map(item => (
-        <li>{answersSet[item]}</li>
+      {Object.keys(list).map(item => (
+        <li key={item}>{list[item] ? answersSet[item] : null}</li>
       ))}
     </ul>
   );
