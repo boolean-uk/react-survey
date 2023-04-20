@@ -197,11 +197,31 @@ h2 {
   background-color: white;
 }
 
+.actions_span {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .edit_button {
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgb(80, 214, 109);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  font-size: large;
+  color: white;
+}
+
+.delete_button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgb(196, 100, 44);
   cursor: pointer;
   outline: none;
   border: none;

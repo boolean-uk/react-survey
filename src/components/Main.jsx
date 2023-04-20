@@ -1,15 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AnswersList from '../components/AnswersList'
+import axios from "axios";
 function Main() {
 
   const initialData = {
-    color: '',
-    // timeSpent: {
-    //   swimming: false,
-    //   bathing: false,
-    //   chatting: false,
-    //   noTime: false
-    // },
+    color: '1',
     timeSpent: [],
     review: '',
     username: '',
@@ -23,6 +18,11 @@ function Main() {
 
   const editIndex = useRef(-1)
 
+
+  useEffect(()=>{
+    axios.get('http://localhost:3030/answers').then((response) => setAnswers(response.data))
+  }, [])
+
   const handleChange = (e) => {
     const { type, name, checked, value } = e.target
     if (type === 'checkbox') {
@@ -32,9 +32,6 @@ function Main() {
       if(index === -1 && checked) arr.push(value)
       else if(index !== -1 && !checked) arr.splice(index, 1)
       
-
-      // let newVal = data[name]
-      // newVal[value] = checked
 
       setData({ ...data, timeSpent: arr })
     } else {
@@ -53,22 +50,34 @@ function Main() {
 
       updatedAnswers[editIndex.current] = data
 
-      setAnswers(updatedAnswers)
-    } else
-      setAnswers([...answers, data])
+      axios.patch(`http://localhost:3030/answers/${answers[editIndex.current].id}`, updatedAnswers[editIndex.current]).then(response => setAnswers(updatedAnswers))
+
+    } else{
+      axios.post('http://localhost:3030/answers', data).then(response => {
+        if(response.status === 201)
+          setAnswers([...answers, response.data])
+      }) 
+    }
+     
     setData(initialData)
-
     editIndex.current = -1
-
   }
 
   const handleAnswerEdit = (answer) => {
     let index = answers.indexOf(answer)
 
     editIndex.current = index
-    //setData(answers[index])
     setData({...answers[index]})
 
+  }
+
+  const handleAnswerDelete = (answer) => {
+    let index = answers.indexOf(answer)
+
+    axios.delete(`http://localhost:3030/answers/${answers[index].id}`).then(response => {
+      if(response.status === 200)
+        setAnswers(answers.filter((answer, i) => i !== index))
+    })
   }
 
   return (
@@ -76,7 +85,7 @@ function Main() {
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
 
-        {answers.length > 0 && <AnswersList answersList={answers} handleEdit={handleAnswerEdit} />}
+        {answers.length > 0 && <AnswersList answersList={answers} handleEdit={handleAnswerEdit} handleDelete = {handleAnswerDelete}/>}
       </section>
       <section className="main__form">
         <form class="form" onSubmit={handleSubmit}>
