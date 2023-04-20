@@ -1,58 +1,23 @@
 import { RadioButton} from './RadioButton'
 import { Checkbox } from './Checkbox'
 
-import { useState } from 'react'
+export const Form = ({formData, handleChange, handleSubmit}) => {
 
-const initialFormData = {
-  username: '',
-  color:'',
-  spent: [],
-  review: '',
-  email: '',
-}
-
-export const Form = () => {
-
-  const [formData, setFormData] = useState(initialFormData)
-
-  const handleChange = (e) => {
-    const inputName = e.target.name;
-    const inputValue = e.target.value;
-    const checked = e.target.checked;
-
-    if (inputName === "username") {
-      setFormData({ ...formData, username: inputValue });
-    }
-
-    if (inputName === "email") {
-      setFormData({...formData, email: inputValue })
-    }
-
-    if (inputName === 'color') {
-      setFormData({...formData, color: inputValue })
-    }
-
-    if (inputName === 'review') {
-      setFormData({...formData, review: inputValue})
-    }
-
-    if (inputName === 'spend-time' && checked) {
-      checked ? setFormData({...formData, spent: [...formData.spent, inputValue]}) : setFormData({...formData})
-    }
+  const change = (e) => {
+    handleChange(e)
   }
 
-  const handleSubmit = (e) => {
-    console.log(formData)
-    setFormData(initialFormData)
+  const submit = (e) => {
+    handleSubmit(e)
   }
 
   return(
-  <form className="form" onSubmit={handleSubmit}>
+  <form className="form" onSubmit={submit}>
     <h2>Tell us what you think about your rubber duck!</h2>
     <div className="form__group radio">
       <h3>How do you rate your rubber duck colour?</h3>
       <RadioButton
-        handleChange={handleChange}
+        onChange={change}
         color={formData.color}
         spent={formData.spent}
       />
@@ -60,7 +25,7 @@ export const Form = () => {
     <div className="form__group">
       <h3>How do you like to spend time with your rubber duck</h3>
       <Checkbox
-        handleChange={handleChange}
+        onChange={change}
         spent = {formData.spent}
       />
     </div>
@@ -70,7 +35,7 @@ export const Form = () => {
       name="review"
       cols="30"
       rows="10"
-      onChange={handleChange}
+      onChange={change}
       value={formData.review}
     ></textarea>
     </label>
@@ -80,7 +45,7 @@ export const Form = () => {
       type="text"
       name="username"
       value={formData.username}
-      onChange={handleChange}
+      onChange={change}
       />
     </label>
     <label>
@@ -89,7 +54,7 @@ export const Form = () => {
       type="email"
       name="email"
       value={formData.email}
-      onChange={handleChange}
+      onChange={change}
       />
     </label>
       <input

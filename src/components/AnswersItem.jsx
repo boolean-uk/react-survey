@@ -8,11 +8,11 @@ const answersSet = {
   noTime: "I don't like to spend time with it"
 };
 
-function ItemsList({ list }) {
+function ItemsList({ list, key }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, key) => (
+        <li key={key}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -34,8 +34,8 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={spent} />
         </p>
+          <ItemsList list={timeSpent} />
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>

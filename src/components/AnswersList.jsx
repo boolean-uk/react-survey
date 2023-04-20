@@ -1,14 +1,12 @@
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
-
-  const { answersList } = props;
+export const AnswersList = ({answers}) => {
+  console.log("Inside AnswersList: ", answers);
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {answers.map((answerItem, id) => (
+        <AnswersItem answerItem={answerItem} key={id} />
       ))}
     </ul>
   );
