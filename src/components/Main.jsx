@@ -4,13 +4,15 @@ import AnswersList from "./AnswersList.jsx"
 function Main() {
   const listItem = {
     colour: "",
-    swimming: false,
-    bathing: false,
-    chatting: false,
-    noTime: false,
+    timeSpent : {
+      swimming: false,
+      bathing: false,
+      chatting: false,
+      noTime: false
+    },
     review: "",
     username: "",
-    email: "",
+    email: ""
   }
 
   const [item, setItem] = useState(listItem)
@@ -20,10 +22,8 @@ function Main() {
   const handleSubmit = (e) => {
     e.preventDefault()
     answersList.push(item)
-    // setAnswerList([...answersList])
-    
-    console.log ("Added: " + item.username)
-    console.log (item)
+    // console.log ("Added: ")
+    // setAnswerList([{...answersList, item}])
     console.log (answersList)
     const form = document.querySelector("form")
     form.reset()
@@ -40,13 +40,13 @@ function Main() {
         setItem({ ...item, username: value })
       } else if (name === "spend-time") {
         if (value === "swimming"){
-          setItem({ ...item, swimming : true})
+          setItem({ ...item, timeSpent :{...item.timeSpent, swimming :true}})
         } else if (value === "bathing") {
-          setItem({ ...item, bathing: true })
+          setItem({ ...item, timeSpent :{...item.timeSpent, bathing :true}})
         } else if (value === "chatting") {
-          setItem({ ...item, chatting: true })
+          setItem({ ...item, timeSpent :{...item.timeSpent, chatting :true}})
         } else {
-          setItem({ ...item, noTime: true })
+          setItem({ ...item, timeSpent :{...item.timeSpent, noTime :true}})
         }
       } else {
         setItem({ ...item, email: value })

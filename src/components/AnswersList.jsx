@@ -7,9 +7,9 @@ export default function AnswersList(props) {
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
-      ))}
+      {answersList.map((answerItem, i) => {
+       ( <AnswersItem answerItem={answerItem} key={i} />)
+      })}
     </ul>
   );
 }
