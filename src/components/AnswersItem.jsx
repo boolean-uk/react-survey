@@ -34,7 +34,7 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <ItemsList list={spent} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
