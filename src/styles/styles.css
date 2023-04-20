@@ -196,3 +196,16 @@ h2 {
 .form__submit:hover {
   background-color: white;
 }
+
+.edit_button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgb(80, 214, 109);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  font-size: large;
+  color: white;
+}

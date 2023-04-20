@@ -11,9 +11,9 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {console.log(list)}
+      
       {Object.keys(list).map((key) => {
-        console.log(list[key])
+        
         return <li>{list[key] && answersSet[key]}</li>
       })}
     </ul>
@@ -24,24 +24,26 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, color, timeSpent, review }
+  answerItem, handleEdit
 }) {
+
   return (
     <li>
       <article className="answer">
-        <h3>{username || "Anon"} said:</h3>
+        <h3>{answerItem.username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{color}</span>
+          <span className="answer__line">{answerItem.color}</span>
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <ItemsList list={answerItem.timeSpent} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
-          <span className="answer__line">{review}</span>
+          <span className="answer__line">{answerItem.review}</span>
         </p>
+        <button className="edit_button" onClick={()=>handleEdit(answerItem)}>Edit</button>
       </article>
     </li>
   );

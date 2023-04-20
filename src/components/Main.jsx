@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AnswersList from '../components/AnswersList'
 function Main() {
 
@@ -20,6 +20,8 @@ function Main() {
 
   const [answers, setAnswers] = useState([])
 
+  const editIndex = useRef(-1)
+
   const handleChange = (e) =>{
     const {type, name, checked,value} = e.target
     if(type === 'checkbox'){
@@ -37,18 +39,37 @@ function Main() {
 
   const handleSubmit = (e) =>{
       e.preventDefault()
-      console.log(data)
-      setAnswers([...answers, data])
+  
+      if(editIndex.current !== -1) {
+        
+        const updatedAnswers = [...answers]
+
+        updatedAnswers[editIndex.current] = data
+        
+        setAnswers(updatedAnswers)
+      }else
+        setAnswers([...answers, data])
       setData(initialData)
 
+      editIndex.current = -1
 
   }
+
+  const handleAnswerEdit = (answer) => {
+      let index = answers.indexOf(answer)
+      
+      editIndex.current = index
+      setData(answers[index])
+      
+      
+  } 
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-       {answers.length > 0 && <AnswersList answersList = {answers}/>}
+        
+       {answers.length > 0 && <AnswersList answersList = {answers} handleEdit = {handleAnswerEdit}/>}
       </section>
       <section className="main__form">
       <form class="form" onSubmit={handleSubmit}>
