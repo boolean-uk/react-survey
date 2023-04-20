@@ -27,7 +27,6 @@ function Main() {
     e.preventDefault()
     if (editCard) {
       const editedAnswers = answersList.map((answerItem) => {
-        console.log(1);
         if (answerItem.id === oldFormData.id) {
           // Editing the props of formData when submitting
           setEditCard(false)
@@ -76,7 +75,6 @@ function Main() {
   }
 
   const handleDeleteData = (idTodelete) => {
-    console.log(idTodelete);
     const deletedAnswer = answersList.filter(answerItem => answerItem.id !== idTodelete)
     setAnswersList(deletedAnswer)
   }
