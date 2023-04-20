@@ -17,7 +17,6 @@ function Main() {
 
   const [open, setOpen] = useState(false); //Ignore this state
   const [data, setData] = useState(initialData)
-
   const [answers, setAnswers] = useState([])
 
   const handleChange = (e) =>{
@@ -48,7 +47,7 @@ function Main() {
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-       {answers.length > 0 && <AnswersList answersList = {answers}/>}
+       {answers.length > 0 && <AnswersList answersList = {answers} setData={setData} data={data}/>}
       </section>
       <section className="main__form">
       <form class="form" onSubmit={handleSubmit}>

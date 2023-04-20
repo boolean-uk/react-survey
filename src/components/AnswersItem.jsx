@@ -24,8 +24,20 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, color, timeSpent, review }
+  answerItem: { username, color, timeSpent, review, email}
 }) {
+  const handleRecall = () =>{
+    const newData = {
+      color: color,
+      timeSpent: timeSpent,
+      review: review,
+      username: username,
+      email: email
+    }
+    //TODO update the form
+    console.log(newData);
+ 
+  }
   return (
     <li>
       <article className="answer">
@@ -43,6 +55,8 @@ export default function AnswersItem({
           <span className="answer__line">{review}</span>
         </p>
       </article>
+      <button onClick={handleRecall}>Recall</button>
+
     </li>
   );
 }
