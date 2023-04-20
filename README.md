@@ -26,5 +26,5 @@ Store all submitted answers in state. Update `Main.jsx` to display all the answe
 ## Extension 2
 Add an edit button to each of the answers cards. Clicking on this button should fill in the form with the current answers, and submitting the form should save the changes into the same card again.
 
-## Extension 2
+## Extension 3
 Add a json-server to your app, and persist all the answers from the form. You still should be able to edit the form and save the new answers too. Also, add a delete button to each of the answers that will delete them from the server too.

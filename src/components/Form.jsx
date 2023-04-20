@@ -1,15 +1,8 @@
 import RadioButtons from "./RadioButtons";
 import CheckBoxes from "./CheckBoxes";
-import { useState } from "react";
 
-export default function Form({ answers, setAnswers }) {
-  const [userData, setUserData] = useState({
-    timeSpent: [],
-    colour: null,
-    review: "",
-    username: "",
-    email: "",
-  });
+export default function Form({ handleSumbit, userData, setUserData }) {
+  
   const handleChange = (e) => {
     e.target.type === "checkbox"
       ? userData.timeSpent.includes(e.target.value)
@@ -25,21 +18,9 @@ export default function Form({ answers, setAnswers }) {
           })
       : setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-  const handleSumbit = (e) => {
-    e.preventDefault();
-    // *console.table(userData);
-    setAnswers([...answers, userData]);
-    setUserData({
-      timeSpent: [],
-      colour: null,
-      review: "",
-      username: "",
-      email: "",
-    });
-  };
 
   return (
-    <form onSubmit={handleSumbit} className="form">
+    <form onSubmit={e => { handleSumbit(e) }} className="form">
       <h2>Tell us what you think about your rubber duck!</h2>
       <div className="form__group radio">
         <h3>How do you rate your rubber duck colour?</h3>
