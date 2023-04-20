@@ -1,10 +1,10 @@
 import { useState } from "react";
-
+import AnswersList from '../components/AnswersList'
 function Main() {
 
   const initialData = {
     color: '',
-    'spend-time': {
+    timeSpent: {
       swimming: false,
       bathing: false,
       chatting: false,
@@ -17,6 +17,8 @@ function Main() {
 
   const [open, setOpen] = useState(false); //Ignore this state
   const [data, setData] = useState(initialData)
+
+  const [answers, setAnswers] = useState([])
 
   const handleChange = (e) =>{
     const {type, name, checked,value} = e.target
@@ -36,7 +38,9 @@ function Main() {
   const handleSubmit = (e) =>{
       e.preventDefault()
       console.log(data)
+      setAnswers([...answers, data])
       setData(initialData)
+
 
   }
 
@@ -44,7 +48,7 @@ function Main() {
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+       {answers.length > 0 && <AnswersList answersList = {answers}/>}
       </section>
       <section className="main__form">
       <form class="form" onSubmit={handleSubmit}>
@@ -72,16 +76,16 @@ function Main() {
 
     <ul>
       <li>
-        <label><input name="spend-time" type="checkbox" value="swimming" onChange={handleChange} checked={data['spend-time'].swimming}/>Swimming</label>
+        <label><input name="timeSpent" type="checkbox" value="swimming" onChange={handleChange} checked={data.timeSpent.swimming}/>Swimming</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="bathing" onChange={handleChange} checked={data['spend-time'].bathing}/>Bathing</label>
+        <label><input name="timeSpent" type="checkbox" value="bathing" onChange={handleChange} checked={data.timeSpent.bathing}/>Bathing</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="chatting" onChange={handleChange} checked={data['spend-time'].chatting}/>Chatting</label>
+        <label><input name="timeSpent" type="checkbox" value="chatting" onChange={handleChange} checked={data.timeSpent.chatting}/>Chatting</label>
       </li>
       <li>
-        <label><input name="spend-time" type="checkbox" value="noTime" onChange={handleChange} checked={data['spend-time'].noTime}/>I don't like to
+        <label><input name="timeSpent" type="checkbox" value="noTime" onChange={handleChange} checked={data.timeSpent.noTime}/>I don't like to
           spend time with it</label>
       </li>
     </ul>
