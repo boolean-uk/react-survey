@@ -67,11 +67,7 @@ function Main() {
 
     editIndex.current = index
     //setData(answers[index])
-    setData({
-      username:answers[index].username,
-      color:answers[index].color,
-      timeSpent: answers[index].timeSpent,
-    })
+    setData({...answers[index]})
 
   }
 
@@ -104,7 +100,7 @@ function Main() {
             </ul>
           </div>
           <div class="form__group">
-            <h3>How do you like to spend time with your rubber duck</h3>
+            <h3>How do you like to spend time with your rubber duck?</h3>
 
             <ul>
               <li>

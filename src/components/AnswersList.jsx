@@ -5,7 +5,6 @@ export default function AnswersList(props) {
 
   const { answersList, handleEdit } = props;
 
-  
   return (
     <ul>
       {answersList.map((answerItem, i) => (
