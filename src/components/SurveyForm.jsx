@@ -14,7 +14,7 @@ const SurveyForm = ({formData, handleSubmit, handleChange}) => {
       </div>
       <div className="form__group">
         <h3>How do you like to spend time with your rubber duck</h3>
-        <Checkboxes handleChange={handleChange} timeSpent={formData['spend-time']}/>
+        <Checkboxes handleChange={handleChange} timeSpent={formData.timeSpent}/>
       </div>
       <label>
         What else have you got to say about your rubber duck?

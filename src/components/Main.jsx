@@ -6,7 +6,7 @@ import {
 
 const initialFormData = {
   color: '',
-  'spend-time': [],
+  timeSpent: [],
   review: '',
   username: '',
   email: ''
@@ -21,7 +21,7 @@ function Main() {
     console.log(formData)
     setFormData({
       color: '',
-      'spend-time': [],
+      timeSpent: [],
       review: '',
       username: '',
       email: ''
@@ -31,7 +31,7 @@ function Main() {
   const handleChange = (e) => {
     const {name, type, value, checked} = e.target
     if (type === "checkbox" && name === "spend-time") {
-      let copySpendTime = [...formData['spend-time']]
+      let copySpendTime = [...formData.timeSpent]
       if (copySpendTime.includes(value) && !checked) {
         // deselect
         copySpendTime = copySpendTime.filter(item => item !== value)
@@ -39,7 +39,7 @@ function Main() {
         // select
         copySpendTime.push(value)
       }
-      setFormData({...formData, 'spend-time': copySpendTime})
+      setFormData({...formData, timeSpent: copySpendTime})
     } else {
       setFormData({...formData, [name]: value})
     }
@@ -49,7 +49,7 @@ function Main() {
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={[]} />
+        <AnswersList answersList={[formData]} />
       </section>
       <section className="main__form">
         <SurveyForm
