@@ -1,19 +1,20 @@
 import { useState } from "react";
 
-const initialData = {
-  color: '',
-  'spend-time': {
-    swimming: false,
-    bathing: false,
-    chatting: false,
-    noTime: false
-  },
-  review: '',
-  username: '',
-  email: ''
-}
-
 function Main() {
+
+  const initialData = {
+    color: '',
+    'spend-time': {
+      swimming: false,
+      bathing: false,
+      chatting: false,
+      noTime: false
+    },
+    review: '',
+    username: '',
+    email: ''
+  }
+
   const [open, setOpen] = useState(false); //Ignore this state
   const [data, setData] = useState(initialData)
 
@@ -23,7 +24,6 @@ function Main() {
       
       let newVal = data[name]
       newVal[value] = checked
-      // console.log(newVal)
       
       setData({...data, [name]: newVal})
     }else{
@@ -35,16 +35,13 @@ function Main() {
 
   const handleSubmit = (e) =>{
       e.preventDefault()
+      console.log(data)
       setData(initialData)
 
   }
 
-
-
   return (
     <main className="main">
-    {console.log(data)}
-
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
@@ -57,16 +54,16 @@ function Main() {
     <h3>How do you rate your rubber duck colour?</h3>
     <ul>
     <li>
-      <input id="color-one" type="radio" name="color" value="1" onChange={handleChange}/><label for="color-one">1</label>
+      <input id="color-one" type="radio" name="color" value="1" onChange={handleChange} checked={data.color == 1}/><label for="color-one">1</label>
     </li>
     <li>
-      <input id="color-two" type="radio" name="color" value="2" onChange={handleChange}/><label for="color-two">2</label>
+      <input id="color-two" type="radio" name="color" value="2" onChange={handleChange} checked={data.color == 2}/><label for="color-two">2</label>
     </li>
     <li>
-      <input id="color-three" type="radio" name="color" value="3" onChange={handleChange}/><label for="color-three">3</label>
+      <input id="color-three" type="radio" name="color" value="3" onChange={handleChange} checked={data.color == 3}/><label for="color-three">3</label>
     </li>
     <li>
-      <input id="color-four" type="radio" name="color" value="4" onChange={handleChange}/><label for="color-four">4</label>
+      <input id="color-four" type="radio" name="color" value="4" onChange={handleChange} checked={data.color == 4}/><label for="color-four">4</label>
     </li>
   </ul>
   </div>
