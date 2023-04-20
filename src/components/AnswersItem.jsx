@@ -11,11 +11,13 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      
-      {Object.keys(list).map((key) => {
+      {console.log(list)}
+      {/* {Object.keys(list).map((key) => {
         
         return <li>{list[key] && answersSet[key]}</li>
-      })}
+      })} */}
+
+      {list.map((index) => <li>{answersSet[index]}</li>)}
     </ul>
   );
 }
