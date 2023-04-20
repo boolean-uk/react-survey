@@ -3,9 +3,16 @@ import { useState } from "react";
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
-  // const handleSubmit {
-    
-  // }
+  const [rate, setRate] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(rate);
+  }
+
+  const handleRate = (e) => {
+    setRate(e.target.value)
+  }
 
   return (
     <main className="main">
@@ -15,32 +22,32 @@ function Main() {
       </section>
       <section className="main__form">
         
-      <form class="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Tell us what you think about your rubber duck!</h2>
-        <div class="form__group radio">
+        <div className="form__group radio">
           <h3>How do you rate your rubber duck colour?</h3>
           {/* <!-- Radio inputs go here --> */}
           <ul>
             <li>
-              <input id="color-one" type="radio" name="color" value="1" /><label
+              <input id="color-one" type="radio" name="color" value="1" onChange={handleRate}/><label
                 for="color-one"
                 >1</label
               >
             </li>
             <li>
-              <input id="color-two" type="radio" name="color" value="2" /><label
+              <input id="color-two" type="radio" name="color" value="2" onChange={handleRate}/><label
                 for="color-two"
                 >2</label
               >
             </li>
             <li>
-              <input id="color-three" type="radio" name="color" value="3" /><label
+              <input id="color-three" type="radio" name="color" value="3" onChange={handleRate}/><label
                 for="color-three"
                 >3</label
               >
             </li>
             <li>
-              <input id="color-four" type="radio" name="color" value="4" /><label
+              <input id="color-four" type="radio" name="color" value="4" onChange={handleRate}/><label
                 for="color-four"
                 >4</label
               >
@@ -48,7 +55,7 @@ function Main() {
           </ul>
 
         </div>
-        <div class="form__group">
+        <div className="form__group">
           <h3>How do you like to spend time with your rubber duck</h3>
           <ul>
             <li>
@@ -98,7 +105,7 @@ function Main() {
             type="email"
             name="email"
             value="" /></label
-        ><input class="form__submit" type="submit" value="Submit Survey!" />
+        ><input className="form__submit" type="submit" value="Submit Survey!" />
       </form>
         
         </section>
