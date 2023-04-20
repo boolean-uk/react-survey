@@ -1,9 +1,31 @@
 import { useState } from "react";
 
-// var Form = require('../templates/form.html')
-
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
+
+  //const [color, setColor] = useState("")
+  // const [time, setTime] = useState("")
+  const [review, setReview] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+  const handleName = (e) => {
+    setName(e.target.value)
+  }
+  const handleReview = (e) => {
+    setReview(e.target.value)
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("okkk")
+  }
+
+
 
   return (
     <main className="main">
@@ -11,7 +33,8 @@ function Main() {
         <h2>Answers list</h2>
         {/* answers should go here */}
       </section>
-      <section className="main__form">{/* a form should be here */}<form class="form">
+      <section className="main__form">{/* a form should be here */}
+      <form class="form" onSubmit={handleSubmit}>
   <h2>Tell us what you think about your rubber duck!</h2>
   <div class="form__group radio">
     <h3>How do you rate your rubber duck colour?</h3>
@@ -61,8 +84,7 @@ function Main() {
     >
   </li>
   <li>
-    <label
-      ><input
+    <label><input
         name="spend-time"
         type="checkbox"
         value="chatting"
@@ -83,18 +105,20 @@ function Main() {
       name="review"
       cols="30"
       rows="10"
+      value={review} onChange={handleReview} 
     ></textarea></label
   ><label
     >Put your name here (if you feel like it):<input
       type="text"
       name="username"
-      value="" /></label
+      value={name} onChange={handleName} /></label
   ><label
-    >Leave us your email pretty please??<input
+    >Leave us your email pretty please??
+    <input
       type="email"
       name="email"
-      value="" /></label
-  ><input class="form__submit" type="submit" value="Submit Survey!" />
+      value={email} onChange={handleEmail} /></label
+  ><input class="form__submit" type="submit" value="Submit Survey!"/>
 </form>
 </section>
     </main>
