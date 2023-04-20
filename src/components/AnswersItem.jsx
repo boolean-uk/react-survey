@@ -7,12 +7,12 @@ const answersSet = {
   chatting: "Chatting",
   noTime: "I don't like to spend time with it"
 };
-
+//use key to remove the error
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item,key) => (
+        <li key = {key}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -36,7 +36,7 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <span className="answer_line">{timeSpent}</span>
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>

@@ -1,51 +1,57 @@
 import { useState } from "react";
 
-import AnswersList from './AnswersList'
-
+import AnswersList from "./AnswersList";
+const initialState = {
+  colour: null,
+  timeSpent: [],
+  review: "",
+  username: "",
+  email: "",
+};
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
-
-  const [newList, setNewList] = useState([])
-
-  const [colour, setColour] = useState("");
-  const [timeSpent, setTimeSpent] = useState([]);
-  const [review,setReview] = useState("")
-  const [userName,setUserName] = useState("")
-  const [email,setEmail] = useState("")
+  const [formData, setFormData] = useState(initialState);
+  const [list, setList] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onSubmit put the variables in an array.
-    setNewList([...newList, {colour,timeSpent,review,userName}])
-    // console.log({colour,timeSpent,review,userName, email})
-  };
-
-  const handleColour = (e) => {
-    setColour(e.target.value);
-  };
-  const handleTimeSpent = (e) => {
-    setTimeSpent([...timeSpent, e.target.value]);
-    console.log(timeSpent);
-  };
-  const handleReview = (e) =>{
-    setReview(e.target.value)
+    //update the list
+    setList([...list, formData]);
     
-  }
-  const handleUserName = (e) =>{
-    setUserName(e.target.value)
-    
-  }
-  const handleEmail = (e) =>{
-    setEmail(e.target.value)
-  }
-
+    setFormData({
+      colour: null,
+      timeSpent: [],
+      review: "",
+      username: "",
+      email: "",
+    })
+  };
+  const handleChange = (e) => {
+    const targetName = e.target.name;
+    const targetValue = e.target.value;
+    if (e.target.type === "checkbox") {
+      if (formData.timeSpent.includes(e.target.value)) {
+        //remove the item if it is already in there
+        setFormData({
+          ...formData,
+          timeSpent: formData.filter((time) => time !== e.target.value),
+        });
+      } else {
+        setFormData({
+          ...formData,
+          timeSpent: [...formData.timeSpent, e.target.value],
+        });
+      }
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
   return (
-    
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
-        <AnswersList answersList = {newList} />
+        <AnswersList answersList={list} />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -58,9 +64,10 @@ function Main() {
                 <input
                   id="color-one"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="1"
-                  onChange={handleColour}
+                  checked={formData.colour === "1"}
+                  onChange={handleChange}
                 />
                 <label for="color-one">1</label>
               </li>
@@ -68,9 +75,10 @@ function Main() {
                 <input
                   id="color-two"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="2"
-                  onChange={handleColour}
+                  checked={formData.colour === "2"}
+                  onChange={handleChange}
                 />
                 <label for="color-two">2</label>
               </li>
@@ -78,9 +86,10 @@ function Main() {
                 <input
                   id="color-three"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="3"
-                  onChange={handleColour}
+                  checked={formData.colour === "3"}
+                  onChange={handleChange}
                 />
                 <label for="color-three">3</label>
               </li>
@@ -88,9 +97,10 @@ function Main() {
                 <input
                   id="color-four"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="4"
-                  onChange={handleColour}
+                  checked={formData.colour === "4"}
+                  onChange={handleChange}
                 />
                 <label for="color-four">4</label>
               </li>
@@ -102,10 +112,11 @@ function Main() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="timeSpent"
                     type="checkbox"
                     value="swimming"
-                    onChange={handleTimeSpent}
+                    checked={formData.timeSpent === "swimming"}
+                    onChange={handleChange}
                   />
                   Swimming
                 </label>
@@ -113,10 +124,11 @@ function Main() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="timeSpent"
                     type="checkbox"
                     value="bathing"
-                    onChange={handleTimeSpent}
+                    checked={formData.timeSpent === "bathing"}
+                    onChange={handleChange}
                   />
                   Bathing
                 </label>
@@ -124,10 +136,11 @@ function Main() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="timeSpent"
                     type="checkbox"
                     value="chatting"
-                    onChange={handleTimeSpent}
+                    checked={formData.timeSpent === "chatting"}
+                    onChange={handleChange}
                   />
                   Chatting
                 </label>
@@ -135,10 +148,11 @@ function Main() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="timeSpent"
                     type="checkbox"
                     value="noTime"
-                    onChange={handleTimeSpent}
+                    checked={formData.timeSpent === "noTime"}
+                    onChange={handleChange}
                   />
                   I don't like to spend time with it
                 </label>
@@ -147,17 +161,37 @@ function Main() {
           </div>
           <label>
             What else have you got to say about your rubber duck?
-            <textarea name="review" cols="30" rows="10" onChange={handleReview}></textarea>
+            <textarea
+              name="review"
+              cols="30"
+              rows="10"
+              value={formData.review}
+              onChange={handleChange}
+            ></textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" value={userName} onChange={handleUserName}/>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Leave us your email pretty please??
-            <input type="email" name="email" value={email} onChange={handleEmail}/>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </label>
-          <input className="form__submit" type="submit" value="Submit Survey!" />
+          <input
+            className="form__submit"
+            type="submit"
+            value="Submit Survey!"
+          />
         </form>
       </section>
     </main>
