@@ -11,8 +11,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, i) => (
+        <li key={i}>{answersSet[item]}</li>
       ))}
     </ul>
   );
