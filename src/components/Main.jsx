@@ -1,18 +1,67 @@
 import { useState } from "react";
+ 
+ 
 
-function Main() {
+ 
+
+export default function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
   const [ formData, setFormData ] = useState({
-    form__group_radio : '',
-    form__group : '',
+    // form__group_radio1 : false,
+    // form__group_radio2 : false,
+    // form__group_radio3 : false,
+    // form__group_radio4 : false,
+  
+    spent: [],
     review : '',
     text: '',
-    email: ''
-
+    email: '',
+    color:'' 
+  
   })
 
 
+  const handleChange = (event) => {
+    const { name, type , value } = event.target
+
+    if (type === "radio") {
+      for (i=1 ; i<=4; i++) {
+          if ( value === 'i') {
+            setFormData({...formData, color : value})
+          }
+      }
+
+
+    } else if (type === "checkbox") { 
+      if (name === 'swimming') {
+        setFormData({...formData, spent : value})
+      }
+      if (name === 'bathing') {
+        setFormData({...formData, spent : value})
+      }
+      if (name === 'chatting') {
+        setFormData({...formData, spent : value})
+      }
+      if (name === 'notime') {
+        setFormData({...formData, spent : value})
+      }
+
+    } else if (type === 'review') {
+      setFormData({...formData, review: value})
+
+    } else if (type === 'text') {
+      setFormData({...formData, review: value})
+    } else if (type === 'email') {
+      setFormData({...formData, review: value})
+    }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    
+    console.log(formData)
+  }
+  
 
   return (
     <main className="main">
@@ -31,7 +80,7 @@ function Main() {
               type = 'radio'
               name = 'color'
               value = '1'
-              checkedOption={formData.form__group_radio}
+              color={formData.color}
               onChange={handleChange}
               />
 
@@ -41,7 +90,7 @@ function Main() {
               type = 'radio'
               name = 'color'
               value = '2'
-              checkedOption={formData.form__group_radio}
+              color={formData.color}
               onChange={handleChange}
               />
 
@@ -51,7 +100,7 @@ function Main() {
               type = 'radio'
               name = 'color'
               value = '3'
-              checkedOption={formData.form__group_radio}
+              color ={formData.color}
               onChange={handleChange}
               />
 
@@ -60,8 +109,8 @@ function Main() {
               id = 'color-three'
               type = 'radio'
               name = 'color'
-              value = '3'
-              checkedOption={formData.form__group_radio}
+              value = '4'
+              color={formData.color}
               onChange={handleChange}
               />
               </div>
@@ -70,33 +119,33 @@ function Main() {
               <h3>How do you like to spend time with your rubber duck</h3>
               <CheckBox
               label = 'swimming'
-              name = 'spend-time'
+              name = 'swimming'
               type = 'checkbox' 
-              value={formData.form__group}
+              value={formData.spent}
               onChange={handleChange}
               />
 
               <CheckBox
               label = 'bathing'
-              name = 'spend-time'
+              name = 'bathing'
               type = 'checkbox' 
-              value={formData.form__group}
+              value={formData.spent}
               onChange={handleChange}
               />
 
               <CheckBox
               label = 'chatting'
-              name = 'spend-time'
+              name = 'chatting'
               type = 'checkbox' 
-              value={formData.form__group}
+              value={formData.spent}
               onChange={handleChange}
               />
 
               <CheckBox
               label = 'I dont like to spend time with it'
-              name = 'spend-time'
+              name = 'notime'
               type = 'checkbox' 
-              value={formData.form__group}
+              value={formData.form__group4}
               onChange={handleChange}
               />
               </div>
@@ -110,6 +159,7 @@ function Main() {
                 value = {formData.review}
                 onChange = {handleChange}
                 />
+               </div> 
 
               < div class='text'>
                 <Input 
@@ -127,13 +177,16 @@ function Main() {
               onChange = {handleChange}
               />
               </div>
-              <input type = "submit" 
+
+              <div class="form__submit">
+              < input 
+              type = "submit" 
               value = "Submit!"/>
+              </div>
 
         </form>
       </section>
     </main>
   );
 }
-
-export default Main;
+}
