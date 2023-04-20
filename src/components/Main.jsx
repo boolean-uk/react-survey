@@ -19,13 +19,14 @@ function Main() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // answersList.push(item)
+    answersList.push(item)
     // setAnswerList([...answersList])
     
     console.log ("Added: " + item.username)
     console.log (item)
     console.log (answersList)
-    e.default()
+    const form = document.querySelector("form")
+    form.reset()
     
   }
 
