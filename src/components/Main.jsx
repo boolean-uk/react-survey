@@ -1,19 +1,21 @@
 import { useState } from "react";
-
+import "../styles/styles.css";
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
   const [color, setColor] = useState("");
-  // const [time, setTime] = useState("")
+  const [time, setTime] = useState("");
   const [review, setReview] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const handleColor = (e) => {
-    setColor(e.target.checked);
-    console.log(color);
+    setColor(e.target.value);
   };
 
+  const handleTime = (e) => {
+    setTime(e.target.checked);
+  };
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -31,15 +33,18 @@ function Main() {
 
   return (
     <main className="main">
+      {console.log(color)}
+      {console.log(email)}
+      {console.log(time)}
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
       </section>
       <section className="main__form">
         {/* a form should be here */}
-        <form class="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
-          <div class="form__group radio">
+          <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
               <li>
@@ -49,9 +54,9 @@ function Main() {
                   name="color"
                   value="1"
                   onChange={handleColor}
-                  checked={color}
+                  checked={color === "1"}
                 />
-                <label for="color-one">1</label>
+                <label htmlFor="color-one">1</label>
               </li>
               <li>
                 <input
@@ -60,9 +65,9 @@ function Main() {
                   name="color"
                   value="2"
                   onChange={handleColor}
-                  checked={color}
+                  checked={color === "2"}
                 />
-                <label for="color-two">2</label>
+                <label htmlFor="color-two">2</label>
               </li>
               <li>
                 <input
@@ -71,9 +76,9 @@ function Main() {
                   name="color"
                   value="3"
                   onChange={handleColor}
-                  checked={color}
+                  checked={color === "3"}
                 />
-                <label for="color-three">3</label>
+                <label htmlFor="color-three">3</label>
               </li>
               <li>
                 <input
@@ -82,37 +87,61 @@ function Main() {
                   name="color"
                   value="4"
                   onChange={handleColor}
-                  checked={color}
+                  checked={color === "4"}
                 />
-                <label for="color-four">4</label>
+                <label htmlFor="color-four">4</label>
               </li>
             </ul>
           </div>
-          <div class="form__group">
+          <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="swimming" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="swimming"
+                    onChange={handleTime}
+                    checked={time === "swimming"}
+                  />
                   Swimming
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="bathing" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="bathing"
+                    onChange={handleTime}
+                    checked={time === "bathing"}
+                  />
                   Bathing
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="chatting" />
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="chatting"
+                    onChange={handleTime}
+                    checked={time === "chatting"}
+                  />
                   Chatting
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="noTime" />I
-                  don't like to spend time with it
+                  <input
+                    name="spend-time"
+                    type="checkbox"
+                    value="noTime"
+                    onChange={handleTime}
+                    checked={time === "noTime"}
+                  />
+                  I don't like to spend time with it
                 </label>
               </li>
             </ul>
@@ -145,7 +174,11 @@ function Main() {
               onChange={handleEmail}
             />
           </label>
-          <input class="form__submit" type="submit" value="Submit Survey!" />
+          <input
+            className="form__submit"
+            type="submit"
+            value="Submit Survey!"
+          />
         </form>
       </section>
     </main>
