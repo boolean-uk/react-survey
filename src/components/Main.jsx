@@ -5,21 +5,27 @@ import AnswersList from './AnswersList'
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  const [newList, setNewList] = useState([])
+
   const [colour, setColour] = useState("");
-  const [timeSpent, setTimeSpent] = useState("");
+  const [timeSpent, setTimeSpent] = useState([]);
   const [review,setReview] = useState("")
   const [userName,setUserName] = useState("")
   const [email,setEmail] = useState("")
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({colour,timeSpent,review,userName,email});
+    // onSubmit put the variables in an array.
+    setNewList([...newList, {colour,timeSpent,review,userName}])
+    // console.log({colour,timeSpent,review,userName, email})
   };
 
   const handleColour = (e) => {
     setColour(e.target.value);
   };
   const handleTimeSpent = (e) => {
-    setTimeSpent(e.target.value);
+    setTimeSpent([...timeSpent, e.target.value]);
+    console.log(timeSpent);
   };
   const handleReview = (e) =>{
     setReview(e.target.value)
@@ -39,7 +45,7 @@ function Main() {
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
-        <AnswersList />
+        <AnswersList answersList = {newList} />
       </section>
       <section className="main__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -90,7 +96,7 @@ function Main() {
               </li>
             </ul>
           </div>
-          <div class="form__group">
+          <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
               <li>
@@ -151,7 +157,7 @@ function Main() {
             Leave us your email pretty please??
             <input type="email" name="email" value={email} onChange={handleEmail}/>
           </label>
-          <input class="form__submit" type="submit" value="Submit Survey!" />
+          <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
       </section>
     </main>
