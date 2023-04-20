@@ -1,43 +1,85 @@
 import RadioButtons from "./RadioButtons";
-import CheckBoxes from './CheckBoxes';
+import CheckBoxes from "./CheckBoxes";
+import { useState } from "react";
 
-export default function Form() {
+export default function Form({ answers, setAnswers }) {
+  const [userData, setUserData] = useState({
+    timeSpent: [],
+    colour: null,
+    review: "",
+    username: "",
+    email: "",
+  });
+  const handleChange = (e) => {
+    e.target.type === "checkbox"
+      ? userData.timeSpent.includes(e.target.value)
+        ? setUserData({
+            ...userData,
+            timeSpent: [
+              ...userData.timeSpent.filter((time) => time !== e.target.value),
+            ],
+          })
+        : setUserData({
+            ...userData,
+            timeSpent: [...userData.timeSpent, e.target.value],
+          })
+      : setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    // *console.table(userData);
+    setAnswers([...answers, userData]);
+    setUserData({
+      timeSpent: [],
+      colour: null,
+      review: "",
+      username: "",
+      email: "",
+    });
+  };
 
-    return (
-        <form className="form">
-            <h2>Tell us what you think about your rubber duck!</h2>
-            <div className="form__group radio">
-                <h3>How do you rate your rubber duck colour?</h3>
-                {/*<!-- Radio inputs go here -->*/}
-                <RadioButtons />
-            </div>
-            <div className="form__group">
-                <h3>How do you like to spend time with your rubber duck</h3>
-                {/*<!-- checkboxes go here -->*/}
-                <CheckBoxes />
-            </div>
-            <label>
-                What else have you got to say about your rubber duck?
-                <textarea
-                    name="review"
-                    cols="30"
-                    rows="10" >
-                </textarea>
-            </label>
-            <label>
-                Put your name here (if you feel like it):
-                <input
-                    type="text"
-                    name="username"
-                    value="" />
-            </label>
-            <label>
-                Leave us your email pretty please??<input
-                type="email"
-                name="email"
-                value="" />
-            </label>
-            <input className="form__submit" type="submit" value="Submit Survey!" />
-        </form>
-    )
+  return (
+    <form onSubmit={handleSumbit} className="form">
+      <h2>Tell us what you think about your rubber duck!</h2>
+      <div className="form__group radio">
+        <h3>How do you rate your rubber duck colour?</h3>
+        {/*<!-- Radio inputs go here -->*/}
+        <RadioButtons handleChange={handleChange} value={userData.colour} />
+      </div>
+      <div className="form__group">
+        <h3>How do you like to spend time with your rubber duck</h3>
+        {/*<!-- checkboxes go here -->*/}
+        <CheckBoxes handleCheckbox={handleChange} values={userData.timeSpent} />
+      </div>
+      <label>
+        What else have you got to say about your rubber duck?
+        <textarea
+          onChange={handleChange}
+          name="review"
+          cols="30"
+          rows="10"
+          value={userData.review}
+        ></textarea>
+      </label>
+      <label>
+        Put your name here (if you feel like it):
+        <input
+          onChange={handleChange}
+          type="text"
+          name="username"
+          value={userData.username}
+        />
+      </label>
+      <label>
+        Leave us your email pretty please??
+        <input
+          onChange={handleChange}
+          type="email"
+          name="email"
+          value={userData.email}
+        />
+      </label>
+      <input className="form__submit" type="submit" value="Submit Survey!" />
+    </form>
+  );
 }
