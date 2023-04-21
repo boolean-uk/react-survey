@@ -40,7 +40,9 @@ function Main() {
         setFormData({
           ...formData,
           timeSpent: [...formData.timeSpent, e.target.value],
+          
         });
+        console.log([e.target.name]+":",e.target.value);
       }
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -115,7 +117,7 @@ function Main() {
                     name="timeSpent"
                     type="checkbox"
                     value="swimming"
-                    checked={formData.timeSpent === "swimming"}
+                    checked={formData.timeSpent.includes("swimming")}
                     onChange={handleChange}
                   />
                   Swimming
@@ -127,7 +129,7 @@ function Main() {
                     name="timeSpent"
                     type="checkbox"
                     value="bathing"
-                    checked={formData.timeSpent === "bathing"}
+                    checked={formData.timeSpent.includes("bathing")}
                     onChange={handleChange}
                   />
                   Bathing
@@ -139,7 +141,7 @@ function Main() {
                     name="timeSpent"
                     type="checkbox"
                     value="chatting"
-                    checked={formData.timeSpent === "chatting"}
+                    checked={formData.timeSpent.includes("chatting")}
                     onChange={handleChange}
                   />
                   Chatting
@@ -151,7 +153,7 @@ function Main() {
                     name="timeSpent"
                     type="checkbox"
                     value="noTime"
-                    checked={formData.timeSpent === "noTime"}
+                    checked={formData.timeSpent.includes("noTime")}
                     onChange={handleChange}
                   />
                   I don't like to spend time with it

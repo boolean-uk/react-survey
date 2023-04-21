@@ -22,14 +22,14 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { userName, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review }
 }) {
 
-  console.log(userName, colour, timeSpent, review);
+  console.log(username, colour, timeSpent, review);
   return (
     <li>
       <article className="answer">
-        <h3>{userName || "Anon"} said:</h3>
+        <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
           <span className="answer__line">{colour}</span>
