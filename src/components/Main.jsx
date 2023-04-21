@@ -15,10 +15,12 @@ const initialFormData = {
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(initialFormData)
+  const [answers, setAnswers] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(formData)
+    setAnswers([...answers, formData])
     setFormData({
       color: '',
       timeSpent: [],
@@ -49,7 +51,7 @@ function Main() {
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={[formData]} />
+        <AnswersList answersList={answers} />
       </section>
       <section className="main__form">
         <SurveyForm
