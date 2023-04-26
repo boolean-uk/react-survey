@@ -1,66 +1,60 @@
 import { useState } from "react";
  
- 
+const initialState = {
+  colour: null,
+  timeSpent: [],
+  review: "",
+  username: "",
+  email: "",
+};
 
  
 
 export default function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
-
-  const [ formData, setFormData ] = useState({
-    // form__group_radio1 : false,
-    // form__group_radio2 : false,
-    // form__group_radio3 : false,
-    // form__group_radio4 : false,
-  
-    spent: [],
-    review : '',
-    text: '',
-    email: '',
-    color:'' 
-  
-  })
-
-
-  const handleChange = (event) => {
-    const { name, type , value } = event.target
-
-    if (type === "radio") {
-      for (i=1 ; i<=4; i++) {
-          if ( value === 'i') {
-            setFormData({...formData, color : value})
-          }
-      }
-
-
-    } else if (type === "checkbox") { 
-      if (name === 'swimming') {
-        setFormData({...formData, spent : value})
-      }
-      if (name === 'bathing') {
-        setFormData({...formData, spent : value})
-      }
-      if (name === 'chatting') {
-        setFormData({...formData, spent : value})
-      }
-      if (name === 'notime') {
-        setFormData({...formData, spent : value})
-      }
-
-    } else if (type === 'review') {
-      setFormData({...formData, review: value})
-
-    } else if (type === 'text') {
-      setFormData({...formData, review: value})
-    } else if (type === 'email') {
-      setFormData({...formData, review: value})
-    }
+  const [formData, setFormData] = useState(initialState)
+  const [list, setList] = useState([])
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    setList([...list, formData])
     
-    console.log(formData)
+    setFormData({
+      colour: null,
+      timeSpent: [],
+      review: "",
+      username: "",
+      email: "",
+    })
   }
+
+
+  const handleChange = (e) => {
+    const targetName = e.target.name
+    const targetValue = e.target.value
+
+    if (type === "checkbox") { 
+      if (formData.timeSpent.includes(e.target.value)) {
+        //remove the item if it is already in there
+        setFormData({
+          ...formData,
+          timeSpent: formData.filter((time) => time !== e.target.value),
+        });
+      } else {
+        setFormData({
+          ...formData,
+          timeSpent: [...formData.timeSpent, e.target.value],
+
+        })
+      }
+    }
+
+    else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  }
+ 
   
 
   return (
@@ -70,88 +64,118 @@ export default function Main() {
         {/* answers should go here */}
       </section>
       <section className="main__form">
-        <form className= "form" on Submit={handleSubmit} >
+        <form className= "form" onSubmit={handleSubmit} >
         <h2>Tell us what you think about your rubber duck!</h2>
           <div class="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-              <RadioInput 
-              label = '1'
-              id = 'color-one'
-              type = 'radio'
-              name = 'color'
-              value = '1'
-              color={formData.color}
-              onChange={handleChange}
-              />
+            <ul>
+              <li>
+            <input
+                   id="color-one"
+                   type="radio"
+                   name="colour"
+                   value="1"
+                   checked={formData.colour === "1"}
+                   onChange={handleChange}
+                 />
+                 <label for="color-one">1</label>
+               </li>
 
-              <RadioInput 
-              label = '2'
-              id = 'color-two'
-              type = 'radio'
-              name = 'color'
-              value = '2'
-              color={formData.color}
-              onChange={handleChange}
-              />
+               <li>
+               <input
+                   id="color-two"
+                   type="radio"
+                   name="colour"
+                   value="2"
+                   checked={formData.colour === "2"}
+                   onChange={handleChange}
+                 />
+                 <label for="color-one">2</label>
+               </li>
+               <li>
+               <input
+                   id="color-three"
+                   type="radio"
+                   name="colour"
+                   value="3"
+                   checked={formData.colour === "3"}
+                   onChange={handleChange}
+                 />
+                 <label for="color-one">3</label>
+               </li>
 
-              <RadioInput 
-              label = '3'
-              id = 'color-three'
-              type = 'radio'
-              name = 'color'
-              value = '3'
-              color ={formData.color}
-              onChange={handleChange}
-              />
-
-              <RadioInput 
-              label = '4'
-              id = 'color-three'
-              type = 'radio'
-              name = 'color'
-              value = '4'
-              color={formData.color}
-              onChange={handleChange}
-              />
+               <li>
+              <input
+                   id="color-four"
+                   type="radio"
+                   name="colour"
+                   value="4"
+                   checked={formData.colour === "4"}
+                   onChange={handleChange}
+                 />
+                 <label for="color-one">1</label>
+               </li>
+               </ul>
               </div>
+              
 
               <div class="form__group">
               <h3>How do you like to spend time with your rubber duck</h3>
-              <CheckBox
-              label = 'swimming'
-              name = 'swimming'
-              type = 'checkbox' 
-              value={formData.spent}
-              onChange={handleChange}
-              />
-
-              <CheckBox
-              label = 'bathing'
-              name = 'bathing'
-              type = 'checkbox' 
-              value={formData.spent}
-              onChange={handleChange}
-              />
-
-              <CheckBox
-              label = 'chatting'
-              name = 'chatting'
-              type = 'checkbox' 
-              value={formData.spent}
-              onChange={handleChange}
-              />
-
-              <CheckBox
-              label = 'I dont like to spend time with it'
-              name = 'notime'
-              type = 'checkbox' 
-              value={formData.form__group4}
-              onChange={handleChange}
-              />
+              <ul>
+              <li>
+                 <label>
+                   <input
+                     name="timeSpent"
+                     type="checkbox"
+                     value="swimming"
+                     checked={formData.timeSpent.includes("swimming")}
+                     onChange={handleChange}
+                   />
+                   Swimming
+                 </label>
+               </li>
+               <li>
+                 <label>
+                   <input
+                     name="timeSpent"
+                     type="checkbox"
+                     value="bathing"
+                     checked={formData.timeSpent.includes("bathing")}
+                     onChange={handleChange}
+                   />
+                   Bathing
+                 </label>
+               </li>
+               <li>
+                 <label>
+                   <input
+                     name="timeSpent"
+                     type="checkbox"
+                     value="chatting"
+                     checked={formData.timeSpent.includes("chatting")}
+                     onChange={handleChange}
+                   />
+                   Chatting
+                 </label>
+               </li>
+               <li>
+                 <label>
+                   <input
+                     name="timeSpent"
+                     type="checkbox"
+                     value="noTime"
+                     checked={formData.timeSpent.includes("noTime")}
+                     onChange={handleChange}
+                   />
+                   I don't like to spend time with it
+                 </label>
+               </li>
+             
+              </ul>
               </div>
 
               <div class= 'review'>
-                <TextArea 
+                <textarea 
                 label = "What else have you got to say about your rubber duck?"
                 name= "review" 
                 cols= "30" 
@@ -162,14 +186,14 @@ export default function Main() {
                </div> 
 
               < div class='text'>
-                <Input 
+                <input 
                 label = 'Put your name here (if you feel like it):'
                 type = 'text'
                 name = 'username'
                 value = {formData.text}
                 onChange = {handleChange}
               /> 
-              <Input
+              <input
               label = 'Leave us your email pretty please??'
               type = 'email'
               name = 'email'
@@ -189,4 +213,4 @@ export default function Main() {
     </main>
   );
 }
-}
+
