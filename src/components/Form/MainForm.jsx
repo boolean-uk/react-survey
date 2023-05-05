@@ -1,20 +1,24 @@
 import Checkboxes from "./Checkboxes";
 import RadioButtons from "./Radio-buttons";
 
-function Form() {
+function Form({formState, setFormState}) {
+
+  const printFormToConsole = (e) => {
+    e.preventDefault()
+    console.log({formState})
+  }
+
   return (
     <>
-      <form className="form">
+      <form className="form" onSubmit={printFormToConsole}>
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
           <h3>How do you rate your rubber duck colour?</h3>
-          {/* <!-- Radio inputs go here --> */}
-          <RadioButtons />
+          <RadioButtons formState={formState} setFormState={setFormState}/>
         </div>
         <div className="form__group">
           <h3>How do you like to spend time with your rubber duck</h3>
-          {/* <!-- checkboxes go here --> */}
-          <Checkboxes />
+          <Checkboxes formState={formState} setFormState={setFormState}/>
         </div>
         <label>
           What else have you got to say about your rubber duck?
@@ -30,7 +34,6 @@ function Form() {
         </label>
         <input className="form__submit" type="submit" value="Submit Survey!" />
       </form>
-      ;
     </>
   );
 }

@@ -1,4 +1,10 @@
-function RadioButtons() {
+function RadioButtons({formState, setFormState}) {
+
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setFormState({...formState, duckRating: e.target.value})
+  }
+
   return (
     <>
       <ul>
@@ -43,9 +49,8 @@ function RadioButtons() {
           <label htmlFor="color-four">4</label>
         </li>
       </ul>
-      ;
     </>
-  );
+  )
 }
 
 export default RadioButtons;

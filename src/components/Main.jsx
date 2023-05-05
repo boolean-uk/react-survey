@@ -5,14 +5,29 @@ import { Form } from "./Form";
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  const initialFormState = {
+    duckRating: null,
+    spendTime: {
+      swimming: false,
+      bathing: false,
+      chatting: false,
+      noTime: false
+    },
+    whatElse: '',
+    name: '',
+    email: ''
+  }
+
+  const [formState, setFormState] = useState(initialFormState)
+
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
       </section>
-      <section className="main__form">{/* Main form */}
-        <Form />
+      <section className="main__form">
+        <Form formState={formState} setFormState={setFormState}/>
       
       
       </section>
