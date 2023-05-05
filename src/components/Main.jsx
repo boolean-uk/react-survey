@@ -4,11 +4,24 @@ function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [rate, setRate] = useState(1);
   const [review, setReview] = useState('')
+const [swimming, setSwimming] = useState('false')
+const [bathing, setBathing] = useState('false')
+const [chatting, setChatting] = useState('false')
+const [noTime, SetNoTime] = useState('false')
+const [name, setName] = useState('')
+const [email, setEmail] = useState('')
 
 const handleSubmit = (e) => {
   e.preventDefault()
-  console.log('hi!')
-  console.log({rate, review})
+  console.log({rate, swimming, bathing, chatting, noTime, review, name, email})
+  setRate('')
+  setReview('')
+  setSwimming('')
+  setChatting('')
+  SetNoTime('')
+  setBathing('')
+  setName('')
+  setEmail('')
 }
 
 const handleChangeRate = (e) => {
@@ -21,6 +34,34 @@ const handleChangeReview = (e) => {
   console.log(e.target.value)
   setReview(e.target.value)
 }
+
+const handleCheckOne = (e) => {
+  console.log(e.target.checked)
+  setSwimming(e.target.checked)
+}
+const handleCheckTwo = (e) => {
+  console.log(e.target.checked)
+  setBathing(e.target.checked)
+}
+const handleCheckThree = (e) => {
+  console.log(e.target.checked)
+  setChatting(e.target.checked)
+}
+const handleCheckFour = (e) => {
+  console.log(e.target.checked)
+  SetNoTime(e.target.checked)
+}
+
+const handleName = (e) => {
+console.log(e.target.value);
+setName(e.target.value)
+}
+
+const handleEmail = (e) => {
+  console.log(e.target.value);
+  setEmail(e.target.value)
+}
+
 
   return (
     <main className="main">
@@ -57,26 +98,26 @@ const handleChangeReview = (e) => {
             <ul>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="swimming" />
+                  <input name="spend-time" type="checkbox" value="swimming"  onChange={handleCheckOne} checked={swimming}/>
                   Swimming
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="bathing" />
+                  <input name="spend-time" type="checkbox" value="bathing"  onChange={handleCheckTwo} checked={bathing}/>
                   Bathing
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="chatting" />
+                  <input name="spend-time" type="checkbox" value="chatting" onChange={handleCheckThree} checked={chatting}/>
                   Chatting
                 </label>
               </li>
               <li>
                 <label>
-                  <input name="spend-time" type="checkbox" value="noTime" />I
-                  don't like to spend time with it
+                  <input name="spend-time" type="checkbox" value="noTime" onChange={handleCheckFour} checked={noTime}/>
+                  I don't like to spend time with it
                 </label>
               </li>
             </ul>
@@ -87,11 +128,11 @@ const handleChangeReview = (e) => {
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" value="" />
+            <input type="text" name="username" value={name} onChange={handleName} />
           </label>
           <label>
             Leave us your email pretty please??
-            <input type="email" name="email" value="" />
+            <input type="email" name="email" value={email} onChange={handleEmail} />
           </label>
           <input
             className="form__submit"
