@@ -1,17 +1,33 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 const initialFormData = {
+  id: null,
   color: '',
-  "spend-time": [],
+  timeSpent: [],
   review: '',
   username: '',
   email: ''
 }
 
+let id = 1
+
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
     const [formData, setFormData] = useState(initialFormData)
+    const [answers, setAnswers] = useState([])
+    // CHANGE THIS BACK TO BLANK AT THE END
+    // const [answers, setAnswers] = useState(
+    //   [{
+    //     id: 1,
+    //     color: '1',
+    //     timeSpent: ["swimming","noTime"],
+    //     review: '123',
+    //     username: '456',
+    //     email: '789@gmail.com'
+    //   }]
+    // )
 
     const handleChange = (event) => {
       const { name, value } = event.target
@@ -19,34 +35,42 @@ function Main() {
     }
 
     const handleChecked = (event) => {
-      const { value, checked } = event.target
+      const { value, checked, name } = event.target
       let newSpendTime
       if (checked) {
-        newSpendTime = [...formData["spend-time"], value]
+        newSpendTime = [...formData[name], value]
       } else {
-        newSpendTime = formData["spend-time"].filter(item => item !== value)
+        newSpendTime = formData[name].filter(item => item !== value)
       }
-      setFormData({...formData, "spend-time": newSpendTime})      
+      setFormData({...formData, name: newSpendTime})      
     }
 
     const handleSubmit = (event) => {
       console.log(`submit`)
       event.preventDefault()
+      formData.id = id
+      setAnswers([...answers, formData])
+      id++
       setFormData(initialFormData)
-      console.log(initialFormData)
       
-      document.querySelectorAll('input[type="radio"], input[type="checkbox"], input[type="text"], input[type="email"], textarea').forEach(input => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(input => {
         input.checked = false;
         input.value = ""
       });
+    }
 
+    const logAnswers = () => {
+        console.log(`H2 Clicked`)
+        console.log('answers',answers)
+        console.log('initialFormData',initialFormData)
+      
     }
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
-        <h2>Answers list</h2>
-        {/* answers should go here */}
+        <h2 onClick={logAnswers} >Answers list</h2>
+        <AnswersList answers={answers} />
       </section>
       <section className="main__form">
       <form className="form" onSubmit={handleSubmit} >
@@ -55,25 +79,25 @@ function Main() {
           <h3>How do you rate your rubber duck colour?</h3>
           <ul>
             <li>
-              <input id="color-one" type="radio" name="color" value="1" onChange={handleChange} /><label
+              <input id="color-one" type="radio" name="color" value="1" onChange={handleChange} checked={formData.color === "1"} /><label
                 htmlFor="color-one"
                 >1</label
               >
             </li>
             <li>
-              <input id="color-two" type="radio" name="color" value="2" onChange={handleChange} /><label
+              <input id="color-two" type="radio" name="color" value="2" onChange={handleChange} checked={formData.color === "2"} /><label
                 htmlFor="color-two"
                 >2</label
               >
             </li>
             <li>
-              <input id="color-three" type="radio" name="color" value="3" onChange={handleChange} /><label
+              <input id="color-three" type="radio" name="color" value="3" onChange={handleChange} checked={formData.color === "3"} /><label
                 htmlFor="color-three"
                 >3</label
               >
             </li>
             <li>
-              <input id="color-four" type="radio" name="color" value="4" onChange={handleChange} /><label
+              <input id="color-four" type="radio" name="color" value="4" onChange={handleChange} checked={formData.color === "4"} /><label
                 htmlFor="color-four"
                 >4</label
               >
@@ -86,25 +110,25 @@ function Main() {
             <li>
               <label
                 ><input
-                  name="spend-time" type="checkbox" value="swimming" onChange={handleChecked}
+                  name="timeSpent" type="checkbox" value="swimming" onChange={handleChecked}
                 />Swimming</label
               >
             </li>
             <li>
               <label
-                ><input name="spend-time" type="checkbox" value="bathing" onChange={handleChecked} />Bathing</label
+                ><input name="timeSpent" type="checkbox" value="bathing" onChange={handleChecked} />Bathing</label
               >
             </li>
             <li>
               <label
                 ><input
-                  name="spend-time" type="checkbox" value="chatting" onChange={handleChecked}
+                  name="timeSpent" type="checkbox" value="chatting" onChange={handleChecked}
                 />Chatting</label
               >
             </li>
             <li>
               <label
-                ><input name="spend-time" type="checkbox" value="noTime" onChange={handleChecked} />I don't like to
+                ><input name="timeSpent" type="checkbox" value="noTime" onChange={handleChecked} />I don't like to
                 spend time with it</label
               >
             </li>
@@ -115,18 +139,21 @@ function Main() {
             name="review"
             cols="30"
             rows="10"
-            onChange={handleChange} 
+            onChange={handleChange}
+            value={formData.review}
           ></textarea></label
         ><label
           >Put your name here (if you feel like it):<input
             type="text"
             name="username"
-            onChange={handleChange} /></label
+            onChange={handleChange}
+            value={formData.username} /></label
         ><label
           >Leave us your email pretty please??<input
             type="email"
             name="email"
-            onChange={handleChange} /></label
+            onChange={handleChange}
+            value={formData.email} /></label
         ><input className="form__submit" type="submit" value="Submit Survey!" />
       </form>
       </section>
