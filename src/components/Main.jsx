@@ -1,29 +1,46 @@
 import { useState } from "react";
 
+const initialFormData = {
+  color: '',
+  "spend-time": [],
+  review: '',
+  username: '',
+  email: ''
+}
+
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const initialFormData = {
-    color: ``,
-    "spend-time": []
-  }
+
     const [formData, setFormData] = useState(initialFormData)
 
     const handleChange = (event) => {
       const { name, value } = event.target
       setFormData({...formData, [name]: value})
-
     }
 
     const handleChecked = (event) => {
       const { value, checked } = event.target
+      let newSpendTime
       if (checked) {
-        formData["spend-time"].push(value)
+        newSpendTime = [...formData["spend-time"], value]
       } else {
-        formData["spend-time"] = formData["spend-time"].filter(item => item !== value)
+        newSpendTime = formData["spend-time"].filter(item => item !== value)
       }
-      setFormData(formData)      
+      setFormData({...formData, "spend-time": newSpendTime})      
     }
 
+    const handleSubmit = (event) => {
+      console.log(`submit`)
+      event.preventDefault()
+      setFormData(initialFormData)
+      console.log(initialFormData)
+      
+      document.querySelectorAll('input[type="radio"], input[type="checkbox"], input[type="text"], input[type="email"], textarea').forEach(input => {
+        input.checked = false;
+        input.value = ""
+      });
+
+    }
 
   return (
     <main className="main">
@@ -32,7 +49,7 @@ function Main() {
         {/* answers should go here */}
       </section>
       <section className="main__form">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit} >
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
           <h3>How do you rate your rubber duck colour?</h3>
@@ -98,17 +115,18 @@ function Main() {
             name="review"
             cols="30"
             rows="10"
+            onChange={handleChange} 
           ></textarea></label
         ><label
           >Put your name here (if you feel like it):<input
             type="text"
             name="username"
-            value="" /></label
+            onChange={handleChange} /></label
         ><label
           >Leave us your email pretty please??<input
             type="email"
             name="email"
-            value="" /></label
+            onChange={handleChange} /></label
         ><input className="form__submit" type="submit" value="Submit Survey!" />
       </form>
       </section>
