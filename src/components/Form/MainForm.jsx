@@ -5,16 +5,14 @@ function Form({ formState, setFormState, initialFormState }) {
   const printFormToConsole = (e) => {
     e.preventDefault();
     console.log({ formState });
-    console.log("initform", { initialFormState });
+
     setFormState(initialFormState);
     e.target.reset();
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target);
-    console.log("name", name);
-    console.log("value", value);
+
     setFormState({ ...formState, [name]: value });
   };
 
