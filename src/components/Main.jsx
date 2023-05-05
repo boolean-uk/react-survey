@@ -16,6 +16,7 @@ function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formState, setFormState] = useState(initialFormData)
 
+  const resetForm = () => {setFormState(initialFormData)}
 
   return (
     <main className="main">
@@ -27,6 +28,8 @@ function Main() {
         <Form 
           formState={formState}
           setFormState={setFormState}
+          resetForm={resetForm}
+          initialFormData={initialFormData}
         />
       </section>
     </main>

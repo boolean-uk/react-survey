@@ -1,13 +1,11 @@
 export default function Checkboxes({handleChange, formState}) {
-
     return (
-
         <ul>
             <li>
                 <label>Swimming
                     <input
                         onChange={handleChange}
-                        checked={formState.swimming.value}
+                        checked={formState.swimming}
                         name="activity"
                         type="checkbox"
                         value="swimming"
@@ -18,7 +16,7 @@ export default function Checkboxes({handleChange, formState}) {
                 <label>Bathing
                     <input
                         onChange={handleChange}
-                        checked={formState.bathing.value}
+                        checked={formState.bathing}
                         name="activity"
                         type="checkbox"
                         value="bathing"
@@ -29,7 +27,7 @@ export default function Checkboxes({handleChange, formState}) {
                 <label>Chatting
                     <input
                         onChange={handleChange}
-                        checked={formState.chatting.value}
+                        checked={formState.chatting}
                         name="activity"
                         type="checkbox"
                         value="chatting"
@@ -40,7 +38,7 @@ export default function Checkboxes({handleChange, formState}) {
                 <label>I don't like to activity with it
                     <input
                     onChange={handleChange}
-                    checked={formState.noTime.value}
+                    checked={formState.noTime}
                     name="activity"
                     type="checkbox"
                     value="noTime"

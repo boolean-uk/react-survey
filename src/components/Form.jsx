@@ -1,17 +1,19 @@
 import Checkboxes from './Checkboxes'
 import Radio from './Radio'
 
-export default function Form({formState, setFormState}) {
+
+export default function Form({formState, setFormState, resetForm, initialFormData}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formState)
+        // resetForm()
+        setFormState(initialFormData)
     }
 
     const handleChange = (e) => {
         const { name, type, value, checked } = e.target
-        console.log('e.target', e.target)
-        console.log('e.target.checked', e.target.checked)
+        console.log('e.target', e.target.value)
         if (type === 'checkbox' && name === 'activity') {
             setFormState({...formState, [value]: checked})
         } else {
@@ -47,6 +49,7 @@ export default function Form({formState, setFormState}) {
                         name="review"
                         cols="30"
                         rows="10"
+                        value={formState.review}
                     >
                     </textarea>
                 </label>
@@ -56,7 +59,7 @@ export default function Form({formState, setFormState}) {
                         onChange={handleChange}
                         type="text"
                         name="username"
-                        value="" />
+                        value={formState.username}/>
                 </label>
 
                 <label>Leave us your email pretty please??
@@ -64,7 +67,7 @@ export default function Form({formState, setFormState}) {
                         onChange={handleChange}
                         type="email"
                         name="email"
-                        value=""
+                        value={formState.email}
                     />
                 </label>
 
