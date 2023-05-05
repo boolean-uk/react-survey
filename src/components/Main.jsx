@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Form } from "./Form";
 
-
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
 
@@ -11,14 +10,14 @@ function Main() {
       swimming: false,
       bathing: false,
       chatting: false,
-      noTime: false
+      noTime: false,
     },
-    whatElse: '',
-    name: '',
-    email: ''
-  }
+    review: "",
+    username: "",
+    email: "",
+  };
 
-  const [formState, setFormState] = useState(initialFormState)
+  const [formState, setFormState] = useState(initialFormState);
 
   return (
     <main className="main">
@@ -27,9 +26,11 @@ function Main() {
         {/* answers should go here */}
       </section>
       <section className="main__form">
-        <Form formState={formState} setFormState={setFormState}/>
-      
-      
+        <Form
+          formState={formState}
+          setFormState={setFormState}
+          initialFormState={initialFormState}
+        />
       </section>
     </main>
   );
