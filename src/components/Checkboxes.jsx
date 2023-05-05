@@ -1,4 +1,4 @@
-export default function Checkboxes() {
+export default function Checkboxes({handleChange, formState}) {
 
     return (
 
@@ -6,7 +6,9 @@ export default function Checkboxes() {
             <li>
                 <label>Swimming
                     <input
-                        name="spend-time"
+                        onChange={handleChange}
+                        checked={formState.swimming.value}
+                        name="activity"
                         type="checkbox"
                         value="swimming"
                     />
@@ -15,7 +17,9 @@ export default function Checkboxes() {
             <li>
                 <label>Bathing
                     <input
-                        name="spend-time"
+                        onChange={handleChange}
+                        checked={formState.bathing.value}
+                        name="activity"
                         type="checkbox"
                         value="bathing"
                     />
@@ -24,16 +28,20 @@ export default function Checkboxes() {
             <li>
                 <label>Chatting
                     <input
-                        name="spend-time"
+                        onChange={handleChange}
+                        checked={formState.chatting.value}
+                        name="activity"
                         type="checkbox"
                         value="chatting"
                     />
                 </label>
             </li>
             <li>
-                <label>I don't like to spend time with it
+                <label>I don't like to activity with it
                     <input
-                    name="spend-time"
+                    onChange={handleChange}
+                    checked={formState.noTime.value}
+                    name="activity"
                     type="checkbox"
                     value="noTime"
                     />
