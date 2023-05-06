@@ -18,10 +18,21 @@ function ItemsList({ list, key }) {
   );
 }
 
-
 function AnswersItem({
-  answerItem: { username, color, timeSpent, review }
+  answerItem: { username, color, timeSpent, review, email, id }, handleEditAnswer
 }) {
+
+  const handleEdit = () => {
+    handleEditAnswer({
+      color: color,
+      timeSpent: timeSpent,
+      review: review,
+      username: username,
+      email: email,
+      id: id
+    })
+  }
+
   return (
         <li>
           <article className="answer">
@@ -38,6 +49,7 @@ function AnswersItem({
               <em>What else have you got to say about your rubber duck?</em>
               <span className="answer__line">{review}</span>
             </p>
+            <button onClick={handleEdit} >EDIT</button>
           </article>
         </li>
   )

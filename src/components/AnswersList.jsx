@@ -1,16 +1,16 @@
 import AnswersItem from "./AnswersItem";
 
-function AnswersList ({answers}) {
+function AnswersList ({answers, handleEditAnswer}) {
 
   // console.log("Inside AnswersList: ", answers);
-
 
   return (
     <ul>
       {answers.map((answerItem, i) => (
         <AnswersItem 
         answerItem={answerItem}
-        key={i} />
+        key={i}
+        handleEditAnswer={handleEditAnswer} />
       ))}
     </ul>
   );

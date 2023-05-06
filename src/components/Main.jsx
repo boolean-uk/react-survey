@@ -15,11 +15,17 @@ let id = 1
 function Main() {
     const [open, setOpen] = useState(false); //Ignore this state
     const [formData, setFormData] = useState(initialFormData)
+    const [editing, setEditing] = useState(false)
     const [answers, setAnswers] = useState([])
 
     const handleChange = (event) => {
       const { name, value } = event.target
       setFormData({...formData, [name]: value})
+    }
+
+    const handleEditAnswer = (formData) => {
+      setFormData(formData)
+      setEditing(true)
     }
 
     const handleChecked = (event) => {
@@ -32,32 +38,42 @@ function Main() {
     }
 
     const handleSubmit = (event) => {
-      console.log(`submit`)
       event.preventDefault()
-      formData.id = id
-      setAnswers([...answers, formData])
-      id++
-      setFormData(initialFormData)
+      if (editing) {
+        setEditing(false)
+        const editedAnswers = answers.map((item) => {
+          if (item.id === formData.id) {
+            item.color = formData.color
+            item.timeSpent = formData.timeSpent
+            item.review = formData.review
+            item.username = formData.username
+            item.email = formData.email
+            item.id = formData.id
+          } return item
+        })
+        setAnswers(editedAnswers)
       
-      document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
-        input.value = ""
-      });
+      } else {
+        formData.id = id
+        setAnswers([...answers, formData])
+        id++
+      }
+      setFormData(initialFormData)
     }
 
     const logAnswers = () => {
         console.log(`H2 Clicked`)
         console.log('answers',answers)
-        // console.log('initialFormData',initialFormData)
         console.log('formData:', formData)
-      
+        console.log(editing)
+        console.log(answers)
     }
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2 onClick={logAnswers} >Answers list</h2>
-        <AnswersList answers={answers} />
+        <AnswersList answers={answers} handleEditAnswer={handleEditAnswer} />
       </section>
       <section className="main__form">
       <form className="form" onSubmit={handleSubmit} >
@@ -97,25 +113,25 @@ function Main() {
             <li>
               <label
                 ><input
-                  name="timeSpent" type="checkbox" value="swimming" onChange={handleChecked}
+                  name="timeSpent" type="checkbox" value="swimming" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "swimming")}
                 />Swimming</label
               >
             </li>
             <li>
               <label
-                ><input name="timeSpent" type="checkbox" value="bathing" onChange={handleChecked} />Bathing</label
+                ><input name="timeSpent" type="checkbox" value="bathing" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "bathing")} />Bathing</label
               >
             </li>
             <li>
               <label
                 ><input
-                  name="timeSpent" type="checkbox" value="chatting" onChange={handleChecked}
+                  name="timeSpent" type="checkbox" value="chatting" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "chatting")}
                 />Chatting</label
               >
             </li>
             <li>
               <label
-                ><input name="timeSpent" type="checkbox" value="noTime" onChange={handleChecked} />I don't like to
+                ><input name="timeSpent" type="checkbox" value="noTime" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "noTime")} />I don't like to
                 spend time with it</label
               >
             </li>
