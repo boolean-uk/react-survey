@@ -32,16 +32,8 @@ function Main() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    e.target[0].checked =
-      e.target[1].checked =
-      e.target[2].checked =
-      e.target[3].checked =
-      e.target[4].checked =
-      e.target[5].checked =
-      e.target[6].checked =
-      e.target[7].checked =
-        false;
+    console.log(e);
+    e.target.reset();
 
     console.log(color, time, feedback, name, email);
     setColor("");
