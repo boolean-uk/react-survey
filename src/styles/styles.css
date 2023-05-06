@@ -168,7 +168,7 @@ h2 {
 }
 
 .form__group input[type="radio"] {
-  display: none;
+  display: inline-block;
 }
 
 .form textarea {
