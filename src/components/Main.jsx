@@ -13,21 +13,9 @@ const initialFormData = {
 let id = 1
 
 function Main() {
-  const [open, setOpen] = useState(false); //Ignore this state
-
+    const [open, setOpen] = useState(false); //Ignore this state
     const [formData, setFormData] = useState(initialFormData)
     const [answers, setAnswers] = useState([])
-    // CHANGE THIS BACK TO BLANK AT THE END
-    // const [answers, setAnswers] = useState(
-    //   [{
-    //     id: 1,
-    //     color: '1',
-    //     timeSpent: ["swimming","noTime"],
-    //     review: '123',
-    //     username: '456',
-    //     email: '789@gmail.com'
-    //   }]
-    // )
 
     const handleChange = (event) => {
       const { name, value } = event.target
@@ -36,13 +24,11 @@ function Main() {
 
     const handleChecked = (event) => {
       const { value, checked, name } = event.target
-      let newSpendTime
       if (checked) {
-        newSpendTime = [...formData[name], value]
-      } else {
-        newSpendTime = formData[name].filter(item => item !== value)
-      }
-      setFormData({...formData, name: newSpendTime})      
+        setFormData({...formData, [name]: [...formData.timeSpent, value]})
+      } else (
+        setFormData({...formData, [name]: formData.timeSpent.filter(item => item !== value)})
+      )
     }
 
     const handleSubmit = (event) => {
@@ -62,7 +48,8 @@ function Main() {
     const logAnswers = () => {
         console.log(`H2 Clicked`)
         console.log('answers',answers)
-        console.log('initialFormData',initialFormData)
+        // console.log('initialFormData',initialFormData)
+        console.log('formData:', formData)
       
     }
 

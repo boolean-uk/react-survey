@@ -2,7 +2,7 @@ import AnswersItem from "./AnswersItem";
 
 function AnswersList ({answers}) {
 
-  console.log("Inside AnswersList: ", answers);
+  // console.log("Inside AnswersList: ", answers);
 
 
   return (
@@ -17,3 +17,4 @@ function AnswersList ({answers}) {
 }
 
 export default AnswersList
+
