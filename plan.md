@@ -1,4 +1,4 @@
-Initial Plan
+Initial Plan:
 
 * Add form features to main.jsx, edit where needed
 * Create formData state to store what's entered in the form
@@ -8,7 +8,7 @@ Initial Plan
 * Clear the form
 * Break page down in to smaller components
 
-Editing Answers
+Editing Answers:
 
 edit button pressed =>
 pass selected answer to formData =>
@@ -21,3 +21,17 @@ find the current answer in answers state, give it changed values and run setAnsw
 4 - on submit, check if that edit constant is true
 5 - if it is, create a new answer list by mapping through the old answers
 6 - when an answer is found with the same ID as the current formData, update the information
+
+Sections to extract:
+
+* Radio Button List
+* Checkbox list
+
+Radio Button List:
+
+* Props of handleChange and formData
+
+Checkbox List:
+
+* Props of handleChecked and formData
+* Might need to deconstruct formData so it can access timeSpent

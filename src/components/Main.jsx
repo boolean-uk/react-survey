@@ -1,5 +1,7 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
+import RadioButtons from "./RadioButtons";
+import CheckBoxes from "./CheckBoxes";
 
 const initialFormData = {
   id: null,
@@ -80,62 +82,11 @@ function Main() {
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
           <h3>How do you rate your rubber duck colour?</h3>
-          <ul>
-            <li>
-              <input id="color-one" type="radio" name="color" value="1" onChange={handleChange} checked={formData.color === "1"} /><label
-                htmlFor="color-one"
-                >1</label
-              >
-            </li>
-            <li>
-              <input id="color-two" type="radio" name="color" value="2" onChange={handleChange} checked={formData.color === "2"} /><label
-                htmlFor="color-two"
-                >2</label
-              >
-            </li>
-            <li>
-              <input id="color-three" type="radio" name="color" value="3" onChange={handleChange} checked={formData.color === "3"} /><label
-                htmlFor="color-three"
-                >3</label
-              >
-            </li>
-            <li>
-              <input id="color-four" type="radio" name="color" value="4" onChange={handleChange} checked={formData.color === "4"} /><label
-                htmlFor="color-four"
-                >4</label
-              >
-            </li>
-          </ul>
+          <RadioButtons handleChange={handleChange} formData={formData} />
         </div>
         <div className="form__group">
           <h3>How do you like to spend time with your rubber duck</h3>
-          <ul>
-            <li>
-              <label
-                ><input
-                  name="timeSpent" type="checkbox" value="swimming" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "swimming")}
-                />Swimming</label
-              >
-            </li>
-            <li>
-              <label
-                ><input name="timeSpent" type="checkbox" value="bathing" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "bathing")} />Bathing</label
-              >
-            </li>
-            <li>
-              <label
-                ><input
-                  name="timeSpent" type="checkbox" value="chatting" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "chatting")}
-                />Chatting</label
-              >
-            </li>
-            <li>
-              <label
-                ><input name="timeSpent" type="checkbox" value="noTime" onChange={handleChecked} checked={formData.timeSpent.some(word => word === "noTime")} />I don't like to
-                spend time with it</label
-              >
-            </li>
-          </ul>
+          <CheckBoxes handleChecked={handleChecked} formData={formData} />
         </div>
         <label
           >What else have you got to say about your rubber duck?<textarea
