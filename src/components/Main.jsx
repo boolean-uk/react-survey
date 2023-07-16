@@ -21,15 +21,16 @@ function Main() {
   const [open, setOpen] = useState(false) // Ignore this state
   // const [worstFeature, setWorstFeature] = useState()
   // const [bestFeature, setBestFeature] = useState()
-  const [consistency, setConsistency] = useState()
-  const [colour, setColour] = useState()
-  const [logo, setLogo] = useState()
+  const [consistency, setConsistency] = useState('')
+  const [colour, setColour] = useState('')
+  const [logo, setLogo] = useState('')
   const [review, setReview] = useState('')
   const [name, setName] = useState('')
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [initialBest, setInitialBest] = useState(initialStateBest)
   const [initialWorst, setInitialWorst] = useState(initialStateWorst)
   const [initialTime, setInitialTime]= useState(initialStateTime)
+  const [answers, setAnswers] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -44,7 +45,16 @@ function Main() {
       review,
       name
     })
-    e.target.reset();
+    setConsistency('')
+    setColour('')
+    setLogo('')
+    setReview('')
+    setName('')
+    // setFormSubmitted(false)
+    setInitialBest(initialStateBest)
+    setInitialWorst(initialStateWorst)
+    setInitialTime(initialStateTime)
+    setAnswers()
   }
   function updateCheckboxBest(name) {
     setInitialBest({ ...initialBest, [name]: !initialBest[name] })
@@ -88,9 +98,11 @@ function Main() {
             <p>
               <em>
                 What would you say that are the best features of your rubber
-                duck?
+                duck is: 
               </em>
-              <span className="answer__line">{console.log(Object.keys(initialBest))}</span>
+              <span className="answer__line">{console.log(Object.entries(initialBest).filter(pair => {
+                return pair.includes(true)
+              }))}</span>
             </p>
             <p>
               <em>
