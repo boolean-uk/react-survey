@@ -24,8 +24,8 @@ function Main() {
   const [consistency, setConsistency] = useState()
   const [colour, setColour] = useState()
   const [logo, setLogo] = useState()
-  const [review, setReview] = useState()
-  const [name, setName] = useState()
+  const [review, setReview] = useState('')
+  const [name, setName] = useState('')
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [initialBest, setInitialBest] = useState(initialStateBest)
   const [initialWorst, setInitialWorst] = useState(initialStateWorst)
@@ -44,6 +44,7 @@ function Main() {
       review,
       name
     })
+    e.target.reset();
   }
   function updateCheckboxBest(name) {
     setInitialBest({ ...initialBest, [name]: !initialBest[name] })
@@ -89,13 +90,13 @@ function Main() {
                 What would you say that are the best features of your rubber
                 duck?
               </em>
-              <span className="answer__line">{initialBest}</span>
+              <span className="answer__line">{console.log(Object.keys(initialBest))}</span>
             </p>
             <p>
               <em>
                 What would you say that are the worst bits of your rubber duck?{' '}
               </em>
-              <span className="answer__line">{initialWorst}</span>
+              <span className="answer__line">{initialWorst.checked}</span>
             </p>
             <p>
               <em>How do you rate your rubber duck consistency? </em>
