@@ -214,7 +214,7 @@ function Main() {
           </div>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck consistency?</h3>
-            <label>
+            <label style={{backgroundColor: consistency === '1' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="consistency"
@@ -225,7 +225,7 @@ function Main() {
               1
             </label>
 
-            <label>
+            <label style={{backgroundColor: consistency === '2' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="consistency"
@@ -236,7 +236,7 @@ function Main() {
               2
             </label>
 
-            <label>
+            <label style={{backgroundColor: consistency === '3' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="consistency"
@@ -247,7 +247,7 @@ function Main() {
               3
             </label>
 
-            <label>
+            <label style={{backgroundColor: consistency === '4' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="consistency"
@@ -260,18 +260,18 @@ function Main() {
           </div>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-            <label>
+            <label style={{backgroundColor: colour === '1' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="colour"
                 value="1"
                 onChange={handleColour}
                 checked={colour === '1'}
-              />
+                />
               1
             </label>
 
-            <label>
+            <label style={{backgroundColor: colour === '2' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="colour"
@@ -282,7 +282,7 @@ function Main() {
               2
             </label>
 
-            <label>
+            <label style={{backgroundColor: colour === '3' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="colour"
@@ -293,7 +293,7 @@ function Main() {
               3
             </label>
 
-            <label>
+            <label style={{backgroundColor: colour === '4' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="colour"
@@ -306,7 +306,7 @@ function Main() {
           </div>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck logo?</h3>
-            <label>
+            <label style={{backgroundColor: logo === '1' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="logo"
@@ -317,7 +317,7 @@ function Main() {
               1
             </label>
 
-            <label>
+            <label style={{backgroundColor: logo === '2' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="logo"
@@ -328,7 +328,7 @@ function Main() {
               2
             </label>
 
-            <label>
+            <label style={{backgroundColor: logo === '3' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="logo"
@@ -339,7 +339,7 @@ function Main() {
               3
             </label>
 
-            <label>
+            <label style={{backgroundColor: logo === '4' ? 'red': 'white'}}>
               <input
                 type="radio"
                 name="logo"
