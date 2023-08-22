@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Checkbox from "./Checkbox";
 import RadioChoice from "./RadioChoice";
+import AnswersList from "./AnswersList";
 
 function Main() {
     const [open, setOpen] = useState(false); //Ignore this state
@@ -16,6 +17,13 @@ function Main() {
         email: "",
     };
     const [formData, setFormData] = useState(initialState);
+    const [results, setResults] = useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const handleEditClick = (index) => {
+        setEditingIndex(index);
+        const editedAnswer = results[index];
+        setFormData(editedAnswer);
+    };
     const featuresArr = [
         "It's yellow",
         "It squeaks",
@@ -53,13 +61,26 @@ function Main() {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formData);
+        // console.log(formData);
+        if (editingIndex !== null) {
+            const updatedAnswers = [...results];
+            updatedAnswers[editingIndex] = formData;
+            setResults(updatedAnswers);
+            setEditingIndex(null);
+        } else {
+            setResults([...results, formData]);
+        }
+        // console.log(results);
         setFormData(initialState);
     };
     return (
         <main className="main">
             <section className={`main__list ${open ? "open" : ""}`}>
                 <h2>Answers list</h2>
+                <AnswersList
+                    answersList={results}
+                    onEditClick={handleEditClick}
+                />
                 {/* answers should go here */}
             </section>
             <section className="main__form">
