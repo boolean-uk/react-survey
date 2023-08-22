@@ -3,11 +3,24 @@ import RadioGroup from "./RadioGroup";
 import CheckboxesGroup from "./CheckboxesGroup";
 
 export default function Form(props) {
-  /** TODO: Add state fields in formData */
+  /** TODO: use values from arrays with data instead of the hard-coded items here */
   const [formData, setFormData] = useState({
+    "best-features": {
+      "yellow": false,
+      "squeaks": false,
+      "logo": false,
+      "big": false
+    },
+    "worst-bits": {
+      "yellow": false,
+      "squeaks": false,
+      "logo": false,
+      "big": false
+    },
+    consistency: '',
     color: '',
-    ["spend-time"]: {   // TODO: ["spend-time"]: '' or "spend-time": '' ??
-      // TODO: use values from checkboxData instead of the hard-coded items here
+    logo: '',
+    "spend-time": {
       "swimming": false,
       "bathing": false,
       "chatting": false,
@@ -20,8 +33,10 @@ export default function Form(props) {
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
-
-    // NOTE: update nested object as presentes here https://react.dev/learn/updating-objects-in-state
+    /** NOTE:
+     * update nested object as presented here
+     * https://react.dev/learn/updating-objects-in-state
+     */
     if (type === "checkbox") {
       setFormData({
         ...formData,
@@ -43,14 +58,12 @@ export default function Form(props) {
     console.log(formData)
   }
 
-  const radioData = [
-    { id: "color-one", value: '1' },
-    { id: "color-two", value: '2' },
-    { id: "color-three", value: '3' },
-    { id: "color-four", value: '4' }
+  const rateData = [
+    { id: "one", value: '1' },
+    { id: "two", value: '2' },
+    { id: "three", value: '3' },
+    { id: "four", value: '4' }
   ]
-
-  const isRadioChecked = value => formData.color === value
 
   const checkboxData = [
     { message: "Swimming", value: "swimming" },
@@ -59,33 +72,61 @@ export default function Form(props) {
     { message: "I don't like to spend time with it", value: "noTime" }
   ]
 
-  const isCheckboxChecked = (value) => formData["spend-time"][value]
+  const featuresData = [
+    { message: "It's yellow!", value: "yellow" },
+    { message: "It squeaks!", value: "squeaks" },
+    { message: "It has a logo!", value: "logo" },
+    { message: "It's big!", value: "big" }
+  ]
+
+  const isRadioChecked = (name, value) => formData[name] === value
+  const isCheckboxChecked = (name, value) => formData[name][value]
   
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Tell us what you think about your rubber duck!</h2>
-      <div className="form__group radio">
-        {/* <h3>How do you rate your rubber duck colour?</h3> */}
-        {/* <!-- Radio inputs go here --> */}
-        <RadioGroup
-          header="How do you rate your rubber duck colour?"
-          data={radioData}
-          name="color"
-          handleChange={handleChange}
-          isChecked={isRadioChecked}
-        />
-      </div>
-      <div className="form__group">
-        {/* <h3>How do you like to spend time with your rubber duck</h3> */}
-        {/* <!-- checkboxes go here --> */}
-        <CheckboxesGroup
-          header="How do you like to spend time with your rubber duck"
-          data={checkboxData}
-          name="spend-time"
-          handleChange={handleChange}
-          isChecked={isCheckboxChecked}
-        />
-      </div>
+      <CheckboxesGroup
+        header="What would you say are the best features of your rubber duck?"
+        data={featuresData}
+        name="best-features"
+        handleChange={handleChange}
+        isChecked={isCheckboxChecked}
+      />
+      <CheckboxesGroup
+        header="What would you say are the worst bits of your rubber duck?"
+        data={featuresData}
+        name="worst-bits"
+        handleChange={handleChange}
+        isChecked={isCheckboxChecked}
+      />
+      <RadioGroup
+        header="How do you rate your rubber duck consistency?"
+        data={rateData}
+        name="consistency"
+        handleChange={handleChange}
+        isChecked={isRadioChecked}
+      />
+      <RadioGroup
+        header="How do you rate your rubber duck colour?"
+        data={rateData}
+        name="color"
+        handleChange={handleChange}
+        isChecked={isRadioChecked}
+      />
+      <RadioGroup
+        header="How do you rate your rubber duck logo?"
+        data={rateData}
+        name="logo"
+        handleChange={handleChange}
+        isChecked={isRadioChecked}
+      />
+      <CheckboxesGroup
+        header="How do you like to spend time with your rubber duck"
+        data={checkboxData}
+        name="spend-time"
+        handleChange={handleChange}
+        isChecked={isCheckboxChecked}
+      />
       <label
         >What else have you got to say about your rubber duck?<textarea
           name="review"

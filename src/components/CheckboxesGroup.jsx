@@ -9,7 +9,7 @@ function Checkbox(props) {
           name={name}
           value={value}
           onChange={handleChange}
-          checked={isChecked(value)}
+          checked={isChecked(name, value)}
         />
         {message}
       </label>
@@ -21,7 +21,7 @@ export default function CheckboxesGroup(props) {
   const { header, data, name, handleChange, isChecked } = props
 
   return (
-    <>
+    <div className="form__group">
       <h3>{header}</h3>
       <ul>
         {
@@ -37,6 +37,6 @@ export default function CheckboxesGroup(props) {
           )
         }
       </ul>
-    </>
+    </div>
   )
 }
