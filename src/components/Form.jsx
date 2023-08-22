@@ -2,34 +2,35 @@ import { useState } from "react";
 import RadioGroup from "./RadioGroup";
 import CheckboxesGroup from "./CheckboxesGroup";
 
-export default function Form(props) {
-  /** TODO: use values from arrays with data instead of the hard-coded items here */
-  const [formData, setFormData] = useState({
-    "best-features": {
-      "yellow": false,
-      "squeaks": false,
-      "logo": false,
-      "big": false
-    },
-    "worst-bits": {
-      "yellow": false,
-      "squeaks": false,
-      "logo": false,
-      "big": false
-    },
-    consistency: '',
-    color: '',
-    logo: '',
-    "spend-time": {
-      "swimming": false,
-      "bathing": false,
-      "chatting": false,
-      "noTime": false
-    },
-    review: '',
-    username: '',
-    email: ''
-  })
+const emptyFormData = {
+  "best-features": {
+    "yellow": false,
+    "squeaks": false,
+    "logo": false,
+    "big": false
+  },
+  "worst-bits": {
+    "yellow": false,
+    "squeaks": false,
+    "logo": false,
+    "big": false
+  },
+  consistency: '',
+  color: '',
+  logo: '',
+  "spend-time": {
+    "swimming": false,
+    "bathing": false,
+    "chatting": false,
+    "noTime": false
+  },
+  review: '',
+  username: '',
+  email: ''
+}
+
+export default function Form({ setSubmittedAnswer }) {
+  const [formData, setFormData] = useState(emptyFormData)
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
@@ -56,6 +57,8 @@ export default function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(formData)
+    setSubmittedAnswer(formData)
+    setFormData(emptyFormData)
   }
 
   const rateData = [
