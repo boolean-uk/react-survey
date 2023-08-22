@@ -3,13 +3,13 @@ import RadioGroup from "./RadioGroup";
 import CheckboxesGroup from "./CheckboxesGroup";
 
 const emptyFormData = {
-  "best-features": {
+  bestFeatures: {
     "yellow": false,
     "squeaks": false,
     "logo": false,
     "big": false
   },
-  "worst-bits": {
+  worstBits: {
     "yellow": false,
     "squeaks": false,
     "logo": false,
@@ -18,7 +18,7 @@ const emptyFormData = {
   consistency: '',
   color: '',
   logo: '',
-  "spend-time": {
+  timeSpend: {
     "swimming": false,
     "bathing": false,
     "chatting": false,
@@ -91,14 +91,14 @@ export default function Form({ handleSubmittedAnswer }) {
       <CheckboxesGroup
         header="What would you say are the best features of your rubber duck?"
         data={featuresData}
-        name="best-features"
+        name="bestFeatures"
         handleChange={handleChange}
         isChecked={isCheckboxChecked}
       />
       <CheckboxesGroup
         header="What would you say are the worst bits of your rubber duck?"
         data={featuresData}
-        name="worst-bits"
+        name="worstBits"
         handleChange={handleChange}
         isChecked={isCheckboxChecked}
       />
@@ -126,7 +126,7 @@ export default function Form({ handleSubmittedAnswer }) {
       <CheckboxesGroup
         header="How do you like to spend time with your rubber duck"
         data={checkboxData}
-        name="spend-time"
+        name="timeSpend"
         handleChange={handleChange}
         isChecked={isCheckboxChecked}
       />
