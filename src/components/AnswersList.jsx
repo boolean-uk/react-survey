@@ -1,8 +1,6 @@
-import AnswersItem from "./AnswersItem";
+import AnswersItem from "./AnswersItem.jsx";
 
 export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
-
   const { answersList } = props;
 
   return (
