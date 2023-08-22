@@ -11,8 +11,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item,i) => (
+        <li key={i}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,10 +22,10 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review }, index, handleEdit, handleDelete
 }) {
   return (
-    <li>
+    <li key={index}>
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
         <p>
@@ -34,12 +34,14 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
         </p>
+        <ItemsList list={Object.keys(timeSpent).filter(item => timeSpent[item] === true)} />
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button type='button' onClick={() => handleEdit(index)}>Edit.</button>
+        <button type='button' onClick={() => handleDelete(index)}>Delete.</button>
       </article>
     </li>
   );
