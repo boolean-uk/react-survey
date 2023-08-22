@@ -1,5 +1,37 @@
 import { useState } from "react";
 
+function RadioButton(props) {
+  const { id, name, value } = props
+  
+  return (
+    <li>
+      <input
+        id={id} type="radio" name={name}
+        value={`${value}`}
+      />
+      <label htmlFor={id}>{value}</label>
+    </li>
+  )
+}
+
+function RadioGroup(props) {
+  const { data, name } = props
+  
+  return (
+    <ul>
+      {
+        data.map(item => 
+          <RadioButton
+            id={item.id} name={name} value={item.value}
+            key={item.id}
+          />
+        )
+      }
+    </ul>
+  )
+}
+
+
 export default function Form(props) {
   /** TODO: Add state fields in formData */
   const [formData, setFormData] = useState({
@@ -21,6 +53,13 @@ export default function Form(props) {
     event.preventDefault()
     console.log(formData)
   }
+
+  const radioData = [
+    { id: "color-one", value: 1 },
+    { id: "color-two", value: 2 },
+    { id: "color-three", value: 3 },
+    { id: "color-four", value: 4 }
+  ]
   
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -28,6 +67,9 @@ export default function Form(props) {
       <div className="form__group radio">
         <h3>How do you rate your rubber duck colour?</h3>
         {/* <!-- Radio inputs go here --> */}
+        <RadioGroup
+          data={radioData}
+        />
       </div>
       <div className="form__group">
         <h3>How do you like to spend time with your rubber duck</h3>
