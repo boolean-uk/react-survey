@@ -6,12 +6,11 @@ function Main() {
   
   const [color, setColor] = useState('')
   let [timespent, setTimeSpent] = useState({
-    swimming: '',
-    bathing: '',
-    chatting: '',
-    notime: ''
+    swimming: false,
+    bathing: false,
+    chatting: false,
+    notime: false
   })
-
   const [review, setReview] = useState('')
   const [username, setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -21,10 +20,10 @@ function Main() {
     console.log({color, timespent, review, username, email})
    
     event.target.reset()
-    setTimeSpent({swimming: event.target[4].checked,
-      bathing: event.target[5].checked,
-      chatting: event.target[6].checked,
-      notime: event.target[7].checked
+    setTimeSpent({swimming: event.target[1].checked,
+      bathing: event.target[2].checked,
+      chatting: event.target[3].checked,
+      notime: event.target[4].checked
     })
   }
   
@@ -114,7 +113,6 @@ function Main() {
               </li>
               <li>
                 <label
-                    
                     ><input name="timespent" type="checkbox" value="notime" onChange={handleTimeSpent}
                     checked = {timespent.notime} />I don't like to
                   spend time with it</label>
