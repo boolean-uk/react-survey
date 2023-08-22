@@ -18,7 +18,7 @@ const emptyFormData = {
   consistency: '',
   color: '',
   logo: '',
-  timeSpend: {
+  timeSpent: {
     "swimming": false,
     "bathing": false,
     "chatting": false,
@@ -126,7 +126,7 @@ export default function Form({ handleSubmittedAnswer }) {
       <CheckboxesGroup
         header="How do you like to spend time with your rubber duck"
         data={checkboxData}
-        name="timeSpend"
+        name="timeSpent"
         handleChange={handleChange}
         isChecked={isCheckboxChecked}
       />
