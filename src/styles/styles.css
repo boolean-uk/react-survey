@@ -196,3 +196,8 @@ h2 {
 .form__submit:hover {
   background-color: white;
 }
+
+.form-buttons {
+  display: inline-flex;
+  justify-content: space-between;
+}
