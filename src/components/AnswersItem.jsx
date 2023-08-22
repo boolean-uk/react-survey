@@ -24,7 +24,7 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Remember here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colourRating, timeSpent, review, bestFeatures, worstBits, duckConsistency, duckLogo }, onEditClick, index   // added new props look like the original form
+  answerItem: { username, colourRating, timeSpent, review, bestFeatures, worstBits, duckConsistency, duckLogo }, answerItem, onDeleteClick, onEditClick, index   // added new props look like the original form
 }) {
   return (
     <li>
@@ -52,7 +52,8 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck:</em>
           <p>{review}</p>
 
-          <button onClick={() => onEditClick(index)}>Edit</button> 
+          <button onClick={() => onEditClick(answerItem.id)}>Edit</button>
+          <button onClick={() => onDeleteClick(answerItem.id)}>Delete</button>
       </article>
     </li>
   );

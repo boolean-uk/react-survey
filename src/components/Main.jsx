@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";   // adding useEffect for fetching from server
 import AnswersList from './AnswersList'; 
 import {answersSet} from "./AnswersItem";
 
@@ -17,6 +17,13 @@ function Main() {
     timeSpent:[],
     review:""
   })
+
+  //fetching data
+  useEffect(() => {
+    fetch("http://localhost:5000/answers")
+      .then(response => response.json())
+      .then(data => setAnswers(data))
+  }, [])
 
   //answer state
   const [answers, setAnswers] = useState([])
@@ -43,17 +50,48 @@ function Main() {
     }
     }
 
-    function handleSubmit(e) {
-      e.preventDefault()
+    function handleDelete(id) {
+      fetch(`http://localhost:5000/answers/${id}`, {
+        method: "DELETE"
+      }).then(() => {
+        setAnswers(prev => prev.filter(a => a.id !== id))
+      })
+    }
 
+    function handleSubmit(e) {
+      e.preventDefault();
       if (currentEdit !== null) {
-        const updatedAnswers = [...answers];
-        updatedAnswers[currentEdit] = formData;
-        setAnswers(updatedAnswers);
-        setCurrentEdit(null);
+        // Updating existing answer
+        fetch(`http://localhost:5000/answers/${currentEdit.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }).then(() => {
+          // Update the answers in state 
+          const updatedAnswers = answers.map(a => 
+            a.id === currentEdit.id ? formData : a
+          )
+          setAnswers(updatedAnswers)
+          setCurrentEdit(null)
+          resetForm();
+        });
       } else {
-        setAnswers(prev => [...prev, formData]);
+        // Create a new answer
+        fetch("http://localhost:5000/answers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }).then(response => response.json())
+          .then(newAnswer => {
+            setAnswers(prev => [...prev, newAnswer])
+            resetForm()
+          })
       }
+    
   
       resetForm();
     }
@@ -72,16 +110,17 @@ function Main() {
       })
     }
 
-    function handleEditClick(index) {
-      setFormData(answers[index])
-      setCurrentEdit(index)
-    }
+    function handleEditClick(id) {
+      const answerToEdit = answers.find(a => a.id === id)
+      setFormData(answerToEdit)
+      setCurrentEdit(answerToEdit)
+  }
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} onEditClick={handleEditClick} />
+        <AnswersList answersList={answers} onEditClick={handleEditClick} onDeleteClick={handleDelete} />
       </section>
       <section className="main__form">
       <form className="form" onSubmit={handleSubmit}>
