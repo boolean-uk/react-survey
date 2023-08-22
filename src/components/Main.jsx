@@ -21,6 +21,9 @@ function Main() {
   //answer state
   const [answers, setAnswers] = useState([])
 
+  //state for edit button
+  const [currentEdit, setCurrentEdit] = useState(null)
+
   function handleChange(e) {
     const {name, value, type} =e.target
 
@@ -42,10 +45,17 @@ function Main() {
 
     function handleSubmit(e) {
       e.preventDefault()
-      console.log(formData)
 
-      setAnswers(prev => [ ...prev, formData])
-      resetForm()
+      if (currentEdit !== null) {
+        const updatedAnswers = [...answers];
+        updatedAnswers[currentEdit] = formData;
+        setAnswers(updatedAnswers);
+        setCurrentEdit(null);
+      } else {
+        setAnswers(prev => [...prev, formData]);
+      }
+  
+      resetForm();
     }
 
     function resetForm() {
@@ -62,11 +72,16 @@ function Main() {
       })
     }
 
+    function handleEditClick(index) {
+      setFormData(answers[index])
+      setCurrentEdit(index)
+    }
+
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList answersList={answers} onEditClick={handleEditClick} />
       </section>
       <section className="main__form">
       <form className="form" onSubmit={handleSubmit}>
