@@ -50,8 +50,6 @@ function Main() {
     setEmail(event.target.value)
   }
 
-  
-
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
