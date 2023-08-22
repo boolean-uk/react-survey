@@ -5,16 +5,18 @@ import Form from "./Form";
 
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const [submittedAnswer, setSubmittedAnswer] = useState({});
+  const [answersList, setAnswersList] = useState([])
+
+  const handleSubmittedAnswer = (submittedAnswer) => setAnswersList([...answersList, submittedAnswer])
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList submittedAnswer={submittedAnswer} />
+        <AnswersList answersList={answersList} />
       </section>
       <section className="main__form">
-        <Form setSubmittedAnswer={setSubmittedAnswer} />
+        <Form handleSubmittedAnswer={handleSubmittedAnswer} />
       </section>
     </main>
   );

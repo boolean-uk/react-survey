@@ -29,7 +29,7 @@ const emptyFormData = {
   email: ''
 }
 
-export default function Form({ setSubmittedAnswer }) {
+export default function Form({ handleSubmittedAnswer }) {
   const [formData, setFormData] = useState(emptyFormData)
 
   const handleChange = (event) => {
@@ -57,7 +57,7 @@ export default function Form({ setSubmittedAnswer }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(formData)
-    setSubmittedAnswer(formData)
+    handleSubmittedAnswer(formData)
     setFormData(emptyFormData)
   }
 

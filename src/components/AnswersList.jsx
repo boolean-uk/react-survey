@@ -1,9 +1,6 @@
-import { useState } from "react";
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList({ submittedAnswer }) {
-  const [answersList, setAnswersList] = useState([])
-
+export default function AnswersList({ answersList }) {
   return (
     (answersList.length > 0) &&
       <ul>
