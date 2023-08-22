@@ -18,22 +18,25 @@ function Checkbox(props) {
 }
 
 export default function CheckboxesGroup(props) {
-  const { data, name, handleChange, isChecked } = props
+  const { header, data, name, handleChange, isChecked } = props
 
   return (
-    <ul>
-      {
-        data.map(item =>
-          <Checkbox
-            message={item.message}
-            name={name}
-            value={item.value}
-            handleChange={handleChange}
-            isChecked={isChecked}
-            key={item.value}
-          />
-        )
-      }
-    </ul>
+    <>
+      <h3>{header}</h3>
+      <ul>
+        {
+          data.map(item =>
+            <Checkbox
+              message={item.message}
+              name={name}
+              value={item.value}
+              handleChange={handleChange}
+              isChecked={isChecked}
+              key={item.value}
+            />
+          )
+        }
+      </ul>
+    </>
   )
 }

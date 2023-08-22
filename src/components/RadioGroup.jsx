@@ -15,20 +15,23 @@ function RadioButton(props) {
 }
 
 export default function RadioGroup(props) {
-  const { data, name, handleChange, isChecked } = props
+  const { header, data, name, handleChange, isChecked } = props
 
   return (
-    <ul>
-      {
-        data.map(item => 
-          <RadioButton
-            id={item.id} name={name} value={item.value}
-            handleChange={handleChange}
-            isChecked={isChecked}
-            key={item.id}
-          />
-        )
-      }
-    </ul>
+    <>
+      <h3>{header}</h3>
+      <ul>
+        {
+          data.map(item => 
+            <RadioButton
+              id={item.id} name={name} value={item.value}
+              handleChange={handleChange}
+              isChecked={isChecked}
+              key={item.id}
+            />
+          )
+        }
+      </ul>
+    </>
   )
 }

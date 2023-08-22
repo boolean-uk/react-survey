@@ -65,9 +65,10 @@ export default function Form(props) {
     <form className="form" onSubmit={handleSubmit}>
       <h2>Tell us what you think about your rubber duck!</h2>
       <div className="form__group radio">
-        <h3>How do you rate your rubber duck colour?</h3>
+        {/* <h3>How do you rate your rubber duck colour?</h3> */}
         {/* <!-- Radio inputs go here --> */}
         <RadioGroup
+          header="How do you rate your rubber duck colour?"
           data={radioData}
           name="color"
           handleChange={handleChange}
@@ -75,9 +76,10 @@ export default function Form(props) {
         />
       </div>
       <div className="form__group">
-        <h3>How do you like to spend time with your rubber duck</h3>
+        {/* <h3>How do you like to spend time with your rubber duck</h3> */}
         {/* <!-- checkboxes go here --> */}
         <CheckboxesGroup
+          header="How do you like to spend time with your rubber duck"
           data={checkboxData}
           name="spend-time"
           handleChange={handleChange}
