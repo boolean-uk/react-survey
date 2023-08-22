@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 function RadioButton(props) {
-  const { id, name, value } = props
+  const { id, name, value, handleChange, isChecked } = props
   
   return (
     <li>
       <input
         id={id} type="radio" name={name}
-        value={`${value}`}
+        value={value}
+        onChange={handleChange}
+        checked={isChecked(value)}
       />
       <label htmlFor={id}>{value}</label>
     </li>
@@ -15,14 +17,16 @@ function RadioButton(props) {
 }
 
 function RadioGroup(props) {
-  const { data, name } = props
-  
+  const { data, name, value, handleChange, isChecked } = props
+
   return (
     <ul>
       {
         data.map(item => 
           <RadioButton
             id={item.id} name={name} value={item.value}
+            handleChange={handleChange}
+            isChecked={isChecked}
             key={item.id}
           />
         )
@@ -35,6 +39,7 @@ function RadioGroup(props) {
 export default function Form(props) {
   /** TODO: Add state fields in formData */
   const [formData, setFormData] = useState({
+    color: '',
     review: '',
     username: '',
     email: ''
@@ -55,11 +60,13 @@ export default function Form(props) {
   }
 
   const radioData = [
-    { id: "color-one", value: 1 },
-    { id: "color-two", value: 2 },
-    { id: "color-three", value: 3 },
-    { id: "color-four", value: 4 }
+    { id: "color-one", value: '1' },
+    { id: "color-two", value: '2' },
+    { id: "color-three", value: '3' },
+    { id: "color-four", value: '4' }
   ]
+
+  const isRadioChecked = (value) => formData.color === value
   
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -69,6 +76,9 @@ export default function Form(props) {
         {/* <!-- Radio inputs go here --> */}
         <RadioGroup
           data={radioData}
+          name="color"
+          handleChange={handleChange}
+          isChecked={isRadioChecked}
         />
       </div>
       <div className="form__group">
