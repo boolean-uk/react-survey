@@ -29,8 +29,11 @@ const emptyFormData = {
   email: ''
 }
 
-export default function Form({ handleSubmittedAnswer }) {
-  const [formData, setFormData] = useState(emptyFormData)
+export default function Form({ answer, handleSubmittedAnswer }) {
+  const initialData = answer ? answer : emptyFormData
+  const [formData, setFormData] = useState(initialData)
+
+  console.log('inside Form -- answer: ', answer)
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target

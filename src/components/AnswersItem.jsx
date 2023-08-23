@@ -33,7 +33,7 @@ function Paragraph({ message, data, answersSet }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, bestFeatures, worstBits, consistency, color, logo, timeSpent, review }
+  answerItem: { username, bestFeatures, worstBits, consistency, color, logo, timeSpent, review }, index, handleEditAnswer
 }) {
   return (
     <li>
@@ -71,6 +71,7 @@ export default function AnswersItem({
           data={review}
           answersSet={data.review.answersSet}
         />
+        <button onClick={() => handleEditAnswer(index)}>Edit answer</button>
       </article>
     </li>
   );

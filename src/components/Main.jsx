@@ -6,17 +6,35 @@ import Form from "./Form";
 function Main() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [answersList, setAnswersList] = useState([])
+  const [index, setIndex] = useState(null)
 
-  const handleSubmittedAnswer = (submittedAnswer) => setAnswersList([...answersList, submittedAnswer])
+  const handleSubmittedAnswer = (submittedAnswer) => {
+    if (index) {
+      setAnswersList([...answersList.slice(0, index), submittedAnswer, ...answersList.slice(index + 1)])
+      setIndex(null)
+    } else {
+      setAnswersList([...answersList, submittedAnswer])
+    }
+  }
+
+  const handleEditAnswer = (index) => {
+    setIndex(index)
+  }
 
   return (
     <main className="main">
       <section className={`main__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList} />
+        <AnswersList
+          answersList={answersList}
+          handleEditAnswer={handleEditAnswer}
+        />
       </section>
       <section className="main__form">
-        <Form handleSubmittedAnswer={handleSubmittedAnswer} />
+        <Form
+          answer={answersList[index]}
+          handleSubmittedAnswer={handleSubmittedAnswer}
+        />
       </section>
     </main>
   );
