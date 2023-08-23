@@ -23,32 +23,24 @@ function Main() {
     const handleChange = (event) => {
       const { name, value,type } = event.target
 
-      setFormData({
+      if (type === "checkbox") {
+        setFormData({...formData, [name]: event.target.checked})
+      }else {
+        setFormData({
           ...formData,
           [name]: value
       })
-      if (type === "checkbox") {
-        setFormData({...formData, [name]: event.target.checked})
       }
+      
     }
 
-    const [formDataList, setFormDataList] = useState({})
+    const [formDataList, setFormDataList] = useState([])
 
     const handleSubmit = (event) => {
       event.preventDefault()
 
-      // formDataList.push(formData)
-      // setFormDataList(formDataList.push(formData))
-      // setFormDataList(...formDataList.push(formData))
-      // useState(formDataList.push(formData))
-      // useState(...formDataList.push(formData))
-
-       setFormDataList([...formDataList, formData])
-      // useState([formDataList.push(formData)])
-      // useState([...formDataList.push(formData)])
-      // setFormDataList([formDataList.push(formData)])
-
-      console.log(formData)
+      setFormDataList([...formDataList, formData])
+    
     }
 
   return (
@@ -60,10 +52,10 @@ function Main() {
       </section>
 
       <section className="main__form">{/* a form should be here */
-      <form class="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Tell us what you think about your rubber duck!</h2>
 
-        <div class="form__group">
+        <div className="form__group">
         <h3>What would you say that are the best feautures of your rubber duck?</h3>
         {/* <!-- checkboxes go here --> added */}
           <ul>
@@ -83,7 +75,7 @@ function Main() {
         </div>
 
 
-        <div class="form__group radio">
+        <div className="form__group radio">
          <h3>How do you rate your rubber duck colour?</h3>
           {/* <!-- Radio inputs go here --> added*/}
           <ul>
@@ -106,7 +98,7 @@ function Main() {
           </ul>
         </div>
 
-        <div class="form__group radio">
+        <div className="form__group radio">
          <h3>How do you rate your rubber duck consisteny?</h3>
           {/* <!-- Radio inputs go here --> added*/}
           <ul>
@@ -129,7 +121,7 @@ function Main() {
           </ul>
         </div>
 
-        <div class="form__group">
+        <div className="form__group">
         <h3>How do you like to spend time with your rubber duck</h3>
         {/* <!-- checkboxes go here --> added */}
           <ul>
@@ -170,7 +162,7 @@ function Main() {
               // value="" 
               onChange={handleChange}/>
           </label>
-        <input class="form__submit" type="submit" value="Submit Survey!"/>
+        <input className="form__submit" type="submit" value="Submit Survey!"/>
       </form>
 
     }</section>
