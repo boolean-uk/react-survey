@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RadioGroup from "./RadioGroup";
 import CheckboxesGroup from "./CheckboxesGroup";
 
@@ -33,7 +33,14 @@ export default function Form({ answer, handleSubmittedAnswer }) {
   const initialData = answer ? answer : emptyFormData
   const [formData, setFormData] = useState(initialData)
 
-  console.log('inside Form -- answer: ', answer)
+  useEffect(() => {
+    if (answer) {
+      console.log('useEffect answer:', answer)
+      setFormData(answer)
+    }
+  }, [answer])
+
+  console.log('inside Form -- formData: ', formData)
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
