@@ -30,17 +30,13 @@ const emptyFormData = {
 }
 
 export default function Form({ answer, handleSubmittedAnswer }) {
-  const initialData = answer ? answer : emptyFormData
-  const [formData, setFormData] = useState(initialData)
+  const [formData, setFormData] = useState(emptyFormData)
 
   useEffect(() => {
     if (answer) {
-      console.log('useEffect answer:', answer)
       setFormData(answer)
     }
   }, [answer])
-
-  console.log('inside Form -- formData: ', formData)
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target
@@ -66,7 +62,6 @@ export default function Form({ answer, handleSubmittedAnswer }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(formData)
     handleSubmittedAnswer(formData)
     setFormData(emptyFormData)
   }

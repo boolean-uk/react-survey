@@ -10,19 +10,21 @@ function Main() {
   const [answer, setAnswer] = useState(null)
 
   const handleSubmittedAnswer = (submittedAnswer) => {
-    if (index) {
-      setAnswersList([...answersList.slice(0, index), submittedAnswer, ...answersList.slice(index + 1)])
+    if (index === null) {
+      const newList = [...answersList, submittedAnswer]
+      setAnswersList(newList)
+    } else {
+      const newList = [...answersList]
+      newList[index] = submittedAnswer
+      setAnswersList(newList)
       setIndex(null)
       setAnswer(null)
-    } else {
-      setAnswersList([...answersList, submittedAnswer])
     }
   }
 
   const handleEditAnswer = (index) => {
     setIndex(index)
     setAnswer(answersList[index])
-    console.log(`handleEditAnswer -- answersList[${index}]: ${answersList[index]}`)
   }
 
   return (
