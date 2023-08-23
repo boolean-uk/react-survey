@@ -1,6 +1,7 @@
 function RadioChoice(props) {
     const { data, handleChange, name } = props;
     const options = ["1", "2", "3", "4"];
+
     return (
         <ul>
             {options.map((optionValue, index) => (
@@ -12,6 +13,7 @@ function RadioChoice(props) {
                         value={optionValue}
                         checked={data[name] === optionValue}
                         onChange={handleChange}
+                        required={name === "colorRating"}
                     />
                     <label htmlFor={`${name}-${optionValue}`}>
                         {optionValue}

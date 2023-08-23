@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import RadioChoice from "./RadioChoice";
 import AnswersList from "./AnswersList";
 
 function Main() {
     const [open, setOpen] = useState(false); //Ignore this state
+
     const initialState = {
         bestFeatures: [],
         worstFeatures: [],
@@ -16,30 +17,39 @@ function Main() {
         name: "",
         email: "",
     };
-    const [formData, setFormData] = useState(initialState);
-    const [results, setResults] = useState([]);
-    const [editingIndex, setEditingIndex] = useState(null);
-    const handleEditClick = (index) => {
-        setEditingIndex(index);
-        const editedAnswer = results[index];
-        setFormData(editedAnswer);
-    };
+
     const featuresArr = [
         "It's yellow",
         "It squeaks",
         "It has a logo",
         "It's big",
     ];
+
     const spendingTimeOptionsArr = [
         "Swimming",
         "Bathing",
         "Chatting",
         "I don't like spending time with it",
     ];
+
+    const API_BASE_URL = "http://localhost:5000";
+
+    const [formData, setFormData] = useState(initialState);
+    const [results, setResults] = useState([]);
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [colorRatingError, setColorRatingError] = useState(false);
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/answers/`)
+            .then((response) => response.json())
+            .then((data) => setResults(data));
+    }, [results]);
+
     const featuresData = {
         data: featuresArr,
         formData: formData,
     };
+
     const spendingTimeData = {
         data: spendingTimeOptionsArr,
         formData: formData,
@@ -47,7 +57,6 @@ function Main() {
 
     const handleChange = (event) => {
         const { name, value, type } = event.target;
-
         if (type === "checkbox") {
             setFormData({
                 ...formData,
@@ -59,20 +68,72 @@ function Main() {
             setFormData({ ...formData, [name]: value });
         }
     };
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(formData);
-        if (editingIndex !== null) {
-            const updatedAnswers = [...results];
-            updatedAnswers[editingIndex] = formData;
-            setResults(updatedAnswers);
-            setEditingIndex(null);
+
+        if (!formData.colorRating) {
+            setColorRatingError(true);
+            return;
         } else {
-            setResults([...results, formData]);
+            setColorRatingError(false);
         }
-        // console.log(results);
-        setFormData(initialState);
+        if (editingIndex !== null) {
+            updateAnswer(editingIndex, formData);
+        } else {
+            createAnswer(formData);
+        }
+        if (editingIndex === null) {
+            setFormData(initialState);
+        }
     };
+
+    const createAnswer = (answerData) => {
+        fetch(`${API_BASE_URL}/answers`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(answerData),
+        }).then((newResult) => {
+            setResults([...results, newResult]);
+        });
+    };
+
+    const updateAnswer = (id, answerData) =>
+        fetch(`${API_BASE_URL}/answers/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(answerData),
+        }).then(() => {
+            const updatedAnswers = results.map(
+                (r) => (r.id = id ? answerData : r)
+            );
+            setResults(updatedAnswers);
+            setFormData(initialState);
+            setEditingIndex(null);
+        });
+
+    const handleEditClick = (id) => {
+        setEditingIndex(id);
+        const editedAnswer = results.find((r) => r.id === id);
+        setFormData(editedAnswer);
+    };
+
+    const deleteAnswer = (id) =>
+        fetch(`${API_BASE_URL}/answers/${id}`, {
+            method: "DELETE",
+        }).then(() => {
+            const updatedResults = results.filter((r) => r.id != id);
+            setResults(updatedResults);
+        });
+
+    const handleDeleteClick = (id) => {
+        deleteAnswer(id);
+    };
+
     return (
         <main className="main">
             <section className={`main__list ${open ? "open" : ""}`}>
@@ -80,12 +141,13 @@ function Main() {
                 <AnswersList
                     answersList={results}
                     onEditClick={handleEditClick}
+                    onDeleteClick={handleDeleteClick}
                 />
-                {/* answers should go here */}
             </section>
             <section className="main__form">
-                <form class="form" onSubmit={handleSubmit}>
+                <form class="form" onSubmit={handleSubmit} noValidate>
                     <h2>Tell us what you think about your rubber duck!</h2>
+                    <p class="warning">* Mandatory fields</p>
                     <div class="form__group">
                         <h3>
                             What would you say are the best features of your
@@ -117,7 +179,15 @@ function Main() {
                         />
                     </div>
                     <div class="form__group radio">
-                        <h3>How do you rate your rubber duck colour?</h3>
+                        <h3>
+                            How do you rate your rubber duck colour?
+                            <span class="warning small">*</span>
+                        </h3>
+                        {colorRatingError && (
+                            <p class="error">
+                                Please provide a rating for color.
+                            </p>
+                        )}
                         <RadioChoice
                             data={formData}
                             handleChange={handleChange}
@@ -132,7 +202,6 @@ function Main() {
                             name="logoRating"
                         />
                     </div>
-
                     <div class="form__group">
                         <h3>
                             How do you like to spend time with your rubber duck

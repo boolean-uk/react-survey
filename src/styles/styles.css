@@ -184,6 +184,8 @@ h2 {
 }
 
 .form__submit {
+  background-color: green;
+  color: white;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -194,5 +196,46 @@ h2 {
 }
 
 .form__submit:hover {
-  background-color: white;
+  background-color: darkgreen;
+  color: white;
+}
+
+.error {
+  display: block; /* Ensure the message takes up space */
+  color: red; /* Set the text color to red */
+  font-weight: bold; /* Make the text bold */
+  margin-top: 5px; /* Add some space above the error message */
+}
+.warning {
+  display: block; /* Ensure the message takes up space */
+  color: orange ; /* Set the text color to red */
+  font-weight: bold; /* Make the text bold */
+  margin-top: 5px; /* Add some space above the error message */
+}
+.warning.small { 
+  display: inline;
+  color: orange ; /* Set the text color to red */
+  font-weight: bold; /* Make the text bold */ 
+}
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button {
+  background-color: rgb(179, 117, 3);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }

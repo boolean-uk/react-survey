@@ -11,6 +11,7 @@ function Checkbox(props) {
                             value={option}
                             checked={formData[name].includes(option)}
                             onChange={handleChange}
+                            
                         />
                         {option}
                     </label>
