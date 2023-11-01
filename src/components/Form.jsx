@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ColorRadioButtons from "./ColorRadioButtons";
+import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
 
 function Form() {
   const INITIAL_STATE = {
@@ -25,62 +26,11 @@ function Form() {
       <h2>Tell us what you think about your rubber duck!</h2>
       <div className="form__group radio">
         <h3>How do you rate your rubber duck colour?</h3>
-        {<ColorRadioButtons form={form} handleChange={handleChange} />}
+        { <ColorRadioButtons form={form} handleChange={handleChange} /> }
       </div>
       <div className="form__group">
         <h3>How do you like to spend time with your rubber duck</h3>
-        {
-          <ul>
-            <li>
-              <label>
-                <input
-                    onChange={e => handleChange(e)}
-                    name="spendTime"
-                    type="checkbox"
-                    value="swimming"
-                    checked={form.spendTime === "swimming"}
-                />
-                Swimming
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                    onChange={e => handleChange(e)}
-                    name="spendTime"
-                    type="checkbox"
-                    value="bathing"
-                    checked={form.spendTime === "bathing"}
-                />
-                Bathing
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                    onChange={e => handleChange(e)}
-                    name="spendTime"
-                    type="checkbox"
-                    value="chatting"
-                    checked={form.spendTime === "chatting"}
-                />
-                Chatting
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                    onChange={e => handleChange(e)}
-                    name="spendTime"
-                    type="checkbox"
-                    value="noTime"
-                    checked={form.spendTime === "noTime"}
-                />
-                I don't like to spend time with it
-              </label>
-            </li>
-          </ul>
-        }
+        { <SpendTimeCheckboxes form={form} handleChange={handleChange} /> }
       </div>
       <label>
         What else have you got to say about your rubber duck?
