@@ -3,6 +3,7 @@ import { useState } from "react";
 import ColorRadioButtons from "./ColorRadioButtons";
 import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
 import Review from "./Review";
+import Username from "./Username"
 
 function Form() {
   const INITIAL_STATE = {
@@ -43,12 +44,7 @@ function Form() {
       </label>
       <label>
         Put your name here (if you feel like it):
-        <input
-        onChange={e => handleChange(e)}
-            type="text"
-            name="username"
-            value={form.username}
-        />
+        <Username form={form} handleChange={handleChange} />
       </label>
       <label>
         Leave us your email pretty please??
