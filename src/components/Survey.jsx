@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   review: "",
   username: "",
   email: "",
-  // time_spent: "",
+  time_spent: "",
 };
 
 function Survey() {
@@ -28,6 +28,9 @@ function Survey() {
     };
     fetch("http://localhost:5174", options);
 
+    // Log the data from form
+    console.log(form);
+
     // setting Form
     setForm(INITIAL_STATE);
   };
@@ -37,7 +40,7 @@ function Survey() {
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     if (type === "checkbox") {
-      setForm({ ...form, [name]: value });
+      setForm({ ...form, [name]: checked ? value : "" });
     } else {
       setForm({ ...form, [name]: value });
     }
