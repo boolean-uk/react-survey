@@ -47,9 +47,8 @@ function Survey() {
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
-              <li>
-                {colors.map(color =>
-                <>
+              {colors.map((color, i) =>
+              <li key={i}>
                   <input
                     onChange={(e) => handleChange(e)}
                     id={`color-${color}`}
@@ -59,16 +58,15 @@ function Survey() {
                     checked={form.color === color}
                   />
                   <label htmlFor={`color-${color}`}>{color}</label>
-                </>
-                )}
               </li>
+              )}
             </ul>
           </div>
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
-              <li>
-                {timeWithDuckOptions.map(option =>
+              {timeWithDuckOptions.map((option, i) =>
+              <li key={i}>
                 <label>
                   <input
                     onChange={(e) => handleChange(e)}
@@ -78,8 +76,8 @@ function Survey() {
                     checked={form.spendTime === option}
                   />{option}
                 </label>
-                )}
               </li>
+              )}
             </ul>
           </div>
           <label>
