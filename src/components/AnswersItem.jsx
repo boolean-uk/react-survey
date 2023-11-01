@@ -9,7 +9,6 @@
 // };
 
 function ItemsList({list:question}) {
-  console.log(question)
   return (
     <ul>
       {Object.keys(question).map((item, i) => {
@@ -26,12 +25,23 @@ function ItemsList({list:question}) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({answerItem: {bestFeatures, colour, consistency, email, logo, review, timeSpent, username, worstBits}}, {key:i}) {
+export default function AnswersItem({answerItem, setForm, setAnswersList, answersList,index}) {
 
+ const {bestFeatures, colour, consistency, email, logo, review, timeSpent, username, worstBits} = answerItem
+ 
 
-  console.log(timeSpent)
+  const editForm = () => {
+    setForm(answerItem)
+    console.log(index)
+    const updatedAnswersList = answersList.filter((answer, i) => {
+      console.log(i)
+      return(i!== index)
+    })
+    setAnswersList(updatedAnswersList)
+  }
+
   return (
-    <li key={i}>
+    <li key={index}>
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
         <p>
@@ -62,7 +72,9 @@ export default function AnswersItem({answerItem: {bestFeatures, colour, consiste
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={() => editForm()}>Edit</button>
       </article>
     </li>
   );
 }
+

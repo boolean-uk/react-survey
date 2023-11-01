@@ -37,10 +37,10 @@ function Survey() {
 
   const submitForm = (event) => {
     event.preventDefault()
-    console.log(form)
     setForm(initialForm)
     setAnswersList([...answersList, form])
   }
+
 
 
   const handleChanges = (event, question) => {
@@ -51,14 +51,13 @@ function Survey() {
     } else {
       setForm({...form, [name]: value})
     }
-    console.log(form)
   }
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList}></AnswersList>
+        <AnswersList answersList={answersList} setForm={setForm} setAnswersList={setAnswersList}></AnswersList>
       </section>
       <section className="survey__form">
         {/* CORE a form should be here */}
