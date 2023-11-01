@@ -4,6 +4,7 @@ import ColorRadioButtons from "./ColorRadioButtons";
 import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
 import Review from "./Review";
 import Username from "./Username"
+import Email from "./Email";
 
 function Form() {
   const INITIAL_STATE = {
@@ -48,12 +49,7 @@ function Form() {
       </label>
       <label>
         Leave us your email pretty please??
-        <input
-            onChange={e => handleChange(e)}
-            type="email"
-            name="email"
-            value={form.email}
-        />
+        <Email form={form} handleChange={handleChange} />
       </label>
       <input className="form__submit" type="submit" value="Submit Survey!" />
     </form>
