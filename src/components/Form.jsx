@@ -7,7 +7,8 @@ function Form() {
     color: "",
     spendTime: "",
     review: "",
-    username: ""
+    username: "",
+    email: ""
   };
 
   const [form, setForm] = useState(INITIAL_STATE);
@@ -56,7 +57,12 @@ function Form() {
       </label>
       <label>
         Leave us your email pretty please??
-        <input type="email" name="email" value="" />
+        <input
+            onChange={e => handleChange(e)}
+            type="email"
+            name="email"
+            value={form.email}
+        />
       </label>
       <input className="form__submit" type="submit" value="Submit Survey!" />
     </form>
