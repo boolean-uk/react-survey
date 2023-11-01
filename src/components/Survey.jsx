@@ -1,8 +1,9 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 const initialForm = {
   color: "",
-  spendTime: "",
+  timeSpent: [],
   review: "",
   username: "",
   email: "",
@@ -11,35 +12,52 @@ const initialForm = {
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-
   const [form, setForm] = useState(initialForm)
+  const [answersList, setAnswersList] = useState([])
 
 
 
   function handleChange(e) {
-    const {name, type, value} = e.target
+    const { name, type, value } = e.target
     if (type === "checkbox") {
-      setForm({ ...form, [name]: value });
+      if (form[name].includes(value)) {
+        const updatedArray = form[name].filter((item) => item !== value)
+        setForm({ ...form, [name]: updatedArray })
+      } else {
+        setForm({ ...form, [name]: [...form[name], value] });
+      }
     } else if (type === "radio") {
       setForm({ ...form, [name]: value });
     } else {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }}
+      setForm({ ...form, [e.target.name]: e.target.value });
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault()
     console.log(form)
     setForm(initialForm)
+    setAnswersList([...answersList, form])
   }
 
-  const timeWithDuckOptions = ["Swimming", "Bathing", "Chatting", "I don't like to spend time with it"]
+  const timeWithDuckOptions = [{ label: "Swimming", value: "swimming" },
+  { label: "Bathing", value: "bathing" },
+  { label: "Chatting", value: "chatting" }, 
+  { label: "I don't like to spend time with it", value: "noTime" },]
+  
   const colors = ["1", "2", "3", "4"]
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* AnswersItem component should be here */}
+        <AnswersList
+          answersList={answersList}
+          username={form.username}
+          color={form.color}
+          timeSpent={form.timeSpent}
+          review={form.review}
+        />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={(e) => handleSubmit(e)}>
@@ -48,7 +66,7 @@ function Survey() {
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
               {colors.map((color, i) =>
-              <li key={i}>
+                <li key={i}>
                   <input
                     onChange={(e) => handleChange(e)}
                     id={`color-${color}`}
@@ -58,7 +76,7 @@ function Survey() {
                     checked={form.color === color}
                   />
                   <label htmlFor={`color-${color}`}>{color}</label>
-              </li>
+                </li>
               )}
             </ul>
           </div>
@@ -66,17 +84,17 @@ function Survey() {
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
               {timeWithDuckOptions.map((option, i) =>
-              <li key={i}>
-                <label>
-                  <input
-                    onChange={(e) => handleChange(e)}
-                    name="spendTime"
-                    type="checkbox"
-                    value={option}
-                    checked={form.spendTime === option}
-                  />{option}
-                </label>
-              </li>
+                <li key={i}>
+                  <label>
+                    <input
+                      onChange={(e) => handleChange(e)}
+                      name="timeSpent"
+                      type="checkbox"
+                      value={option.value}
+                      checked={form.timeSpent.includes(option.value)}
+                    />{option.label}
+                  </label>
+                </li>
               )}
             </ul>
           </div>
