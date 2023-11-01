@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import ColorRadioButtons from "./ColorRadioButtons";
 import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
+import Review from "./Review";
 
 function Form() {
   const INITIAL_STATE = {
@@ -37,14 +39,7 @@ function Form() {
       </div>
       <label>
         What else have you got to say about your rubber duck?
-        <textarea
-            onChange={e => handleChange(e)}
-            name="review"
-            value={form.review}
-            cols="30"
-            rows="10"
-        >
-        </textarea>
+        <Review form={form} handleChange={handleChange} />
       </label>
       <label>
         Put your name here (if you feel like it):
