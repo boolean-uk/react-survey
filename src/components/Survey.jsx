@@ -9,6 +9,9 @@ const INITIAL_STATE = {
   review: '',
   features: '',
   worstFeatures: "",
+  consistency: '',
+  logo: '',
+
 };
 
 
@@ -199,6 +202,107 @@ function Survey() {
                   checked={form.color === "4"}
                 />
                 <label htmlFor="color-four">4</label>
+              </li>
+            </ul>
+          </div>
+
+<div className="form__group radio">
+            <h3>How do you rate your rubber duck consistency?</h3>
+            <ul className="rateColourOfDuck_radio">
+              <li>
+                <input
+                  id="consistency-one"
+                  type="radio"
+                  name="consistency"
+                  value="1"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.consistency === "1"}
+                />
+                <label htmlFor="consistency-one">1</label>
+              </li>
+              <li>
+                <input
+                  id="consistency-two"
+                  type="radio"
+                  name="consistency"
+                  value="2"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.consistency === "2"}
+                />
+                <label htmlFor="consistency-two">2</label>
+              </li>
+              <li>
+                <input
+                  id="consistency-three"
+                  type="radio"
+                  name="consistency"
+                  value="3"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.consistency === "3"}
+                />
+                <label htmlFor="consistency-three">3</label>
+              </li>
+              <li>
+                <input
+                  id="consistency-four"
+                  type="radio"
+                  name="consistency"
+                  value="4"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.consistency === "4"}
+                />
+                <label htmlFor="consistency-four">4</label>
+              </li>
+            </ul>
+          </div>
+
+
+          <div className="form__group radio">
+            <h3>How do you rate your rubber duck logo?</h3>
+            <ul className="rateColourOfDuck_radio">
+              <li>
+                <input
+                  id="logo-one"
+                  type="radio"
+                  name="logo"
+                  value="1"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.logo === "1"}
+                />
+                <label htmlFor="logo-one">1</label>
+              </li>
+              <li>
+                <input
+                  id="logo-two"
+                  type="radio"
+                  name="logo"
+                  value="2"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.logo === "2"}
+                />
+                <label htmlFor="logo-two">2</label>
+              </li>
+              <li>
+                <input
+                  id="logo-three"
+                  type="radio"
+                  name="logo"
+                  value="3"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.logo === "3"}
+                />
+                <label htmlFor="logo-three">3</label>
+              </li>
+              <li>
+                <input
+                  id="logo-four"
+                  type="radio"
+                  name="logo"
+                  value="4"
+                  onChange={(event) => { handleChanges(event) }}
+                  checked={form.logo === "4"}
+                />
+                <label htmlFor="logo-four">4</label>
               </li>
             </ul>
           </div>
