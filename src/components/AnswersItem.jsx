@@ -8,12 +8,19 @@
 //   noTime: "I don't like to spend time with it"
 // };
 
-function ItemsList({ list }) {
+function ItemsList({list:question}) {
+  console.log(question)
   return (
     <ul>
-      {Object.keys(list).map((item, i) => (
-        <li key={i}>{list[item]}</li>
-      ))}
+      {Object.keys(question).map((item, i) => {
+        if (question[item] === true){
+          return (
+            <li key={i}>{item}</li>
+          )
+        }
+      }
+      
+      )}
     </ul>
   );
 }
@@ -22,7 +29,7 @@ function ItemsList({ list }) {
 export default function AnswersItem({answerItem: {bestFeatures, colour, consistency, email, logo, review, timeSpent, username, worstBits}}, {key:i}) {
 
 
-  console.log(logo)
+  console.log(timeSpent)
   return (
     <li key={i}>
       <article className="answer">
@@ -38,6 +45,14 @@ export default function AnswersItem({answerItem: {bestFeatures, colour, consiste
         <p>
           <em>How do you rate your rubber duck logo?</em>
           <span className="answer__line">{logo}</span>
+        </p>
+        <p>
+          <em>What would you say are the best features of your rubber duck?</em>
+          <ItemsList list={bestFeatures} />
+        </p>
+        <p>
+          <em>What would you say are the worst bits about your rubber duck?</em>
+          <ItemsList list={worstBits} />
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
