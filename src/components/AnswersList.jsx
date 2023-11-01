@@ -7,7 +7,7 @@ export default function AnswersList(props) {
   
   return (
     <ul>
-      {Object.keys(answersList).map((answerItem, i) => {
+      {answersList.map((answerItem, i) => {
         console.log('ANSWER ITEM', answerItem)
       return (<AnswersItem answerItem={answerItem} key={i} />)
       }

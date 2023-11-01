@@ -32,12 +32,14 @@ const initialForm = {
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(initialForm)
+  const [answersList, setAnswersList] = useState([])
 
 
   const submitForm = (event) => {
     event.preventDefault()
     console.log(form)
     setForm(initialForm)
+    setAnswersList([...answersList, form])
   }
 
 
@@ -56,7 +58,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={form}></AnswersList>
+        <AnswersList answersList={answersList}></AnswersList>
       </section>
       <section className="survey__form">
         {/* CORE a form should be here */}
