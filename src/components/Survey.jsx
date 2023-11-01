@@ -3,13 +3,13 @@ import { useState } from "react";
 
 const intialForm = {
   bestFeatures: {
-    yello: false, 
+    yellow: false, 
     logo: false, 
     big: false, 
     squeaks: false
   }, 
   worstBits: {
-    yello: false, 
+    yellow: false, 
     logo: false, 
     big: false, 
     squeaks: false
@@ -34,7 +34,15 @@ function Survey() {
     event.preventDefault()
     console.log(form)
   }
-  // const handleChanges = () => {console.log(form)}
+  const handleChanges = (event, question) => {
+    const {name, value, type, checked} = event.target
+    if (type === 'checkbox'){
+    setForm({...form, [question]:{...form[question], [name]:checked}})
+    } else {
+    setForm({...form, [name]: value})
+    }
+    console.log(form)
+  }
 
   return (
     <main className="survey">
@@ -53,39 +61,47 @@ function Survey() {
             </h3>
             <ul>
               <li>
-                <label>
+                <label>It is yellow!
                   <input 
                     type="checkbox" 
                     value="" 
                     id="" 
-                    name=""/>
+                    checked={form.bestFeatures.yellow}
+                    onChange={event => handleChanges(event, 'bestFeatures')}
+                    name="yellow"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It is got a logo!
                   <input 
                     type="checkbox" 
-                    value="" 
+                    value="logo" 
                     id="" 
-                    name=""/>
+                    checked={form.bestFeatures.logo}
+                    onChange={event => handleChanges(event, 'bestFeatures')}
+                    name="logo"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It is big!
                   <input 
                     type="checkbox" 
                     value="" 
                     id="" 
-                    name=""/>
+                    checked={form.bestFeatures.big}
+                    onChange={event => handleChanges(event, 'bestFeatures')}
+                    name="big"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It squeaks!
                   <input 
                     type="checkbox" 
                     value="" 
                     id="" 
-                    name=""/>
+                    checked={form.bestFeatures.squeaks}
+                    onChange={event => handleChanges(event, 'bestFeatures')}
+                    name="squeaks"/>
                 </label>
               </li>
             </ul>
@@ -96,39 +112,39 @@ function Survey() {
             </h3>
             <ul>
               <li>
-                <label>
+                <label>It is yellow!
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.worstBits.yellow}
+                    onChange={event => handleChanges(event, "worstBits")}
+                    name="yellow"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It is got a logo!
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.worstBits.logo}
+                    onChange={event => handleChanges(event, "worstBits")}
+                    name="logo"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It is big!
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.worstBits.big}
+                    onChange={event => handleChanges(event, "worstBits")}
+                    name="big"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>It squeaks!
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.worstBits.squeaks}
+                    onChange={event => handleChanges(event, "worstBits")}
+                    name="squeaks"/>
                 </label>
               </li>
             </ul>
