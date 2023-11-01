@@ -5,7 +5,8 @@ import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
 function Form() {
   const INITIAL_STATE = {
     color: "",
-    spendTime: ""
+    spendTime: "",
+    review: "",
   };
 
   const [form, setForm] = useState(INITIAL_STATE);
@@ -17,7 +18,7 @@ function Form() {
   }
 
   function handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setForm({ ...form, [name]: value });
   }
 
@@ -34,7 +35,14 @@ function Form() {
       </div>
       <label>
         What else have you got to say about your rubber duck?
-        <textarea name="review" cols="30" rows="10"></textarea>
+        <textarea
+            onChange={e => handleChange(e)}
+            name="review"
+            value={form.review}
+            cols="30"
+            rows="10"
+        >
+        </textarea>
       </label>
       <label>
         Put your name here (if you feel like it):
