@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   review: "",
   username: "",
   email: "",
-  time_spent: "",
+  // time_spent: "",
 };
 
 function Survey() {
@@ -125,7 +125,7 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="swimming"
-                    checked={form.time_spent === "swimming"}
+                    checked={form.spend_time === "swimming"}
                   />
                   Swimming
                 </label>
@@ -137,7 +137,7 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="bathing"
-                    checked={form.time_spent === "bathing"}
+                    checked={form.spend_time === "bathing"}
                   />
                   Bathing
                 </label>
@@ -149,7 +149,7 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="chatting"
-                    checked={form.time_spent === "chatting"}
+                    checked={form.spend_time === "chatting"}
                   />
                   Chatting
                 </label>
@@ -161,7 +161,7 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="noTime"
-                    checked={form.time_spent === "noTime"}
+                    checked={form.spend_time === "noTime"}
                   />
                   I don't like to spend time with it
                 </label>
