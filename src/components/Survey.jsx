@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   spendTime: '',
   review: '',
   features: '',
+  worstFeatures: "",
 };
 
 
@@ -16,8 +17,8 @@ function Survey() {
   const [form, setForm] = useState(INITIAL_STATE);
 
   const handleChanges = (event) => {
-    const { name, type, id, checkbox, value } = event.target
-    setForm({ ...form, [name]: value })
+    const { name, type, id, checked, value } = event.target
+      setForm({ ...form, [name]: value })
   }
 
   const submitHandle = (event) => {
@@ -38,9 +39,10 @@ function Survey() {
       <section className="survey__form">
         <form
           className="form"
-          onSubmit={submitHandle}
-        >
+          onSubmit={submitHandle}>
           <h2>Tell us what you think about your rubber duck!</h2>
+
+
           <div className="form__group">
             <h3>What do you think are the best features of your rubber duck?</h3>
             <ul className="spendTimeWithDuck_checkbox">
@@ -94,6 +96,63 @@ function Survey() {
               </li>
             </ul>
           </div>
+
+
+          <div className="form__group">
+            <h3>What do you think are the worst features of your rubber duck?</h3>
+            <ul className="spendTimeWithDuck_checkbox">
+              <li>
+                <label>
+                  <input
+                    name="worstFeatures"
+                    type="checkbox"
+                    value="yellow"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.worstFeatures === "yellow"}
+                  />
+                  It's yellow!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="worstFeatures"
+                    type="checkbox"
+                    value="squeaks"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.worstFeatures === "squeaks"}
+                  />
+                  It squeaks!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="worstFeatures"
+                    type="checkbox"
+                    value="logo"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.worstFeatures === "logo"}
+                  />
+                  It has a logo!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="worstFeatures"
+                    type="checkbox"
+                    value="big"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.worstFeatures === "big"}
+                  />
+                  It's big!
+                </label>
+              </li>
+            </ul>
+          </div>
+
+
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul className="rateColourOfDuck_radio">
@@ -143,10 +202,10 @@ function Survey() {
               </li>
             </ul>
           </div>
+
+
           <div className="form__group">
-            <h3>
-              How do you like to spend time with your rubber duck
-            </h3>
+            <h3>How do you like to spend time with your rubber duck</h3>
             <ul className="spendTimeWithDuck_checkbox">
               <li>
                 <label>
