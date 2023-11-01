@@ -1,7 +1,10 @@
 import { useState } from "react";
 
 const initialForm = {
-  duckColor: 1,
+  duckColor1: 1,
+  duckColor2: 2,
+  duckColor3: 3,
+  duckColor4: 4,
   spendTime: [],
   review: "",
   username: "",
@@ -40,6 +43,7 @@ function Survey() {
                   id="color-one"
                   type="radio"
                   name="color"
+                  value={form.duckColor1}
                 />
                 <label htmlFor="color-one">1</label>
               </li>
@@ -49,6 +53,7 @@ function Survey() {
                   id="color-two"
                   type="radio"
                   name="color"
+                  value={form.duckColor2}
                 />
                 <label htmlFor="color-two">2</label>
               </li>
@@ -58,6 +63,7 @@ function Survey() {
                   id="color-three"
                   type="radio"
                   name="color"
+                  value={form.duckColor3}
                 />
                 <label htmlFor="color-three">3</label>
               </li>
@@ -67,6 +73,7 @@ function Survey() {
                   id="color-four"
                   type="radio"
                   name="color"
+                  value={form.duckColor4}
                 />
                 <label htmlFor="color-four">4</label>
               </li>
@@ -79,9 +86,11 @@ function Survey() {
           <label>
             What else have you got to say about your rubber duck?
             <textarea
+              onChange={(e) => handleChange(e)}
               name="review"
               cols="30"
               rows="10"
+              value={form.review}
             >
             </textarea>
           </label>
