@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import AnswersList from "./AnswersList";
+import AnswersList from "./AnswersList";
 
 const initialForm = {
   bestFeatures: {
@@ -17,7 +17,7 @@ const initialForm = {
   colour: "", 
   consistency: "", 
   logo: "", 
-  activities: {
+  timeSpent: {
     swimming: false, 
     listening_to_Muse: false, 
     ranting: false, 
@@ -27,6 +27,7 @@ const initialForm = {
   username: "", 
   email: ""
 }
+
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
@@ -38,6 +39,7 @@ function Survey() {
     console.log(form)
     setForm(initialForm)
   }
+
 
   const handleChanges = (event, question) => {
     
@@ -54,8 +56,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* EXTENSION <AnswersList answerList={answerList}></AnswersList>
-        answers should go here */}
+        <AnswersList answersList={form}></AnswersList>
       </section>
       <section className="survey__form">
         {/* CORE a form should be here */}
@@ -309,8 +310,8 @@ function Survey() {
                 <label>swimming
                   <input 
                     type="checkbox" 
-                    checked={form.activities.swimming} 
-                    onChange={event => handleChanges(event, 'activities')}
+                    checked={form.timeSpent.swimming} 
+                    onChange={event => handleChanges(event, 'timeSpent')}
                     name="swimming"/>
                 </label>
               </li>
@@ -318,8 +319,8 @@ function Survey() {
                 <label>listening_to_Muse
                   <input 
                     type="checkbox" 
-                    checked={form.activities.listening_to_Muse}
-                    onChange={event => handleChanges(event, 'activities')} 
+                    checked={form.timeSpent.listening_to_Muse}
+                    onChange={event => handleChanges(event, 'timeSpent')} 
                     name="listening_to_Muse"/>
                 </label>
               </li>
@@ -327,8 +328,8 @@ function Survey() {
                 <label>ranting
                   <input 
                     type="checkbox" 
-                    checked={form.activities.ranting}
-                    onChange={event => handleChanges(event, 'activities')} 
+                    checked={form.timeSpent.ranting}
+                    onChange={event => handleChanges(event, 'timeSpent')} 
                     name="ranting"/>
                 </label>
               </li>
@@ -336,8 +337,8 @@ function Survey() {
                 <label>coding
                   <input 
                     type="checkbox" 
-                    checked={form.activities.coding}
-                    onChange={event => handleChanges(event, 'activities')} 
+                    checked={form.timeSpent.coding}
+                    onChange={event => handleChanges(event, 'timeSpent')} 
                     name="coding"/>
                 </label>
               </li>
