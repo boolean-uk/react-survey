@@ -41,7 +41,7 @@ function ColorRadioButtons({ form, handleChange }) {
           type="radio"
           name="color"
           value="4"
-          checked={form.color === "3"}
+          checked={form.color === "4"}
         />
         <label htmlFor="color-four">4</label>
       </li>
