@@ -4,6 +4,7 @@ import ColorRadioButtons from "./ColorRadioButtons";
 function Form() {
   const INITIAL_STATE = {
     color: "",
+    spendTime: ""
   };
 
   const [form, setForm] = useState(INITIAL_STATE);
@@ -32,26 +33,50 @@ function Form() {
           <ul>
             <li>
               <label>
-                <input name="spend-time" type="checkbox" value="swimming" />
+                <input
+                    onChange={e => handleChange(e)}
+                    name="spendTime"
+                    type="checkbox"
+                    value="swimming"
+                    checked={form.spendTime === "swimming"}
+                />
                 Swimming
               </label>
             </li>
             <li>
               <label>
-                <input name="spend-time" type="checkbox" value="bathing" />
+                <input
+                    onChange={e => handleChange(e)}
+                    name="spendTime"
+                    type="checkbox"
+                    value="bathing"
+                    checked={form.spendTime === "bathing"}
+                />
                 Bathing
               </label>
             </li>
             <li>
               <label>
-                <input name="spend-time" type="checkbox" value="chatting" />
+                <input
+                    onChange={e => handleChange(e)}
+                    name="spendTime"
+                    type="checkbox"
+                    value="chatting"
+                    checked={form.spendTime === "chatting"}
+                />
                 Chatting
               </label>
             </li>
             <li>
               <label>
-                <input name="spend-time" type="checkbox" value="noTime" />I
-                don't like to spend time with it
+                <input
+                    onChange={e => handleChange(e)}
+                    name="spendTime"
+                    type="checkbox"
+                    value="noTime"
+                    checked={form.spendTime === "noTime"}
+                />
+                I don't like to spend time with it
               </label>
             </li>
           </ul>
