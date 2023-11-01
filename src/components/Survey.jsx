@@ -17,10 +17,11 @@ function Survey() {
 
   const submitForm = (e) => {
     e.preventDefault();
+    const formClass = document.querySelector(".form");
 
-    console.log(form)
     setAnswerList([...answersList, form]);
     setForm(INITIAL_STATE);
+    formClass.reset()
   };
 
   const handleChange = (event) => {
