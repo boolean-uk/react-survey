@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   color: '',
   spendTime: '',
   review: '',
+  features: '',
 };
 
 
@@ -18,7 +19,7 @@ function Survey() {
     const { name, type, id, checkbox, value } = event.target
     setForm({ ...form, [name]: value })
   }
-  
+
   const submitHandle = (event) => {
     event.preventDefault()
     event.target.reset()
@@ -40,6 +41,59 @@ function Survey() {
           onSubmit={submitHandle}
         >
           <h2>Tell us what you think about your rubber duck!</h2>
+          <div className="form__group">
+            <h3>What do you think are the best features of your rubber duck?</h3>
+            <ul className="spendTimeWithDuck_checkbox">
+              <li>
+                <label>
+                  <input
+                    name="features"
+                    type="checkbox"
+                    value="yellow"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.features === "yellow"}
+                  />
+                  It's yellow!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="features"
+                    type="checkbox"
+                    value="squeaks"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.features === "squeaks"}
+                  />
+                  It squeaks!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="features"
+                    type="checkbox"
+                    value="logo"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.features === "logo"}
+                  />
+                  It has a logo!
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="features"
+                    type="checkbox"
+                    value="big"
+                    onChange={(event) => { handleChanges(event) }}
+                    checked={form.features === "big"}
+                  />
+                  It's big!
+                </label>
+              </li>
+            </ul>
+          </div>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul className="rateColourOfDuck_radio">
