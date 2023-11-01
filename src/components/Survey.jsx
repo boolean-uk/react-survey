@@ -1,11 +1,8 @@
 import { useState } from "react";
 
 const initialForm = {
-  duckColor1: 1,
-  duckColor2: 2,
-  duckColor3: 3,
-  duckColor4: 4,
-  spendTime: [],
+  color: "",
+  spendTime: "",
   review: "",
   username: "",
   email: "",
@@ -14,16 +11,29 @@ const initialForm = {
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-  
+
   const [form, setForm] = useState(initialForm)
-    
+
 
 
   function handleChange(e) {
+    const {name, type, value} = e.target
+    if (type === "checkbox") {
+      setForm({ ...form, [name]: value });
+    } else if (type === "radio") {
+      setForm({ ...form, [name]: value });
+    } else {
     setForm({ ...form, [e.target.name]: e.target.value });
+  }}
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(form)
+    setForm(initialForm)
   }
 
-
+  const timeWithDuckOptions = ["Swimming", "Bathing", "Chatting", "I don't like to spend time with it"]
+  const colors = ["1", "2", "3", "4"]
 
   return (
     <main className="survey">
@@ -32,56 +42,44 @@ function Survey() {
         {/* AnswersItem component should be here */}
       </section>
       <section className="survey__form">
-        <form className="form">
+        <form className="form" onSubmit={(e) => handleSubmit(e)}>
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
               <li>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="color-one"
-                  type="radio"
-                  name="color"
-                  value={form.duckColor1}
-                />
-                <label htmlFor="color-one">1</label>
-              </li>
-              <li>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="color-two"
-                  type="radio"
-                  name="color"
-                  value={form.duckColor2}
-                />
-                <label htmlFor="color-two">2</label>
-              </li>
-              <li>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="color-three"
-                  type="radio"
-                  name="color"
-                  value={form.duckColor3}
-                />
-                <label htmlFor="color-three">3</label>
-              </li>
-              <li>
-                <input
-                  onChange={(e) => handleChange(e)}
-                  id="color-four"
-                  type="radio"
-                  name="color"
-                  value={form.duckColor4}
-                />
-                <label htmlFor="color-four">4</label>
+                {colors.map(color =>
+                <>
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    id={`color-${color}`}
+                    type="radio"
+                    name="color"
+                    value={color}
+                  />
+                  <label htmlFor={`color-${color}`}>{color}</label>
+                </>
+                )}
               </li>
             </ul>
           </div>
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
-            {/* <!-- checkboxes go here --> */}
+            <ul>
+              <li>
+                {timeWithDuckOptions.map(option =>
+                <label>
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    name="spendTime"
+                    type="checkbox"
+                    value={option}
+                    checked={form.spendTime === option}
+                  />{option}
+                </label>
+                )}
+              </li>
+            </ul>
           </div>
           <label>
             What else have you got to say about your rubber duck?
