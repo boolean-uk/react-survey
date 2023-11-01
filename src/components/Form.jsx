@@ -7,6 +7,7 @@ function Form() {
     color: "",
     spendTime: "",
     review: "",
+    username: ""
   };
 
   const [form, setForm] = useState(INITIAL_STATE);
@@ -18,7 +19,7 @@ function Form() {
   }
 
   function handleChange(e) {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   }
 
@@ -46,7 +47,12 @@ function Form() {
       </label>
       <label>
         Put your name here (if you feel like it):
-        <input type="text" name="username" value="" />
+        <input
+        onChange={e => handleChange(e)}
+            type="text"
+            name="username"
+            value={form.username}
+        />
       </label>
       <label>
         Leave us your email pretty please??
