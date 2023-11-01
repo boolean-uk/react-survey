@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ColorRadioButtons from "./ColorRadioButtons";
 
 function Form() {
 
@@ -24,54 +25,7 @@ function Form() {
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-            {
-            <ul>
-                <li>
-                    <input
-                        onChange={e => handleChange(e)}
-                        id="color-one" 
-                        type="radio" 
-                        name="color" 
-                        value="1"
-                        checked={form.color === "1"}
-                    />
-                    <label htmlFor="color-one">1</label>
-                </li>
-                <li>
-                    <input
-                        onChange={e => handleChange(e)}
-                        id="color-two" 
-                        type="radio" 
-                        name="color" 
-                        value="2" 
-                        checked={form.color === "2"}
-                    />
-                    <label htmlFor="color-two">2</label>
-                </li>
-                <li>
-                    <input
-                        onChange={e => handleChange(e)}
-                        id="color-three"
-                        type="radio"
-                        name="color"
-                        value="3"
-                        checked={form.color === "3"}
-                    />
-                    <label htmlFor="color-three">3</label>
-                </li>
-                <li>
-                    <input
-                        onChange={e => handleChange(e)}
-                        id="color-four"
-                        type="radio"
-                        name="color"
-                        value="4"
-                        checked={form.color === "3"}
-                    />
-                    <label htmlFor="color-four">4</label>
-                </li>
-            </ul>
-            }
+            {<ColorRadioButtons form={form} handleChange={handleChange} />}
         </div>
         <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
