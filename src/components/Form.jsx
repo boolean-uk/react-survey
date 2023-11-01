@@ -3,8 +3,8 @@
 export default function Form({
   form,
   setForm,
-  formHistory,
-  setFormHistory,
+  answersList,
+  setAnswersList,
   INITIAL_STATE,
 }) {
   function handleChange(event) {
@@ -21,11 +21,11 @@ export default function Form({
     }
   }
 
-  const submitForm = (event) => {
+  function submitForm(event) {
     event.preventDefault();
-    setFormHistory([...formHistory, form]);
-    setForm(INITIAL_STATE);
-  };
+    setForm({...INITIAL_STATE, timeSpent: []});
+    setAnswersList([...answersList, form]);
+  }
 
   return (
     <section className="survey__form">
@@ -87,10 +87,10 @@ export default function Form({
               <label>
                 <input
                   onChange={(event) => handleChange(event)}
-                  name="spend-time"
+                  name="timeSpent"
                   type="checkbox"
                   value="swimming"
-                  checked={form["spend-time"].includes("swimming")}
+                  checked={form.timeSpent.includes("swimming")}
                 />
                 Swimming
               </label>
@@ -99,10 +99,10 @@ export default function Form({
               <label>
                 <input
                   onChange={(event) => handleChange(event)}
-                  name="spend-time"
+                  name="timeSpent"
                   type="checkbox"
                   value="bathing"
-                  checked={form["spend-time"].includes("bathing")}
+                  checked={form.timeSpent.includes("bathing")}
                 />
                 Bathing
               </label>
@@ -111,10 +111,10 @@ export default function Form({
               <label>
                 <input
                   onChange={(event) => handleChange(event)}
-                  name="spend-time"
+                  name="timeSpent"
                   type="checkbox"
                   value="chatting"
-                  checked={form["spend-time"].includes("chatting")}
+                  checked={form.timeSpent.includes("chatting")}
                 />
                 Chatting
               </label>
@@ -123,10 +123,10 @@ export default function Form({
               <label>
                 <input
                   onChange={(event) => handleChange(event)}
-                  name="spend-time"
+                  name="timeSpent"
                   type="checkbox"
                   value="noTime"
-                  checked={form["spend-time"].includes("noTime")}
+                  checked={form.timeSpent.includes("noTime")}
                 />
                 I don't like to spend time with it
               </label>
