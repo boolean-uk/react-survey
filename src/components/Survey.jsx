@@ -14,15 +14,18 @@ const intialForm = {
     big: false, 
     squeaks: false
   }, 
-  colour: 1, 
-  consistency: 1, 
-  logo: 1, 
+  colour: "", 
+  consistency: "", 
+  logo: "", 
   activities: {
     swimming: false, 
     listening_to_Muse: false, 
     ranting: false, 
     coding: false
   },
+  review: "", 
+  username: "", 
+  email: ""
 }
 
 function Survey() {
@@ -35,6 +38,7 @@ function Survey() {
     console.log(form)
   }
   const handleChanges = (event, question) => {
+    event.preventDefault()
     const {name, value, type, checked} = event.target
     if (type === 'checkbox'){
     setForm({...form, [question]:{...form[question], [name]:checked}})
@@ -61,7 +65,7 @@ function Survey() {
             </h3>
             <ul>
               <li>
-                <label>It is yellow!
+                <label>
                   <input 
                     type="checkbox" 
                     value="" 
@@ -69,10 +73,11 @@ function Survey() {
                     checked={form.bestFeatures.yellow}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="yellow"/>
+                    It is yellow!
                 </label>
               </li>
               <li>
-                <label>It is got a logo!
+                <label>
                   <input 
                     type="checkbox" 
                     value="logo" 
@@ -80,10 +85,11 @@ function Survey() {
                     checked={form.bestFeatures.logo}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="logo"/>
+                    It is got a logo!
                 </label>
               </li>
               <li>
-                <label>It is big!
+                <label>
                   <input 
                     type="checkbox" 
                     value="" 
@@ -91,10 +97,11 @@ function Survey() {
                     checked={form.bestFeatures.big}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="big"/>
+                    It is big!
                 </label>
               </li>
               <li>
-                <label>It squeaks!
+                <label>
                   <input 
                     type="checkbox" 
                     value="" 
@@ -103,6 +110,7 @@ function Survey() {
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="squeaks"/>
                 </label>
+                It squeaks!
               </li>
             </ul>
           </div>
@@ -112,40 +120,44 @@ function Survey() {
             </h3>
             <ul>
               <li>
-                <label>It is yellow!
+                <label>
                   <input 
                     type="checkbox" 
                     checked={form.worstBits.yellow}
                     onChange={event => handleChanges(event, "worstBits")}
                     name="yellow"/>
                 </label>
+                It is yellow!
               </li>
               <li>
-                <label>It is got a logo!
+                <label>
                   <input 
                     type="checkbox" 
                     checked={form.worstBits.logo}
                     onChange={event => handleChanges(event, "worstBits")}
                     name="logo"/>
                 </label>
+                It is got a logo!
               </li>
               <li>
-                <label>It is big!
+                <label>
                   <input 
                     type="checkbox" 
                     checked={form.worstBits.big}
                     onChange={event => handleChanges(event, "worstBits")}
                     name="big"/>
                 </label>
+                It is big!
               </li>
               <li>
-                <label>It squeaks!
+                <label>
                   <input 
                     type="checkbox" 
                     checked={form.worstBits.squeaks}
                     onChange={event => handleChanges(event, "worstBits")}
                     name="squeaks"/>
                 </label>
+                It squeaks!
               </li>
             </ul>
           </div>
@@ -154,22 +166,46 @@ function Survey() {
               <ul>
                 <li>
                   <label>1
-                    <input type="radio" value="1" name="colour" id="colour-1" />   
+                    <input 
+                      type="radio" 
+                      value="1" 
+                      name="colour" 
+                      id="colour-1"
+                      checked={event.target.value==="1"}
+                      onChange={event => handleChanges(event)} />   
                   </label> 
                 </li>
                 <li>
                   <label>2
-                    <input type="radio" value="2" name="colour" id="colour-2"/>
+                    <input 
+                      type="radio" 
+                      value="2" 
+                      name="colour" 
+                      id="colour-2"
+                      checked={event.target.value==="2"}
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>3
-                    <input type="radio" value="3" name="colour" id="colour-3"/>
+                    <input 
+                      type="radio" 
+                      value="3" 
+                      name="colour" 
+                      id="colour-3"
+                      checked={event.target.value==="3"}
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>4
-                    <input type="radio" value="4" name="colour" id="colour-4"/>
+                    <input 
+                      type="radio" 
+                      value="4" 
+                      name="colour" 
+                      id="colour-4"
+                      checked={event.target.value==="4"}
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
               </ul>
@@ -179,22 +215,42 @@ function Survey() {
             <ul>
                 <li>
                   <label>1
-                    <input type="radio" value="1" name="consistency" id="consistency-1" />   
+                    <input
+                      type="radio"
+                      value="1"
+                      name="consistency"
+                      id="consistency-1"
+                      onChange={event => handleChanges(event)}/>   
                   </label> 
                 </li>
                 <li>
                   <label>2
-                    <input type="radio" value="2" name="consistency" id="consistency-2"/>
+                    <input
+                      type="radio"
+                      value="2"
+                      name="consistency"
+                      id="consistency-2"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>3
-                    <input type="radio" value="3" name="consistency" id="consistency-3"/>
+                    <input
+                      type="radio"
+                      value="3"
+                      name="consistency"
+                      id="consistency-3"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>4
-                    <input type="radio" value="4" name="consistency" id="consistency-4"/>
+                    <input
+                      type="radio"
+                      value="4"
+                      name="consistency"
+                      id="consistency-4"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
               </ul>
@@ -204,22 +260,42 @@ function Survey() {
             <ul>
                 <li>
                   <label>1
-                    <input type="radio" value="1" name="logo" id="logo-1" />   
+                    <input
+                      type="radio"
+                      value="1"
+                      name="logo"
+                      id="logo-1"
+                      onChange={event => handleChanges(event)}/>   
                   </label> 
                 </li>
                 <li>
                   <label>2
-                    <input type="radio" value="2" name="logo" id="logo-2"/>
+                    <input
+                      type="radio"
+                      value="2"
+                      name="logo"
+                      id="logo-2"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>3
-                    <input type="radio" value="3" name="logo" id="logo-3"/>
+                    <input
+                      type="radio"
+                      value="3"
+                      name="logo"
+                      id="logo-3"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
                 <li>
                   <label>4
-                    <input type="radio" value="4" name="logo" id="logo-4"/>
+                    <input
+                      type="radio"
+                      value="4"
+                      name="logo"
+                      id="logo-4"
+                      onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
               </ul>
@@ -228,54 +304,67 @@ function Survey() {
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
               <li>
-                <label>
+                <label>swimming
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.activities.swimming} 
+                    onChange={event => handleChanges(event, 'activities')}
+                    name="swimming"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>listening_to_Muse
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.activities.listening_to_Muse}
+                    onChange={event => handleChanges(event, 'activities')} 
+                    name="listening_to_Muse"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>ranting
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.activities.ranting}
+                    onChange={event => handleChanges(event, 'activities')} 
+                    name="ranting"/>
                 </label>
               </li>
               <li>
-                <label>
+                <label>coding
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
-                    name=""/>
+                    checked={form.activities.coding}
+                    onChange={event => handleChanges(event, 'activities')} 
+                    name="coding"/>
                 </label>
               </li>
             </ul>
           </div>
           <label>
             What else have you got to say about your rubber duck?
-            <textarea name="review" cols="30" rows="10"></textarea>
+            <textarea 
+              name="review"
+              cols="30"
+              rows="10"
+              value={form.review}
+              onChange={event => handleChanges(event)}></textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" value="" />
+            <input 
+              type="text"
+              name="username"
+              value={form.fullName} 
+              onChange={event => handleChanges(event)}/>
           </label>
           <label>
             Leave us your email pretty please??
-            <input type="email" name="email" value="" />
+            <input 
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={event => handleChanges(event)}/>
           </label>
           <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
