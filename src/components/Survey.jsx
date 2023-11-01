@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import AnswersList from "./AnswersList";
 
-const intialForm = {
+const initialForm = {
   bestFeatures: {
     yellow: false, 
     logo: false, 
@@ -30,20 +30,22 @@ const intialForm = {
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const [form, setForm] = useState(intialForm)
+  const [form, setForm] = useState(initialForm)
 
 
   const submitForm = (event) => {
     event.preventDefault()
     console.log(form)
+    setForm(initialForm)
   }
+
   const handleChanges = (event, question) => {
-    event.preventDefault()
+    
     const {name, value, type, checked} = event.target
     if (type === 'checkbox'){
-    setForm({...form, [question]:{...form[question], [name]:checked}})
+      setForm({...form, [question]:{...form[question], [name]:checked}})
     } else {
-    setForm({...form, [name]: value})
+      setForm({...form, [name]: value})
     }
     console.log(form)
   }
@@ -67,9 +69,7 @@ function Survey() {
               <li>
                 <label>
                   <input 
-                    type="checkbox" 
-                    value="" 
-                    id="" 
+                    type="checkbox"  
                     checked={form.bestFeatures.yellow}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="yellow"/>
@@ -80,8 +80,6 @@ function Survey() {
                 <label>
                   <input 
                     type="checkbox" 
-                    value="logo" 
-                    id="" 
                     checked={form.bestFeatures.logo}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="logo"/>
@@ -92,8 +90,6 @@ function Survey() {
                 <label>
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
                     checked={form.bestFeatures.big}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="big"/>
@@ -104,8 +100,6 @@ function Survey() {
                 <label>
                   <input 
                     type="checkbox" 
-                    value="" 
-                    id="" 
                     checked={form.bestFeatures.squeaks}
                     onChange={event => handleChanges(event, 'bestFeatures')}
                     name="squeaks"/>
@@ -171,7 +165,7 @@ function Survey() {
                       value="1" 
                       name="colour" 
                       id="colour-1"
-                      checked={event.target.value==="1"}
+                      checked={form.colour === "1"}
                       onChange={event => handleChanges(event)} />   
                   </label> 
                 </li>
@@ -182,7 +176,7 @@ function Survey() {
                       value="2" 
                       name="colour" 
                       id="colour-2"
-                      checked={event.target.value==="2"}
+                      checked={form.colour === "2"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -193,7 +187,7 @@ function Survey() {
                       value="3" 
                       name="colour" 
                       id="colour-3"
-                      checked={event.target.value==="3"}
+                      checked={form.colour === "3"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -204,7 +198,7 @@ function Survey() {
                       value="4" 
                       name="colour" 
                       id="colour-4"
-                      checked={event.target.value==="4"}
+                      checked={form.colour === "4"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -220,6 +214,7 @@ function Survey() {
                       value="1"
                       name="consistency"
                       id="consistency-1"
+                      checked={form.consistency}
                       onChange={event => handleChanges(event)}/>   
                   </label> 
                 </li>
@@ -230,6 +225,7 @@ function Survey() {
                       value="2"
                       name="consistency"
                       id="consistency-2"
+                      checked={form.consistency}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -240,6 +236,7 @@ function Survey() {
                       value="3"
                       name="consistency"
                       id="consistency-3"
+                      checked={form.consistency}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -250,6 +247,7 @@ function Survey() {
                       value="4"
                       name="consistency"
                       id="consistency-4"
+                      checked={form.consistency}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -265,6 +263,7 @@ function Survey() {
                       value="1"
                       name="logo"
                       id="logo-1"
+                      checked={form.logo === "1"}
                       onChange={event => handleChanges(event)}/>   
                   </label> 
                 </li>
@@ -275,6 +274,7 @@ function Survey() {
                       value="2"
                       name="logo"
                       id="logo-2"
+                      checked={form.logo === "2"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -285,6 +285,7 @@ function Survey() {
                       value="3"
                       name="logo"
                       id="logo-3"
+                      checked={form.logo === "3"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -295,6 +296,7 @@ function Survey() {
                       value="4"
                       name="logo"
                       id="logo-4"
+                      checked={form.logo === "4"}
                       onChange={event => handleChanges(event)}/>
                   </label>
                 </li>
@@ -355,7 +357,7 @@ function Survey() {
             <input 
               type="text"
               name="username"
-              value={form.fullName} 
+              value={form.username} 
               onChange={event => handleChanges(event)}/>
           </label>
           <label>
@@ -374,3 +376,5 @@ function Survey() {
 }
 
 export default Survey;
+
+
