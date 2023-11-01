@@ -29,7 +29,7 @@ function Survey() {
     fetch("http://localhost:5174", options);
 
     // Log the data from form
-    console.log(form);
+    console.log(form, "logging the data");
 
     // setting Form
     setForm(INITIAL_STATE);
