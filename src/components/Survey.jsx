@@ -56,6 +56,7 @@ function Survey() {
                     type="radio"
                     name="color"
                     value={color}
+                    checked={form.color === color}
                   />
                   <label htmlFor={`color-${color}`}>{color}</label>
                 </>
