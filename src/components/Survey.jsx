@@ -122,10 +122,10 @@ function Survey() {
                 <label>
                   <input
                     onChange={(event) => handleChange(event)}
-                    name="spend-time"
+                    name="time_spent"
                     type="checkbox"
                     value="swimming"
-                    checked={form.spend_time === "swimming"}
+                    checked={form.time_spent === "swimming"}
                   />
                   Swimming
                 </label>
@@ -134,10 +134,10 @@ function Survey() {
                 <label>
                   <input
                     onChange={(event) => handleChange(event)}
-                    name="spend-time"
+                    name="time_spent"
                     type="checkbox"
                     value="bathing"
-                    checked={form.spend_time === "bathing"}
+                    checked={form.time_spent === "bathing"}
                   />
                   Bathing
                 </label>
@@ -146,10 +146,10 @@ function Survey() {
                 <label>
                   <input
                     onChange={(event) => handleChange(event)}
-                    name="spend-time"
+                    name="time_spent"
                     type="checkbox"
                     value="chatting"
-                    checked={form.spend_time === "chatting"}
+                    checked={form.time_spent === "chatting"}
                   />
                   Chatting
                 </label>
@@ -158,10 +158,10 @@ function Survey() {
                 <label>
                   <input
                     onChange={(event) => handleChange(event)}
-                    name="spend-time"
+                    name="time_spent"
                     type="checkbox"
                     value="noTime"
-                    checked={form.spend_time === "noTime"}
+                    checked={form.time_spent === "noTime"}
                   />
                   I don't like to spend time with it
                 </label>
