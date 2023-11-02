@@ -1,4 +1,5 @@
 function Checkbox ({value, description}) {
+  console.log(value, description)
   return (
     <label>
       <input
@@ -12,7 +13,8 @@ function Checkbox ({value, description}) {
 }
 
 export default function Checkboxes({valDescArr}) {
-  return (
-    {valDescArr.map((element, index) => <Checkbox key={index} value={"1"} description={"0"}/>)}
-  )
+  valDescArr.forEach((elementArr, index) => console.log(index, elementArr[0], elementArr[1]))
+  // return (
+  //   {valDescArr.map((elementArr, index) => <Checkbox key={index} value={elementArr[1]} description={elementArr[0]}/>)}
+  // )
 }
