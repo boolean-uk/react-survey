@@ -12,19 +12,23 @@ export default function SurveyItem () {
     ["I don't like to spend time with it", "noTime"]
   ]
 
+  const inputHandler = (event) => {
+    console.log(event.target, event.target)
+  }
+
   return (
   <form className="form">
     <h2>Tell us what you think about your rubber duck!</h2>
     <div className="form__group radio">
 
       <h3>How do you rate your rubber duck colour?</h3>
-      <RadioButtons valArr={valArr}/>
+      <RadioButtons valArr={valArr} name="colour" inputHandler={inputHandler}/>
       
       <h3>How do you rate your duck's consistency?</h3>
-      <RadioButtons valArr={valArr}/>
+      <RadioButtons valArr={valArr} name="consistency" inputHandler={inputHandler} />
       
       <h3>How do you rate your rubber duck's logo?</h3>
-      <RadioButtons valArr={valArr}/>
+      <RadioButtons valArr={valArr} name="logo" inputHandler={inputHandler} />
     
     </div>
     <div className="form__group">
@@ -37,7 +41,7 @@ export default function SurveyItem () {
           name="review"
           cols="30"
           rows="10"
-          onChange={(event) => console.log(event.target.name)}
+          onChange={(event) => inputHandler(event)}
         ></textarea>
     </label>
 
@@ -46,7 +50,7 @@ export default function SurveyItem () {
           type="text"
           name="username"
           value="" 
-          onChange={(event) => console.log(event.target.name)}
+          onChange={(event) => inputHandler(event)}
         />
       </label>
 
@@ -55,7 +59,7 @@ export default function SurveyItem () {
         type="email"
         name="email"
         value=""
-        onChange={(event) => console.log(event.target.name)}
+        onChange={(event) => inputHandler(event)}
     /></label
     ><input className="form__submit" type="submit" value="Submit Survey!" />
   </form>

@@ -1,16 +1,16 @@
-function RadioButton ({value}) {
+function RadioButton ({value, name}) {
   return (
   <label>
-    <input type="radio" name="contact" value={value} onChange={() => console.log({value})}/>
+    <input type="radio" name={name} value={value} />
     {value}
   </label>
   )
 }
 
-export default function RadioButtons({valArr}) {
+export default function RadioButtons({valArr, name, inputHandler}) {
     return (
       <div className="form__radio-group" type="radio" onChange={(event) => inputHandler(event)} >
-        {valArr.map((element, index) => <RadioButton key={index} value={element}/>)}
+        {valArr.map((element, index) => <RadioButton key={index} name={name} value={element}/>)}
       </div>
     )
 }
