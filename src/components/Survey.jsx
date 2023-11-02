@@ -1,59 +1,115 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
+import AnswersItem from "./AnswersItem";
+
+
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
+
+  const [rating, setRating] = useState(""); 
+  const [activities, setActivities] = useState([]); 
+  const [review, setReview] = useState(""); 
+  const [username, setUsername] = useState(""); 
+  const [email, setEmail] = useState(""); 
+
+
+  const handleCheckboxChange = (e) => {
+    const { value } = e.target;
+    if (activities.includes(value)) {
+      // If the value is already in the activities array, remove it
+      setActivities(activities.filter((activity) => activity !== value));
+    } else {
+      // If the value is not in the activities array, add it
+      setActivities([...activities, value]);
+    }
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Log form data
+    console.log("Rating:", rating);
+    console.log("Activities:", activities);
+    console.log("Review:", review);
+    console.log("Username:", username);
+    console.log("Email:", email);
+
+    // Reset form fields
+    setRating("");
+    setActivities([]);
+    setReview("");
+    setUsername("");
+    setEmail("");
+  };
+
+
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answers={answers.map((answer, index) => <AnswersItem key={index} answer={answer} />)} />
+
       </section>
       <section className="survey__form">{
-      <form className="form">
-      <h2>Tell us what you think about your rubber duck!</h2>
-      <div className="form__group radio">
-        <h3>How do you rate your rubber duck colour?</h3>
-       <label htmlFor="rating">1 <input type="radio"/></label>
-       <label htmlFor="rating">2 <input type="radio"/></label>
-       <label htmlFor="rating">3 <input type="radio"/></label>
-       <label htmlFor="rating">4 <input type="radio"/></label>
-      </div>
-      <div className="form__group">
-        <h3>How do you like to spend time with your rubber duck</h3>
-    <label htmlFor="">Swimming<input type="checkbox" name="" id="" /></label>
-    <label htmlFor="">Bathing<input type="checkbox" name="" id="" /></label>
-    <label htmlFor="">Chatting<input type="checkbox" name="" id="" /></label>
-    <label htmlFor="">I dont like to spend time with it<input type="checkbox" name="" id="" /></label>
-      </div>
-      <label>
-        What else have you got to say about your rubber duck?
-        <textarea
-          name="review"
-          cols="30"
-          rows="10"
-        >
-      </textarea>
-      </label>
-      <label>
-        Put your name here (if you feel like it):
-        <input
-          type="text"
-          name="username"
-          value="" 
-        />
-      </label>
-      <label>
-        Leave us your email pretty please??
-        <input
-          type="email"
-          name="email"
-          value="" 
-        />
-      </label>
-      <input className="form__submit" type="submit" value="Submit Survey!" />
-    </form>
-      
+        <form className="form" onSubmit={handleSubmit}>
+          <h2>Tell us what you think about your rubber duck!</h2>
+
+
+
+          <div className="form__group radio">
+            <h3>How do you rate your rubber duck colour?</h3>
+
+
+            <label htmlFor="rating">1 <input type="radio" /></label>
+            <label htmlFor="rating">2 <input type="radio" /></label>
+            <label htmlFor="rating">3 <input type="radio" /></label>
+            <label htmlFor="rating">4 <input type="radio" /></label>
+          </div>
+
+
+          <div className="form__group">
+            <h3>How do you like to spend time with your rubber duck</h3>
+
+            <label htmlFor="activities">Swimming<input type="checkbox" name="activities" value="Swimming" onChange={handleCheckboxChange} /></label>
+            <label htmlFor="activities">Bathing<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
+            <label htmlFor="activities">Chatting<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
+            <label htmlFor="activities">I dont like spending time with it<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
+
+          </div>
+          <label>
+            What else have you got to say about your rubber duck?
+            <textarea
+              name="review"
+              cols="30"
+              rows="10"
+            >
+            </textarea>
+          </label>
+          <label>
+            Put your name here (if you feel like it):
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+
+          </label>
+          <label>
+            Leave us your email pretty please??
+            <input
+              type="email"
+              name="email"
+              value="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <input className="form__submit" type="submit" value="Submit Survey!" />
+        </form>
+
       }</section>
     </main>
   );
