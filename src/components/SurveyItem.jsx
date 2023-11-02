@@ -1,11 +1,23 @@
-export default function SurveyItem () {
+import RadioButtons from "./RadioButton"
 
+export default function SurveyItem () {
+  const valArr = [
+    1, 2, 3, 4
+  ]
   return (
   <form className="form">
     <h2>Tell us what you think about your rubber duck!</h2>
     <div className="form__group radio">
+      
       <h3>How do you rate your rubber duck colour?</h3>
-      {/* <!-- Radio inputs go here --> */}
+      <RadioButtons valArr={valArr}/>
+      
+      <h3>How do you rate your duck's consistency?</h3>
+      <RadioButtons valArr={valArr}/>
+      
+      <h3>How do you rate your rubber duck's logo?</h3>
+      <RadioButtons valArr={valArr}/>
+    
     </div>
     <div className="form__group">
       <h3>How do you like to spend time with your rubber duck</h3>
