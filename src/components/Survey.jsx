@@ -5,8 +5,10 @@ import AnswersItem from "./AnswersItem";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const answerObj = {
-    username: "Test",
+    username: "",
     colour: "",
+    consistency: "",
+    logo: "",
     timeSpent: "",
     review: ""
   }

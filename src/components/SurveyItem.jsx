@@ -40,7 +40,7 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
     </div>
     <div className="form__group">
       <h3>How do you like to spend time with your rubber duck</h3>
-      <Checkboxes valDescArr={checkBoxArr}/>
+      <Checkboxes valDescArr={checkBoxArr} inputHandler={inputHandler}/>
     </div>
     <label>
       What else have you got to say about your rubber duck?
@@ -56,7 +56,6 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
         <input
           type="text"
           name="username"
-          value="" 
           onChange={(event) => inputHandler(event)}
         />
       </label>
@@ -65,7 +64,6 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
       Leave us your email pretty please??<input
         type="email"
         name="email"
-        value=""
         onChange={(event) => inputHandler(event)}
     /></label
     ><input className="form__submit" type="submit" value="Submit Survey!" />
