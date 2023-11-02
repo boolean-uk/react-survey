@@ -31,22 +31,32 @@ export default function SurveyItem () {
       <h3>How do you like to spend time with your rubber duck</h3>
       <Checkboxes valDescArr={checkBoxArr}/>
     </div>
-    <label
-      >What else have you got to say about your rubber duck?<textarea
-        name="review"
-        cols="30"
-        rows="10"
-      ></textarea></label
-    ><label
-      >Put your name here (if you feel like it):<input
-        type="text"
-        name="username"
-        value="" /></label
-    ><label
-      >Leave us your email pretty please??<input
+    <label>
+      What else have you got to say about your rubber duck?
+        <textarea
+          name="review"
+          cols="30"
+          rows="10"
+          onChange={(event) => console.log(event.target.name)}
+        ></textarea>
+    </label>
+
+      <label>Put your name here (if you feel like it):
+        <input
+          type="text"
+          name="username"
+          value="" 
+          onChange={(event) => console.log(event.target.name)}
+        />
+      </label>
+
+    <label>
+      Leave us your email pretty please??<input
         type="email"
         name="email"
-        value="" /></label
+        value=""
+        onChange={(event) => console.log(event.target.name)}
+    /></label
     ><input className="form__submit" type="submit" value="Submit Survey!" />
   </form>
   )

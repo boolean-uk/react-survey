@@ -1,7 +1,7 @@
 function RadioButton ({value}) {
   return (
   <label>
-    <input type="radio" name="contact" value={value}/>
+    <input type="radio" name="contact" value={value} onChange={() => console.log({value})}/>
     {value}
   </label>
   )

@@ -24,6 +24,7 @@ export default function AnswersItem({
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: { username, colour, timeSpent, review }
 }) {
+  console.log(answerItem)
   return (
     <li>
       <article className="answer">
