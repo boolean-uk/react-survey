@@ -18,32 +18,50 @@ function Form() {
 
   const [form, setForm] = useState(INITIAL_STATE);
 
+  const CHECKED_STATE = {
+    isChecked1: false,
+    isChecked2: false,
+    isChecked3: false,
+    isChecked4: false
+  }
+
+  const [isChecked, setIsChecked] = useState(CHECKED_STATE)
+
   function submit(e) {
     e.preventDefault();
     console.log(form);
     setForm(INITIAL_STATE);
+    setIsChecked(CHECKED_STATE)
   }
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-    if (type === "checkbox" && name === "features" && checked) {
+    if (type === "checkbox" && name === "features") {
       let trackFeatures = [...form.features]
 
+      if (value === "yellow") {
+        setIsChecked({...isChecked, isChecked1: checked})
+      }
+      if (value === "squeak") {
+        setIsChecked({...isChecked, isChecked2: checked})
+      }
+      if (value === "big") {
+      setIsChecked({...isChecked, isChecked3: checked})
+      }
+      if (value === "logo") {
+      setIsChecked({...isChecked, isChecked4: checked})
+      }
+      
       if (checked) {
         trackFeatures.push(value)
-        console.log(trackFeatures)
-        // setForm({...form, features: value})
       }
       else {
-        // setForm({...form, features: value.filter(e => e !== value)})
         trackFeatures = trackFeatures.filter(e => e !== value)
       }
       setForm({...form, features: trackFeatures})
-      console.log(form)
     }
     else {
         setForm({ ...form, [name]: value });
-        console.log(form)
     }
   }
 
@@ -60,7 +78,7 @@ function Form() {
                          name="features"
                          type="checkbox"
                          value="yellow"
-                        //  checked={form.features === "yellow"}
+                        checked={isChecked.isChecked1}
                     />
                     It's yellow!
                 </label>
@@ -72,7 +90,7 @@ function Form() {
                          name="features"
                          type="checkbox"
                          value="squeak"
-                        //  checked={form.features === "squeak"}
+                        checked={isChecked.isChecked2}
                     />
                     It squeaks!
                 </label>
@@ -84,7 +102,7 @@ function Form() {
                          name="features"
                          type="checkbox"
                          value="big"
-                        //  checked={form.features === "big"}
+                        checked={isChecked.isChecked3}
                     />
                     It's big!
                 </label>
@@ -96,7 +114,7 @@ function Form() {
                          name="features"
                          type="checkbox"
                          value="logo"
-                        //  checked={form.features === "logo"}
+                        checked={isChecked.isChecked4}
                     />
                     It has a logo!
                 </label>
