@@ -10,7 +10,7 @@ function RadioButton ({value}) {
 export default function RadioButtons({valArr}) {
     return (
       <div className="form__radio-group" type="radio" onChange={(event) => inputHandler(event)} >
-        {valArr.map(element => <RadioButton value={element}/>)}
+        {valArr.map((element, index) => <RadioButton key={index} value={element}/>)}
       </div>
     )
 }
