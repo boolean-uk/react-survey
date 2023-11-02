@@ -5,8 +5,10 @@ import SpendTimeCheckboxes from "./SpendTimeCheckboxes";
 import Review from "./Review";
 import Username from "./Username"
 import Email from "./Email";
+import BestFeatures from "./BestFeatures";
 
 function Form() {
+
   const INITIAL_STATE = {
     features: [],
     color: "",
@@ -16,8 +18,6 @@ function Form() {
     email: ""
   };
 
-  const [form, setForm] = useState(INITIAL_STATE);
-
   const CHECKED_STATE = {
     isChecked1: false,
     isChecked2: false,
@@ -25,6 +25,7 @@ function Form() {
     isChecked4: false
   }
 
+  const [form, setForm] = useState(INITIAL_STATE);
   const [isChecked, setIsChecked] = useState(CHECKED_STATE)
 
   function submit(e) {
@@ -70,58 +71,7 @@ function Form() {
       <h2>Tell us what you think about your rubber duck!</h2>
       <div className="form__group">
         <h3>What would you say are the best features of your rubber duck?</h3>
-        <ul>
-            <li>
-                <label>
-                    <input
-                         onChange={e => handleChange(e)}
-                         name="features"
-                         type="checkbox"
-                         value="yellow"
-                        checked={isChecked.isChecked1}
-                    />
-                    It's yellow!
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input
-                         onChange={e => handleChange(e)}
-                         name="features"
-                         type="checkbox"
-                         value="squeak"
-                        checked={isChecked.isChecked2}
-                    />
-                    It squeaks!
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input
-                         onChange={e => handleChange(e)}
-                         name="features"
-                         type="checkbox"
-                         value="big"
-                        checked={isChecked.isChecked3}
-                    />
-                    It's big!
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input
-                         onChange={e => handleChange(e)}
-                         name="features"
-                         type="checkbox"
-                         value="logo"
-                        checked={isChecked.isChecked4}
-                    />
-                    It has a logo!
-                </label>
-            </li>
-        </ul>
-
-
+        { <BestFeatures isChecked={isChecked} handleChange={handleChange} /> }
       </div>
       <div className="form__group radio">
         <h3>How do you rate your rubber duck colour?</h3>
