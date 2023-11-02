@@ -2,13 +2,15 @@ import  { useState } from "react";
 import AnswersItem from "./AnswersItem";
 
 function Survey() {
+  const [answers, setAnswers] = useState([]);
   const [open, setOpen] = useState(false);
+
   const [rating, setRating] = useState("");
   const [activities, setActivities] = useState([]);
   const [review, setReview] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [answers, setAnswers] = useState([]);
+  
  
 
   const handleCheckboxChange = (e) => {
@@ -19,6 +21,7 @@ function Survey() {
       setActivities([...activities, value]);
     }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
@@ -71,8 +74,8 @@ function Survey() {
 
             <label htmlFor="activities">Swimming<input type="checkbox" name="activities" value="Swimming" onChange={handleCheckboxChange} /></label>
             <label htmlFor="activities">Bathing<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
-            <label htmlFor="activities">Chatting<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
-            <label htmlFor="activities">I dont like spending time with it<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
+            <label htmlFor="activities">Chatting<input type="checkbox" name="activities" value="Chatting" onChange={handleCheckboxChange} /></label>
+            <label htmlFor="activities">I dont like spending time with it<input type="checkbox" name="activities" value="DontLike" onChange={handleCheckboxChange} /></label>
 
           </div>
           <label>
