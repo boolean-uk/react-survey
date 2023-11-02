@@ -1,5 +1,18 @@
-// Components don't need to be separeted into individual files
-// Here we have a smaller component that helps compose the AnswersItem below
+import PropTypes from 'prop-types';
+
+ItemsList.propTypes = {
+  list: PropTypes.array.isRequired
+};
+
+AnswersItem.propTypes = {
+  answerItem: PropTypes.shape({
+    username: PropTypes.string,
+    colour: PropTypes.string.isRequired,
+    timeSpent: PropTypes.array.isRequired,
+    review: PropTypes.string.isRequired
+  }).isRequired
+};
+
 
 const answersSet = {
   swimming: "Swimming",
@@ -12,7 +25,7 @@ function ItemsList({ list }) {
   return (
     <ul>
       {list.map((item) => (
-        <li>{answersSet[item]}</li>
+        <li key={item}>{answersSet[item]}</li>
       ))}
     </ul>
   );

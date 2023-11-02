@@ -1,40 +1,37 @@
-import { useState } from "react";
-import AnswersList from "./AnswersList";
+import  { useState } from "react";
 import AnswersItem from "./AnswersItem";
 
-
-
 function Survey() {
-  const [open, setOpen] = useState(false); //Ignore this state
-
-  const [rating, setRating] = useState(""); 
-  const [activities, setActivities] = useState([]); 
-  const [review, setReview] = useState(""); 
-  const [username, setUsername] = useState(""); 
-  const [email, setEmail] = useState(""); 
-
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState("");
+  const [activities, setActivities] = useState([]);
+  const [review, setReview] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [answers, setAnswers] = useState([]);
+ 
 
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
     if (activities.includes(value)) {
-      // If the value is already in the activities array, remove it
       setActivities(activities.filter((activity) => activity !== value));
     } else {
-      // If the value is not in the activities array, add it
       setActivities([...activities, value]);
     }
   };
 
-
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
-    // Log form data
-    console.log("Rating:", rating);
-    console.log("Activities:", activities);
-    console.log("Review:", review);
-    console.log("Username:", username);
-    console.log("Email:", email);
+    const answer = {
+      rating: rating,
+      activities: activities,
+      review: review,
+      username: username,
+      email: email,
+    };
+
+    setAnswers([...answers, answer]);
 
     // Reset form fields
     setRating("");
@@ -44,16 +41,15 @@ function Survey() {
     setEmail("");
   };
 
-
-
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answers={answers.map((answer, index) => <AnswersItem key={index} answer={answer} />)} />
-
+        {answers.map((answer, index) => (
+          <AnswersItem key={index} answer={answer} />
+        ))}
       </section>
-      <section className="survey__form">{
+      <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
 
@@ -103,14 +99,14 @@ function Survey() {
             <input
               type="email"
               name="email"
-              value="email"
+              value={email}  // Set the value prop to the email state
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
           <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
 
-      }</section>
+      </section>
     </main>
   );
 }
