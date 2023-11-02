@@ -6,12 +6,13 @@ function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const answerObj = {
     username: "Test",
-    colour: "ColorTest",
-    timeSpent: "spendTimeTest",
-    review: "NOPE"
+    colour: "",
+    timeSpent: "",
+    review: ""
   }
-  const [answers, setAnswers] = useState(answerObj)
 
+  const [answers, setAnswers] = useState(answerObj)
+  console.log(answers)
 
   return (
     <main className="survey">
@@ -20,7 +21,7 @@ function Survey() {
         <AnswersItem answerItem={answers}/>
       </section>
       <section className="survey__form">
-        <SurveyItem />  
+        <SurveyItem answerItem={answers} updateAnswers={setAnswers} />  
       </section>
     </main>
   );

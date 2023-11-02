@@ -1,7 +1,7 @@
 import Checkboxes from "./Checkboxes"
 import RadioButtons from "./RadioButtons"
 
-export default function SurveyItem () {
+export default function SurveyItem ({updateAnswers, answerItem}) {
   const valArr = [
     1, 2, 3, 4
   ]
@@ -13,7 +13,14 @@ export default function SurveyItem () {
   ]
 
   const inputHandler = (event) => {
-    console.log(event.target, event.target)
+    console.log(event.target, event.target.name, event.target.value)
+    const key = event.target.name
+    const value = event.target.value
+    console.log(answerItem)
+    updateAnswers({
+      ...answerItem,
+      [key]: value
+    })
   }
 
   return (
