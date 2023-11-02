@@ -1,0 +1,17 @@
+{
+    "answers": [
+        {
+            "id": 1698889215405,
+            "color": "1",
+            "timeSpent": ["bathing", "chatting", "swimming", "noTime"]
+        },
+        {
+            "id": 1698889225906,
+            "timeSpent": ["bathing", "swimming"],
+            "color": "1",
+            "review": "Nothing special",
+            "username": "Nazar",
+            "email": "nazartumiv@gmail.com"
+        }
+    ]
+}

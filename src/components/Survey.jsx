@@ -1,28 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import QuestionsForm from "./QuestionsForm";
 import AnswersList from "./AnswersList";
+
+const root = "http://localhost:3000/answers/";
 
 function Survey() {
     const [open, setOpen] = useState(false); //Ignore this state
     const [answers, setAnswers] = useState([]);
     const [editData, setEditData] = useState({});
 
-    const handleAnswers = (form) => {
-        setAnswers([...answers, form]);
+    // fetches
+
+    const postAnswer = (answer) => {
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(answer),
+        };
+        fetch(root, options).then(() => getAllAnswers());
     };
 
-    const handleEditData = (data) => {
-        setEditData(data);
+    const getAllAnswers = () => {
+        fetch(root)
+            .then((res) => res.json())
+            .then((data) => setAnswers(data));
     };
+
+    const updateAnswer = (answer) => {
+        const options = {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...answer }),
+        };
+
+        fetch(root + answer.id, options).then(() => getAllAnswers());
+    };
+
+    // handlers
+
+    const handleAnswers = (form) => postAnswer(form);
+
+    const handleEditData = (data) => setEditData(data);
 
     const handleEditAnswers = (form) => {
-        setAnswers(
-            answers.map((item) => (item.id === form.id ? { ...form } : item))
-        );
+        updateAnswer(form);
         setEditData({});
     };
+
+    // useEffect
+    useEffect(() => getAllAnswers(), []);
 
     return (
         <main className="survey">
