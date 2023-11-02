@@ -1,5 +1,5 @@
 import Checkboxes from "./Checkboxes"
-import RadioButtons from "./RadioButton"
+import RadioButtons from "./RadioButtons"
 
 export default function SurveyItem () {
   const valArr = [
