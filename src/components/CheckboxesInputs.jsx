@@ -1,6 +1,6 @@
-const CheckboxesInputs = ({ handleChange, name, questions }) => {
+const CheckboxesInputs = ({ handleChange, name, questions, inputs }) => {
     return (
-        <ul onChange={(e) => handleChange(e)}>
+        <ul>
             {questions.map((question, index) => (
                 <li key={index}>
                     <label>
@@ -8,6 +8,13 @@ const CheckboxesInputs = ({ handleChange, name, questions }) => {
                             name={name}
                             type="checkbox"
                             value={question.value}
+                            checked={
+                                inputs[name] &&
+                                inputs[name].includes(question.value)
+                                    ? true
+                                    : false
+                            }
+                            onChange={(e) => handleChange(e)}
                         />
                         {question.value}
                     </label>

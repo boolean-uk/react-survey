@@ -1,6 +1,6 @@
-const RadioInputs = ({ handleChange, name, questions }) => {
+const RadioInputs = ({ handleChange, name, questions, inputs }) => {
     return (
-        <ul onChange={(e) => handleChange(e)}>
+        <ul>
             {questions.map((question, index) => (
                 <li key={index}>
                     <input
@@ -8,6 +8,12 @@ const RadioInputs = ({ handleChange, name, questions }) => {
                         type="radio"
                         name={name}
                         value={question.value}
+                        checked={
+                            inputs[name] === question.value.toString()
+                                ? true
+                                : false
+                        }
+                        onChange={(e) => handleChange(e)}
                     />
                     <label htmlFor={question.id}>{question.value}</label>
                 </li>

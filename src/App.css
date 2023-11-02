@@ -105,7 +105,7 @@ h2 {
   box-shadow: var(--survey-shadow);
 }
 
-.form > h2 {
+.form>h2 {
   text-align: center;
 }
 
@@ -118,7 +118,7 @@ h2 {
   display: inline;
 }
 
-.form > label {
+.form>label {
   display: block;
 }
 
@@ -162,7 +162,7 @@ h2 {
   margin: 0.5rem;
 }
 
-.form__group.radio input[type="radio"]:checked + label {
+.form__group.radio input[type="radio"]:checked+label {
   background-color: var(--primary-colour);
   color: var(--background-two);
 }
@@ -179,7 +179,7 @@ h2 {
   resize: none;
 }
 
-.form > * + * {
+.form>*+* {
   margin-top: 2rem;
 }
 
@@ -195,4 +195,18 @@ h2 {
 
 .form__submit:hover {
   background-color: white;
+}
+
+.answerItem {
+  position: relative;
+}
+
+.editButton {
+  position: absolute;
+  background: none;
+  border: 1px solid #000;
+  padding: 0.2rem 0.8rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  right: 15px;
 }

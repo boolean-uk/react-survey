@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CheckboxesInputs from "./CheckboxesInputs";
 import RadioInputs from "./RadioInputs";
 
@@ -47,30 +47,34 @@ const questionsList = [
     },
 ];
 
-const QuestionsForm = ({ handleAnswers }) => {
+const QuestionsForm = ({ handleAnswers, editData, handleEditAnswers }) => {
     const [key, setKey] = useState(0);
-    const [inputs, setInputs] = useState({
-        username: "",
-        email: "",
-        review: "",
-    });
-
-    console.log(inputs);
+    const [inputs, setInputs] = useState({ id: Date.now() });
 
     // submit
 
     const submitForm = (e) => {
         e.preventDefault();
 
-        handleAnswers(inputs);
+        if (Object.keys(editData).length > 0) {
+            handleEditAnswers(inputs);
+        } else {
+            handleAnswers(inputs);
+        }
 
         setInputs({
-            username: "",
-            email: "",
-            review: "",
+            id: Date.now(),
         });
         setKey((k) => k + 1);
     };
+
+    useEffect(
+        () =>
+            Object.keys(editData).length > 0
+                ? setInputs(editData)
+                : setInputs({ id: Date.now() }),
+        [editData]
+    );
 
     // handle changes
 
@@ -105,6 +109,7 @@ const QuestionsForm = ({ handleAnswers }) => {
                                 name={item.name}
                                 questions={item.questions}
                                 handleChange={handleChange}
+                                inputs={inputs}
                             />
                         </div>
                     );
@@ -116,6 +121,7 @@ const QuestionsForm = ({ handleAnswers }) => {
                                 name={item.name}
                                 questions={item.questions}
                                 handleChange={handleChange}
+                                inputs={inputs}
                             />
                         </div>
                     );
@@ -136,8 +142,8 @@ const QuestionsForm = ({ handleAnswers }) => {
                 <input
                     type="text"
                     name="username"
-                    value={inputs.username}
                     onChange={(e) => handleChange(e)}
+                    value={inputs.username}
                 />
             </label>
             <label>
@@ -145,14 +151,18 @@ const QuestionsForm = ({ handleAnswers }) => {
                 <input
                     type="email"
                     name="email"
-                    value={inputs.email}
                     onChange={(e) => handleChange(e)}
+                    value={inputs.email}
                 />
             </label>
             <input
                 className="form__submit"
                 type="submit"
-                value="Submit Survey!"
+                value={
+                    Object.keys(editData).length > 0
+                        ? "Edit Survey!"
+                        : "Submit Survey!"
+                }
             />
         </form>
     );
