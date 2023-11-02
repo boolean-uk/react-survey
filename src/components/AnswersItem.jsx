@@ -24,7 +24,7 @@ export default function AnswersItem({
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: { username, colour, timeSpent, review }
 }) {
-  console.log(answerItem)
+  console.log(username, colour, timeSpent, review)
   return (
     <li>
       <article className="answer">
@@ -35,7 +35,7 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <span className="answer__line">{timeSpent}</span>
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
