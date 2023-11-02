@@ -7,17 +7,17 @@ function Survey() {
   const [answers, setAnswers] = useState()
 
   const answerObj = {
-    username: "Test",
-    colour: undefined,
-    timeSpent: "",
-    review: undefined
+    username: "",
+    colour: "",
+    spendTime: "",
+    review: ""
   }
-  
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersItem answerItem={answerObj}/>
+        {/* <AnswersItem answerItem={answerObj}/> */}
       </section>
       <section className="survey__form">
         <SurveyItem />  
