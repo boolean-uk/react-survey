@@ -29,7 +29,7 @@ export default function AnswersItem({
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
         <p>
-          <em>How do you rate your rubber duck colour?</em>
+          <em>How do you rate your rubber duck's colour?</em>
           <span className="answer__line">{colour}</span>
         </p>
         <p>
