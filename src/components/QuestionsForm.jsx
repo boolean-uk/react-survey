@@ -2,6 +2,51 @@ import { useState } from "react";
 import CheckboxesInputs from "./CheckboxesInputs";
 import RadioInputs from "./RadioInputs";
 
+const questionsList = [
+    {
+        title: "How do you rate your rubber duck colour?",
+        type: "radio",
+        name: "color",
+        questions: [
+            {
+                id: "color-one",
+                value: 1,
+            },
+            {
+                id: "color-two",
+                value: 2,
+            },
+            {
+                id: "color-three",
+                value: 3,
+            },
+            {
+                id: "color-four",
+                value: 4,
+            },
+        ],
+    },
+    {
+        title: "How do you like to spend time with your rubber duck?",
+        type: "checkbox",
+        name: "timeSpent",
+        questions: [
+            {
+                value: "swimming",
+            },
+            {
+                value: "bathing",
+            },
+            {
+                value: "chatting",
+            },
+            {
+                value: "noTime",
+            },
+        ],
+    },
+];
+
 const QuestionsForm = ({ handleAnswers }) => {
     const [key, setKey] = useState(0);
     const [inputs, setInputs] = useState({
@@ -9,6 +54,8 @@ const QuestionsForm = ({ handleAnswers }) => {
         email: "",
         review: "",
     });
+
+    console.log(inputs);
 
     // submit
 
@@ -49,14 +96,31 @@ const QuestionsForm = ({ handleAnswers }) => {
     return (
         <form className="form" onSubmit={submitForm} key={key}>
             <h2>Tell us what you think about your rubber duck!</h2>
-            <div className="form__group radio">
-                <h3>How do you rate your rubber duck colour?</h3>
-                <RadioInputs handleChange={handleChange} />
-            </div>
-            <div className="form__group">
-                <h3>How do you like to spend time with your rubber duck</h3>
-                <CheckboxesInputs handleChange={handleChange} />
-            </div>
+            {questionsList.map((item, index) => {
+                if (item.type === "radio") {
+                    return (
+                        <div className="form__group radio" key={index}>
+                            <h3>{item.title}</h3>
+                            <RadioInputs
+                                name={item.name}
+                                questions={item.questions}
+                                handleChange={handleChange}
+                            />
+                        </div>
+                    );
+                } else if (item.type === "checkbox") {
+                    return (
+                        <div className="form__group" key={index}>
+                            <h3>{item.title}</h3>
+                            <CheckboxesInputs
+                                name={item.name}
+                                questions={item.questions}
+                                handleChange={handleChange}
+                            />
+                        </div>
+                    );
+                }
+            })}
             <label>
                 What else have you got to say about your rubber duck?
                 <textarea
