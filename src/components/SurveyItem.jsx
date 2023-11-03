@@ -13,7 +13,8 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
   ]
 
   const inputHandler = (event) => {
-    console.log(event.target, event.target.name, event.target.value)
+    console.log("this is the event", event.target, event.target.name)
+    // console.log(event.target, event.target.name, event.target.value)
     const key = event.target.name
     const value = event.target.value
     console.log(answerItem)
@@ -35,7 +36,7 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
       <RadioButtons valArr={valArr} name="consistency" inputHandler={inputHandler} />
       
       <h3>How do you rate your rubber duck's logo?</h3>
-      <RadioButtons valArr={valArr} name="logo" inputHandler={inputHandler} />
+      <RadioButtons valArr={valArr} name="logo" onClick={(event) => inputHandler(event)}/>
     
     </div>
     <div className="form__group">

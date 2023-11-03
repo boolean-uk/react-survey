@@ -1,8 +1,9 @@
 function RadioButton ({value, name, inputHandler}) {
+
   return (
-    <li onClick={(event) => inputHandler(value)} >
-      <input type="radio" name={name} value={value}/>
-      <label>
+    <li>
+      <input type="radio" value={value}  />
+      <label name={name} onClick={(event) => inputHandler(event)}>
         {value}
       </label>
     </li>
@@ -11,9 +12,9 @@ function RadioButton ({value, name, inputHandler}) {
 
 export default function RadioButtons({valArr, name, inputHandler}) {
     return (
-      <div className="form__radio-group" type="radio" inputHandler={inputHandler}>
+      <div className="form__radio-group" type="radio">
         <ul>
-          {valArr.map((element, index) => <RadioButton key={index} name={name} value={element} />)}
+          {valArr.map((element, index) => <RadioButton key={index} name={name} value={element} inputHandler={inputHandler}/>)}
         </ul>
       </div>
     )
