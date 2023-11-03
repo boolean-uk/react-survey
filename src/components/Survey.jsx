@@ -14,7 +14,6 @@ function Survey() {
   }
 
   const [answers, setAnswers] = useState(answerObj)
-  console.log(answers)
 
   return (
     <main className="survey">
