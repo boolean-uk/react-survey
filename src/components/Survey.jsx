@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   rubberDuck: '',
   spendTime: '',
   aboutDuck: '',
-  name: '',
+  username: '',
   email: ''
 
 }
@@ -16,21 +16,22 @@ function Survey() {
 
   const submitForm =(event) =>{
     event.preventDefault()
-
+    event.target.reset();//
     setForm(INITIAL_STATE)
   }
 
   // common event listener callback function
-  const changeHandle =(event)=>{
+  const handleChange =(event)=>{
     const {name, value, checked, type} = event.target
     if(type === 'checkbox'){
-      setForm({...form, [name] : value})
+      setForm({...form, [name] : checked})
     }else{
       setForm({...form , [name] : value})
     }
   }
 
   return (
+    <>
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
@@ -45,25 +46,25 @@ function Survey() {
             {/*  <!-- Radio inputs go here --> */}
             <ul>
               <li>
-                <input id="color-one" type="radio" name="rubberDuck" value="1"  checked={form.rubberDuck === '1'}  onChange={(event)=>changeHandle(event)}/><label
+                <input id="color-one" type="radio" name="rubberDuck" value="1"  checked={form.rubberDuck === '1'}  onChange={(event)=>handleChange(event)}/><label
                   for="color-one"
                 >1</label
                 >
               </li>
               <li>
-                <input id="color-two" type="radio" name="rubberDuck" value="2"  checked={form.rubberDuck === '2'}   onChange={(event)=>changeHandle(event)} /><label
+                <input id="color-two" type="radio" name="rubberDuck" value="2"  checked={form.rubberDuck === '2'}   onChange={(event)=>handleChange(event)} /><label
                   for="color-two"
                 >2</label
                 >
               </li>
               <li>
-                <input id="color-three" type="radio" name="rubberDuck" value="3"  checked={form.rubberDuck === '3'}   onChange={(event)=>{changeHandle(event)}}  /><label
+                <input id="color-three" type="radio" name="rubberDuck" value="3"  checked={form.rubberDuck === '3'}   onChange={(event)=>{handleChange(event)}}  /><label
                   for="color-three"
                 >3</label
                 >
               </li>
               <li>
-                <input id="color-four" type="radio" name="rubberDuck" value="4"  checked={form.rubberDuck === '4'}  onChange={(event)=>changeHandle(event)} /><label
+                <input id="color-four" type="radio" name="rubberDuck" value="4"  checked={form.rubberDuck === '4'}  onChange={(event)=>handleChange(event)} /><label
                   for="color-four"
                 >4</label
                 >
@@ -81,14 +82,16 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="swimming"
-                    checked={form.spendTime === 'swimming'}
-                    onChange={(event) => changeHandle(event)}
+                    //checked={form.spendTime === 'swimming'}
+                    onChange={(event) =>handleChange(event)}
                   />Swimming</label
                 >
               </li>
               <li>
                 <label
-                ><input name="spend-time" type="checkbox" value="bathing"  checked={form.spendTime === 'bathing'}  onChange={(event) => changeHandle(event)} />Bathing</label
+                ><input name="spend-time" type="checkbox" value="bathing" 
+                // checked={form.spendTime === 'bathing'} 
+                  onChange={(event) => handleChange(event)} />Bathing</label
                 >
               </li>
               <li>
@@ -97,14 +100,16 @@ function Survey() {
                     name="spend-time"
                     type="checkbox"
                     value="chatting"
-                    checked={form.chatting === 'chatting'}
-                    onChange={(event) => changeHandle(event)}
+                   // checked={form.chatting === 'chatting'}
+                    onChange={(event) => handleChange(event)}
                   />Chatting</label
                 >
               </li>
               <li>
                 <label
-                ><input name="spend-time" type="checkbox" value="noTime"  checked={form.spendTime === 'noTime'}  onChange={(event) => changeHandle(event)}/>I don't like to
+                ><input name="spend-time" type="checkbox" value="noTime" 
+                // checked={form.spendTime === 'noTime'} 
+                  onChange={(event) => handleChange(event)}/>I don't like to
                   spend time with it</label
                 >
               </li>
@@ -116,25 +121,29 @@ function Survey() {
             cols="30"
             rows="10"
             name ="aboutDuck"
-            value='These rubber duckS are of quality!'
-            onChange={(event)=>changeHandle(event)}
+           placeholder='These rubber ducks are of quality!'
+           value={form.aboutDuck}
+            onChange={(event)=>handleChange(event)}
           ></textarea></label
           ><label
           >Put your name here (if you feel like it):<input
               type="text"
               name="username"
-              value="name" 
-              onChange={(event) => changeHandle(event)}/></label
+              value={form.username} 
+              placeholder="Name"
+              onChange={(event) => handleChange(event)}/></label
           ><label
           >Leave us your email pretty please??<input
               type="email"
               name="email"
-              value="Faiza@gmail.com" 
-             onChange={(event)=>changeHandle(event)}/></label
+              placeholder="Faiza@gmail.com" 
+              value={form.email}
+             onChange={(event)=>handleChange(event)}/></label
           ><input class="form__submit" type="submit" value="Submit Survey!" />
         </form>
       </section>
     </main>
+    </>
   );
 }
 
