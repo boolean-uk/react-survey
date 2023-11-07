@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
-import Form from "./form";
+import Form from "./Form";
 const INITIAL_STATE = {
   username: "",
   colour: "",
