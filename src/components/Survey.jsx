@@ -24,7 +24,7 @@ function Survey() {
   const changeHandle =(event)=>{
     const {name, value, checked, type} = event.target
     if(type === 'checkbox'){
-      setForm({...form, [name] : checked})
+      setForm({...form, [name] : value})
     }else{
       setForm({...form , [name] : value})
     }
