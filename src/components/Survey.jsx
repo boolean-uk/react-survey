@@ -5,13 +5,27 @@ const INITIAL_STATE = {
   username: '',
   email: '',
   color: '',
-  spendTime: '',
+  spendTime: {
+    swimming: false,
+    bathing: false,
+    chatting: false,
+    noTime: false,
+  },
   review: '',
-  features: '',
-  worstFeatures: "",
+  features: {
+    yellow: false,
+    squeaks: false,
+    logo: false,
+    big: false,
+  },
+  worstFeatures: {
+    yellow: false,
+    squeaks: false,
+    logo: false,
+    big: false,
+  },
   consistency: '',
   logo: '',
-
 };
 
 
@@ -19,9 +33,13 @@ function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(INITIAL_STATE);
 
-  const handleChanges = (event) => {
-    const { name, type, id, checked, value } = event.target
+  const handleChanges = (event, questionType) => {
+    const { name, type, checked, value } = event.target
+    if (type === "checkbox") {
+      setForm({ ...form, [questionType]: { ...form[questionType], [value]: checked } })
+    } else {
       setForm({ ...form, [name]: value })
+    }
   }
 
   const submitHandle = (event) => {
@@ -55,8 +73,8 @@ function Survey() {
                     name="features"
                     type="checkbox"
                     value="yellow"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.features === "yellow"}
+                    onChange={(event) => { handleChanges(event, "features") }}
+                    checked={form.features.yellow}
                   />
                   It's yellow!
                 </label>
@@ -67,8 +85,8 @@ function Survey() {
                     name="features"
                     type="checkbox"
                     value="squeaks"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.features === "squeaks"}
+                    onChange={(event) => { handleChanges(event, "features") }}
+                    checked={form.features.squeaks}
                   />
                   It squeaks!
                 </label>
@@ -79,8 +97,8 @@ function Survey() {
                     name="features"
                     type="checkbox"
                     value="logo"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.features === "logo"}
+                    onChange={(event) => { handleChanges(event, "features") }}
+                    checked={form.features.logo}
                   />
                   It has a logo!
                 </label>
@@ -91,8 +109,8 @@ function Survey() {
                     name="features"
                     type="checkbox"
                     value="big"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.features === "big"}
+                    onChange={(event) => { handleChanges(event, "features") }}
+                    checked={form.features.big}
                   />
                   It's big!
                 </label>
@@ -110,8 +128,8 @@ function Survey() {
                     name="worstFeatures"
                     type="checkbox"
                     value="yellow"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.worstFeatures === "yellow"}
+                    onChange={(event) => { handleChanges(event, "worstFeatures") }}
+                    checked={form.worstFeatures.yellow}
                   />
                   It's yellow!
                 </label>
@@ -122,8 +140,8 @@ function Survey() {
                     name="worstFeatures"
                     type="checkbox"
                     value="squeaks"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.worstFeatures === "squeaks"}
+                    onChange={(event) => { handleChanges(event, "worstFeatures") }}
+                    checked={form.worstFeatures.squeaks}
                   />
                   It squeaks!
                 </label>
@@ -134,8 +152,8 @@ function Survey() {
                     name="worstFeatures"
                     type="checkbox"
                     value="logo"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.worstFeatures === "logo"}
+                    onChange={(event) => { handleChanges(event, "worstFeatures") }}
+                    checked={form.worstFeatures.logo}
                   />
                   It has a logo!
                 </label>
@@ -146,8 +164,8 @@ function Survey() {
                     name="worstFeatures"
                     type="checkbox"
                     value="big"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.worstFeatures === "big"}
+                    onChange={(event) => { handleChanges(event, "worstFeatures") }}
+                    checked={form.worstFeatures.big}
                   />
                   It's big!
                 </label>
@@ -206,7 +224,7 @@ function Survey() {
             </ul>
           </div>
 
-<div className="form__group radio">
+          <div className="form__group radio">
             <h3>How do you rate your rubber duck consistency?</h3>
             <ul className="rateColourOfDuck_radio">
               <li>
@@ -317,8 +335,8 @@ function Survey() {
                     name="spendTime"
                     type="checkbox"
                     value="swimming"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.spendTime === "swimming"}
+                    onChange={(event) => { handleChanges(event, "spendTime") }}
+                    checked={form.spendTime.swimming}
                   />
                   Swimming
                 </label>
@@ -329,8 +347,8 @@ function Survey() {
                     name="spendTime"
                     type="checkbox"
                     value="bathing"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.spendTime === "bathing"}
+                    onChange={(event) => { handleChanges(event, "spendTime") }}
+                    checked={form.spendTime.bathing}
                   />
                   Bathing
                 </label>
@@ -341,8 +359,8 @@ function Survey() {
                     name="spendTime"
                     type="checkbox"
                     value="chatting"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.spendTime === "chatting"}
+                    onChange={(event) => { handleChanges(event, "spendTime") }}
+                    checked={form.spendTime.chatting}
                   />
                   Chatting
                 </label>
@@ -353,8 +371,8 @@ function Survey() {
                     name="spendTime"
                     type="checkbox"
                     value="noTime"
-                    onChange={(event) => { handleChanges(event) }}
-                    checked={form.spendTime === "noTime"}
+                    onChange={(event) => { handleChanges(event, "spendTime") }}
+                    checked={form.spendTime.noTime}
                   />
                   I don't like to spend time with it
                 </label>
