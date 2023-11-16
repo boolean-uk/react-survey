@@ -15,6 +15,7 @@ function Form() {
   const submitForm = (event) => {
     event.preventDefault();
     console.log(form)
+    
     setForm(initialState)
 
   }
@@ -31,7 +32,7 @@ function Form() {
   
 
     return(
-        <form className="form">
+        <form className="form" onSubmit={submitForm}>
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
              <h3>How do you rate your rubber duck colour?</h3>
