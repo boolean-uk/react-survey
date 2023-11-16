@@ -81,7 +81,7 @@ function Form() {
 
           </div>
           <div className="form__group">
-            <h3>How do you like to spend time with your rubber duck</h3>
+            <h3>How do you like to spend time with your rubber duck?</h3>
             <ul>
               <li>
                 <label>
@@ -90,7 +90,7 @@ function Form() {
                   checked={form.spendtime1}
                   name="spendtime1"
                   type="checkbox"
-                  value="swimming"/>
+                  value="swimming"/>gi
                   Swimming
                 </label>
               </li>
