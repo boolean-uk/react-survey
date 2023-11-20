@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   review: "",
   username: "",
   email: "",
-  // time_spent: "",
+  time_spent: [],
 };
 
 function Survey() {
@@ -40,7 +40,22 @@ function Survey() {
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     if (type === "checkbox") {
-      setForm({ ...form, [name]: checked ? value : "" });
+      // copy the existing array
+      const selectedVals = [...form[name]];
+
+      if (checked) {
+        // add the checked values to the array if ticked
+        selectedVals.push(value);
+      } else {
+        // remove hte value to the array if val is false
+        const index = selectedVals.indexOf(value);
+        if (index !== -1) {
+          selectedVals.splice(index, 1);
+        }
+      }
+
+      // update state
+      setForm({ ...form, [name]: selectedVals });
     } else {
       setForm({ ...form, [name]: value });
     }
@@ -125,7 +140,7 @@ function Survey() {
                     name="time_spent"
                     type="checkbox"
                     value="swimming"
-                    checked={form.time_spent === "swimming"}
+                    checked={form.time_spent.includes("swimming")}
                   />
                   Swimming
                 </label>
@@ -137,7 +152,7 @@ function Survey() {
                     name="time_spent"
                     type="checkbox"
                     value="bathing"
-                    checked={form.time_spent === "bathing"}
+                    checked={form.time_spent.includes("bathing")}
                   />
                   Bathing
                 </label>
@@ -149,7 +164,7 @@ function Survey() {
                     name="time_spent"
                     type="checkbox"
                     value="chatting"
-                    checked={form.time_spent === "chatting"}
+                    checked={form.time_spent.includes("chatting")}
                   />
                   Chatting
                 </label>
@@ -161,7 +176,7 @@ function Survey() {
                     name="time_spent"
                     type="checkbox"
                     value="noTime"
-                    checked={form.time_spent === "noTime"}
+                    checked={form.time_spent.includes("noTime")}
                   />
                   I don't like to spend time with it
                 </label>
