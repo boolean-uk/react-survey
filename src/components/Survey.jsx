@@ -72,11 +72,8 @@ function Survey() {
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
 
-            <label htmlFor="activities">Swimming<input type="checkbox" name="activities" value="Swimming" onChange={handleCheckboxChange} /></label>
-            <label htmlFor="activities">Bathing<input type="checkbox" name="activities" value="Bathing" onChange={handleCheckboxChange} /></label>
-            <label htmlFor="activities">Chatting<input type="checkbox" name="activities" value="Chatting" onChange={handleCheckboxChange} /></label>
-            <label htmlFor="activities">I dont like spending time with it<input type="checkbox" name="activities" value="DontLike" onChange={handleCheckboxChange} /></label>
-
+          
+          
           </div>
           <label>
             What else have you got to say about your rubber duck?

@@ -1,24 +1,14 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 ItemsList.propTypes = {
-  list: PropTypes.array.isRequired
+  list: PropTypes.array.isRequired,
 };
-
-AnswersItem.propTypes = {
-  answerItem: PropTypes.shape({
-    username: PropTypes.string,
-    colour: PropTypes.string.isRequired,
-    timeSpent: PropTypes.array.isRequired,
-    review: PropTypes.string.isRequired
-  }).isRequired
-};
-
 
 const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
 function ItemsList({ list }) {
@@ -31,11 +21,8 @@ function ItemsList({ list }) {
   );
 }
 
-// This is the main component being exported from this file
 export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review },
 }) {
   return (
     <li>
