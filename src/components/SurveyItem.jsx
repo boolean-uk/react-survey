@@ -75,11 +75,30 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
     // console.log(event.target, event.target.name, event.target.value)
     const key = event.target.name
     const value = event.target.value
-    console.log(answerItem)
-    updateAnswers({
-      ...answerItem,
-      [key]: value
-    })
+    const multipleAnswers = ["bestFeatures", "worstFeatures","timeSpent"]
+    console.log(key, value, event.target.checked)
+    if (multipleAnswers.includes(key)) {
+      checkBoxArr[key].forEach(element => {
+        if (element.value === event.target.value) {
+          element.checked = event.target.checked
+        }
+      })
+      console.log(checkBoxArr[key])
+      const trueAnswers = checkBoxArr[key].filter(element => element.checked)
+      const answerStringArr = trueAnswers.map(element => element.description)
+
+      const answerListStr = answerStringArr.join(", ")
+      console.log(answerItem, answerListStr, trueAnswers.length)
+      updateAnswers({
+        ...answerItem,
+        [key]: "test"
+      })
+    } else {
+      updateAnswers({
+        ...answerItem,
+        [key]: value
+      })
+    }
   }
 
   return (
