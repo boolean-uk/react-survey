@@ -1,10 +1,10 @@
-function Checkbox ({value, description, inputHandler}) {
+function Checkbox ({name, value, description, inputHandler}) {
   return (
     <label>
       <input
+        name={name}
         type="checkbox"
         value={value}
-        name="timeSpent"
         onChange={(event) => inputHandler(event)}
       />
         {description}
@@ -12,8 +12,8 @@ function Checkbox ({value, description, inputHandler}) {
   )
 }
 
-export default function Checkboxes({valDescArr, inputHandler}) {
+export default function Checkboxes({name, valDescArr, inputHandler}) {
   return (
-    valDescArr.map((elementArr, index) => <Checkbox key={index} value={elementArr[1]} description={elementArr[0]} inputHandler={inputHandler}/>)
+    valDescArr.map((element, index) => <Checkbox key={index} name={name} value={element.value} description={element.description} inputHandler={inputHandler}/>)
   )
 }

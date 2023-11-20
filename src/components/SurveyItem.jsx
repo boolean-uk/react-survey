@@ -6,11 +6,69 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
     1, 2, 3, 4
   ]
 
-  const checkBoxArr = [
-    ["Swimming", "swimming"],
-    ["Chatting", "chatting"],
-    ["I don't like to spend time with it", "noTime"]
+  const checkBoxArr = {
+    bestFeatures: [
+    {
+      description: "It's yellow!",
+      value: "yellow",
+      checked: false
+    },
+    {
+      description: "It squeaks!",
+      value: "squeaking",
+      checked: false
+    },
+    {
+      description: "It has a logo!",
+      value: "logo",
+      checked: false
+    },
+    {
+      description: "It's big!",
+      value: "size",
+      checked: false
+    }
+  ],
+  worstFeatures: [
+    {
+      description: "It's yellow!",
+      value: "yellow",
+      checked: false
+    },
+    {
+      description: "It squeaks!",
+      value: "squeaking",
+      checked: false
+    },
+    {
+      description: "It has a logo!",
+      value: "logo",
+      checked: false
+    },
+    {
+      description: "It's big!",
+      value: "size",
+      checked: false
+    }
+  ],
+  timeSpent: [
+    {
+      description: "Swimming",
+      value: "swimming",
+      checked: false
+    },
+    {
+      description: "Chatting",
+      value: "chatting",
+      checked: false
+    },
+    {
+      description: "I don't like to spend time with it",
+      value: "noTime",
+      checked: false
+    }
   ]
+}
 
   const inputHandler = (event) => {
     console.log("this is the event", event.target, event.target.name)
@@ -27,6 +85,14 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
   return (
   <form className="form">
     <h2>Tell us what you think about your rubber duck!</h2>
+    <div className="form__group">
+      <h3>What, would you say, are the best features of your duck?</h3>
+      <Checkboxes name={"bestFeatures"} valDescArr={checkBoxArr.bestFeatures} inputHandler={inputHandler}/>
+    </div>
+    <div className="form__group">
+      <h3>What, would you say, are the worst features of your duck?</h3>
+      <Checkboxes name={"worstFeatures"} valDescArr={checkBoxArr.worstFeatures} inputHandler={inputHandler}/>
+    </div>
     <div className="form__group radio">
 
       <h3>How do you rate your rubber duck colour?</h3>
@@ -36,12 +102,12 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
       <RadioButtons valArr={valArr} name="consistency" inputHandler={inputHandler} />
       
       <h3>How do you rate your rubber duck's logo?</h3>
-      <RadioButtons valArr={valArr} name="logo" onClick={(event) => inputHandler(event)}/>
+      <RadioButtons valArr={valArr} name="logo" inputHandler={inputHandler} />
     
     </div>
     <div className="form__group">
       <h3>How do you like to spend time with your rubber duck</h3>
-      <Checkboxes valDescArr={checkBoxArr} inputHandler={inputHandler}/>
+      <Checkboxes valDescArr={checkBoxArr.timeSpent} inputHandler={inputHandler}/>
     </div>
     <label>
       What else have you got to say about your rubber duck?
