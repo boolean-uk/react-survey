@@ -1,111 +1,137 @@
-import  { useState } from "react";
-import AnswersItem from "./AnswersItem";
+import { useState } from "react";
+import AnswersList from "./AnswersList";
+
+const initialForm = {
+  color: "",
+  timeSpent: [],
+  review: "",
+  username: "",
+  email: "",
+};
+
 
 function Survey() {
-  const [answers, setAnswers] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); //Ignore this state
+  const [form, setForm] = useState(initialForm)
+  const [answersList, setAnswersList] = useState([])
 
-  const [rating, setRating] = useState("");
-  const [activities, setActivities] = useState([]);
-  const [review, setReview] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  
- 
 
-  const handleCheckboxChange = (e) => {
-    const { value } = e.target;
-    if (activities.includes(value)) {
-      setActivities(activities.filter((activity) => activity !== value));
+
+  function handleChange(e) {
+    const { name, type, value } = e.target
+    if (type === "checkbox") {
+      if (form[name].includes(value)) {
+        const updatedArray = form[name].filter((item) => item !== value)
+        setForm({ ...form, [name]: updatedArray })
+      } else {
+        setForm({ ...form, [name]: [...form[name], value] });
+      }
+    } else if (type === "radio") {
+      setForm({ ...form, [name]: value });
     } else {
-      setActivities([...activities, value]);
+      setForm({ ...form, [e.target.name]: e.target.value });
     }
-  };
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(form)
+    setForm(initialForm)
+    setAnswersList([...answersList, form])
+  }
+
+  const activityOptions = [
+  { label: "Swimming", value: "swimming" },
+  { label: "Bathing", value: "bathing" },
+  { label: "Chatting", value: "chatting" }, 
+  { label: "I don't like to spend time with it", value: "noTime" },
+
+]
   
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); 
-
-    const answer = {
-      rating: rating,
-      activities: activities,
-      review: review,
-      username: username,
-      email: email,
-    };
-
-    setAnswers([...answers, answer]);
-
-    // Reset form fields
-    setRating("");
-    setActivities([]);
-    setReview("");
-    setUsername("");
-    setEmail("");
-  };
+  const colors = ["1", "2", "3", "4"]
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {answers.map((answer, index) => (
-          <AnswersItem key={index} answer={answer} />
-        ))}
+        <AnswersList
+          answersList={answersList}
+          username={form.username}
+          color={form.color}
+          timeSpent={form.timeSpent}
+          review={form.review}
+        />
       </section>
       <section className="survey__form">
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={(e) => handleSubmit(e)}>
           <h2>Tell us what you think about your rubber duck!</h2>
-
-
-
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-
-
-            <label htmlFor="rating">1 <input type="radio" /></label>
-            <label htmlFor="rating">2 <input type="radio" /></label>
-            <label htmlFor="rating">3 <input type="radio" /></label>
-            <label htmlFor="rating">4 <input type="radio" /></label>
+            <ul>
+              {colors.map((color, i) =>
+                <li key={i}>
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    id={`color-${color}`}
+                    type="radio"
+                    name="color"
+                    value={color}
+                    checked={form.color === color}
+                  />
+                  <label htmlFor={`color-${color}`}>{color}</label>
+                </li>
+              )}
+            </ul>
           </div>
-
-
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
-
-          
-          
+            <ul>
+              {activityOptions.map((option, i) =>
+                <li key={i}>
+                  <label>
+                    <input
+                      onChange={(e) => handleChange(e)}
+                      name="timeSpent"
+                      type="checkbox"
+                      value={option.value}
+                      checked={form.timeSpent.includes(option.value)}
+                    />{option.label}
+                  </label>
+                </li>
+              )}
+            </ul>
           </div>
           <label>
             What else have you got to say about your rubber duck?
             <textarea
+              onChange={(e) => handleChange(e)}
               name="review"
               cols="30"
               rows="10"
+              value={form.review}
             >
             </textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
             <input
+              onChange={(e) => handleChange(e)}
               type="text"
               name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={form.username}
             />
-
           </label>
           <label>
             Leave us your email pretty please??
             <input
+              onChange={(e) => handleChange(e)}
               type="email"
               name="email"
-              value={email}  // Set the value prop to the email state
-              onChange={(e) => setEmail(e.target.value)}
+              value={form.email}
             />
           </label>
           <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
-
       </section>
     </main>
   );
