@@ -1,9 +1,8 @@
 function RadioButton ({value, name, inputHandler}) {
-
   return (
     <li>
-      <input type="radio" value={value}  />
-      <label name={name} onClick={(event) => inputHandler(event)}>
+      <label onClick={(event) => inputHandler(event)}>
+      <input type="radio" name={name} value={value} />
         {value}
       </label>
     </li>

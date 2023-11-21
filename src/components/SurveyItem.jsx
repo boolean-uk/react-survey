@@ -1,97 +1,95 @@
 import Checkboxes from "./Checkboxes"
 import RadioButtons from "./RadioButtons"
 
+const checkBoxArr = {
+  bestFeatures: [
+  {
+    description: "It's yellow!",
+    value: "yellow",
+    checked: false
+  },
+  {
+    description: "It squeaks!",
+    value: "squeaking",
+    checked: false
+  },
+  {
+    description: "It has a logo!",
+    value: "logo",
+    checked: false
+  },
+  {
+    description: "It's big!",
+    value: "size",
+    checked: false
+  }
+],
+worstFeatures: [
+  {
+    description: "It's yellow!",
+    value: "yellow",
+    checked: false
+  },
+  {
+    description: "It squeaks!",
+    value: "squeaking",
+    checked: false
+  },
+  {
+    description: "It has a logo!",
+    value: "logo",
+    checked: false
+  },
+  {
+    description: "It's big!",
+    value: "size",
+    checked: false
+  }
+],
+timeSpent: [
+  {
+    description: "Swimming",
+    value: "swimming",
+    checked: false
+  },
+  {
+    description: "Chatting",
+    value: "chatting",
+    checked: false
+  },
+  {
+    description: "I don't like to spend time with it",
+    value: "noTime",
+    checked: false
+  }
+]
+}
+
 export default function SurveyItem ({updateAnswers, answerItem}) {
   const valArr = [
     1, 2, 3, 4
   ]
 
-  const checkBoxArr = {
-    bestFeatures: [
-    {
-      description: "It's yellow!",
-      value: "yellow",
-      checked: false
-    },
-    {
-      description: "It squeaks!",
-      value: "squeaking",
-      checked: false
-    },
-    {
-      description: "It has a logo!",
-      value: "logo",
-      checked: false
-    },
-    {
-      description: "It's big!",
-      value: "size",
-      checked: false
-    }
-  ],
-  worstFeatures: [
-    {
-      description: "It's yellow!",
-      value: "yellow",
-      checked: false
-    },
-    {
-      description: "It squeaks!",
-      value: "squeaking",
-      checked: false
-    },
-    {
-      description: "It has a logo!",
-      value: "logo",
-      checked: false
-    },
-    {
-      description: "It's big!",
-      value: "size",
-      checked: false
-    }
-  ],
-  timeSpent: [
-    {
-      description: "Swimming",
-      value: "swimming",
-      checked: false
-    },
-    {
-      description: "Chatting",
-      value: "chatting",
-      checked: false
-    },
-    {
-      description: "I don't like to spend time with it",
-      value: "noTime",
-      checked: false
-    }
-  ]
-}
-
   const inputHandler = (event) => {
-    console.log("this is the event", event.target, event.target.name)
-    // console.log(event.target, event.target.name, event.target.value)
     const key = event.target.name
     const value = event.target.value
     const multipleAnswers = ["bestFeatures", "worstFeatures","timeSpent"]
-    console.log(key, value, event.target.checked)
+    
     if (multipleAnswers.includes(key)) {
+      // Procedure if it's multiple element answers
       checkBoxArr[key].forEach(element => {
         if (element.value === event.target.value) {
           element.checked = event.target.checked
         }
       })
-      console.log(checkBoxArr[key])
+
       const trueAnswers = checkBoxArr[key].filter(element => element.checked)
       const answerStringArr = trueAnswers.map(element => element.description)
-
       const answerListStr = answerStringArr.join(", ")
       console.log(answerItem, answerListStr, trueAnswers.length)
       updateAnswers({
         ...answerItem,
-        [key]: "test"
+        [key]: answerListStr
       })
     } else {
       updateAnswers({
@@ -115,7 +113,7 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
     <div className="form__group radio">
 
       <h3>How do you rate your rubber duck colour?</h3>
-      <RadioButtons valArr={valArr} name="colour" inputHandler={inputHandler}/>
+      <RadioButtons valArr={valArr} name="colour" inputHandler={inputHandler} />
       
       <h3>How do you rate your duck's consistency?</h3>
       <RadioButtons valArr={valArr} name="consistency" inputHandler={inputHandler} />
@@ -126,7 +124,7 @@ export default function SurveyItem ({updateAnswers, answerItem}) {
     </div>
     <div className="form__group">
       <h3>How do you like to spend time with your rubber duck</h3>
-      <Checkboxes valDescArr={checkBoxArr.timeSpent} inputHandler={inputHandler}/>
+      <Checkboxes name={"timeSpent"} valDescArr={checkBoxArr.timeSpent} inputHandler={inputHandler}/>
     </div>
     <label>
       What else have you got to say about your rubber duck?
