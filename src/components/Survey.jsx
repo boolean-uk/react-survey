@@ -1,15 +1,31 @@
 import { useState } from "react";
+import SurveyItem from "./SurveyItem";
+import AnswersItem from "./AnswersItem";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
+  const answerObj = {
+    bestFeatures: [],
+    worstFeatures: [],
+    username: "",
+    colour: "",
+    consistency: "",
+    logo: "",
+    timeSpent: [],
+    review: ""
+  }
+
+  const [answers, setAnswers] = useState(answerObj)
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersItem answerItem={answers}/>
       </section>
-      <section className="survey__form">{/* a form should be here */}</section>
+      <section className="survey__form">
+        <SurveyItem answerItem={answers} updateAnswers={setAnswers} />  
+      </section>
     </main>
   );
 }

@@ -11,8 +11,7 @@ bunch of forms). This will also give you some hands-on time with creating contro
 1. Fork this repository
 2. Clone the forked repository onto your local machines
 3. In the root directory, type `npm ci`, which installs dependencies for the project
-4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server 
-   will reload your website whenever you make any changes to source files
+4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server will reload your website whenever you make any changes to source files
 
 ## Instructions
 
