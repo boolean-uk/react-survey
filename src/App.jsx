@@ -1,14 +1,14 @@
-import "./App.css";
+import React from 'react';
+import Header from './components/Header';
+import Survey from './components/Survey.jsx';
 
-import Header from "./components/Header";
-import Survey from "./components/Survey";
-
-export default function App() {
+const App = () => {
   return (
-    // <> </> <- These are called React Fragments, and they allow us to return more than one top component
     <>
       <Header />
       <Survey />
     </>
   );
-}
+};
+
+export default App;
