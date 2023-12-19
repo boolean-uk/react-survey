@@ -3,6 +3,7 @@ import { useState } from "react";
 import Form from "../components/Form";
 import AnswersList from "../components/AnswersList";
 
+
 const INITIAL_STATE = {
   color: "",
   timeSpent: [],
@@ -32,4 +33,6 @@ function Survey() {
     </main>
   );
 }
+
+export default Survey;
 	
