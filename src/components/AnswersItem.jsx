@@ -5,14 +5,14 @@ const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, i) => (
+        <li key={i}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,25 +22,25 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, color, spendTime, review },
 }) {
   return (
-    <li>
+    <ul>
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
-        <p>
+        <li>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
-        </p>
-        <p>
+          <span className="answer__line">{color}</span>
+        </li>
+        <li>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
-        </p>
-        <p>
+          <ItemsList list={spendTime} />
+        </li>
+        <li>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
-        </p>
+        </li>
       </article>
-    </li>
+    </ul>
   );
 }

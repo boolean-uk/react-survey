@@ -1,14 +1,15 @@
 import DuckFormCheckBoxes from "./DuckFormCheckboxes";
 import DuckFormRadioButtons from "./DuckFormRadioButtons";
 
-export default function DuckForm() {
+export default function DuckForm({ appendForm }) {
   function submit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const formDataObject = {};
     formData.forEach((value, key) => (formDataObject[key] = value));
+    formDataObject.spendTime = formData.getAll("spendTime");
+    appendForm(formDataObject);
     event.target.reset();
-    console.log(formDataObject);
   }
 
   return (
