@@ -1,3 +1,5 @@
+const boxes = ["swimming", "bathing", "chatting", "noTime"];
+
 export default function DuckFormCheckBoxes() {
   return (
     <ul>
