@@ -14,6 +14,7 @@ function Survey() {
         form.id === formObject.id ? formObject : form
       );
       setForms(update);
+      setEditForm({});
       return;
     }
     setForms([...forms, formObject]);
