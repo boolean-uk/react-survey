@@ -1,16 +1,6 @@
 {
   "answers": [
     {
-      "id": "1a1d",
-      "color": "3",
-      "timeSpent": [
-        "bathing"
-      ],
-      "review": "dfgdfgfddgsedsdfsedfwsef ",
-      "username": "fdgdfg",
-      "email": "krzysiu.142017@gmail.com"
-    },
-    {
       "id": "f994",
       "color": "",
       "timeSpent": [
@@ -22,6 +12,19 @@
       "review": "",
       "username": "",
       "email": ""
+    },
+    {
+      "id": "9fe9",
+      "color": "4",
+      "timeSpent": [
+        "swimming",
+        "chatting",
+        "bathing",
+        "noTime"
+      ],
+      "review": "sdgdfsfdsdfgediterd",
+      "username": "sdfg",
+      "email": "sfg@sg"
     }
   ]
 }
