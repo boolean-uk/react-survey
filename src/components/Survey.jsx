@@ -3,58 +3,70 @@ import AnswersList from "./AnswersList";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const [answers, setAnswers] = useState({
-    color: "",
-    spendTime: "",
-    review: "",
-    username: "",
-    emails: "",
-  });
+  const [answers, setAnswers] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  //   {
+  //   color: "",
+
+  //   spendTime: "",
+  //   review: "",
+  //   username: "",
+  //   emails: "",
+  // } );
+
+  // const handleChange = (e) => {
+  //   //(e) => { ... }: This is an arrow function that takes an event object e as its argument.
+  //   //This event object contains information about the event that occurred, such as which input field triggered the change.
+
+  //   // Extracting the name and value from the event target (input field)
+  //   //This line destructures the name and value properties from the target property of the
+  //   //event object. The target property refers to the element that triggered the event, which in this case is the input field that the user interacted with.
+  //   const { name, value } = e.target;
+
+  //   // Updating the state using the extracted name and value
+  //   // The spread operator (...) is used to create a new object with the existing state values
+  //   // The square brackets ([]) around the name variable indicate that it's a computed property name,
+  //   // meaning that the actual property name will be determined dynamically based on the value of the name variable.
+  //   // This allows us to update the state with the corresponding field name (e.g., username, email) dynamically.
+  //   setAnswers((prevState) => ({
+  //     //This line updates the state using the setAnswers function, which is provided by the useState hook. It takes a
+  //     //callback function as an argument, which receives the previous state (prevState) as its argument. Inside the callback
+  //     //function, a new state object is created using the spread operator (...prevState) to copy all existing state properties,
+  //     //and then the value of the input field that triggered the change is updated dynamically using computed property names ([name]: value).
+  //     ...prevState,
+  //     [name]: value, //name and value: These variables hold the name and value of the input field that triggered the change.
+  //     //The name variable corresponds to the name attribute of the input field, while the value variable corresponds to the value entered by the user into the input field.
+  //   }));
+  // };
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? (checked ? value : "") : value;
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [name]: val,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Survey answers:", answers);
-    // Reset form
-    setAnswers({
-      color: "",
-      spendTime: [],
-      review: "",
-      username: "",
-      email: "",
+    // Add the submitted answer to the answers state array
+
+    setAnswers((prevAnswers) => {
+      // Ensure prevAnswers is initialized properly
+      const updatedAnswers = Array.isArray(prevAnswers) ? [...prevAnswers] : [];
+      // Concatenate the new answer
+      updatedAnswers.push(answers);
+      return updatedAnswers;
     });
-  };
-
-  const handleChange = (e) => {
-    //(e) => { ... }: This is an arrow function that takes an event object e as its argument.
-    //This event object contains information about the event that occurred, such as which input field triggered the change.
-
-    // Extracting the name and value from the event target (input field)
-    //This line destructures the name and value properties from the target property of the
-    //event object. The target property refers to the element that triggered the event, which in this case is the input field that the user interacted with.
-    const { name, value } = e.target;
-
-    // Updating the state using the extracted name and value
-    // The spread operator (...) is used to create a new object with the existing state values
-    // The square brackets ([]) around the name variable indicate that it's a computed property name,
-    // meaning that the actual property name will be determined dynamically based on the value of the name variable.
-    // This allows us to update the state with the corresponding field name (e.g., username, email) dynamically.
-    setAnswers((prevState) => ({
-      //This line updates the state using the setAnswers function, which is provided by the useState hook. It takes a
-      //callback function as an argument, which receives the previous state (prevState) as its argument. Inside the callback
-      //function, a new state object is created using the spread operator (...prevState) to copy all existing state properties,
-      //and then the value of the input field that triggered the change is updated dynamically using computed property names ([name]: value).
-      ...prevState,
-      [name]: value, //name and value: These variables hold the name and value of the input field that triggered the change.
-      //The name variable corresponds to the name attribute of the input field, while the value variable corresponds to the value entered by the user into the input field.
-    }));
+    setFormSubmitted(true);
   };
 
   return (
     <main className="survey">
-      <section className={`survey__list ${open ? "open" : ""}`}>
+      {/* <section className={`survey__list ${open ? "open" : ""}`}> */}
+      <section className="survey__list">
         <h2>Answers list</h2>
-        {/* answers should go here */}
-        <AnswersList answersList={answers} />
+        {formSubmitted && <AnswersList answersList={answers} />}
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -64,43 +76,43 @@ function Survey() {
             <ul>
               <li>
                 <input
-                  id="color-one"
+                  id="colour-one"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="1"
                   onChange={handleChange}
                 />
-                <label htmlFor="color-one">1</label>
+                <label htmlFor="colour-one">1</label>
               </li>
               <li>
                 <input
-                  id="color-two"
+                  id="colour-two"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="2"
                   onChange={handleChange}
                 />
-                <label htmlFor="color-two">2</label>
+                <label htmlFor="colour-two">2</label>
               </li>
               <li>
                 <input
-                  id="color-three"
+                  id="colour-three"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="3"
                   onChange={handleChange}
                 />
-                <label htmlFor="color-three">3</label>
+                <label htmlFor="colour-three">3</label>
               </li>
               <li>
                 <input
-                  id="color-four"
+                  id="colour-four"
                   type="radio"
-                  name="color"
+                  name="colour"
                   value="4"
                   onChange={handleChange}
                 />
-                <label htmlFor="color-four">4</label>
+                <label htmlFor="colour-four">4</label>
               </li>
             </ul>
           </div>
@@ -110,7 +122,7 @@ function Survey() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="spendTime"
                     type="checkbox"
                     value="swimming"
                     onChange={handleChange}
@@ -121,7 +133,7 @@ function Survey() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="spendTime"
                     type="checkbox"
                     value="bathing"
                     onChange={handleChange}
@@ -132,7 +144,7 @@ function Survey() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="spendTime"
                     type="checkbox"
                     value="chatting"
                     onChange={handleChange}
@@ -143,7 +155,7 @@ function Survey() {
               <li>
                 <label>
                   <input
-                    name="spend-time"
+                    name="spendTime"
                     type="checkbox"
                     value="noTime"
                     onChange={handleChange}

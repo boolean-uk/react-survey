@@ -11,12 +11,12 @@ const answersSet = {
 
 function ItemsList({ list }) {
   if (!list || !Array.isArray(list)) {
-    return null; // or any other default content or behavior
+    return null;
   }
   return (
     <ul>
-      {list.map((item) => (
-        <li key={item}>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -25,10 +25,8 @@ function ItemsList({ list }) {
 ItemsList.propTypes = {
   list: PropTypes.array,
 };
-// This is the main component being exported from this file
+
 export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: { username, colour, spendTime, review },
 }) {
   return (
