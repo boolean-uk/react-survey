@@ -1,0 +1,30 @@
+{
+  "answers": [
+    {
+      "id": "f994",
+      "color": "",
+      "timeSpent": [
+        "chatting",
+        "swimming",
+        "bathing",
+        "noTime"
+      ],
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "9fe9",
+      "color": "4",
+      "timeSpent": [
+        "swimming",
+        "chatting",
+        "bathing",
+        "noTime"
+      ],
+      "review": "sdgdfsfdsdfgediterd",
+      "username": "sdfg",
+      "email": "sfg@sg"
+    }
+  ]
+}
