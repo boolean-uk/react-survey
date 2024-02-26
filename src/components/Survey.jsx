@@ -9,23 +9,37 @@ const INITIAL_FORM_STATE = {
   name:"",
   email:""
 }
+
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(INITIAL_FORM_STATE)
   const [answers, setAnswers] = useState([])
-  const reset = () =>{setFormData({...INITIAL_FORM_STATE})
+  const [editing, setEditing] = useState(null)
+  const [id, setId] = useState(1)
 
+  const EditAnswer = (oldData) => {
+    setFormData({...oldData})
+    setEditing(oldData.id)
   }
   const addAnswer = (answer) => {
-    answers.push(answer)
-    setAnswers([...answers])
+    if (editing === null)
+    {
+      answers.push({...answer, id:id})
+      setId(id +1)
+      setAnswers([...answers])
+    }
+    else {
+      answers.splice(answers.indexOf( answers.find((answer) => answer.id === editing)), 1, answer)
+      setAnswers([...answers])
+    }
+    setEditing(null)
   }
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList= {answers}/>
+        <AnswersList answersList= {answers} EditAnswer = {EditAnswer}/>
         {/* answers should go here */}
       </section>
       <section className="survey__form">
