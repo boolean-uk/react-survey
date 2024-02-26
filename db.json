@@ -1,0 +1,39 @@
+{
+  "responses": [
+    {
+      "id": "1",
+      "username": "mock-username",
+      "colour": "1",
+      "timeSpent": [
+        "swimming",
+        "bathing",
+        "noTime"
+      ],
+      "review": "mock-review"
+    },
+    {
+      "id": "c4cc",
+      "username": "asd",
+      "colour": "2",
+      "timeSpent": [
+        "noTime",
+        "swimming"
+      ],
+      "review": "ad"
+    },
+    {
+      "id": "b8ba",
+      "username": "qwerqwer",
+      "colour": null,
+      "timeSpent": [],
+      "review": "qwer"
+    },
+    {
+      "id": "6d3a",
+      "username": "cvbnasdf",
+      "colour": null,
+      "timeSpent": [],
+      "review": "qwer"
+    }
+  ]
+}
