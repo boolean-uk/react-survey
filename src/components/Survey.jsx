@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AnswersList from "./AnswersList";
 
@@ -7,13 +7,20 @@ function Survey() {
 
   const [formData, setFormData] = useState({
     color: "",
-    spendTime: [],
+    timeSpent: [],
     review: "",
     username: "",
     email: "",
   });
 
   const [answersList, setAnswersList] = useState([]);
+  const [editFormData, setEditFormData] = useState({
+    color: "",
+    timeSpent: [],
+    review: "",
+    username: "",
+    email: "",
+  });
 
   const colorOptions = ["1", "2", "3", "4"];
 
@@ -26,18 +33,22 @@ function Survey() {
 
   const handleInputChange = (event) => {
     const { name, type, value, checked } = event.target;
+    console.log(name, type, value, checked);
     if (name !== undefined) {
       if (type === "checkbox") {
         if (checked) {
+          console.log("hello");
           setFormData({
             ...formData,
-            spendTime: [...formData.spendTime, value],
+            timeSpent: [...formData.timeSpent, value],
           });
+          console.log(formData);
         } else {
           setFormData({
             ...formData,
-            spendTime: formData.spendTime.filter((item) => item !== value),
+            timeSpent: formData.timeSpent.filter((item) => item !== value),
           });
+          console.log(formData);
         }
       } else {
         setFormData({ ...formData, [name]: value });
@@ -48,26 +59,39 @@ function Survey() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Assuming formData has properties like color, spendTime, review, username, email
-    // const answers = [
-    //   { question: "Color", answer: formData.color },
-    //   { question: "Spend Time", answer: formData.spendTime.join(", ") },
-    //   { question: "Review", answer: formData.review },
-    //   { question: "Username", answer: formData.username },
-    //   { question: "Email", answer: formData.email },
-    // ];
-
     const submittedAnswer = {
-      colour: formData.color,
-      timeSpent: formData.spendTime,
+      color: formData.color,
+      timeSpent: formData.timeSpent,
       review: formData.review,
       username: formData.username,
       email: formData.email,
     };
 
-    setAnswersList((prevAnswersList) => [...prevAnswersList, submittedAnswer]);
+    if (editFormData) {
+      console.log("editfom data true");
+      setAnswersList((prevAnswersList) =>
+        prevAnswersList.map((answer) =>
+          answer === editFormData ? submittedAnswer : answer
+        )
+      );
+      console.log("turn setEditFormData to null");
+      setEditFormData(null);
+    } else {
+      console.log("else");
+      setAnswersList((prevAnswersList) => [
+        ...prevAnswersList,
+        submittedAnswer,
+      ]);
+    }
 
     console.log("Answers: ", submittedAnswer);
+  };
+
+  const handleEditClick = (editedData) => {
+    console.log("edetedData", editedData);
+    setFormData(editedData);
+    setEditFormData(editedData);
+    console.log("editformdata", editFormData);
   };
 
   return (
@@ -75,7 +99,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
-        <AnswersList answersList={answersList} />
+        <AnswersList answersList={answersList} onEditClick={handleEditClick} />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -109,6 +133,7 @@ function Survey() {
                       type="checkbox"
                       value={option.value}
                       onChange={handleInputChange}
+                      checked={formData.timeSpent.includes(option.value)}
                     />
                     {option.label}
                   </label>
@@ -123,6 +148,7 @@ function Survey() {
               cols="30"
               rows="10"
               onChange={handleInputChange}
+              value={formData.review}
             ></textarea>
           </label>
           <label>

@@ -20,9 +20,13 @@ function ItemsList({ list }) {
 }
 
 export default function AnswersItem({
-  answerItem: { username, colour, timeSpent, review },
+  answerItem: { username, color, timeSpent, review, email },
+  onEditClick,
 }) {
-  console.log("AnswerItem ", username, colour, timeSpent, review);
+  const handleEditClick = () => {
+    console.log(timeSpent);
+    onEditClick({ username, color, timeSpent, review, email });
+  };
 
   return (
     <li>
@@ -30,7 +34,7 @@ export default function AnswersItem({
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <span className="answer__line">{color}</span>
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
@@ -44,6 +48,7 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={handleEditClick}>Edit</button>
       </article>
     </li>
   );
@@ -52,10 +57,12 @@ export default function AnswersItem({
 AnswersItem.propTypes = {
   answerItem: PropTypes.shape({
     username: PropTypes.string,
-    colour: PropTypes.string,
+    color: PropTypes.string,
     timeSpent: PropTypes.array,
     review: PropTypes.string,
+    email: PropTypes.string,
   }),
+  onEditClick: PropTypes.func,
 };
 
 ItemsList.propTypes = {
