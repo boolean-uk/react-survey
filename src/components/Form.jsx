@@ -1,18 +1,16 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 
-const INITIAL_FORM_DATA = {
-	color: "",
-	timeSpent: [],
-	review: "",
-	username: "",
-	email: "",
-};
-
-export default function Form({ answers, setAnswers }) {
-	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+export default function Form({
+	answers,
+	setAnswers,
+	formData,
+	setFormData,
+	INITIAL_FORM_DATA,
+}) {
+	// setFormData(INITIAL_FORM_DATA);
 
 	const logAnswers = () => {
+		console.log("Id:", formData.id);
 		console.log("Color rating:", formData.color);
 		console.log("How time spent:", formData.timeSpent);
 		console.log("Review:", formData.review);
@@ -22,10 +20,25 @@ export default function Form({ answers, setAnswers }) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		logAnswers();
-		console.log({ ...formData });
-		const updatedAnswers = [...answers, { ...formData }];
+
+		const isEditing = answers.some((answer) => answer.id === formData.id);
+
+		const updatedAnswers = isEditing
+			? answers.map(
+					(answer) =>
+						answer.id === formData.id ? { ...formData } : { ...answer }
+					// eslint-disable-next-line no-mixed-spaces-and-tabs
+			  )
+			: () => {
+					const formDataWithId = { ...formData, id: answers.length };
+					setFormData(formDataWithId);
+					return [...answers, formData];
+					// eslint-disable-next-line no-mixed-spaces-and-tabs
+			  };
+
 		setAnswers(updatedAnswers);
+		logAnswers();
+
 		setFormData(INITIAL_FORM_DATA);
 	};
 
@@ -199,4 +212,7 @@ export default function Form({ answers, setAnswers }) {
 Form.propTypes = {
 	answers: PropTypes.array,
 	setAnswers: PropTypes.func,
+	formData: PropTypes.object,
+	setFormData: PropTypes.func,
+	INITIAL_FORM_DATA: PropTypes.object,
 };
