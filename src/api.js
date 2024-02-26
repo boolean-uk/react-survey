@@ -21,3 +21,13 @@ export const addAnswer = async (answer) => {
 		throw error;
 	}
 };
+
+export const deleteAnswer = async (answerId) => {
+	try {
+		const response = await axios.delete(`${BASE_URL}/answers/${answerId}`);
+		return response.data;
+	} catch (error) {
+		console.error("Error deleting answer:", error);
+		throw error;
+	}
+};

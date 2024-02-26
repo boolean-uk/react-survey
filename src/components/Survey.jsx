@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AnswersList from "./AnswersList";
-import { addAnswer, getAnswers } from "../api";
+import { addAnswer, getAnswers, deleteAnswer } from "../api";
 function Survey() {
 	const [open, setOpen] = useState(false); //Ignore this state
 	const [answers, setAnswers] = useState([]);
@@ -20,6 +20,12 @@ function Survey() {
 	const edit = (index) => {
 		setFormData({ ...answers[index] });
 		setEditIndex(index);
+	};
+
+	const remove = (index) => {
+		const newAnswers = answers.filter((_, i) => i !== index);
+		deleteAnswer(answers[index].id);
+		setAnswers(newAnswers);
 	};
 
 	console.log(formData);
@@ -51,6 +57,7 @@ function Survey() {
 			}));
 		}
 	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (editIndex !== null) {
@@ -75,7 +82,7 @@ function Survey() {
 		<main className="survey">
 			<section className={`survey__list ${open ? "open" : ""}`}>
 				<h2>Answers list</h2>
-				<AnswersList answersList={answers} edit={edit} />
+				<AnswersList answersList={answers} edit={edit} remove={remove} />
 			</section>
 			<section className="survey__form">
 				<form className="form" onSubmit={handleSubmit}>

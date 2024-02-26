@@ -24,10 +24,14 @@ export default function AnswersItem({
 	// Rememeber here we're destructuring answerItem, which is the prop name that we've passed
 	answerItem: { username, colour, timeSpent, review },
 	edit,
+	remove,
 	index,
 }) {
-	const handleClick = () => {
+	const handleEdit = () => {
 		edit(index);
+	};
+	const handleRemove = () => {
+		remove(index);
 	};
 	return (
 		<li key={index}>
@@ -45,8 +49,11 @@ export default function AnswersItem({
 					<em>What else have you got to say about your rubber duck?</em>
 					<span className="answer__line">{review}</span>
 				</p>
-				<button className="answer__button" onClick={handleClick}>
+				<button className="answer__button" onClick={handleEdit}>
 					Edit
+				</button>
+				<button className="answer__button" onClick={handleRemove}>
+					Remove
 				</button>
 			</article>
 		</li>

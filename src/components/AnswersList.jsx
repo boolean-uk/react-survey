@@ -4,11 +4,18 @@ export default function AnswersList(props) {
 
 	const { answersList } = props;
 	const { edit } = props;
+	const { remove } = props;
 
 	return (
 		<ul>
 			{answersList.map((answerItem, i) => (
-				<AnswersItem answerItem={answerItem} index={i} edit={edit} key={i} />
+				<AnswersItem
+					answerItem={answerItem}
+					index={i}
+					edit={edit}
+					remove={remove}
+					key={i}
+				/>
 			))}
 		</ul>
 	);
