@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import AnswersList from "./AnswersList";
-import AnswersItem from "./AnswersItem";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
@@ -48,13 +47,15 @@ function Survey() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log(
-      "formData: " + formData.color,
-      formData.spendTime,
-      formData.review,
-      formData.username,
-      formData.email
-    );
+    const answers = [
+      { question: "Color", answer: formData.color },
+      { question: "Spend Time", answer: formData.spendTime.join(", ") },
+      { question: "Review", answer: formData.review },
+      { question: "Username", answer: formData.username },
+      { question: "Email", answer: formData.email },
+    ];
+
+    console.log("Answers: ", answers);
   };
 
   return (
