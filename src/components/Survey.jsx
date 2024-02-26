@@ -3,9 +3,9 @@ import { useState } from "react";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const [answersList, setAnswersList] = useState();
+  //const [answersList, setAnswersList] = useState();
   const [formData, setFormData] = useState({
-    colourRating: "",
+    colourRating: false,
     swimming: false,
     bathing: false,
     chatting: false,
@@ -16,16 +16,20 @@ function Survey() {
   });
 
   const handleFormChange = (event) => {
+    // Load event data
     const { name, type, value, checked } = event.target;
     console.log("handleFormChange", name, type, value, checked);
+    // Check which field has been changed and update formData
     if (name === "colour") setFormData({ ...formData, colourRating: value });
     else if (name === "review") setFormData({ ...formData, textArea: value });
     else if (name === "username") setFormData({ ...formData, name: value });
     else if (name === "email") setFormData({ ...formData, email: value });
   };
   const handleCheckBoxChange = (event) => {
+    // Load event data
     const { name, type, value, checked } = event.target;
     console.log("handleFormChange", name, type, value, checked);
+    // Check which checkbox has been pressed and update formData
     if (value === "swimming") setFormData({ ...formData, swimming: checked });
     else if (value === "bathing")
       setFormData({ ...formData, bathing: checked });
@@ -34,6 +38,7 @@ function Survey() {
     else if (value === "noTime") setFormData({ ...formData, noTime: checked });
   };
   const handleFormSubmit = (event) => {
+    // Prevent default behaviour
     event.preventDefault();
     console.log(
       "colourRating: " +
@@ -53,6 +58,17 @@ function Survey() {
         "\nemail: " +
         formData.email
     );
+    // Clear form by setting all variables to default
+    setFormData({
+      colourRating: false,
+      swimming: false,
+      bathing: false,
+      chatting: false,
+      noTime: false,
+      textArea: "",
+      name: "",
+      email: "",
+    });
   };
   return (
     <main className="survey">
@@ -73,6 +89,7 @@ function Survey() {
                   name="colour"
                   value="1"
                   onChange={handleFormChange}
+                  checked={formData.colourRating === "1"}
                 />
                 <label htmlFor="colour-one">1</label>
               </li>
@@ -83,6 +100,7 @@ function Survey() {
                   name="colour"
                   value="2"
                   onChange={handleFormChange}
+                  checked={formData.colourRating === "2"}
                 />
                 <label htmlFor="colour-two">2</label>
               </li>
@@ -93,6 +111,7 @@ function Survey() {
                   name="colour"
                   value="3"
                   onChange={handleFormChange}
+                  checked={formData.colourRating === "3"}
                 />
                 <label htmlFor="colour-three">3</label>
               </li>
@@ -103,6 +122,7 @@ function Survey() {
                   name="colour"
                   value="4"
                   onChange={handleFormChange}
+                  checked={formData.colourRating === "4"}
                 />
                 <label htmlFor="colour-four">4</label>
               </li>
@@ -118,6 +138,7 @@ function Survey() {
                     type="checkbox"
                     value="swimming"
                     onChange={handleCheckBoxChange}
+                    checked={formData.swimming}
                   />
                   Swimming
                 </label>
@@ -129,6 +150,7 @@ function Survey() {
                     type="checkbox"
                     value="bathing"
                     onChange={handleCheckBoxChange}
+                    checked={formData.bathing}
                   />
                   Bathing
                 </label>
@@ -140,6 +162,7 @@ function Survey() {
                     type="checkbox"
                     value="chatting"
                     onChange={handleCheckBoxChange}
+                    checked={formData.chatting}
                   />
                   Chatting
                 </label>
@@ -151,6 +174,7 @@ function Survey() {
                     type="checkbox"
                     value="noTime"
                     onChange={handleCheckBoxChange}
+                    checked={formData.noTime}
                   />
                   I don&apos;t like to spend time with it
                 </label>
