@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
 
-  let answerForms = []
+let answerForms = []
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
@@ -15,9 +15,9 @@ function Survey() {
     username: "",
     email: ""
   }
-  
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const [answerData, setAnswerData] = useState(answerForms);
+  const [haveChanges, setHaveChanged] = useState(-1);
   
   // Handling submit
   const handleSubmit = (event) =>
@@ -28,6 +28,17 @@ function Survey() {
     setFormData(INITIAL_FORM_DATA)
   }
 
+  // Handling edited submit
+  const handleEditSubmit = (event) =>
+  {
+    event.preventDefault()
+    answerForms[haveChanges] = formData
+    setAnswerData([...answerForms])
+    setFormData(INITIAL_FORM_DATA)
+    setHaveChanged(-1)
+  }
+
+  // Handling input
   const handleInput = (event) =>
   {
     const { name, type, value, checked } = event.target
@@ -45,16 +56,29 @@ function Survey() {
       setFormData({...formData, [name]: value })
   }
 
+  // Handling button "Edit"
+  const editForm = (data) =>
+  {
+    setFormData({
+      color: data.color,
+      timeSpent: data.timeSpent,
+      review: data.review,
+      username: data.username,
+      email: data.email
+    })
+    setHaveChanged(data.index)
+  }
+
   return (
     <>
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
-        <AnswersList answerData={answerData}/>
+        <AnswersList answerData={answerData} editForm={editForm} />
       </section>
       <section className="survey__form">{/* a form should be here */}</section>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={haveChanges > -1 ? handleEditSubmit : handleSubmit}>
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
         <h3>How do you rate your rubber duck colour?</h3>
@@ -97,12 +121,13 @@ function Survey() {
             type="checkbox"
             value="swimming"
             onChange={handleInput}
+            checked={formData.timeSpent.includes("swimming")}
             />Swimming</label>
           </li>
           <li>
             <label
             ><input name="spend-time" type="checkbox" value="bathing"
-            onChange={handleInput} />Bathing</label>
+            onChange={handleInput} checked={formData.timeSpent.includes("bathing")} />Bathing</label>
           </li>
           <li>
             <label
@@ -111,12 +136,13 @@ function Survey() {
             type="checkbox"
             value="chatting"
             onChange={handleInput}
+            checked={formData.timeSpent.includes("chatting")}
             />Chatting</label>
           </li>
           <li>
             <label
             ><input name="spend-time" type="checkbox" value="noTime"
-            onChange={handleInput} />I don't like to
+            onChange={handleInput} checked={formData.timeSpent.includes("noTime")} />I don't like to
             spend time with it</label>
           </li>
         </ul>
