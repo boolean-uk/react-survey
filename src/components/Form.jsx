@@ -1,10 +1,11 @@
 import PropTypes from "prop-types"
 
-function Form({formData, setFormData, reset}){
+function Form({formData, setFormData, setAnswers}){
 
     const handleSubmit = (event) =>{
         event.preventDefault()
         console.log(formData)
+        setAnswers(formData)
         setFormData({
             color: "",
             timeSpent: [],
@@ -32,7 +33,6 @@ function Form({formData, setFormData, reset}){
         if (name==="spend-time"){
             if (!formData.timeSpent.includes(value) && checked)
             {
-                console.log("Add value to timespent array...")
                 formData.timeSpent.push(value)
                 setFormData({...formData})
                 
@@ -40,7 +40,6 @@ function Form({formData, setFormData, reset}){
             }
             else if (formData.timeSpent.includes(value) && !checked)
             {
-                console.log(`Remove ${value} from timespent array`)
                 const index = formData.timeSpent.indexOf(value)
                 formData.timeSpent.splice(index, 1)
                 setFormData({...formData})
@@ -150,7 +149,7 @@ function Form({formData, setFormData, reset}){
 Form.propTypes = {
     setFormData: PropTypes.func,
     formData : PropTypes.object,
-    reset: PropTypes.func
+    setAnswers: PropTypes.func
 }
 
 export default Form
