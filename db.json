@@ -1,0 +1,24 @@
+{
+  "responses": [
+    {
+      "id": "1",
+      "username": "mock-username",
+      "colour": "1",
+      "timeSpent": [
+        "swimming",
+        "bathing",
+        "noTime"
+      ],
+      "review": "mock-review"
+    },
+    {
+      "id": "260f",
+      "username": "ILoveDucks",
+      "colour": "4",
+      "timeSpent": [
+        "bathing"
+      ],
+      "review": "Another ducktastic product"
+    }
+  ]
+}
