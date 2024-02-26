@@ -13,6 +13,8 @@ function Survey() {
     email: "",
   });
 
+  const [answersList, setAnswersList] = useState([]);
+
   const colorOptions = ["1", "2", "3", "4"];
 
   const spendingTimeOptions = [
@@ -24,7 +26,6 @@ function Survey() {
 
   const handleInputChange = (event) => {
     const { name, type, value, checked } = event.target;
-    console.log(name, type, value, checked);
     if (name !== undefined) {
       if (type === "checkbox") {
         if (checked) {
@@ -47,15 +48,26 @@ function Survey() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const answers = [
-      { question: "Color", answer: formData.color },
-      { question: "Spend Time", answer: formData.spendTime.join(", ") },
-      { question: "Review", answer: formData.review },
-      { question: "Username", answer: formData.username },
-      { question: "Email", answer: formData.email },
-    ];
+    // Assuming formData has properties like color, spendTime, review, username, email
+    // const answers = [
+    //   { question: "Color", answer: formData.color },
+    //   { question: "Spend Time", answer: formData.spendTime.join(", ") },
+    //   { question: "Review", answer: formData.review },
+    //   { question: "Username", answer: formData.username },
+    //   { question: "Email", answer: formData.email },
+    // ];
 
-    console.log("Answers: ", answers);
+    const submittedAnswer = {
+      colour: formData.color,
+      timeSpent: formData.spendTime,
+      review: formData.review,
+      username: formData.username,
+      email: formData.email,
+    };
+
+    setAnswersList((prevAnswersList) => [...prevAnswersList, submittedAnswer]);
+
+    console.log("Answers: ", submittedAnswer);
   };
 
   return (
@@ -63,6 +75,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
+        <AnswersList answersList={answersList} />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
