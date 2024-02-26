@@ -1,11 +1,16 @@
 import PropTypes from "prop-types";
 import AnswersItem from "./AnswersItem";
 
-function AnswersList({ answersList }) {
+function AnswersList({ answersList, onDelete, onEdit }) {
   return (
     <ul>
       {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+        <AnswersItem
+          answerItem={answerItem}
+          key={i}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
       ))}
     </ul>
   );
@@ -20,6 +25,8 @@ AnswersList.propTypes = {
       review: PropTypes.string,
     })
   ).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default AnswersList;

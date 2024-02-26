@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswersList from "./AnswersList";
 
 function Survey() {
@@ -9,21 +9,16 @@ function Survey() {
     username: "",
     email: "",
   });
+  const [answers, setAnswers] = useState([]);
+  const [editingAnswer, setEditingAnswer] = useState(null);
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formState);
-    setFormState({
-      color: "",
-      timeSpent: [],
-      review: "",
-      username: "",
-      email: "",
-    });
-  };
+  useEffect(() => {
+    fetch("http://localhost:3000/answers")
+      .then((response) => response.json())
+      .then((data) => setAnswers(data))
+      .catch((error) => console.error("Error:", error));
+  }, []);
 
-  // Handle input change
   const handleChange = (event) => {
     const { name, value, type } = event.target;
     if (type === "checkbox") {
@@ -38,11 +33,71 @@ function Survey() {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (editingAnswer) {
+      fetch(`http://localhost:3000/answers/${editingAnswer.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setAnswers((prevAnswers) =>
+            prevAnswers.map((answer) => (answer.id === data.id ? data : answer))
+          );
+          setEditingAnswer(null);
+        });
+    } else {
+      fetch("http://localhost:3000/answers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setAnswers((prevAnswers) => [...prevAnswers, data]);
+        });
+    }
+    setFormState({
+      color: "",
+      timeSpent: [],
+      review: "",
+      username: "",
+      email: "",
+    });
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3000/answers/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setAnswers((prevAnswers) =>
+          prevAnswers.filter((answer) => answer.id !== id)
+        );
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  const handleEdit = (answer) => {
+    setFormState(answer);
+    setEditingAnswer(answer);
+  };
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {AnswersList}
+        <AnswersList
+          answersList={answers}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
