@@ -14,13 +14,7 @@ function Survey() {
   });
 
   const [answersList, setAnswersList] = useState([]);
-  const [editFormData, setEditFormData] = useState({
-    color: "",
-    timeSpent: [],
-    review: "",
-    username: "",
-    email: "",
-  });
+  const [editFormData, setEditFormData] = useState(null);
 
   const colorOptions = ["1", "2", "3", "4"];
 
@@ -74,6 +68,7 @@ function Survey() {
           answer === editFormData ? submittedAnswer : answer
         )
       );
+      console.log("answerList after changes", answersList);
       console.log("turn setEditFormData to null");
       setEditFormData(null);
     } else {
