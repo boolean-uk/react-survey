@@ -1,11 +1,12 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
+import PropTypes from "prop-types";
 
 const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
 function ItemsList({ list }) {
@@ -17,12 +18,14 @@ function ItemsList({ list }) {
     </ul>
   );
 }
-
+ItemsList.propTypes = {
+  list: PropTypes.array,
+};
 // This is the main component being exported from this file
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review },
 }) {
   return (
     <li>
@@ -44,3 +47,7 @@ export default function AnswersItem({
     </li>
   );
 }
+
+AnswersItem.propTypes = {
+  answerItem: PropTypes.object,
+};
