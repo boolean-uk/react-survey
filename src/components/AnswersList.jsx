@@ -1,16 +1,23 @@
+import PropType from "prop-types";
+
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  const { answersList, handleEdit } = props;
-
+export default function AnswersList({ answersList, handleEdit }) {
   return (
     <ul>
       {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+        <AnswersItem
+          answerItem={answerItem}
+          key={i}
+          handleEdit={handleEdit}
+          props={answersList}
+        />
       ))}
-      <div>
-        <button onClick={(e) => handleEdit(e, answersList)}>Edit</button>
-      </div>
     </ul>
   );
 }
+
+AnswersList.propTypes = {
+  answersList: PropType.array,
+  handleEdit: PropType.func,
+};

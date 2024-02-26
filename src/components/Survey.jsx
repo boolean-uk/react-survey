@@ -1,18 +1,20 @@
 import { useState } from "react";
 import AnswersList from "../components/AnswersList";
 
+var formId = 0;
+
 const INITIAL_FORM_DATA = {
   bestFeature: {
-    "best-color": false,
-    "best-squeak": false,
-    "best-logo": false,
-    "best-size": false,
+    color: false,
+    squeak: false,
+    logo: false,
+    size: false,
   },
   worstFeature: {
-    "worst-color": false,
-    "worst-squeak": false,
-    "worst-logo": false,
-    "worst-size": false,
+    color: false,
+    squeak: false,
+    logo: false,
+    size: false,
   },
   timeSpent: {
     swimming: false,
@@ -20,6 +22,7 @@ const INITIAL_FORM_DATA = {
     chatting: false,
     noTime: false,
   },
+  id: "",
   consistency: "",
   color: "",
   logo: "",
@@ -33,6 +36,7 @@ function Survey() {
 
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA });
   const [answerList, setToAnswerList] = useState([]);
+  const [toUpdate, setToUpdate] = useState(false);
 
   //TODO: Add your state fields here
   const handleInputChange = (event) => {
@@ -42,9 +46,6 @@ function Survey() {
 
     if (name !== undefined) {
       if (type === "checkbox") {
-        console.log("is current-data?: ", formData[name]);
-        console.log("is column of changed value?: ", value);
-
         // bestFeature
         setFormData({
           ...formData,
@@ -56,19 +57,35 @@ function Survey() {
     }
   };
 
-  const handleEdit = (event, data) => {
-    console.log("event is: ", event);
-    console.log("data: ", data[0]);
-    setFormData({ ...data[0] });
+  const handleEdit = (event, data, id) => {
+    event.preventDefault();
+
+    setFormData({ ...data[id] });
+    setToUpdate(true);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (toUpdate === false) {
+      formData.id = formId;
+      formId = formId + 1;
+      setToAnswerList([...answerList, formData]);
+    } else {
+      let updatedList = answerList.map((item) => {
+        if (item.id === formData.id) {
+          return { ...item, ...formData };
+        }
+        return item;
+      });
+
+      setToAnswerList([...updatedList]);
+      setToUpdate(false);
+    }
+
     console.log(formData);
-    setToAnswerList([...answerList, formData]);
 
     setFormData({ ...INITIAL_FORM_DATA });
-    // document.querySelector("checkbox").checked = false;
   };
 
   return (
@@ -91,11 +108,9 @@ function Survey() {
                   <input
                     name="bestFeature"
                     type="checkbox"
-                    value="best-color"
-                    checked={formData.bestFeature["best-color"]}
-                    onChange={(e) => {
-                      handleInputChange;
-                    }}
+                    value="color"
+                    checked={formData.bestFeature["color"]}
+                    onChange={handleInputChange}
                   />
                   Its yellow!
                 </label>
@@ -105,8 +120,8 @@ function Survey() {
                   <input
                     name="bestFeature"
                     type="checkbox"
-                    value="best-squeak"
-                    checked={formData.bestFeature["best-squeak"]}
+                    value="squeak"
+                    checked={formData.bestFeature["squeak"]}
                     onChange={handleInputChange}
                   />
                   It squeaks!
@@ -117,8 +132,8 @@ function Survey() {
                   <input
                     name="bestFeature"
                     type="checkbox"
-                    value="best-logo"
-                    checked={formData.bestFeature["best-logo"]}
+                    value="logo"
+                    checked={formData.bestFeature["logo"]}
                     onChange={handleInputChange}
                   />
                   It has a logo!
@@ -129,8 +144,8 @@ function Survey() {
                   <input
                     name="bestFeature"
                     type="checkbox"
-                    value="best-size"
-                    checked={formData.bestFeature["best-size"]}
+                    value="size"
+                    checked={formData.bestFeature["size"]}
                     onChange={handleInputChange}
                   />
                   Its big!
@@ -149,8 +164,8 @@ function Survey() {
                   <input
                     name="worstFeature"
                     type="checkbox"
-                    value="worst-color"
-                    checked={formData.worstFeature["worst-color"]}
+                    value="color"
+                    checked={formData.worstFeature["color"]}
                     onChange={handleInputChange}
                   />
                   Its yellow!
@@ -161,8 +176,8 @@ function Survey() {
                   <input
                     name="worstFeature"
                     type="checkbox"
-                    value="worst-squeak"
-                    checked={formData.worstFeature["worst-squeak"]}
+                    value="squeak"
+                    checked={formData.worstFeature["squeak"]}
                     onChange={handleInputChange}
                   />
                   It squeaks!
@@ -173,8 +188,8 @@ function Survey() {
                   <input
                     name="worstFeature"
                     type="checkbox"
-                    value="worst-logo"
-                    checked={formData.worstFeature["worst-logo"]}
+                    value="logo"
+                    checked={formData.worstFeature["logo"]}
                     onChange={handleInputChange}
                   />
                   It has a logo!
@@ -185,8 +200,8 @@ function Survey() {
                   <input
                     name="worstFeature"
                     type="checkbox"
-                    value="worst-size"
-                    checked={formData.worstFeature["worst-size"]}
+                    value="size"
+                    checked={formData.worstFeature["size"]}
                     onChange={handleInputChange}
                   />
                   Its big!
