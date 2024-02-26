@@ -1,4 +1,5 @@
 import AnswersItem from "./AnswersItem";
+import PropTypes from "prop-types";
 
 export default function AnswersList(props) {
   console.log("Inside AnswersList: ", props);
@@ -13,3 +14,14 @@ export default function AnswersList(props) {
     </ul>
   );
 }
+
+AnswersList.propTypes = {
+  answersList: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      colour: PropTypes.string.isRequired,
+      timeSpent: PropTypes.arrayOf(PropTypes.string).isRequired,
+      review: PropTypes.string.isRequired,
+    })
+  ),
+};
