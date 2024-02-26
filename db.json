@@ -12,28 +12,13 @@
       "review": "mock-review"
     },
     {
-      "id": "c4cc",
-      "username": "asd",
-      "colour": "2",
+      "id": "260f",
+      "username": "ILoveDucks",
+      "colour": "4",
       "timeSpent": [
-        "noTime",
-        "swimming"
+        "bathing"
       ],
-      "review": "ad"
-    },
-    {
-      "id": "b8ba",
-      "username": "qwerqwer",
-      "colour": null,
-      "timeSpent": [],
-      "review": "qwer"
-    },
-    {
-      "id": "6d3a",
-      "username": "cvbnasdf",
-      "colour": null,
-      "timeSpent": [],
-      "review": "qwer"
+      "review": "Another ducktastic product"
     }
   ]
 }
