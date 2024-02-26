@@ -69,13 +69,20 @@ function Survey() {
     setHaveChanged(data.index)
   }
 
+  // Handling button "Delete"
+  const deleteForm = (data) =>
+  {
+    answerForms.splice(data.index, 1)
+    setAnswerData([...answerForms])
+  }
+
   return (
     <>
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
-        <AnswersList answerData={answerData} editForm={editForm} />
+        <AnswersList answerData={answerData} editForm={editForm} deleteForm={deleteForm} />
       </section>
       <section className="survey__form">{/* a form should be here */}</section>
       <form className="form" onSubmit={haveChanges > -1 ? handleEditSubmit : handleSubmit}>
