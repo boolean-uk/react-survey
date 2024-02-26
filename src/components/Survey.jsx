@@ -4,6 +4,12 @@ import AnswersList from "./AnswersList";
 function Survey() {
   const colours = ["Red", "Blue", "Yellow", "Green"];
 
+  const [answers, setAnswers] = useState([]);
+
+  const addAnswer = (answer) => {
+    setAnswers([...answers, answer]);
+  };
+
   const [formData, setFormData] = useState({
     username: "",
     colour: "",
@@ -36,6 +42,7 @@ function Survey() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form data:", formData);
+    addAnswer(formData); // Add the submitted answer to the list
     setFormData({
       username: "",
       colour: "",
@@ -48,7 +55,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {AnswersList}
+        <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
         <h2>Answer the survey</h2>
