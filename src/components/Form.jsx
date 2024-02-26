@@ -1,19 +1,20 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const INITIAL_FORM_DATA = {
 	color: "",
-	spendTime: [],
+	timeSpent: [],
 	review: "",
 	username: "",
 	email: "",
 };
 
-export default function Form() {
+export default function Form({ answers, setAnswers }) {
 	const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
 	const logAnswers = () => {
-		console.log("Colour rating:", formData.color);
-		console.log("How time spent:", formData.spendTime);
+		console.log("Color rating:", formData.color);
+		console.log("How time spent:", formData.timeSpent);
 		console.log("Review:", formData.review);
 		console.log("Username:", formData.username);
 		console.log("Email:", formData.email);
@@ -22,8 +23,9 @@ export default function Form() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		logAnswers();
-		console.log(event);
-		console.log("Clicked submit");
+		console.log({ ...formData });
+		const updatedAnswers = [...answers, { ...formData }];
+		setAnswers(updatedAnswers);
 		setFormData(INITIAL_FORM_DATA);
 	};
 
@@ -32,6 +34,7 @@ export default function Form() {
 		console.log(type, name, value);
 
 		const updateCheckboxArray = () => {
+			console.log("Name", name);
 			if (formData[name].includes(value)) {
 				return {
 					...formData,
@@ -53,12 +56,13 @@ export default function Form() {
 				setFormData({ ...formData, [name]: value });
 				break;
 		}
+		console.log(formData);
 	};
 	return (
 		<form className="form" onSubmit={handleSubmit}>
 			<h2>Tell us what you think about your rubber duck!</h2>
 			<div className="form__group radio">
-				<h3>How do you rate your rubber duck colour?</h3>
+				<h3>How do you rate your rubber duck color?</h3>
 				<ul>
 					<li>
 						<input
@@ -112,10 +116,10 @@ export default function Form() {
 					<li>
 						<label>
 							<input
-								name="spendTime"
+								name="timeSpent"
 								type="checkbox"
 								value="swimming"
-								checked={formData.spendTime.includes("swimming")}
+								checked={formData.timeSpent.includes("swimming")}
 								onChange={handleInput}
 							/>
 							Swimming
@@ -124,10 +128,10 @@ export default function Form() {
 					<li>
 						<label>
 							<input
-								name="spendTime"
+								name="timeSpent"
 								type="checkbox"
 								value="bathing"
-								checked={formData.spendTime.includes("bathing")}
+								checked={formData.timeSpent.includes("bathing")}
 								onChange={handleInput}
 							/>
 							Bathing
@@ -136,10 +140,10 @@ export default function Form() {
 					<li>
 						<label>
 							<input
-								name="spendTime"
+								name="timeSpent"
 								type="checkbox"
 								value="chatting"
-								checked={formData.spendTime.includes("chatting")}
+								checked={formData.timeSpent.includes("chatting")}
 								onChange={handleInput}
 							/>
 							Chatting
@@ -148,10 +152,10 @@ export default function Form() {
 					<li>
 						<label>
 							<input
-								name="spendTime"
+								name="timeSpent"
 								type="checkbox"
 								value="noTime"
-								checked={formData.spendTime.includes("noTime")}
+								checked={formData.timeSpent.includes("noTime")}
 								onChange={handleInput}
 							/>
 							{`I don't like to spend time with it`}
@@ -191,3 +195,8 @@ export default function Form() {
 		</form>
 	);
 }
+
+Form.propTypes = {
+	answers: PropTypes.array,
+	setAnswers: PropTypes.func,
+};
