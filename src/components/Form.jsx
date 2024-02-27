@@ -57,6 +57,15 @@ function Form({setAnswers,answers}) {
         event.preventDefault(); // Prevent the default form submission behavior
 
         addAnswer(formData); 
+            // Reset form and state
+        event.target.reset();
+        setFormData({
+            color: 0,
+            timeSpent: [],
+            review: "",
+            name: "",
+            email: "",
+        });
     };
 
     
