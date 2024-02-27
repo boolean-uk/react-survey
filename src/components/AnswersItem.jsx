@@ -21,9 +21,10 @@ function ItemsList({ list }) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({ answerItem: { username, email, colour, spendTime, review }, setForm }) {
+export default function AnswersItem({ answerItem: { id, username, email, colour, spendTime, review }, setForm }) {
   const handleEditButton = () => {
     setForm({
+      id,
       username,
       email,
       colour,

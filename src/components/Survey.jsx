@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AnswersList";
 import AnswersList from "./AnswersList";
 
@@ -21,22 +21,44 @@ function Survey() {
   const [answers, setAnswers] = useState([]);
   const [form, setForm] = useState(defaultForm);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    getAnswers();
+  }, [answers]);
+
+  const getAnswers = async () => {
+    const response = await fetch("http://localhost:3000/surveys");
+    const data = await response.json();
+    setAnswers(data);
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     event.target.reset();
-    if(form.isUpdating) {
-      const updatedAnswers = answers.map((answer) => {
-        if(answer.email === form.email) {
-          return form;
-        }
-        return answer;
-      });
-      setAnswers(updatedAnswers);
-      setForm(defaultForm);
-      return;
+
+    let apiRequest;
+    if (form.isUpdating) {
+      console.log(form)
+      apiRequest = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      }
+      fetch(`http://localhost:3000/surveys/${form.id}`, apiRequest)
     }
-    setAnswers([...answers, form]);
-    setForm(defaultForm)
+    else {
+      apiRequest = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      }
+      fetch("http://localhost:3000/surveys", apiRequest)
+    }
+    setForm(defaultForm);
+    await getAnswers();
   }
 
   const handleFormChange = (event) => {

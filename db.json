@@ -1,0 +1,32 @@
+{
+  "surveys": [
+    {
+      "id": "93bb",
+      "username": "RubberDuckMan",
+      "email": "rubber@duck.programming",
+      "colour": "4",
+      "spendTime": {
+        "swimming": false,
+        "bathing": true,
+        "chatting": true,
+        "other": false
+      },
+      "review": "It's pretty cool!!!!!!!!!!!!!!! 😎",
+      "isUpdating": true
+    },
+    {
+      "id": "e49c",
+      "username": "RubberDuckHater",
+      "email": "i@hate.rubber.ducks.com",
+      "colour": "1",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "other": true
+      },
+      "review": "I hate it so much rubber ducks are dumb",
+      "isUpdating": true
+    }
+  ]
+}
