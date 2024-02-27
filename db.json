@@ -1,0 +1,25 @@
+{
+  "surveys": [
+    {
+      "id": "3a5e",
+      "email": "guy@guy.com",
+      "username": "Guy",
+      "review": "The greatest duck that ever quack!",
+      "spentTime": [
+        "chatting",
+        "bathing"
+      ],
+      "color": "4"
+    },
+    {
+      "id": "196a",
+      "email": "dummy@dummy.com",
+      "username": "Dummy",
+      "review": "Duck is kinda cringe ):",
+      "spentTime": [
+        "noTime"
+      ],
+      "color": "1"
+    }
+  ]
+}
