@@ -5,14 +5,7 @@ import AnswersList from "./AnswersList";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [answers, setAnswers] = useState([])
-
-  const addAnswer = (answer) => {
-    let _answers = answers
-    _answers.push({answer})
-    setAnswers([..._answers])
-    console.log(answer)
-    console.log(answers)
-  }
+  
 
   return (
     <main className="survey">
@@ -21,7 +14,7 @@ function Survey() {
         <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
-        <Form addAnswer ={addAnswer}/>
+        <Form setAnswers ={setAnswers} answers = {answers}/>
       </section>
     </main>
   );

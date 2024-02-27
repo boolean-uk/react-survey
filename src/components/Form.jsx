@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function Form({addAnswer}) {
+function Form({setAnswers,answers}) {
     
     const [formData, setFormData] = useState({
         color: 0,
@@ -43,11 +43,20 @@ function Form({addAnswer}) {
             }
         }
     }
+    const addAnswer = (answer) => {
+        console.log("answers")
+        let _answers = answers
+        _answers.push(answer)
+        setAnswers(_answers)
+      }
     const handleSubmit = (event) => {
+        console.log("submit")
         event.preventDefault(); // Prevent the default form submission behavior
 
         addAnswer(formData); 
-      };
+    };
+
+    
     
   return (
     <form className="form" onSubmit={handleSubmit}>

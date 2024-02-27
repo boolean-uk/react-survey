@@ -20,10 +20,11 @@ function ItemsList({ list }) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({ answerItem: {name, color, timeSpent, review }}) 
+export default function AnswersItem({ 
+  answerItem: {name, color, timeSpent, review }
+}) 
 {
-  //console.log("inside answeritem"+name, color, timeSpent, review)
-  console.log(answerItem)
+  console.log("inside answeritem"+name, color, timeSpent, review)
   return (
     <li>
       <article className="answer">

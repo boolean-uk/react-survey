@@ -1,6 +1,13 @@
 import AnswersItem from "./AnswersItem";
+import PropTypes from 'prop-types'
 
-export default function AnswersList({answersList}) {
+export default function AnswersList(props) {
+
+  const {answersList} = props
+  // answersList.forEach(element => {
+  //   console.log(element)
+  // });
+  
 
   return (
     <ul>
@@ -10,3 +17,7 @@ export default function AnswersList({answersList}) {
     </ul>
   );
 }
+AnswersList.propTypes = {
+  // Update prop type to match the destructure
+  answersList: PropTypes.array
+};
