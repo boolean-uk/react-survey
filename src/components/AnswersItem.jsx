@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
@@ -8,11 +9,19 @@ const answersSet = {
   noTime: "I don't like to spend time with it"
 };
 
-function ItemsList({ list }) {
+
+const propertySetQualities = {
+  color: "It's yellow!",
+  sound: "It squeaks!",
+  logo: "It has a logo!",
+  size: "It's big!"
+}
+
+function ItemsList({ list, objectSet}) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{objectSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,7 +31,7 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colourRating, timeSpent, review, bestFeatures, nagFeatures}
 }) {
   return (
     <li>
@@ -30,12 +39,20 @@ export default function AnswersItem({
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <span className="answer__line">{colourRating}</span>
         </p>
-        <p>
+        <div>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
-        </p>
+          <ItemsList list={timeSpent} objectSet={answersSet} />
+        </div>
+        <div>
+          <em>What do you think is the best features of the duck?</em>
+          <ItemsList list={bestFeatures} objectSet={propertySetQualities} />
+        </div>
+        <div>
+          <em>What do you think is the worst features of the duck?</em>
+          <ItemsList list={nagFeatures} objectSet={propertySetQualities} />
+        </div>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
@@ -43,4 +60,19 @@ export default function AnswersItem({
       </article>
     </li>
   );
+}
+
+ItemsList.propTypes = {
+  list: PropTypes.array,
+  objectSet: PropTypes.object
+}
+
+AnswersItem.propTypes = {
+  answerItem: PropTypes.object,
+  username: PropTypes.string,
+  colourRating: PropTypes.number,
+  timeSpent: PropTypes.array,
+  review: PropTypes.string,
+  bestFeatures: PropTypes.array,
+  nagFeatures: PropTypes.array,
 }
