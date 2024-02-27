@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
-
-  const { answersList } = props;
+export default function AnswersList({ answersList, setForm, highlightedItemId }) {
+  const handleClick = (answerItem) => {
+    setForm(answerItem);
+  };
 
   return (
-    <ul>
+    <>
+      <h2>Answers list</h2>
       {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+        <div key={i} onClick={() => handleClick(answerItem)}>
+          <AnswersItem answerItem={answerItem} highlighted={answerItem.id === highlightedItemId} />
+        </div>
       ))}
-    </ul>
+    </>
   );
 }
