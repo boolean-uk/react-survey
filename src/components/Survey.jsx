@@ -6,19 +6,43 @@ import { CheckBoxes } from "./CheckBoxes";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  
+  const [answersList, setAnswerList] = useState([])
+
+  // Initial get of server
+  useEffect(() =>{
+    fetch("http://localhost:3000/Surveys", 
+      {method: "Get"}
+    )
+    .then((response) => response.json())
+    .then((data) => console.log("data", data.json))
+  }, [])
+
+  let index = Math.max.apply(0, answersList.map((o) => o.id))
+  if ( index == null || index < 0 ) index = 0;
+
 
   const resetInput = () => {
-    return {colour: null, timeSpent: [], review: '', username: '', email: ''}
+    index++
+    return {id: index, colour: null, timeSpent: [], review: '', username: '', email: ''}
   }
 
   const [edit, setEdit] = useState(-1)
-  const [answersList, setAnswerList] = useState([])
   const [input, setInput] = useState(resetInput())
 
   const submit = (e) => {
     e.preventDefault()
-    if(edit == -1)
+    if(edit == -1){
       setAnswerList([input, ...answersList])
+      const apiRequest = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+         },
+         body: JSON.stringify(input)
+      }
+      fetch("http://localhost:3000/surveys", apiRequest);
+    }
     else{
       let alteredList = [...answersList]
       alteredList[edit] = input
@@ -44,9 +68,13 @@ function Survey() {
 
   useEffect(() => {
     if(edit != -1){
-      setInput(answersList[edit])
+      // LEGACY: one-line did not create copy of array, but used reference instead
+      setInput({...answersList[edit], timeSpent: [...answersList[edit].timeSpent]})
     }
   }, [edit, answersList])
+
+
+
 
   return (
     <main className="survey">
@@ -55,13 +83,13 @@ function Survey() {
         <AnswersList answersList={answersList} setEdit={setEdit}/>
       </section>
       <section className="survey__form">
-        <form class="form">
+        <form className="form">
           <h2>Tell us what you think about your rubber duck!</h2>
-          <div class="form__group radio">
+          <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <RadioInput input={input} setInput={setInput}/>
           </div>
-          <div class="form__group">
+          <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <CheckBoxes input={input} setInput={setInput}/>
           </div>
