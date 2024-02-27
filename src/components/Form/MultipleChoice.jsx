@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /* eslint-disable react/prop-types */
-export const MultipleChoice = ({setForm}) => {
+export const MultipleChoice = ({options, setForm}) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const SpendTimeOptions = {
@@ -19,6 +19,7 @@ export const MultipleChoice = ({setForm}) => {
 
   useEffect(() => {
     setForm((prevForm) => ({ ...prevForm, spendTime: selectedOptions }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOptions]);
 
   return (
@@ -30,6 +31,7 @@ export const MultipleChoice = ({setForm}) => {
               name="spend-time"
               type="checkbox"
               value={value}
+              checked={options.includes(value)}
               onClick={() => handleOptionSelected(value)}
             />
             {key}

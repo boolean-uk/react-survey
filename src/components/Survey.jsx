@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SurveyForm } from './Form/SurveyForm'
+import AnswersList from "./Answere/AnswersList";
 
 const emptyForm = {
   colourRating: 0,
@@ -13,12 +14,12 @@ function Survey() {
   // eslint-disable-next-line no-unused-vars
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(emptyForm)
-  const [answers, setAnswers] = useState([]) // [
+  const [answers, setAnswers] = useState([]) 
 
-  const handleSubmit = (e) => {
+  const HandleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    answers.push(form);
+    setAnswers(prevAnswers => [...prevAnswers, form]);
     setForm(emptyForm);
   }
 
@@ -26,10 +27,10 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
-        <SurveyForm form={form} setForm={setForm} handleSubmit={handleSubmit}/>
+        <SurveyForm form={form} setForm={setForm} handleSubmit={HandleSubmit}/>
       </section>
     </main>
   );
