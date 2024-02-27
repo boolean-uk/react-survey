@@ -46,22 +46,14 @@ function Form({setAnswers,answers}) {
                     timeSpent: formData.timeSpent.filter((t) => t !== value)
                   });
 
-                // const index = formData.timeSpent.indexOf(value)
-                // formData.timeSpent.splice(index, 1)
-                // setFormData({...formData})
                 //Remove value from timespent array
             }
         }
     }
-    const addAnswer = (answer) => {
-        console.log("answers")
-        // let _answers = answers
-        // _answers.push(answer)
-        // setAnswers(_answers)
+    const addAnswer = (answer) => {        
         setAnswers((prevAnswers) => [...prevAnswers, answer]);
       }
     const handleSubmit = (event) => {
-        console.log("submit")
         event.preventDefault(); // Prevent the default form submission behavior
 
         addAnswer(formData); 

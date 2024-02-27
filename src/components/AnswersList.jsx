@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 export default function AnswersList(props) {
 
   const {answersList} = props
-  // answersList.forEach(element => {
-  //   console.log(element)
-  // });
-  
 
   return (
     <ul>
@@ -18,6 +14,5 @@ export default function AnswersList(props) {
   );
 }
 AnswersList.propTypes = {
-  // Update prop type to match the destructure
   answersList: PropTypes.array
 };

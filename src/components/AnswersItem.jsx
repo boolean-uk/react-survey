@@ -24,7 +24,6 @@ export default function AnswersItem({
   answerItem: {name, color, timeSpent, review }
 }) 
 {
-  console.log("inside answeritem"+name, color, timeSpent, review)
   return (
     <li>
       <article className="answer">
@@ -46,6 +45,5 @@ export default function AnswersItem({
   );
 }
 AnswersItem.propTypes = {
-  // Update prop type to match the destructure
   answersItem: PropTypes.object
 };
