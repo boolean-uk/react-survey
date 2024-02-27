@@ -1,0 +1,29 @@
+POST http://localhost:3000/ducks HTTP/1.1
+Content-Type: application/json
+
+{
+  "bestFeature": {
+    "color": true,
+    "squeak": false,
+    "logo": true,
+    "size": false
+  },
+  "worstFeature": {
+    "color": false,
+    "squeak": true,
+    "logo": false,
+    "size": true
+  },
+  "timeSpent": {
+    "swimming": false,
+    "bathing": false,
+    "chatting": false,
+    "noTime": true
+  },
+  "consistency": "2",
+  "color": "2", 
+  "logo": "3",
+  "review": "helps me code",
+  "username": "sini",
+  "email": "myemail@gmail.com"
+}

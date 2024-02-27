@@ -2,7 +2,7 @@ import PropType from "prop-types";
 
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList({ answersList, handleEdit }) {
+export default function AnswersList({ answersList, handleEdit, handleDelete }) {
   return (
     <ul>
       {answersList.map((answerItem, i) => (
@@ -10,6 +10,7 @@ export default function AnswersList({ answersList, handleEdit }) {
           answerItem={answerItem}
           key={i}
           handleEdit={handleEdit}
+          handleDelete={handleDelete}
           props={answersList}
         />
       ))}
@@ -20,4 +21,5 @@ export default function AnswersList({ answersList, handleEdit }) {
 AnswersList.propTypes = {
   answersList: PropType.array,
   handleEdit: PropType.func,
+  handleDelete: PropType.func,
 };

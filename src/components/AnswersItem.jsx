@@ -55,6 +55,7 @@ export default function AnswersItem({
     review,
   },
   handleEdit,
+  handleDelete,
   props,
 }) {
   return (
@@ -91,6 +92,9 @@ export default function AnswersItem({
         </p>
         <div>
           <button onClick={(e) => handleEdit(e, props, id)}>Edit</button>
+        </div>
+        <div>
+          <button onClick={(e) => handleDelete(e, props, id)}>Delete</button>
         </div>
       </article>
     </li>
