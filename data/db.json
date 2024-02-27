@@ -1,0 +1,85 @@
+{
+  "ducks": [
+    {
+      "bestFeature": {
+        "color": false,
+        "squeak": false,
+        "logo": false,
+        "size": false
+      },
+      "worstFeature": {
+        "color": false,
+        "squeak": true,
+        "logo": false,
+        "size": false
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "consistency": "",
+      "color": "",
+      "logo": "",
+      "review": "",
+      "username": "",
+      "email": "",
+      "id": "5909"
+    },
+    {
+      "bestFeature": {
+        "color": true,
+        "squeak": false,
+        "logo": true,
+        "size": false
+      },
+      "worstFeature": {
+        "color": false,
+        "squeak": true,
+        "logo": false,
+        "size": true
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": true
+      },
+      "consistency": "2",
+      "color": "2",
+      "logo": "3",
+      "review": "helps me code",
+      "username": "amalia",
+      "email": "myemail@gmail.com",
+      "id": "cd5b"
+    },
+    {
+      "id": "0806",
+      "bestFeature": {
+        "color": false,
+        "squeak": false,
+        "logo": true,
+        "size": false
+      },
+      "worstFeature": {
+        "color": false,
+        "squeak": true,
+        "logo": false,
+        "size": false
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": true
+      },
+      "consistency": "1",
+      "color": "1",
+      "logo": "1",
+      "review": "huh",
+      "username": "",
+      "email": ""
+    }
+  ]
+}

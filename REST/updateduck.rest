@@ -1,0 +1,29 @@
+PUT http://localhost:3000/ducks/cd5b
+Content-Type: application/json
+
+{
+  "bestFeature": {
+    "color": true,
+    "squeak": false,
+    "logo": true,
+    "size": false
+  },
+  "worstFeature": {
+    "color": false,
+    "squeak": true,
+    "logo": false,
+    "size": true
+  },
+  "timeSpent": {
+    "swimming": false,
+    "bathing": false,
+    "chatting": false,
+    "noTime": true
+  },
+  "consistency": "2",
+  "color": "2", 
+  "logo": "3",
+  "review": "helps me code",
+  "username": "amalia",
+  "email": "myemail@gmail.com"
+}
