@@ -32,6 +32,7 @@ function Survey() {
     const [open, setOpen] = useState(false); //Ignore this state
     const [formData, setFormData] = useState({ ...initForm });
     const [answers, setAnswers] = useState([...initAnsers]);
+    const [editIndex, setEditIndex] = useState(-1);
 
     const dataChanged = (event) => {
         const newData = { ...formData };
@@ -42,22 +43,48 @@ function Survey() {
     const submitSurvey = (event) => {
         event.preventDefault();
         console.log(formData);
-        setAnswers([...answers, { ...formData }]);
+
+        if (
+            formData.email.trim() === "" ||
+            formData.username.trim() === "" ||
+            formData.review.trim() === "" ||
+            formData.spentTime.length < 1 ||
+            formData.color === ""
+        ) {
+            return;
+        }
+        if (editIndex === -1) {
+            setAnswers([...answers, { ...formData }]);
+        } else {
+            const newAnswers = [...answers];
+            newAnswers[editIndex] = { ...formData };
+            setAnswers([...newAnswers]);
+            setEditIndex(-1);
+        }
         setFormData({ ...initForm });
+    };
+
+    const editAnswer = (event) => {
+        const i = event.target.id;
+        setEditIndex(i);
+        setFormData({ ...answers[i] });
     };
 
     return (
         <main className="survey">
             <section className={`survey__list ${open ? "open" : ""}`}>
                 <h2>Answers list</h2>
-                <AnswersList answersList={answers} />
+                <AnswersList answersList={answers} editAnswer={editAnswer} />
             </section>
             <section className="survey__form">
                 <form className="form" onSubmit={submitSurvey}>
                     <h2>Tell us what you think about your rubber duck!</h2>
                     <div className="form__group radio">
                         <h3>How do you rate your rubber duck colour?</h3>
-                        <RadioButtons onChange={dataChanged} />
+                        <RadioButtons
+                            onChange={dataChanged}
+                            color={formData.color}
+                        />
                     </div>
                     <div className="form__group">
                         <h3>

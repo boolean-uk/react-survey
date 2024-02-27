@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const RadioButtons = ({ onChange }) => {
+const RadioButtons = ({ onChange, color }) => {
     return (
         <ul>
             <li>
@@ -9,6 +9,7 @@ const RadioButtons = ({ onChange }) => {
                     name="color"
                     value="1"
                     onChange={onChange}
+                    checked={color === "1"}
                 />
                 <label htmlFor="color-one">1</label>
             </li>
@@ -19,6 +20,7 @@ const RadioButtons = ({ onChange }) => {
                     name="color"
                     value="2"
                     onChange={onChange}
+                    checked={color === "2"}
                 />
                 <label htmlFor="color-two">2</label>
             </li>
@@ -29,6 +31,7 @@ const RadioButtons = ({ onChange }) => {
                     name="color"
                     value="3"
                     onChange={onChange}
+                    checked={color === "3"}
                 />
                 <label htmlFor="color-three">3</label>
             </li>
@@ -39,6 +42,7 @@ const RadioButtons = ({ onChange }) => {
                     name="color"
                     value="4"
                     onChange={onChange}
+                    checked={color === "4"}
                 />
                 <label htmlFor="color-four">4</label>
             </li>
