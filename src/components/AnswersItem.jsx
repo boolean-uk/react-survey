@@ -5,14 +5,16 @@ const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
+  other: "Other",
   noTime: "I don't like to spend time with it"
 };
 
 function ItemsList({ list }) {
+  const selectedItems = Object.keys(list).filter((item) => list[item] === true);
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {selectedItems.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,7 +24,7 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, email, colour, spendTime, review }
 }) {
   return (
     <li>
@@ -34,7 +36,7 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <ItemsList list={spendTime} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
