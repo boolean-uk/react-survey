@@ -3,7 +3,7 @@ import { SurveyForm } from './Form/SurveyForm'
 import AnswersList from "./Answere/AnswersList";
 
 const emptyForm = {
-  colourRating: 0,
+  colorRating: 0,
   spendTime: [],
   text: '',
   name: '',
@@ -14,12 +14,12 @@ function Survey() {
   // eslint-disable-next-line no-unused-vars
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(emptyForm)
-  const [answers, setAnswers] = useState([]) 
+  const [answers, setAnswers] = useState([])
 
   const HandleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    setAnswers(prevAnswers => [...prevAnswers, form]);
+    setAnswers(prevAnswers => [form, ...prevAnswers]);
     setForm(emptyForm);
   }
 
@@ -30,7 +30,7 @@ function Survey() {
         <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
-        <SurveyForm form={form} setForm={setForm} handleSubmit={HandleSubmit}/>
+        <SurveyForm form={form} setForm={setForm} HandleSubmit={HandleSubmit}/>
       </section>
     </main>
   );

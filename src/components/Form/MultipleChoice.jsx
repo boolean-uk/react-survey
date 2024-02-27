@@ -1,9 +1,5 @@
-import { useEffect, useState } from 'react';
-
 /* eslint-disable react/prop-types */
 export const MultipleChoice = ({options, setForm}) => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
   const SpendTimeOptions = {
     Swimming: "swimming",
     Bathing: "bathing",
@@ -12,18 +8,16 @@ export const MultipleChoice = ({options, setForm}) => {
   };
 
   const handleOptionSelected = (option) => {
-    if (selectedOptions.includes(option))
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    else setSelectedOptions([...selectedOptions, option]);
+    if (options.includes(option))
+      setForm(prevForm => ({...prevForm, spendTime: options.filter((item) => item !== option)}));
+    else 
+      setForm(prevForm => ({...prevForm, spendTime: [...options, option]}));
   };
 
-  useEffect(() => {
-    setForm((prevForm) => ({ ...prevForm, spendTime: selectedOptions }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedOptions]);
-
   return (
-    <ul>
+    <div className="form__group">
+      <h3>How do you like to spend time with your rubber duck</h3>
+
       {Object.entries(SpendTimeOptions).map(([key, value]) => (
         <li key={key}>
           <label>
@@ -32,12 +26,12 @@ export const MultipleChoice = ({options, setForm}) => {
               type="checkbox"
               value={value}
               checked={options.includes(value)}
-              onClick={() => handleOptionSelected(value)}
+              onChange={() => handleOptionSelected(value)}
             />
             {key}
           </label>
         </li>
       ))}
-    </ul>
+    </div>
   );
 }
