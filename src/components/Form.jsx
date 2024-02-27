@@ -29,14 +29,14 @@ function Form(props) {
             setFormData({...formData, name:value})
         }
         if (name==="spend-time"){
-            if (!formData.timeSpent.includes(value) && checked)
+            if (!formData.timeSpent.includes(value))
             {
                 formData.timeSpent.push(value)
                 setFormData({...formData})
     
                 //Add value to timespent array
             }
-            else if (formData.timeSpent.includes(value) && !checked)
+            else if (formData.timeSpent.includes(value))
             {
                 const index = formData.timeSpent.indexOf(value)
                 formData.timeSpent.splice(index, 1)
@@ -58,22 +58,22 @@ function Form(props) {
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
             <li>
-                <input id="color-one" type="radio" name="color" value="1" onClick={handleInput} />
+                <input id="color-one" type="radio" name="color" value="1" onChange={handleInput} />
                 <label htmlFor="color-one">1</label>
             </li>
             
             <li>
-                <input id="color-two" type="radio" name="color" value="2" onClick={handleInput}/>
+                <input id="color-two" type="radio" name="color" value="2" onChange={handleInput}/>
                 <label htmlFor="color-two">2</label>
             </li>
             
             <li>
-                <input id="color-three" type="radio" name="color" value="3" onClick={handleInput}/>
+                <input id="color-three" type="radio" name="color" value="3" onChange={handleInput}/>
                 <label htmlFor="color-three">3</label>
             </li>
             
             <li>
-                <input id="color-four" type="radio" name="color" value="4" onClick={handleInput}/>
+                <input id="color-four" type="radio" name="color" value="4" onChange={handleInput}/>
                 <label htmlFor="color-four">4</label>
             </li>
             </ul>
