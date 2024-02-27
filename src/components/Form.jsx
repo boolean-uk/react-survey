@@ -18,7 +18,7 @@ function Form({setAnswers,answers}) {
 
 
     const handleInput = (event) =>{
-        const {name, type, value, checked} = event.target;
+        const {name, type, value} = event.target;
         if (name=== "color")
         {
             setFormData({...formData, color:value})
@@ -35,16 +35,20 @@ function Form({setAnswers,answers}) {
         if (name==="spend-time"){
             if (!formData.timeSpent.includes(value))
             {
-                formData.timeSpent.push(value)
-                setFormData({...formData})
+                setFormData({...formData, timeSpent: [...formData.timeSpent, value]})
     
                 //Add value to timespent array
             }
             else if (formData.timeSpent.includes(value))
             {
-                const index = formData.timeSpent.indexOf(value)
-                formData.timeSpent.splice(index, 1)
-                setFormData({...formData})
+                setFormData({
+                    ...formData,
+                    timeSpent: formData.timeSpent.filter((t) => t !== value)
+                  });
+
+                // const index = formData.timeSpent.indexOf(value)
+                // formData.timeSpent.splice(index, 1)
+                // setFormData({...formData})
                 //Remove value from timespent array
             }
         }
