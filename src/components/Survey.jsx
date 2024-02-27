@@ -2,26 +2,41 @@ import { useState } from "react";
 import "./AnswersList";
 import AnswersList from "./AnswersList";
 
+const defaultForm = {
+  colour: "",
+  spendTime: {
+    swimming: false,
+    bathing: false,
+    chatting: false,
+    other: false
+  },
+  review: "",
+  username: "",
+  email: "",
+  isUpdating: false
+};
+
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [answers, setAnswers] = useState([]);
-  const [form, setForm] = useState({
-    colour: "",
-    spendTime: {
-      swimming: false,
-      bathing: false,
-      chatting: false,
-      other: false
-    },
-    review: "",
-    username: "",
-    email: "",
-  });
+  const [form, setForm] = useState(defaultForm);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setAnswers([...answers, form]);
     event.target.reset();
+    if(form.isUpdating) {
+      const updatedAnswers = answers.map((answer) => {
+        if(answer.email === form.email) {
+          return form;
+        }
+        return answer;
+      });
+      setAnswers(updatedAnswers);
+      setForm(defaultForm);
+      return;
+    }
+    setAnswers([...answers, form]);
+    setForm(defaultForm)
   }
 
   const handleFormChange = (event) => {
@@ -48,7 +63,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {
-          <AnswersList answersList={answers} />
+          <AnswersList answersList={answers} setForm={setForm} />
         }
       </section>
       <section className="survey__form" onSubmit={(e) => handleSubmit(e)}>
