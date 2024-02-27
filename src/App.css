@@ -116,6 +116,7 @@ h2 {
 
 .form li {
   display: inline;
+  margin-left: 20px;
 }
 
 .form > label {
@@ -168,7 +169,7 @@ h2 {
 }
 
 .form__group input[type="radio"] {
-  display: none;
+  display: none;  
 }
 
 .form textarea {
