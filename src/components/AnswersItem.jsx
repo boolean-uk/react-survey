@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
@@ -19,18 +20,17 @@ function ItemsList({ list }) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
-}) {
+export default function AnswersItem({ answerItem: {name, color, timeSpent, review }}) 
+{
+  //console.log("inside answeritem"+name, color, timeSpent, review)
+  console.log(answerItem)
   return (
     <li>
       <article className="answer">
-        <h3>{username || "Anon"} said:</h3>
+        <h3>{name || "Anon"} said:</h3>
         <p>
-          <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <em>How do you rate your rubber duck color?</em>
+          <span className="answer__line">{color}</span>
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
@@ -44,3 +44,7 @@ export default function AnswersItem({
     </li>
   );
 }
+AnswersItem.propTypes = {
+  // Update prop type to match the destructure
+  answersItem: PropTypes.object
+};

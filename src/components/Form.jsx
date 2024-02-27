@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
-import PropTypes from 'prop-types'
 
-function Form(props) {
-    Form.propTypes = {
-        addAnswer: PropTypes.func
-    }
+function Form({addAnswer}) {
+    
     const [formData, setFormData] = useState({
         color: 0,
         timeSpent: [],
@@ -12,6 +9,7 @@ function Form(props) {
         name: "",
         email: "",
       });
+
 
     const handleInput = (event) =>{
         const {name, type, value, checked} = event.target;
@@ -47,7 +45,8 @@ function Form(props) {
     }
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the default form submission behavior
-        props.addAnswer(formData); // Call your addAnswer function with the form data
+
+        addAnswer(formData); 
       };
     
   return (

@@ -7,17 +7,18 @@ function Survey() {
   const [answers, setAnswers] = useState([])
 
   const addAnswer = (answer) => {
-    answers.push({answer})
+    let _answers = answers
+    _answers.push({answer})
+    setAnswers([..._answers])
+    console.log(answer)
     console.log(answers)
   }
-  
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
-        {/* <AnswersList answerList={answers} /> */}
+        <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
         <Form addAnswer ={addAnswer}/>
