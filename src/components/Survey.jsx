@@ -1,15 +1,16 @@
 import { useState } from "react";
 
+const initialFormState = {
+  color: "",
+  spend_time: [],
+  review: "",
+  email: "",
+  username: "",
+}
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
 
-  const [form, setForm] = useState({
-    color: "",
-    spend_time: [],
-    review: "",
-    email: "",
-    username: "",
-  });
+  const [form, setForm] = useState(initialFormState);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -30,7 +31,7 @@ function Survey() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(form)
+    setForm(initialFormState)
   }
 
   return (
@@ -45,22 +46,51 @@ function Survey() {
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
               <li>
-                <input id="color-one" type="radio" name="color" value="1" onChange={handleChange} /><label
-                  htmlFor="color-one"
+                <input 
+                  id="color-one" 
+                  type="radio" 
+                  name="color" 
+                  value="1" 
+                  onChange={handleChange} 
+                  checked={form.color === "1"}
+                  />
+                  <label
+                    htmlFor="color-one"
                 >1</label>
               </li>
               <li>
-                <input id="color-two" type="radio" name="color" value="2" onChange={handleChange} /><label
+                <input id="color-two" 
+                       type="radio" 
+                       name="color" 
+                       value="2" 
+                       onChange={handleChange} 
+                       checked={form.color === "2"}
+                       />
+                  <label
                   htmlFor="color-two"
                 >2</label>
               </li>
               <li>
-                <input id="color-three" type="radio" name="color" value="3" onChange={handleChange} /><label
+                <input 
+                  id="color-three" 
+                  type="radio" 
+                  name="color" 
+                  value="3" 
+                  onChange={handleChange} 
+                  checked={form.color === "3"}
+                  /><label
                   htmlFor="color-three"
                 >3</label>
               </li>
               <li>
-                <input id="color-four" type="radio" name="color" value="4" onChange={handleChange} /><label
+                <input 
+                  id="color-four" 
+                  type="radio" 
+                  name="color" 
+                  value="4" 
+                  onChange={handleChange} 
+                  checked={form.color === "4"}
+                  /><label
                   htmlFor="color-four"
                 >4</label>
               </li>
@@ -76,6 +106,7 @@ function Survey() {
                     type="checkbox"
                     value="swimming"
                     onChange={handleChangeCheck}
+                    checked={form.spend_time.includes("swimming")}
                   />Swimming</label>
               </li>
               <li>
@@ -84,7 +115,9 @@ function Survey() {
                     name="spend_time"  
                     type="checkbox" 
                     value="bathing" 
-                    onChange={handleChangeCheck} />Bathing</label>
+                    onChange={handleChangeCheck} 
+                    checked={form.spend_time.includes("bathing")}
+                    />Bathing</label>
               </li>
               <li>
                 <label
@@ -93,11 +126,18 @@ function Survey() {
                     type="checkbox"
                     value="chatting"
                     onChange={handleChangeCheck}
+                    checked={form.spend_time.includes("chatting")}
                   />Chatting</label>
               </li>
               <li>
                 <label
-                ><input name="spend_time" type="checkbox" value="noTime" onChange={handleChangeCheck}/>I don't like to
+                ><input 
+                  name="spend_time" 
+                  type="checkbox" 
+                  value="noTime" 
+                  onChange={handleChangeCheck}
+                  checked={form.spend_time.includes("noTime")}
+                  />I don't like to
                   spend time with it</label>
               </li>
             </ul>
