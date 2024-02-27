@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "./Form";
 import AnswersList from "./AnswersList";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [answers, setAnswers] = useState([])
+
+  useEffect(() => {
+    console.log(answers)
+  }, [answers])
   
 
   return (

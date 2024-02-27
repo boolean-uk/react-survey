@@ -1,4 +1,10 @@
 import React, {useState} from 'react'
+import PropTypes from 'prop-types'
+
+Form.propTypes = {
+    setAnswer: PropTypes.func,
+    answers: PropTypes.array
+}
 
 function Form({setAnswers,answers}) {
     
@@ -45,9 +51,10 @@ function Form({setAnswers,answers}) {
     }
     const addAnswer = (answer) => {
         console.log("answers")
-        let _answers = answers
-        _answers.push(answer)
-        setAnswers(_answers)
+        // let _answers = answers
+        // _answers.push(answer)
+        // setAnswers(_answers)
+        setAnswers((prevAnswers) => [...prevAnswers, answer]);
       }
     const handleSubmit = (event) => {
         console.log("submit")
