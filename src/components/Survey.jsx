@@ -1,15 +1,50 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
+import Form from "./Form";
+/* eslint no-unused-vars:0 */
+
+const INITIAL_FORM_STATE = {
+  color: "",
+  timeSpent: [],
+  review: "",
+  name:"",
+  email:""
+}
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  const [formData, setFormData] = useState(INITIAL_FORM_STATE)
+  const [answers, setAnswers] = useState([])
+  const [editing, setEditing] = useState(null)
+  const [id, setId] = useState(1)
+
+  const EditAnswer = (oldData) => {
+    setFormData({...oldData})
+    setEditing(oldData.id)
+  }
+  const addAnswer = (answer) => {
+    if (editing === null)
+    {
+      answers.push({...answer, id:id})
+      setId(id +1)
+      setAnswers([...answers])
+    }
+    else {
+      answers.splice(answers.indexOf( answers.find((answer) => answer.id === editing)), 1, answer)
+      setAnswers([...answers])
+    }
+    setEditing(null)
+  }
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList= {answers} EditAnswer = {EditAnswer}/>
       </section>
-      <section className="survey__form">{/* a form should be here */}</section>
+      <section className="survey__form">
+        <Form setFormData={setFormData} formData={formData} setAnswers = {addAnswer}/>
+      </section>
     </main>
   );
 }
