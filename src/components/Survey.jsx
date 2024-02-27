@@ -44,7 +44,8 @@ function Survey() {
 
   useEffect(() => {
     if(edit != -1){
-      setInput(answersList[edit])
+      // LEGACY: one-line did not create copy of array, but used reference instead
+      setInput({...answersList[edit], timeSpent: [...answersList[edit].timeSpent]})
     }
   }, [edit, answersList])
 
