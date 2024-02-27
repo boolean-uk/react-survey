@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Checkboxes from "./form/Checkboxes";
 import RadioButtons from "./form/RadioButtons";
 import AnswersList from "./AnswersList";
@@ -11,7 +11,7 @@ function Survey() {
         spentTime: [],
         color: "",
     };
-    const initAnsers = [
+    const initAnswers = [
         {
             email: "mail@mail.com",
             username: "Mailman",
@@ -28,11 +28,33 @@ function Survey() {
         },
     ];
 
+    const initApiRequest = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    let apiInitAnswers;
+
     // eslint-disable-next-line no-unused-vars
     const [open, setOpen] = useState(false); //Ignore this state
     const [formData, setFormData] = useState({ ...initForm });
-    const [answers, setAnswers] = useState([...initAnsers]);
+    const [answers, setAnswers] = useState([...initAnswers]);
     const [editIndex, setEditIndex] = useState(-1);
+
+    const getInitData = useCallback(async () => {
+        const response = await fetch(
+            "http://localhost:3000/surveys",
+            initApiRequest
+        );
+        apiInitAnswers = await response.json();
+        console.log(apiInitAnswers);
+        setAnswers([...apiInitAnswers]);
+    }, [setAnswers]);
+
+    useEffect(() => {
+        getInitData();
+    }, [getInitData]);
 
     const dataChanged = (event) => {
         const newData = { ...formData };
@@ -44,6 +66,22 @@ function Survey() {
         event.preventDefault();
         console.log(formData);
 
+        const apiPostRequest = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        };
+
+        const apiPutRequest = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        };
+
         if (
             formData.email.trim() === "" ||
             formData.username.trim() === "" ||
@@ -54,13 +92,37 @@ function Survey() {
             return;
         }
         if (editIndex === -1) {
-            setAnswers([...answers, { ...formData }]);
+            //setAnswers([...answers, { ...formData }]);s
+            fetch("http://localhost:3000/surveys", apiPostRequest);
+            getInitData();
         } else {
             const newAnswers = [...answers];
             newAnswers[editIndex] = { ...formData };
-            setAnswers([...newAnswers]);
+            fetch(
+                "http://localhost:3000/surveys/" + answers[editIndex].id,
+                apiPutRequest
+            );
+            getInitData();
             setEditIndex(-1);
         }
+
+        setFormData({ ...initForm });
+    };
+
+    const deleteAnswer = async (event) => {
+        const apiDelteRequest = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        };
+        await fetch(
+            "http://localhost:3000/surveys/" + answers[event.target.id].id,
+            apiDelteRequest
+        );
+        await getInitData();
+        setEditIndex(-1);
         setFormData({ ...initForm });
     };
 
@@ -74,7 +136,11 @@ function Survey() {
         <main className="survey">
             <section className={`survey__list ${open ? "open" : ""}`}>
                 <h2>Answers list</h2>
-                <AnswersList answersList={answers} editAnswer={editAnswer} />
+                <AnswersList
+                    answersList={answers}
+                    editAnswer={editAnswer}
+                    deleteAnswer={deleteAnswer}
+                />
             </section>
             <section className="survey__form">
                 <form className="form" onSubmit={submitSurvey}>

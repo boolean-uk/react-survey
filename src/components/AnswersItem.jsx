@@ -26,6 +26,7 @@ export default function AnswersItem({
     answerItem: { username, color, spentTime, review },
     id,
     editAnswer,
+    deleteAnswer,
 }) {
     return (
         <li>
@@ -49,6 +50,9 @@ export default function AnswersItem({
                 </p>
                 <button id={id} onClick={editAnswer}>
                     Edit
+                </button>
+                <button id={id} onClick={deleteAnswer}>
+                    Delete
                 </button>
             </article>
         </li>
