@@ -2,15 +2,45 @@ import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadoButtons";
 
 
-const Form = () => {
-
+const Form = (props) => {
+    
+    const {setAnswersList, answersList} = props ?? {}
 
     const onSubmit = (event) => {
         event.preventDefault();
-        for(let i = 0; i < event.target.length - 1; i++) {
-            console.log(event.target[i].value)
+        let answerItem = {
+            
         }
+        for(let i = 0; i < event.target.length - 1; i++) {
+            if(event.target[i].checked ) {
+                if(event.target[i].name === "color")
+                    answerItem.colour = event.target[i].value;
+                
+                }      
+                
+                if(event.target[i].name === "spend-time") {
+                    answerItem.timeSpent = event.target[i].value;
+                }
+
+                if(event.target[i].name === "review") {
+                    answerItem.review = event.target[i].value;
+                }
+                
+                if(event.target[i].name === "username") {
+                    answerItem.username = event.target[i].value;
+                }
+
+
+                event.target[i].value = "";
+                event.target[i].checked = false;
+        }
+
+        setAnswersList([...answersList, answerItem])
+
     }
+
+
+    // answerItem: { username, colour, timeSpent, review }
 
     return (
         
