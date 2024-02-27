@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
