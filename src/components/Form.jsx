@@ -2,52 +2,25 @@ import PropTypes from "prop-types";
 
 export default function Form({
 	answers,
-	setAnswers,
 	formData,
 	setFormData,
-	INITIAL_FORM_DATA,
+	postAnswer,
+	editAnswer,
 }) {
-	// setFormData(INITIAL_FORM_DATA);
-
-	const logAnswers = () => {
-		console.log("Id:", formData.id);
-		console.log("Color rating:", formData.color);
-		console.log("How time spent:", formData.timeSpent);
-		console.log("Review:", formData.review);
-		console.log("Username:", formData.username);
-		console.log("Email:", formData.email);
-	};
-
-	const handleSubmit = (event) => {
+	const handleSurveySubmit = (event) => {
 		event.preventDefault();
 
-		const isEditing = answers.some((answer) => answer.id === formData.id);
-
-		const updatedAnswers = isEditing
-			? answers.map(
-					(answer) =>
-						answer.id === formData.id ? { ...formData } : { ...answer }
-					// eslint-disable-next-line no-mixed-spaces-and-tabs
-			  )
-			: () => {
-					const formDataWithId = { ...formData, id: answers.length };
-					setFormData(formDataWithId);
-					return [...answers, formData];
-					// eslint-disable-next-line no-mixed-spaces-and-tabs
-			  };
-
-		setAnswers(updatedAnswers);
-		logAnswers();
-
-		setFormData(INITIAL_FORM_DATA);
+		if (answers.find((answer) => answer.id === formData.id)) {
+			editAnswer(formData.id, formData);
+		} else {
+			postAnswer(formData);
+		}
 	};
 
 	const handleInput = (event) => {
 		const { type, name, value } = event.target;
-		console.log(type, name, value);
 
 		const updateCheckboxArray = () => {
-			console.log("Name", name);
 			if (formData[name].includes(value)) {
 				return {
 					...formData,
@@ -69,10 +42,9 @@ export default function Form({
 				setFormData({ ...formData, [name]: value });
 				break;
 		}
-		console.log(formData);
 	};
 	return (
-		<form className="form" onSubmit={handleSubmit}>
+		<form className="form" onSubmit={handleSurveySubmit}>
 			<h2>Tell us what you think about your rubber duck!</h2>
 			<div className="form__group radio">
 				<h3>How do you rate your rubber duck color?</h3>
@@ -211,8 +183,8 @@ export default function Form({
 
 Form.propTypes = {
 	answers: PropTypes.array,
-	setAnswers: PropTypes.func,
 	formData: PropTypes.object,
 	setFormData: PropTypes.func,
-	INITIAL_FORM_DATA: PropTypes.object,
+	postAnswer: PropTypes.func,
+	editAnswer: PropTypes.func,
 };

@@ -1,20 +1,25 @@
 import AnswersItem from "./AnswersItem";
 import PropTypes from "prop-types";
 
-export default function AnswersList(props) {
-	console.log("Inside AnswersList: ", props);
-
-	const { answersList, setFormData } = props;
+export default function AnswersList({
+	answersList,
+	setFormData,
+	deleteAnswer,
+}) {
+	// console.log("Inside AnswersList: ", answersList);
 
 	return (
 		<ul>
-			{answersList.map((answerItem, i) => (
-				<AnswersItem
-					answerItem={answerItem}
-					setFormData={setFormData}
-					key={i}
-				/>
-			))}
+			{answersList.map((answerItem) => {
+				return (
+					<AnswersItem
+						key={answerItem.id}
+						answerItem={answerItem}
+						setFormData={setFormData}
+						deleteAnswer={deleteAnswer}
+					/>
+				);
+			})}
 		</ul>
 	);
 }
@@ -22,4 +27,5 @@ export default function AnswersList(props) {
 AnswersList.propTypes = {
 	answersList: PropTypes.array,
 	setFormData: PropTypes.func,
+	deleteAnswer: PropTypes.func,
 };

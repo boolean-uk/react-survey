@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+// import deleteAnswer from "../httpRequests/deleteAnswer";
 
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
@@ -26,6 +27,7 @@ export default function AnswersItem({
 	// Rememeber here we're destructuring answerItem, which is the prop name that we've passed
 	answerItem: { id, username, color, timeSpent, review, email },
 	setFormData,
+	deleteAnswer,
 }) {
 	const handleEdit = () => {
 		setFormData({
@@ -37,6 +39,7 @@ export default function AnswersItem({
 			email: email,
 		});
 	};
+
 	return (
 		<li>
 			<article className="answer">
@@ -54,6 +57,13 @@ export default function AnswersItem({
 					<span className="answer__line">{review}</span>
 				</p>
 				<button onClick={handleEdit}>Edit</button>
+				<button
+					onClick={() => {
+						deleteAnswer(id);
+					}}
+				>
+					Delete
+				</button>
 			</article>
 		</li>
 	);
@@ -62,6 +72,7 @@ export default function AnswersItem({
 AnswersItem.propTypes = {
 	answerItem: PropTypes.object,
 	setFormData: PropTypes.func,
+	deleteAnswer: PropTypes.func,
 };
 
 ItemsList.propTypes = {
