@@ -55,18 +55,28 @@ function Survey() {
       })
       .catch(error => console.error('Error adding new answer:', error));
     }
+  }
 
-    setForm(emptyForm);
+  const handleDelete = (id) => {
+    fetch(`http://localhost:3000/answers/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        setAnswers(prevAnswers => prevAnswers.filter(answer => answer.id !== id));
+      }
+    })
+    .catch(error => console.error('Error deleting answer:', error));
   }
 
   useEffect(() => {
-    console.log("Answers updated:", answers);
+    setForm(emptyForm)
   }, [answers]);
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
-        <AnswersList setForm={setForm} answersList={answers} highlightedItemId={form.id} />
+        <AnswersList setForm={setForm} answersList={answers} highlightedItemId={form.id} handleDelete={handleDelete}/>
       </section>
       <section className="survey__form">
         <SurveyForm form={form} setForm={setForm} HandleSubmit={HandleSubmit}/>

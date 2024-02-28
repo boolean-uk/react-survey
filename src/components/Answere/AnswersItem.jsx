@@ -20,8 +20,9 @@ function ItemsList({ list }) {
 
 // This is the main component being exported from this file
 export default function AnswersItem({
-  answerItem: { colorRating, spendTime, text, name},
-  highlighted
+  answerItem: { id, colorRating, spendTime, text, name},
+  highlighted,
+  handleDelete
 }) {
   return (
     <div >
@@ -39,6 +40,7 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{text}</span>
         </div>
+        <button onClick={() => handleDelete(id)}>Delete</button>
       </article>
     </div>
   );
