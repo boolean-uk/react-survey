@@ -1,0 +1,88 @@
+{
+  "answers": [
+    {
+      "id": "g111",
+      "q1": [
+        "It´s yellow!"
+      ],
+      "q2": [
+        "It´s yellow!"
+      ],
+      "q3": 1,
+      "q4": "I like it",
+      "q5": "Elsa DB Duck",
+      "q6": "Elsa@duckduck.go"
+    },
+    {
+      "id": "sss",
+      "q1": [
+        "It has a logo",
+        "It´s big"
+      ],
+      "q2": [
+        "It squeeks"
+      ],
+      "q3": "1",
+      "q4": "blabla",
+      "q5": "Dona",
+      "q6": "dona@diaper.no"
+    },
+    {
+      "id": "fff",
+      "q1": [
+        "It has a logo",
+        "It´s big"
+      ],
+      "q2": [
+        "It squeeks"
+      ],
+      "q3": "1",
+      "q4": "It is friendly of course",
+      "q5": "Dona",
+      "q6": "dona@diaper.no"
+    },
+    {
+      "id": "3",
+      "q1": [
+        "It´s yellow!",
+        "It has a logo",
+        "It squeeks",
+        "It´s big"
+      ],
+      "q2": [
+        "It has a logo"
+      ],
+      "q3": "",
+      "q4": "",
+      "q5": "IMPORTANT P",
+      "q6": "donald@gmail.com"
+    },
+    {
+      "id": "4",
+      "q1": [],
+      "q2": [],
+      "q3": "",
+      "q4": "",
+      "q5": "",
+      "q6": "Elsa@duckduck.go"
+    },
+    {
+      "id": "5",
+      "q1": [],
+      "q2": [],
+      "q3": "",
+      "q4": "",
+      "q5": "",
+      "q6": "Bobbly@no.no"
+    },
+    {
+      "id": "6",
+      "q1": [],
+      "q2": [],
+      "q3": "",
+      "q4": "",
+      "q5": "",
+      "q6": "Elsa@duckduck.go"
+    }
+  ]
+}
