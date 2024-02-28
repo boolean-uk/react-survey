@@ -6,12 +6,12 @@
         "color": true,
         "sound": false,
         "logo": false,
-        "size": false
+        "size": true
       },
       "nagFeatures": {
         "color": false,
-        "sound": true,
-        "logo": false,
+        "sound": false,
+        "logo": true,
         "size": false
       },
       "timeSpent": {
@@ -23,9 +23,9 @@
       "consistencyRating": "2",
       "colourRating": "2",
       "duckRating": "2",
-      "username": "myName",
-      "review": "quack",
-      "submitterEmail": "email@email.com"
+      "username": "Scrooge McDuck",
+      "review": "It cost too much",
+      "submitterEmail": "Scrooge@McDuck.org"
     },
     {
       "id": "e91d",
@@ -53,6 +53,33 @@
       "username": "Donald Duck",
       "review": "Quack Quack Quack Quack Quack Quack Quack Quack Quack",
       "submitterEmail": "Donald@duck.org"
+    },
+    {
+      "id": "3e46",
+      "bestFeatures": {
+        "color": false,
+        "sound": true,
+        "logo": true,
+        "size": false
+      },
+      "nagFeatures": {
+        "color": true,
+        "sound": false,
+        "logo": true,
+        "size": false
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "consistencyRating": "1",
+      "colourRating": "1",
+      "duckRating": "1",
+      "username": "DeleteMe",
+      "review": "This is a spam submission, delete me.",
+      "submitterEmail": "Delete@me.com"
     }
   ]
 }

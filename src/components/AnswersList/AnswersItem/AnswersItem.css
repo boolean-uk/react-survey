@@ -1,12 +1,28 @@
-.edit_answer_button {
+.button_container {
     position: relative;
-    top: 12%;
-    left: 95%;
+    top: 5px;
+    left: 88%;
     border: none;
 }
 
-.edit_answer_button > img {
-    width: 1rem;
+.button_container > * {
+    margin-left: 4px;
+}
+
+.button_container > div {
+    position: absolute;
+    left: -160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_container > div > * {
+    margin-left: 2px;
+}
+
+.button_container > * > img{
+    height: 25px;
     border: none;
 }
 

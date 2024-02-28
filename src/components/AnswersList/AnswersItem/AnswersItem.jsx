@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { propertySetQualities, propertySetTime } from "../../../constants.js"
 import "./AnswersItem.css"
+import DeleteEntryButton from "./DeleteEntryButton/DeleteEntryButton.jsx"
 import editButton from "../../../assets/icons/pencil-icon.webp"
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
@@ -19,15 +20,18 @@ function ItemsList({ list, objectSet}) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem, editEntry
+  answerItem, editEntry, deleteEntry
 }) {
-  const { username, colourRating, timeSpent, review, bestFeatures, nagFeatures} = answerItem
+  const { id, username, colourRating, timeSpent, review, bestFeatures, nagFeatures} = answerItem
   return (
     <li>
       <article className="answer">
-        <button className="edit_answer_button" onClick={() => editEntry(answerItem)}>
-          <img src={editButton} />
-        </button>
+        <div className="button_container">
+          <DeleteEntryButton entryID={id} deleteFunc={deleteEntry}/>
+          <button className="edit_answer_button" onClick={() => editEntry(answerItem)}>
+            <img src={editButton} />
+          </button>
+        </div>
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
@@ -61,7 +65,9 @@ ItemsList.propTypes = {
 
 AnswersItem.propTypes = {
   editEntry: PropTypes.func,
+  deleteEntry: PropTypes.func,
   answerItem: PropTypes.object,
+  id: PropTypes.string,
   username: PropTypes.string,
   colourRating: PropTypes.number,
   timeSpent: PropTypes.array,
