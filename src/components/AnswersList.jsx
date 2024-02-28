@@ -1,14 +1,14 @@
-import AnswersItem from "./AnswersItem";
+import AnswersItemComponent from "./AnswersItem";
 
-export default function AnswersList(props) {
+export default function AnswersListComponent(props) {
   console.log("Inside AnswersList: ", props);
 
-  const { answersList } = props;
+  const { surveys, setSelected, setSurvey } = props;
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {surveys.map((survey, i) => (
+        <AnswersItemComponent survey={survey} key={i} setSurvey={setSurvey}/>
       ))}
     </ul>
   );
