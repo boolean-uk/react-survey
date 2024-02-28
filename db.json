@@ -1,7 +1,7 @@
 {
   "Surveys": [
     {
-      "id": 1,
+      "id": "1",
       "colour": "3",
       "timeSpent": [
         "bathing"
@@ -11,7 +11,7 @@
       "email": "email"
     },
     {
-      "id": 2,
+      "id": "2",
       "colour": "3",
       "timeSpent": [
         "bathing"
@@ -21,17 +21,48 @@
       "email": "d"
     },
     {
-      "id": 1,
-      "colour": "3",
+      "id": "3",
+      "colour": "2",
       "timeSpent": [
-        "noTime",
-        "chatting",
-        "bathing",
-        "swimming"
+        "chatting"
       ],
-      "review": "Text",
-      "username": "Something",
-      "email": "email"
+      "review": "Index?",
+      "username": "user",
+      "email": "mail"
+    },
+    {
+      "id": "4",
+      "colour": "2",
+      "timeSpent": [],
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "5",
+      "colour": null,
+      "timeSpent": [],
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": 6,
+      "colour": "2",
+      "timeSpent": [
+        "chatting"
+      ],
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": 7,
+      "colour": "2",
+      "timeSpent": [],
+      "review": "",
+      "username": "",
+      "email": ""
     }
   ]
 }

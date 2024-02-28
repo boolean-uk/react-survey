@@ -23,17 +23,27 @@ function Survey() {
   fetchdata()
   }, [])
 
-  let index = Math.max.apply(0, answersList.map((o) => o.id))
-  if ( index == null || index < 0 ) index = 0;
+  const [index, setIndex] = useState(0);
+  
+  useEffect(() => {
+    if ( answersList.length > 0 ) {
+      let i = Math.max.apply(0, answersList.map((o) => o.id)) + 1
+      setIndex(i)
+      setInput(resetInput(i))
+    }
+      
+    console.log("index, ", index)
+  }, [answersList]);
 
-
-  const resetInput = () => {
-    ++index
-    return {id: index, colour: null, timeSpent: [], review: '', username: '', email: ''}
+  const resetInput = (i) => {
+    console.log("index, reset, ", index)
+    return {id: i || index, colour: null, timeSpent: [], review: '', username: '', email: ''}
   }
 
   const [edit, setEdit] = useState(-1)
   const [input, setInput] = useState(resetInput())
+
+
 
   const submit = (e) => {
     e.preventDefault()
@@ -43,7 +53,7 @@ function Survey() {
         method: "POST",
         body: JSON.stringify(input)
       }
-      fetch(url, apiRequest);
+      fetch(url, apiRequest).then(res => console.log(res.json()))
     }
     else{
       let alteredList = [...answersList]
