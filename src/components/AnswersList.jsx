@@ -7,7 +7,7 @@ export default function AnswersList(props) {
   return (
     <ul>
       {answersList.map((answerItem, i) => (
-        <AnswersItem key={i} id={i} answerItem={answerItem} editAnswer={props.editAnswer} />
+        <AnswersItem key={i} id={i} answerItem={answerItem} editAnswer={props.editAnswer} deleteAnswer={props.deleteAnswer} />
       ))}
     </ul>
   );
@@ -15,5 +15,6 @@ export default function AnswersList(props) {
 
 AnswersList.propTypes = {
   answersList: PropTypes.array.isRequired,
-  editAnswer: PropTypes.func.isRequired
+  editAnswer: PropTypes.func.isRequired,
+  deleteAnswer: PropTypes.func.isRequired
 }
