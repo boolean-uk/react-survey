@@ -196,3 +196,100 @@ h2 {
 .form__submit:hover {
   background-color: white;
 }
+
+/* Fancy Animations */
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Additional Fancy Styles */
+
+.header__logo {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+.survey__list {
+  box-shadow: var(--survey-shadow);
+  background-color: var(--background-two);
+  border: 2px solid var(--primary-colour);
+}
+
+.answer {
+  border: 2px solid var(--primary-colour);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.answer:hover {
+  transform: translateY(-5px);
+}
+
+.form {
+  animation: slideInFromLeft 1s ease-in-out;
+}
+
+.form__submit {
+  background-color: var(--primary-colour);
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.form__submit:hover {
+  background-color: #1e53c5;
+  cursor: pointer;
+  animation: pulse 1s infinite;
+}
+
+/* Responsive Styling */
+
+@media screen and (max-width: 768px) {
+  .survey__list {
+    width: 90vw;
+  }
+  
+  .form__submit {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .survey__list {
+    width: 95vw;
+  }
+  
+  .form__submit {
+    width: 80%;
+  }
+}
