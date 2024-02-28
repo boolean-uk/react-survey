@@ -1,15 +1,18 @@
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
+function AnswersList({savedForms}) {
 
-  const { answersList } = props;
+  // console.log("Inside AnswersList: ", savedForms);
+
+  // const { answersList } = savedForms;
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {savedForms.map((savedForms, i) => (
+        <AnswersItem savedForms={savedForms} key={i} />
       ))}
     </ul>
   );
 }
+
+export default AnswersList

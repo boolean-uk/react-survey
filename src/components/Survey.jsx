@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RadioGroup from "./RadioGroup";
 import CheckboxGroup from "./CheckboxGroup";
+import AnswersList from "./AnswersList";
 
 function Survey() {
 
@@ -17,13 +18,20 @@ function Survey() {
 
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(initialFormState)
+  const [savedForms, setSavedForms] = useState([])
+
+  
+  useEffect(()=> {
+    console.log('USEEFFECT', savedForms)
+  }, [savedForms])
+
 
   function submitFunc(event){
     event.preventDefault()
 
     console.log(formData)
 
-    //TODO add form to array of answers
+    setSavedForms([...savedForms, formData]);
 
     setFormData(initialFormState)
   }
@@ -32,10 +40,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
-        <div>
-          <h4>ANSWER HERE</h4>
-        </div>
+        <AnswersList savedForms={savedForms}/>
       </section>
 
 
