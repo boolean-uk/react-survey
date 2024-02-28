@@ -31,7 +31,9 @@ export default function AnswersItem({
     review,
     email,
     id },
-  EditAnswer
+  EditAnswer,
+  DeleteAnswer
+
 })
  {
   return (
@@ -53,6 +55,7 @@ export default function AnswersItem({
           <span className="answer__line">{review}</span>
         </p>
         <button onClick = {() => EditAnswer({name, color, timeSpent, review, email, id})}>Edit</button>
+        <button onClick={() => DeleteAnswer(id)}>Delete</button>
       </article>
     </li>
   );
