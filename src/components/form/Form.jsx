@@ -1,46 +1,61 @@
+import { useState } from "react";
 import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadoButtons";
-
 
 const Form = (props) => {
     
     const {setAnswersList, answersList} = props ?? {}
+    const [state, setState] = useState(
+        {
+            id: 0,
+            color: "",
+            timeSpent: {
+                bathing: false,
+                swimming: false,
+                chatting: false,
+                noTime: false,    
+            },
+            username: "",
+            review: "",
+            email: "",
+        }
+    );
+
+    const handleChange = (event) => {
+        const {name, value, checked} = event.target;
+            if(name === "spend-time" ) {
+                setState({...state, timeSpent : {...state.timeSpent, [value] : checked}});
+            } else {
+                setState({...state, [name] : value})
+            }
+        
+        }
+    
+
 
     const onSubmit = (event) => {
         event.preventDefault();
-        let answerItem = {
-            
+
+        setState({...state, id: answersList.length})
+        setAnswersList([...answersList, state]);
+        const resetState = 
+        {
+            color: "",
+            timeSpent: {
+                bathing: false,
+                swimming: false,
+                chatting: false,
+                noTime: false,    
+            },
+            username: "",
+            review: "",
+            email: "",
         }
-        for(let i = 0; i < event.target.length - 1; i++) {
-            if(event.target[i].checked ) {
-                if(event.target[i].name === "color")
-                    answerItem.colour = event.target[i].value;
-                
-                }      
-                
-                if(event.target[i].name === "spend-time") {
-                    answerItem.timeSpent = event.target[i].value;
-                }
-
-                if(event.target[i].name === "review") {
-                    answerItem.review = event.target[i].value;
-                }
-                
-                if(event.target[i].name === "username") {
-                    answerItem.username = event.target[i].value;
-                }
-
-
-                event.target[i].value = "";
-                event.target[i].checked = false;
-        }
-
-        setAnswersList([...answersList, answerItem])
+        setState(resetState)
 
     }
 
 
-    // answerItem: { username, colour, timeSpent, review }
 
     return (
         
@@ -48,26 +63,32 @@ const Form = (props) => {
             <h2>Tell us what you think about your rubber duck!</h2>
             <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-                <RadioButtons />
+                <RadioButtons handleChange={handleChange} state={state} />
             </div>
             <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
-                <CheckBoxes />
+                <CheckBoxes handleChange={handleChange} state={state}/>
             </div>
             <label
             >What else have you got to say about your rubber duck?<textarea
                 name="review"
                 cols="30"
                 rows="10"
+                value={state.review}
+                onChange={handleChange}
             ></textarea></label>
             <label
             >Put your name here (if you feel like it):<input
                 type="text"
-                name="username"/></label>
+                name="username" 
+                value={state.username}
+                onChange={handleChange}/></label>
             <label
             >Leave us your email pretty please??<input
                 type="email"
-                name="email"/></label>
+                name="email" 
+                value={state.email}
+                onChange={handleChange}/></label>
             <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
     )
