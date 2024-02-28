@@ -28,6 +28,10 @@ h2 {
   text-align: center;
 }
 
+li {
+  justify-content: center;
+}
+
 #root {
   display: grid;
   min-height: 100vh;
@@ -99,10 +103,14 @@ h2 {
 .form {
   width: 80%;
   margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 2rem;
   background-color: var(--background-two);
   border-radius: 20px;
   box-shadow: var(--survey-shadow);
+  min-width: 500px;
 }
 
 .form > h2 {
@@ -112,6 +120,7 @@ h2 {
 .form h3 {
   font-weight: normal;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .form li {
@@ -119,13 +128,29 @@ h2 {
 }
 
 .form > label {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_label {
+  font-size: 0.9rem;
+}
+
+.side_label {
+  font-size: 0.75rem;
 }
 
 .form textarea {
   display: block;
   padding: 0.25rem;
   font-size: inherit;
+  padding: 0.5rem;
+  width: 80%;
+  font-size: 16px;
+  resize: none;
+  border-radius: 5px;
 }
 
 .form input[type="email"],
@@ -133,25 +158,39 @@ h2 {
   margin-top: 0.5rem;
   padding: 0.25rem;
   display: inline-block;
-  width: 100%;
+  width: 80%;
+  border-radius: 5px;
 }
 
-.form__group label {
-  display: inline-block;
-  margin-left: 2rem;
+.form__group {
+  margin: 0 auto;
+}
+
+.form__group li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem 0 1rem;
+}
+
+.form__group label, .form__group p {
   text-align: center;
 }
 
+.form__group ul, .form__group.radio ul {
+  display: flex;
+  justify-content: center;
+}
+
 .form__group.radio label {
-  margin: 0;
   padding: 1rem;
-  margin-left: 15%;
   border-radius: 10px;
 }
 
 .form__group.radio label:hover {
   background-color: white;
 }
+
 
 .form__group input {
   display: block;
@@ -162,6 +201,13 @@ h2 {
   margin: 0.5rem;
 }
 
+
+.side_label {
+  font-size: 0.75rem;
+  width: 2rem;
+  margin: 0 auto;
+}
+
 .form__group.radio input[type="radio"]:checked + label {
   background-color: var(--primary-colour);
   color: var(--background-two);
@@ -169,14 +215,6 @@ h2 {
 
 .form__group input[type="radio"] {
   display: none;
-}
-
-.form textarea {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: 16px;
-  resize: none;
 }
 
 .form > * + * {

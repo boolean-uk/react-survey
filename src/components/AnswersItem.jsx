@@ -1,13 +1,5 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
-
-const answersSet = {
-  swimming: "Swimming",
-  bathing: "Bathing",
-  chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
-};
-
 function ItemsList({ list }) {
   return (
     <ul>
