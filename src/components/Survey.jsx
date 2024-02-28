@@ -3,7 +3,6 @@ import { SurveyForm } from './Form/SurveyForm'
 import AnswersList from "./Answere/AnswersList";
 
 const emptyForm = {
-  id: 0,
   colorRating: 0,
   spendTime: [],
   text: '',
@@ -11,32 +10,50 @@ const emptyForm = {
   email: ''
 }
 
-let nextAnswerId = 1;
-
 function Survey() {
   // eslint-disable-next-line no-unused-vars
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(emptyForm)
   const [answers, setAnswers] = useState([])
   
+  useEffect(() => {
+    fetch('http://localhost:3000/answers')
+      .then(response => response.json())
+      .then(data => setAnswers(data))
+      .catch(error => console.error('Error fetching answers:', error));
+  }, []);
+
   const HandleSubmit = (e) => {
     e.preventDefault();
 
-    const formIndex = answers.findIndex(answer => answer.id === form.id);
-
-    if (formIndex !== -1) {
-      setAnswers(prevAnswers => {
-        return prevAnswers.map((answer, index) => {
-          if (index === formIndex)
-            return form;
-          else
-            return answer;
+    if (form.id) {
+      fetch(`http://localhost:3000/answers/${form.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
+      .then(response => response.json())
+      .then(updatedAnswer => {
+        setAnswers(prevAnswers => {
+          return prevAnswers.map(answer => answer.id === updatedAnswer.id ? updatedAnswer : answer);
         });
-      });
-    }
-    else {
-      const formWithId = {...form, id: nextAnswerId++}
-      setAnswers(prevAnswers => [formWithId, ...prevAnswers]);
+      })
+      .catch(error => console.error('Error updating answer:', error));
+    } else {
+      fetch('http://localhost:3000/answers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
+      .then(response => response.json())
+      .then(newAnswer => {
+        setAnswers(prevAnswers => [newAnswer, ...prevAnswers]);
+      })
+      .catch(error => console.error('Error adding new answer:', error));
     }
 
     setForm(emptyForm);
