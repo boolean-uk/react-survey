@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AnswersList from './AnswersList/AnswersList.jsx'
 import NewAnswer from "./NewAnswer.jsx"
 import { defaultObject } from "../constants.js";
