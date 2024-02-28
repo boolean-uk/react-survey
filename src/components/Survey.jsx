@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswersList from "./AnswersList";
+
+// json server oppretter id for objekter automatiask når de blir lagt inn
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state 
@@ -8,6 +10,7 @@ function Survey() {
     on: false
   })   
   const [form, setForm] = useState({
+    id: "",
     color: "1",
     "spend-time": [],
     review: "",
@@ -19,17 +22,58 @@ function Survey() {
   const handleSubmit = (event) =>{
     event.preventDefault()
     if (edit.on){
-      let answersCopy = [...answers].splice(edit.index,1,form)
-      setAnswers(answersCopy)
+      fetch(`http://localhost:3000/ans/${form.id.toString()}`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(form)
+      })
+      .then(response => {
+        if (response.ok){
+          fetchAnswers()
+        }
+      })
       setEdit({
         index: null,
         on: false
-      })
+      })      
     }
     else{
-      setAnswers([...answers,form])
+      const index = answers.length === 0 ? 1 : (Number(answers[answers.length-1].id) + 1).toString()  
+      const currForm = {...form, id: index}         
+      fetch(`http://localhost:3000/ans/`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body:  JSON.stringify(currForm)
+      })
+      .then(response => {
+        if (response.ok){          
+          fetchAnswers()
+        }
+        else{console.log("feil i fetch")}
+      })          
     }
     clearForm()
+  }
+
+  const deleteAnswer = (id) => {
+    fetch(`http://localhost:3000/ans/${id.toString()}`,{
+      method: 'DELETE'
+    })        
+    .then(response => {
+      if (response.ok){
+        fetchAnswers()
+        if(id === form.id){
+          clearForm()
+          setEdit({
+            index: null,
+            on: false
+          })      
+        }
+      }
+      else{
+        console.log("delete request failed")        
+      }
+    })
   }
 
   const editForm = (index) => {
@@ -80,7 +124,21 @@ function Survey() {
     )
     radios.push(radio)
   }    
-  
+
+  const fetchAnswers = () =>{    
+    fetch("http://localhost:3000/ans/",{
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then((data) => {      
+      setAnswers(data)
+    })     
+  }
+
+  useEffect(() =>{   
+   fetchAnswers();               
+  },[])
+  console.log(form)
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
@@ -101,7 +159,8 @@ function Survey() {
                   <p>{a.review}</p>
                 </li>
               </ul>
-              <button onClick={() => editForm(index)} >Edit</button>
+              <button onClick={() => editForm(index)}>Edit</button>
+              <button onClick={() => deleteAnswer(a.id)}>Delete</button>
             </div>
           ))}        
       </section>
@@ -200,5 +259,4 @@ function Survey() {
     </main>
   );
 }
-
 export default Survey;
