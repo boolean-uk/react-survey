@@ -3,19 +3,11 @@ import PropTypes from 'prop-types'
 
 Form.propTypes = {
     setAnswer: PropTypes.func,
-    answers: PropTypes.array
+    formData: PropTypes.object,
+    setFormData: PropTypes.func
 }
 
-function Form({setAnswers,answers}) {
-    
-    const [formData, setFormData] = useState({
-        color: 0,
-        timeSpent: [],
-        review: "",
-        name: "",
-        email: "",
-      });
-
+function Form({setAnswers,setFormData, formData}) {
 
     const handleInput = (event) =>{
         const {name, type, value} = event.target;

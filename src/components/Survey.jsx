@@ -5,10 +5,17 @@ import AnswersList from "./AnswersList";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [answers, setAnswers] = useState([])
+  const [formData, setFormData] = useState({
+    color: 0,
+    timeSpent: [],
+    review: "",
+    name: "",
+    email: "",
+  });
 
-  useEffect(() => {
-    console.log(answers)
-  }, [answers])
+  // useEffect(() => {
+  //   console.log(answers)
+  // }, [answers])
   
 
   return (
@@ -18,7 +25,7 @@ function Survey() {
         <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
-        <Form setAnswers ={setAnswers} answers = {answers}/>
+        <Form setAnswers ={setAnswers} setFormData = {setFormData} formData={formData}/>
       </section>
     </main>
   );
