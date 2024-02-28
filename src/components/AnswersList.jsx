@@ -1,8 +1,9 @@
 import AnswersItem from "./AnswersItem";
 
+// This file is to render ALL of the answers!
+
 export default function AnswersList(props) {
   console.log("Inside AnswersList: ", props);
-
   const { answersList } = props;
 
   return (
