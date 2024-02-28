@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 function Survey() {
   // state fields 
@@ -11,7 +12,19 @@ function Survey() {
     time: [],
     colour: ""
   }
+
+  const initialAnswers = [
+    {
+    email: "ernie@sesame.com",
+    username: "Ernie",
+    review: "Rubber duckie you're the one, You make bath time lots of fun!",
+    time:  ['bathing', 'swimming', 'chatting'],
+    colour: 4
+    }
+  ]
+
   const [form, setForm] = useState(initialForm)
+  const [answers, setAnswers] = useState(initialAnswers)
 
   // generic input handler for all except checkboxes
   const handleInput = (event) => {
@@ -36,6 +49,8 @@ function Survey() {
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(form)
+    //extension 1, save to state
+    setAnswers([...answers, {...form}])
     //reset form
     setForm({...initialForm})
   }
@@ -44,7 +59,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answers}/>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
