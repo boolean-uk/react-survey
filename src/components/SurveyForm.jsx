@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react';
 
 
 // Defining propsTypes:
@@ -38,7 +37,8 @@ export default function SurveyForm(props) {
           timeSpent: formData.timeSpent
         },
       ]);
-      setFormData({ 
+       // NEW EMPTY formdata when submit is pressed.
+        setFormData({ 
         username: '',
         email: '',
         features: [],
@@ -47,10 +47,15 @@ export default function SurveyForm(props) {
         colorRate: 0,
         logoRate: 0,
         timeSpent: [],
-        review: '' 
-    });       // NEW EMPTY formdata when submit is pressed.
+        review: ''
+        });    
+
+        // Reset checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
     
-        console.log(answers);
     }
 
     // Handling the input change
@@ -77,9 +82,6 @@ export default function SurveyForm(props) {
         
         else if (type === "radio" || type === "textarea" || type === "text" || type === "email") {
             setFormData({ ...formData, [name]: value });        //Same functionality as: formData[name] = value!
-            console.log({ ...formData, [name]: value });
-            
-            //console.log(formData);
         }
         
 
@@ -218,10 +220,10 @@ export default function SurveyForm(props) {
                 <h3> How do you like to spend time with your duck?</h3>
                 <ul>
                     {_timeSpent.map((f, index) => (
-                        <li key={index}>
+                        <li key={`ha-${index}`}>
                         <label
                         ><input
-                        onChange={handleInputChange}  
+                            onChange={handleInputChange}  
                             name="timeSpent"
                             type="checkbox"
                             value={f}
