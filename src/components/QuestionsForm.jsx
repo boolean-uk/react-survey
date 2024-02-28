@@ -10,6 +10,7 @@ export default function QuestionsForm ({ handleForm }) {
     const formDataObject = {};
     formData.forEach((value, key) =>
       (formDataObject[key] = value));
+    formDataObject.spendTime = formData.getAll('spendTime');
     handleForm(formDataObject);
     event.target.reset();
     console.log(formDataObject);
@@ -34,12 +35,10 @@ export default function QuestionsForm ({ handleForm }) {
       ></textarea></label>
       <label>Put your name here (if you feel like it):<input
         type="text"
-        name="username"
-        value="" /></label>
+        name="username" /></label>
       <label>Leave us your email pretty please??<input
         type="email"
-        name="email"
-        value="" /></label>
+        name="email" /></label>
         <input className="form__submit" type="submit" value="Submit Survey!" />
      </form>
   </>

@@ -6,7 +6,7 @@ export default function QuestionsFormCheckBoxes(){
         <li>
           <label
             ><input
-              name="spend-time"
+              name="spendTime"
               type="checkbox"
               value="swimming"
             />Swimming
@@ -14,7 +14,7 @@ export default function QuestionsFormCheckBoxes(){
         </li>
         <li>
           <label
-            ><input name="spend-time" type="checkbox" value="bathing" />
+            ><input name="spendTime" type="checkbox" value="bathing" />
             Bathing
           </label>
         </li>
@@ -30,7 +30,7 @@ export default function QuestionsFormCheckBoxes(){
         </li>
         <li>
           <label
-            ><input name="spend-time" type="checkbox" value="noTime" />
+            ><input name="spendTime" type="checkbox" value="noTime" />
             I don't like to spend time with it
           </label>
         </li>
