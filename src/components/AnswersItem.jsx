@@ -12,8 +12,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -21,9 +21,12 @@ function ItemsList({ list }) {
 
 // This is the main component being exported from this file
 export default function AnswersItem({ 
-  answerItem: {name, color, timeSpent, review }
+  answerItem: {name, color, timeSpent, review }, i, handleEdit
 }) 
 {
+  // function handleEdit(){
+  //   console.log("edit on index: "+i)
+  // }
   return (
     <li>
       <article className="answer">
@@ -32,18 +35,21 @@ export default function AnswersItem({
           <em>How do you rate your rubber duck color?</em>
           <span className="answer__line">{color}</span>
         </p>
-        <p>
+        
           <em>How do you like to spend time with your rubber duck?</em>
           <ItemsList list={timeSpent} />
-        </p>
+        
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={()=>handleEdit(i)}>Edit</button>
       </article>
     </li>
   );
 }
 AnswersItem.propTypes = {
-  answersItem: PropTypes.object
+  answersItem: PropTypes.object,
+  i: PropTypes.number,
+  handleEdit: PropTypes.func
 };

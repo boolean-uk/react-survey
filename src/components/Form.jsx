@@ -3,11 +3,14 @@ import PropTypes from 'prop-types'
 
 Form.propTypes = {
     setAnswer: PropTypes.func,
+    answers: PropTypes.array,
     formData: PropTypes.object,
-    setFormData: PropTypes.func
+    setFormData: PropTypes.func,
+    selectedAnswerIndex: PropTypes.number,
+    setSelectedAnswerIndex: PropTypes.func
 }
 
-function Form({setAnswers,setFormData, formData}) {
+function Form({answers, setAnswers,setFormData, formData, selectedAnswerIndex, setSelectedAnswerIndex}) {
 
     const handleInput = (event) =>{
         const {name, type, value} = event.target;
@@ -42,23 +45,33 @@ function Form({setAnswers,setFormData, formData}) {
             }
         }
     }
-    const addAnswer = (answer) => {        
-        setAnswers((prevAnswers) => [...prevAnswers, answer]);
-      }
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
-
-        addAnswer(formData); 
-            // Reset form and state
+      const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        if (selectedAnswerIndex !== null) {
+          // Update the answer at the selected index
+          setAnswers((prevAnswers) => {
+            const updatedAnswers = [...prevAnswers];
+            updatedAnswers[selectedAnswerIndex] = formData;
+            return updatedAnswers;
+          });
+          console.log(answers[selectedAnswerIndex])
+        } else {
+          // Add a new answer
+          setAnswers((prevAnswers) => [...prevAnswers, formData]);
+        }
+    
         event.target.reset();
         setFormData({
-            color: 0,
-            timeSpent: [],
-            review: "",
-            name: "",
-            email: "",
+          color: 0,
+          timeSpent: [],
+          review: "",
+          name: "",
+          email: "",
         });
-    };
+    
+        setSelectedAnswerIndex(null);
+      };
 
     
     
@@ -70,22 +83,22 @@ function Form({setAnswers,setFormData, formData}) {
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
             <li>
-                <input id="color-one" type="radio" name="color" value="1" onChange={handleInput} />
+                <input id="color-one" type="radio" name="color" value="1" checked={formData.color === '1'} onChange={handleInput} />
                 <label htmlFor="color-one">1</label>
             </li>
             
             <li>
-                <input id="color-two" type="radio" name="color" value="2" onChange={handleInput}/>
+                <input id="color-two" type="radio" name="color" value="2" checked={formData.color === '2'} onChange={handleInput}/>
                 <label htmlFor="color-two">2</label>
             </li>
             
             <li>
-                <input id="color-three" type="radio" name="color" value="3" onChange={handleInput}/>
+                <input id="color-three" type="radio" name="color" value="3" checked={formData.color === '3'} onChange={handleInput}/>
                 <label htmlFor="color-three">3</label>
             </li>
             
             <li>
-                <input id="color-four" type="radio" name="color" value="4" onChange={handleInput}/>
+                <input id="color-four" type="radio" name="color" value="4" checked={formData.color === '4'} onChange={handleInput}/>
                 <label htmlFor="color-four">4</label>
             </li>
             </ul>
@@ -96,28 +109,36 @@ function Form({setAnswers,setFormData, formData}) {
             <ul>
             <li>
                 <label>
-                <input name="spend-time" type="checkbox" value="swimming" onClick={handleInput}/>
+                <input name="spend-time" type="checkbox" value="swimming" 
+                checked= {formData.timeSpent.includes('swimming')}
+                onClick={handleInput}/>
                 Swimming
                 </label>
             </li>
             
             <li>
                 <label>
-                <input name="spend-time" type="checkbox" value="bathing" onClick={handleInput}/>
+                <input name="spend-time" type="checkbox" value="bathing" 
+                checked= {formData.timeSpent.includes('bathing')}
+                onClick={handleInput}/>
                 Bathing
                 </label>
             </li>
             
             <li>
                 <label>
-                <input name="spend-time" type="checkbox" value="chatting" onClick={handleInput}/>
+                <input name="spend-time" type="checkbox" value="chatting" 
+                checked= {formData.timeSpent.includes('chatting')}
+                onClick={handleInput}/>
                 Chatting
                 </label>
             </li>
             
             <li>
                 <label>
-                <input name="spend-time" type="checkbox" value="noTime" onClick={handleInput} />
+                <input name="spend-time" type="checkbox" value="noTime" 
+                checked= {formData.timeSpent.includes('noTime')}
+                onClick={handleInput} />
                 I don't like to spend time with it
                 </label>
             </li>
@@ -126,7 +147,7 @@ function Form({setAnswers,setFormData, formData}) {
         
         <label>
             What else have you got to say about your rubber duck?
-            <textarea name="review" cols="30" rows="10" onChange={handleInput}></textarea>
+            <textarea name="review" cols="30" rows="10" value={formData.review} onChange={handleInput}></textarea>
         </label>
         
         <label>

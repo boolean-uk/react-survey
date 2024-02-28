@@ -12,20 +12,25 @@ function Survey() {
     name: "",
     email: "",
   });
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
   // useEffect(() => {
   //   console.log(answers)
   // }, [answers])
-  
+  const handleEdit = (index) => {
+    console.log(index)
+    setSelectedAnswerIndex(index);
+    setFormData(answers[index]);
+  };
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList answersList={answers} handleEdit={handleEdit}/>
       </section>
       <section className="survey__form">
-        <Form setAnswers ={setAnswers} setFormData = {setFormData} formData={formData}/>
+        <Form setAnswers ={setAnswers} answers={answers} setFormData = {setFormData} formData={formData} selectedAnswerIndex={selectedAnswerIndex} setSelectedAnswerIndex={setSelectedAnswerIndex}/>
       </section>
     </main>
   );
