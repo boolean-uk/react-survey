@@ -1,64 +1,18 @@
 {
   "Surveys": [
     {
-      "id": "1",
-      "colour": "3",
+      "colour": "2",
       "timeSpent": [
         "bathing"
       ],
-      "review": "A comment",
-      "username": "Name",
-      "email": "email"
-    },
-    {
-      "id": "2",
-      "colour": "3",
-      "timeSpent": [
-        "bathing"
-      ],
-      "review": "b",
-      "username": "c",
-      "email": "d"
-    },
-    {
-      "id": "3",
-      "colour": "2",
-      "timeSpent": [
-        "chatting"
-      ],
-      "review": "Index?",
-      "username": "user",
-      "email": "mail"
-    },
-    {
-      "id": "4",
-      "colour": "2",
-      "timeSpent": [],
-      "review": "",
+      "review": "No",
       "username": "",
-      "email": ""
+      "email": "",
+      "id": "7984"
     },
     {
-      "id": "5",
+      "id": "f3b0",
       "colour": null,
-      "timeSpent": [],
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": 6,
-      "colour": "2",
-      "timeSpent": [
-        "chatting"
-      ],
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": 7,
-      "colour": "2",
       "timeSpent": [],
       "review": "",
       "username": "",

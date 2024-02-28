@@ -17,27 +17,18 @@ function Survey() {
     const fetchdata = async () => {
       const response = await fetch(url);
       const newData = await response.json();
-      setAnswerList(newData)
+      setAnswerList(newData.reverse())
   };
 
   fetchdata()
   }, [])
-
-  const [index, setIndex] = useState(0);
   
   useEffect(() => {
-    if ( answersList.length > 0 ) {
-      let i = Math.max.apply(0, answersList.map((o) => o.id)) + 1
-      setIndex(i)
-      setInput(resetInput(i))
-    }
-      
-    console.log("index, ", index)
+    setInput(resetInput())
   }, [answersList]);
 
-  const resetInput = (i) => {
-    console.log("index, reset, ", index)
-    return {id: i || index, colour: null, timeSpent: [], review: '', username: '', email: ''}
+  const resetInput = () => {
+    return {colour: null, timeSpent: [], review: '', username: '', email: ''}
   }
 
   const [edit, setEdit] = useState(-1)
@@ -45,15 +36,16 @@ function Survey() {
 
 
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     if(edit == -1){
-      setAnswerList([input, ...answersList])
+
       const apiRequest = {
         method: "POST",
         body: JSON.stringify(input)
       }
-      fetch(url, apiRequest).then(res => console.log(res.json()))
+      let index = await fetch(url, apiRequest).then(res => res.json().then(data => data.id))
+      setAnswerList([{...input, id: index}, ...answersList])
     }
     else{
       let alteredList = [...answersList]
@@ -69,6 +61,13 @@ function Survey() {
 
     setInput(resetInput())
     setEdit(-1)
+  }
+
+  const del = (item) => {
+    fetch(url + `/${item.id}`, {
+      method: "DELETE"
+    })
+    setAnswerList(answersList.filter(elm => elm.id != item.id))
   }
 
   function textboxChange(e){
@@ -93,11 +92,12 @@ function Survey() {
 
 
 
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList} setEdit={setEdit}/>
+        <AnswersList answersList={answersList} setEdit={setEdit} delete={del}/>
       </section>
       <section className="survey__form">
         <form className="form">
