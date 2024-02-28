@@ -19,7 +19,7 @@ const INITIAL_FORM_DATA =
   const [answerData, setAnswerData] = useState(answerForms);
   const [haveChanges, setHaveChanged] = useState(-1);
 
-  // Handling submit
+
   const handleSubmit = (event) =>
   {
     event.preventDefault()
@@ -49,6 +49,12 @@ const INITIAL_FORM_DATA =
     setHaveChanged(-1)
   }
 
+  const deleteForm = (data) =>
+  {
+    answerForms.splice(data.index, 1)
+    setAnswerData([...answerForms])
+  }
+
   const handleInput = (event) =>
   {
     const { name, type, value, checked } = event.target
@@ -71,7 +77,7 @@ const INITIAL_FORM_DATA =
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answerData={answerData} editForm={editForm}/>
+        <AnswersList answerData={answerData} editForm={editForm} deleteForm={deleteForm}/>
       </section>
       <form className="form" onSubmit={haveChanges > -1 ? handleEditSubmit : handleSubmit}>
         <h2>Tell us what you think about your rubber duck!</h2>
