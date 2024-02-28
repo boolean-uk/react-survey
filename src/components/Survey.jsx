@@ -48,6 +48,11 @@ function Survey() {
     else{
       let alteredList = [...answersList]
       alteredList[edit] = input
+      const apiRequest = {
+        method: "PUT",
+        body: JSON.stringify(input)
+      }
+      fetch(url + `/${input.id}`, apiRequest)
       console.log("altered: ", alteredList)
       setAnswerList(alteredList)
     }
