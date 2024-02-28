@@ -1,0 +1,24 @@
+{
+    "surveys": [
+      {
+        "id": "1234",
+        "color": "4",
+        "timeSpent": [
+          "chatting"
+        ],
+        "review": "Good Lad",
+        "name": "Jensemann",
+        "email": "user@user.com"
+      },
+      {
+        "id": "4321",
+        "color": "2",
+        "timeSpent": [
+          "swimming"
+        ],
+        "review": "Very Fast",
+        "name": "Not Jensemann",
+        "email": "user2@user2.com"
+      }
+    ]
+  }
