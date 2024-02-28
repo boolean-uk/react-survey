@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswersList from './AnswersList/AnswersList.jsx'
 import NewAnswer from "./NewAnswer.jsx"
 import { defaultObject } from "../constants.js";
@@ -9,7 +9,29 @@ function Survey() {
   const [submittedForms, setSubmittedForms] = useState([])
   const [editEntry, setEditEntry] = useState(undefined)
 
-  const addData = (dataObject) => {
+  useEffect(() => {
+    retrieveSubmittedForms()
+  }, [])
+
+  const retrieveSubmittedForms = async () => {
+    await fetch("http://localhost:3000/forms")
+      .then((res) =>  res.json())
+      .then((objects) => setSubmittedForms([...objects]))
+  }
+
+  const postForm = async (form) => {
+    // Resource: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    const request = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(form)
+    }
+    await fetch("http://localhost:3000/forms", request)
+  }
+
+  const addData = async (dataObject) => {
     if (editEntry !== undefined) {
       setSubmittedForms((submittedForms) => {
         const formsUpdated = [...submittedForms]
@@ -18,7 +40,8 @@ function Survey() {
       })
       setEditEntry(undefined)
     } else {
-      setSubmittedForms([dataObject, ...submittedForms])
+      await postForm(dataObject)
+      retrieveSubmittedForms()
     }
   }
 

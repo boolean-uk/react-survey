@@ -1,0 +1,58 @@
+{
+  "forms": [
+    {
+      "id": "44d4",
+      "bestFeatures": {
+        "color": true,
+        "sound": false,
+        "logo": false,
+        "size": false
+      },
+      "nagFeatures": {
+        "color": false,
+        "sound": true,
+        "logo": false,
+        "size": false
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": true,
+        "chatting": false,
+        "noTime": false
+      },
+      "consistencyRating": "2",
+      "colourRating": "2",
+      "duckRating": "2",
+      "username": "myName",
+      "review": "quack",
+      "submitterEmail": "email@email.com"
+    },
+    {
+      "id": "e91d",
+      "bestFeatures": {
+        "color": true,
+        "sound": false,
+        "logo": false,
+        "size": true
+      },
+      "nagFeatures": {
+        "color": false,
+        "sound": true,
+        "logo": false,
+        "size": false
+      },
+      "timeSpent": {
+        "swimming": false,
+        "bathing": true,
+        "chatting": true,
+        "noTime": false
+      },
+      "consistencyRating": "3",
+      "colourRating": "4",
+      "duckRating": "3",
+      "username": "Donald Duck",
+      "review": "Quack Quack Quack Quack Quack Quack Quack Quack Quack",
+      "submitterEmail": "Donald@duck.org"
+    }
+  ]
+}
