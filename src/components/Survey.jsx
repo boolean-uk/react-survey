@@ -14,11 +14,7 @@ function Survey() {
   });
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(answers)
-  // }, [answers])
   const handleEdit = (index) => {
-    console.log(index)
     setSelectedAnswerIndex(index);
     setFormData(answers[index]);
   };

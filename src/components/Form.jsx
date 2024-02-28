@@ -55,7 +55,6 @@ function Form({answers, setAnswers,setFormData, formData, selectedAnswerIndex, s
             updatedAnswers[selectedAnswerIndex] = formData;
             return updatedAnswers;
           });
-          console.log(answers[selectedAnswerIndex])
         } else {
           // Add a new answer
           setAnswers((prevAnswers) => [...prevAnswers, formData]);
