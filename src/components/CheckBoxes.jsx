@@ -5,16 +5,11 @@ export function CheckBoxes({input, setInput}) {
     const alterValue = (value) => {
         // check if value is in timeSpent, then remove or add
         if ( input.timeSpent.includes(value)){
-            
-            const index = input.timeSpent.indexOf(value);
-            let alteredList = input.timeSpent;
-            alteredList.splice(index, 1)
 
-            setInput({...input, timeSpent: alteredList})
+            setInput({...input, timeSpent: input.timeSpent.filter(elm => elm != value)})
+
         }else{
-            let alteredList = input.timeSpent;
-            alteredList.push(value)
-            setInput({...input, timeSpent: alteredList})
+            setInput({...input, timeSpent: [...input.timeSpent, value]})
         }
 
     }

@@ -6,28 +6,68 @@ import { CheckBoxes } from "./CheckBoxes";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  const url = "http://localhost:3000/Surveys"
+
+  
+  const [answersList, setAnswerList] = useState([])
+
+  // Initial get of server
+  useEffect(() =>{
+
+    const fetchdata = async () => {
+      const response = await fetch(url);
+      const newData = await response.json();
+      setAnswerList(newData.reverse())
+  };
+
+  fetchdata()
+  }, [])
+  
+  useEffect(() => {
+    setInput(resetInput())
+  }, [answersList]);
 
   const resetInput = () => {
     return {colour: null, timeSpent: [], review: '', username: '', email: ''}
   }
 
   const [edit, setEdit] = useState(-1)
-  const [answersList, setAnswerList] = useState([])
   const [input, setInput] = useState(resetInput())
 
-  const submit = (e) => {
+
+
+  const submit = async (e) => {
     e.preventDefault()
-    if(edit == -1)
-      setAnswerList([input, ...answersList])
+    if(edit == -1){
+
+      const apiRequest = {
+        method: "POST",
+        body: JSON.stringify(input)
+      }
+      let index = await fetch(url, apiRequest).then(res => res.json().then(data => data.id))
+      setAnswerList([{...input, id: index}, ...answersList])
+    }
     else{
       let alteredList = [...answersList]
       alteredList[edit] = input
+      const apiRequest = {
+        method: "PUT",
+        body: JSON.stringify(input)
+      }
+      fetch(url + `/${input.id}`, apiRequest)
       console.log("altered: ", alteredList)
       setAnswerList(alteredList)
     }
 
     setInput(resetInput())
     setEdit(-1)
+  }
+
+  const del = (item) => {
+    fetch(url + `/${item.id}`, {
+      method: "DELETE"
+    })
+    setAnswerList(answersList.filter(elm => elm.id != item.id))
   }
 
   function textboxChange(e){
@@ -49,20 +89,24 @@ function Survey() {
     }
   }, [edit, answersList])
 
+
+
+
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList} setEdit={setEdit}/>
+        <AnswersList answersList={answersList} setEdit={setEdit} delete={del}/>
       </section>
       <section className="survey__form">
-        <form class="form">
+        <form className="form">
           <h2>Tell us what you think about your rubber duck!</h2>
-          <div class="form__group radio">
+          <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <RadioInput input={input} setInput={setInput}/>
           </div>
-          <div class="form__group">
+          <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <CheckBoxes input={input} setInput={setInput}/>
           </div>

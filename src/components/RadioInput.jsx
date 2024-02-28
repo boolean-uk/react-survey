@@ -14,25 +14,25 @@ export function RadioInput({ input, setInput }) {
         <ul>
             <li>
                 <input id="color-one" type="radio" name="color" value="1" checked={input.colour==1} onChange={onValueChange}/><label
-                for="color-one"
+                htmlFor="color-one"
                 >1</label
                 >
             </li>
             <li>
                 <input id="color-two" type="radio" name="color" value="2" checked={input.colour==2} onChange={onValueChange} /><label
-                for="color-two"
+                htmlFor="color-two"
                 >2</label
                 >
             </li>
             <li>
                 <input id="color-three" type="radio" name="color" value="3" checked={input.colour==3} onChange={onValueChange} /><label
-                for="color-three"
+                htmlFor="color-three"
                 >3</label
                 >
             </li>
             <li>
                 <input id="color-four" type="radio" name="color" value="4" checked={input.colour==4} onChange={onValueChange} /><label
-                for="color-four"
+                htmlFor="color-four"
                 >4</label
                 >
             </li>

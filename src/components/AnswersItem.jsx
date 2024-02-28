@@ -26,14 +26,10 @@ export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
   answerItem: { username, colour, timeSpent, review }, 
-  setEdit, i
+  setEdit, setDelete
 }) {
 
-  const edit = () => {
-    console.log("Does this never get acessed?", i)
-    setEdit(i)
-  }
-  
+
   return (
     <li>
       <article className="answer">
@@ -50,16 +46,9 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
-        <button onClick={edit}>Edit</button>
+        <button onClick={setEdit}>Edit</button>
+        <button onClick={setDelete}>Delete</button>
       </article>
     </li>
   );
-}
-
-ItemsList.propTypes = {
-  list: PropTypes.Array,
-}
-
-AnswersItem.propTypes = {
-  answerItem: PropTypes.Object,
 }

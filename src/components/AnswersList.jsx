@@ -9,12 +9,9 @@ export default function AnswersList(props) {
   return (
     <ul>
       {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} i={i} setEdit={props.setEdit} />
+        <AnswersItem answerItem={answerItem} key={i} 
+        setEdit={() => props.setEdit(i)} setDelete={() => props.delete(answerItem)} />
       ))}
     </ul>
   );
-}
-
-AnswersList.propTypes = {
-  answersList: PropTypes.Object,
 }
