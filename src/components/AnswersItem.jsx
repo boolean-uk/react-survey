@@ -55,11 +55,3 @@ export default function AnswersItem({
     </li>
   );
 }
-
-ItemsList.propTypes = {
-  list: PropTypes.Array,
-}
-
-AnswersItem.propTypes = {
-  answerItem: PropTypes.Object,
-}

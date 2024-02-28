@@ -14,7 +14,3 @@ export default function AnswersList(props) {
     </ul>
   );
 }
-
-AnswersList.propTypes = {
-  answersList: PropTypes.Object,
-}

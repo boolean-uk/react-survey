@@ -6,16 +6,21 @@ import { CheckBoxes } from "./CheckBoxes";
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
 
+  const url = "http://localhost:3000/Surveys"
+
   
   const [answersList, setAnswerList] = useState([])
 
   // Initial get of server
   useEffect(() =>{
-    fetch("http://localhost:3000/Surveys", 
-      {method: "Get"}
-    )
-    .then((response) => response.json())
-    .then((data) => console.log("data", data.json))
+
+    const fetchdata = async () => {
+      const response = await fetch(url);
+      const newData = await response.json();
+      setAnswerList(newData)
+  };
+
+  fetchdata()
   }, [])
 
   let index = Math.max.apply(0, answersList.map((o) => o.id))
@@ -23,7 +28,7 @@ function Survey() {
 
 
   const resetInput = () => {
-    index++
+    ++index
     return {id: index, colour: null, timeSpent: [], review: '', username: '', email: ''}
   }
 
@@ -36,12 +41,9 @@ function Survey() {
       setAnswerList([input, ...answersList])
       const apiRequest = {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-         },
-         body: JSON.stringify(input)
+        body: JSON.stringify(input)
       }
-      fetch("http://localhost:3000/surveys", apiRequest);
+      fetch(url, apiRequest);
     }
     else{
       let alteredList = [...answersList]
