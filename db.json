@@ -1,0 +1,16 @@
+{
+  "answers": [
+    {
+      "id": "1",
+      "colorRating": 4,
+      "spendTime": [
+        "chatting",
+        "bathing",
+        "swimming"
+      ],
+      "text": "A spot of tea, a drizzle of rain, and an impeccable sense of manners - quite the quintessential experience.",
+      "name": "Nigel",
+      "email": ""
+    }
+  ]
+}
