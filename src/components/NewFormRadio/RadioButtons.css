@@ -1,6 +1,5 @@
 .form__group input[type="radio"] {
     display: none;
-    background-color: black;
 }
 
 .form__group.radio input[type="radio"]:checked  {
@@ -22,12 +21,4 @@
     padding: 1rem;
     margin-left: 15%;
     border-radius: 10px;
-}
-
-#consistencyRating {
-    background-color: black;
-}
-
-input[type="radio"]:hover {
-    background-color: black;
 }

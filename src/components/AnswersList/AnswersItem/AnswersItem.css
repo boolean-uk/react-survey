@@ -1,0 +1,35 @@
+.edit_answer_button {
+    position: relative;
+    top: 12%;
+    left: 95%;
+    border: none;
+}
+
+.edit_answer_button > img {
+    width: 1rem;
+    border: none;
+}
+
+.answer {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid grey;
+    background-color: white;
+}
+  
+.answer p {
+    margin: 1rem 0;
+}
+  
+.answer ul {
+    margin: 0.5rem;
+}
+  
+.answer li {
+    margin: 0.25rem 0;
+}
+  
+.answer__line {
+    display: block;
+    margin: 0.5rem;
+}

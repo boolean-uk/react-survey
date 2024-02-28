@@ -1,40 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "../App.css"
 import PropTypes from "prop-types"
 import CheckBox from "./NewFormCheckboxes/CheckBox.jsx"
 import RadioButtons from "./NewFormRadio/RadioButtons.jsx"
+import { propertySetQualities, propertySetTime, ratingScale } from "../constants.js"
 
-const propertySetTime = {
-    swimming: "Swimming",
-    bathing: "Bathing",
-    chatting: "Chatting",
-    noTime: "I don't like to spend time with it"
-  };
-
-  const propertySetQualities = {
-    color: "It's yellow!",
-    sound: "It squeaks!",
-    logo: "It has a logo!",
-    size: "It's big!"
-}
-
-const ratingScale = [1,2,3,4]
-
-const defaultObject = {
-    bestFeatures: [],
-    nagFeatures: [],
-    timeSpent: [],
-    consistencyRating: "",
-    colourRating: "",
-    duckRating: "",
-    username: "",
-    review: "",
-    submitterEmail: "",
-}
-
-const NewAnswer = ({submittedForms, setSubmittedForms}) => {
-    const [dataObject, setDataObject] = useState(defaultObject)
-    const [resetProperty, setResetProperty] = useState(false)
+const NewAnswer = ({template, addData}) => {
+    const [dataObject, setDataObject] = useState(template)
 
     const handleFieldChange = (e) => {
         if (e.target.type === "radio") {
@@ -46,10 +18,13 @@ const NewAnswer = ({submittedForms, setSubmittedForms}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        setSubmittedForms([dataObject, ...submittedForms])
-        setResetProperty(!resetProperty)
-        setDataObject(defaultObject)
+        addData(dataObject)
+        setDataObject(template)
     }
+
+    useEffect(() => {
+        setDataObject(template)
+    }, [template])
 
     return (
     <form className="form">
@@ -60,7 +35,6 @@ const NewAnswer = ({submittedForms, setSubmittedForms}) => {
             setDataObject={setDataObject}
             propertyId={"bestFeatures"}
             propertySet={propertySetQualities}
-            resetProperty={resetProperty}
         />
         <CheckBox 
             labelText={"What would you say that are the worst nags of your rubber duck?"}
@@ -68,7 +42,6 @@ const NewAnswer = ({submittedForms, setSubmittedForms}) => {
             setDataObject={setDataObject}
             propertyId={"nagFeatures"}
             propertySet={propertySetQualities}
-            resetProperty={resetProperty}
         />
         <RadioButtons 
             labelText={"How do you rate your rubber duck consistency?"}
@@ -97,7 +70,6 @@ const NewAnswer = ({submittedForms, setSubmittedForms}) => {
             setDataObject={setDataObject}
             propertyId="timeSpent"
             propertySet={propertySetTime}
-            resetProperty={resetProperty}
         />
         <label>
             What else have you got to say about your rubber duck?
@@ -118,8 +90,8 @@ const NewAnswer = ({submittedForms, setSubmittedForms}) => {
 }
 
 NewAnswer.propTypes = {
-    submittedForms: PropTypes.array, 
-    setSubmittedForms: PropTypes.func,
+    addData: PropTypes.func,
+    template: PropTypes.object,
 }
 
 export default NewAnswer

@@ -1,21 +1,9 @@
 import PropTypes from 'prop-types'
+import { propertySetQualities, propertySetTime } from "../../../constants.js"
+import "./AnswersItem.css"
+import editButton from "../../../assets/icons/pencil-icon.webp"
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
-
-const answersSet = {
-  swimming: "Swimming",
-  bathing: "Bathing",
-  chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
-};
-
-
-const propertySetQualities = {
-  color: "It's yellow!",
-  sound: "It squeaks!",
-  logo: "It has a logo!",
-  size: "It's big!"
-}
 
 function ItemsList({ list, objectSet}) {
   return (
@@ -31,11 +19,15 @@ function ItemsList({ list, objectSet}) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colourRating, timeSpent, review, bestFeatures, nagFeatures}
+  answerItem, editEntry
 }) {
+  const { username, colourRating, timeSpent, review, bestFeatures, nagFeatures} = answerItem
   return (
     <li>
       <article className="answer">
+        <button className="edit_answer_button" onClick={() => editEntry(answerItem)}>
+          <img src={editButton} />
+        </button>
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
@@ -43,15 +35,15 @@ export default function AnswersItem({
         </p>
         <div>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} objectSet={answersSet} />
+          <ItemsList list={Object.keys(timeSpent).filter((key) => timeSpent[key])} objectSet={propertySetTime} />
         </div>
         <div>
           <em>What do you think is the best features of the duck?</em>
-          <ItemsList list={bestFeatures} objectSet={propertySetQualities} />
+          <ItemsList list={Object.keys(bestFeatures).filter((key) => bestFeatures[key])} objectSet={propertySetQualities} />
         </div>
         <div>
           <em>What do you think is the worst features of the duck?</em>
-          <ItemsList list={nagFeatures} objectSet={propertySetQualities} />
+          <ItemsList list={Object.keys(nagFeatures).filter((key) => nagFeatures[key])} objectSet={propertySetQualities} />
         </div>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
@@ -68,6 +60,7 @@ ItemsList.propTypes = {
 }
 
 AnswersItem.propTypes = {
+  editEntry: PropTypes.func,
   answerItem: PropTypes.object,
   username: PropTypes.string,
   colourRating: PropTypes.number,

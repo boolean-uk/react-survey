@@ -72,29 +72,6 @@ h2 {
   width: 70vw;
 }
 
-.answer {
-  padding: 1rem;
-  margin: 1rem 0;
-  border: 1px solid grey;
-  background-color: white;
-}
-
-.answer p {
-  margin: 1rem 0;
-}
-
-.answer ul {
-  margin: 0.5rem;
-}
-
-.answer li {
-  margin: 0.25rem 0;
-}
-
-.answer__line {
-  display: block;
-  margin: 0.5rem;
-}
 
 .form {
   width: 80%;
