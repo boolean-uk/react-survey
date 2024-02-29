@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export default function FormRadioButtons({ onRadioChange }) {
+export default function FormRadioButtons({ onRadioChange, radioValue }) {
   const handleRadioChange = (event) => {
     onRadioChange(event.target.value);
   };
@@ -13,6 +13,7 @@ export default function FormRadioButtons({ onRadioChange }) {
           name="color"
           value="1"
           onChange={handleRadioChange}
+          checked={radioValue === "1"}
         />
         <label htmlFor="color-one">1</label>
       </li>
@@ -23,6 +24,7 @@ export default function FormRadioButtons({ onRadioChange }) {
           name="color"
           value="2"
           onChange={handleRadioChange}
+          checked={radioValue === "2"}
         />
         <label htmlFor="color-two">2</label>
       </li>
@@ -33,6 +35,7 @@ export default function FormRadioButtons({ onRadioChange }) {
           name="color"
           value="3"
           onChange={handleRadioChange}
+          checked={radioValue === "3"}
         />
         <label htmlFor="color-three">3</label>
       </li>
@@ -43,6 +46,7 @@ export default function FormRadioButtons({ onRadioChange }) {
           name="color"
           value="4"
           onChange={handleRadioChange}
+          checked={radioValue === "4"}
         />
         <label htmlFor="color-four">4</label>
       </li>

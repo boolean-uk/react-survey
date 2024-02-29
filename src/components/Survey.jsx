@@ -17,7 +17,8 @@ function Survey() {
     noTime: false,
   });
 
-  const [submittedValues, setSubmittedValues] = useState(null);
+  const [submittedValues, setSubmittedValues] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
 
   const formObject = {
     name: name,
@@ -31,6 +32,30 @@ function Survey() {
     setRadioValue(value);
   };
 
+  function handleEditAnswer(index) {
+    setSelectedAnswer(index);
+    const oldAnswer = submittedValues[index];
+
+    setName(oldAnswer.name);
+    setEmail(oldAnswer.email);
+    setFeedback(oldAnswer.feedback);
+    setRadioValue(oldAnswer.radioValue);
+    setCheckboxValues(oldAnswer.checkboxValues);
+  }
+
+  function clearForm() {
+    setName("");
+    setEmail("");
+    setFeedback("");
+    setRadioValue("");
+    setCheckboxValues({
+      swimming: false,
+      bathing: false,
+      chatting: false,
+      noTime: false,
+    });
+  }
+
   const handleCheckboxChange = (checkboxName, isChecked) => {
     setCheckboxValues((prevValues) => ({
       ...prevValues,
@@ -40,26 +65,42 @@ function Survey() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmittedValues(formObject);
-    console.log("Submitted form!", formObject);
+    if (selectedAnswer === null) {
+      setSubmittedValues([...submittedValues, formObject]);
+      console.log("Submitted form!", formObject);
+    } else {
+      const updatedSubmittedValues = [...submittedValues];
+      updatedSubmittedValues[selectedAnswer] = formObject;
+      setSubmittedValues(updatedSubmittedValues);
+      setSelectedAnswer(null);
+      console.log("Updated form!", formObject);
+    }
+    clearForm();
   };
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {submittedValues ? <AnswerList answers={submittedValues} /> : <p></p>}
+        {submittedValues[submittedValues.length - 1] ? (
+          <AnswerList
+            answers={submittedValues}
+            handleEditAnswer={handleEditAnswer}
+          />
+        ) : (
+          <p></p>
+        )}
       </section>
       <section className="survey__form">
         <form className="form">
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
-            <FormRadioButtons onRadioChange={handleRadioChange} />
+            <FormRadioButtons onRadioChange={handleRadioChange} radioValue={radioValue} />
           </div>
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
-            <FormCheckboxes onCheckboxChange={handleCheckboxChange} />
+            <FormCheckboxes onCheckboxChange={handleCheckboxChange} checkboxValues={checkboxValues} />
           </div>
           <label>
             What else have you got to say about your rubber duck?

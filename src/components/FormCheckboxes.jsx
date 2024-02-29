@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-export default function FormCheckboxes({ onCheckboxChange }) {
+export default function FormCheckboxes({ onCheckboxChange, checkboxValues }) {
   const handleCheckboxChange = (event) => {
     onCheckboxChange(event.target.value, event.target.checked);
   };
@@ -13,6 +13,7 @@ export default function FormCheckboxes({ onCheckboxChange }) {
             type="checkbox"
             value="swimming"
             onChange={handleCheckboxChange}
+            checked={checkboxValues.swimming}
           />
           Swimming
         </label>
@@ -24,6 +25,7 @@ export default function FormCheckboxes({ onCheckboxChange }) {
             type="checkbox"
             value="bathing"
             onChange={handleCheckboxChange}
+            checked={checkboxValues.bathing}
           />
           Bathing
         </label>
@@ -35,6 +37,7 @@ export default function FormCheckboxes({ onCheckboxChange }) {
             type="checkbox"
             value="chatting"
             onChange={handleCheckboxChange}
+            checked={checkboxValues.chatting}
           />
           Chatting
         </label>
@@ -46,6 +49,7 @@ export default function FormCheckboxes({ onCheckboxChange }) {
             type="checkbox"
             value="noTime"
             onChange={handleCheckboxChange}
+            checked={checkboxValues.noTime}
           />
           I don&apos;t like to spend time with it
         </label>
