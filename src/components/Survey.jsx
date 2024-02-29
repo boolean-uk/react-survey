@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
-import Input from "./Input";
+import { useState, useRef } from "react";
 import AnswersList from "./AnswersList";
 
 const initialFormData = {
@@ -17,13 +16,26 @@ function Survey() {
   const [open] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(initialFormData);
   const [answers, setAnswers] = useState([]);
+  const [editMode, setEditMode] = useState(false)
+  const [editIndex, setEditIndex] = useState(null)
+
+  const formRef = useRef(null)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
-    setAnswers([...answers, formData]);
+
+    if (editMode && editIndex !== null) {
+      const toUpdate = [...answers]
+      toUpdate[editIndex] = formData
+      setAnswers(toUpdate);
+      setEditMode(false)
+      setEditIndex(null)
+    } else {
+      setAnswers([...answers, formData])
+    }
+
     setFormData(initialFormData);
-    console.log(answers);
+    formRef.current.reset()
   };
 
   const handleChange = (event) => {
@@ -43,15 +55,23 @@ function Survey() {
     }
   }
 
+  const handleEditClick = (index) => {
+    setFormData(answers[index])
+    setEditMode(true)
+    setEditIndex(index)
+  }
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList 
+          answersList={answers} 
+          handleEditClick={handleEditClick}/>
       </section>
 
       <section className="survey__form">
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" ref={formRef} onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
 
           <div className="form__group radio">

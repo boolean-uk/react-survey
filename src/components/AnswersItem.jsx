@@ -1,6 +1,8 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
+import PropTypes from 'prop-types'
+
 const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
@@ -22,7 +24,8 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, colour, timeSpent, review }, 
+  handleEditClick
 }) {
   return (
     <li>
@@ -40,7 +43,18 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={handleEditClick}>Edit</button>
       </article>
     </li>
   );
+}
+
+AnswersItem.propTypes = {
+  answerItem: PropTypes.shape({
+    username: PropTypes.string,
+    colour: PropTypes.string,
+    timeSpent: PropTypes.array,
+    review: PropTypes.string,
+  }),
+  handleEditClick: PropTypes.func,
 }
