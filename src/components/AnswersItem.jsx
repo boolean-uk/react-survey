@@ -1,6 +1,8 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
+
+// FIX THIS INTO SMALLER COMPONENTS WHEN TIME
 const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
@@ -49,7 +51,8 @@ export default function AnswersItem({
     review,
     email
   },
-  onEdit
+  handleEdit,
+  handleDelete
 }) {
   console.log("Best Features:", bestFeatures);
   return (
@@ -84,7 +87,8 @@ export default function AnswersItem({
           <em>Email:</em>
           <span className="answer__line">{email}</span>
         </p>
-        <button className="edit-button" onClick={() => onEdit({ username, color, consistency, logo, spendTime, bestFeatures, review, email })}>edit</button>
+        <button className="edit-button" onClick={() => handleEdit({ username, color, consistency, logo, spendTime, bestFeatures, review, email })}>edit</button>
+        <button className="delete-button" onClick={() => handleDelete({ username, color, consistency, logo, spendTime, bestFeatures, review, email })}>Delete</button> {/* Delete button */}
       </article>
     </li>
   );

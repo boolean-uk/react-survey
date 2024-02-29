@@ -40,11 +40,11 @@ function Survey() {
     event.preventDefault();
 
     if (editData) {
-      const updatedData = submittedData.map(item => {
-        if (item.username === editData.username) {
+      const updatedData = submittedData.map(data => {
+        if (data.username === editData.username) {
           return userData;
         }
-        return item;
+        return data;
       });
 
       setSubmittedData(updatedData);
@@ -66,6 +66,17 @@ function Survey() {
     setEditData(data);
   }
 
+  // FIX THIS, IT DOES NOT DELETE FROM SERVER YET.
+  const handleDelete = (data) => {
+    fetch(`http://localhost:3000/answers/${data.username}`, {
+    method: "DELETE",
+    });
+    console.log("Attempted to delete")
+    setSubmittedData(submittedData.filter((answer) => {
+      answer.username !== data.username
+    }));
+  };
+
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     if (name !== undefined) {
@@ -86,7 +97,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* EXTENSION 1 */}
-        <AnswersList submittedData={submittedData} onEdit={handleEdit}/>
+        <AnswersList submittedData={submittedData} handleEdit={handleEdit} handleDelete={handleDelete}/>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
