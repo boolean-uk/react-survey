@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BestFeatures from "./FormQuestions/BestFeatures";
 import Color from "./FormQuestions/Color";
 import Consistency from "./FormQuestions/Consistency";
 import Email from "./FormQuestions/Email";
@@ -16,6 +17,12 @@ const initialFormData = {
     bathing: false,
     chatting: false,
     noTime: false,
+  },
+  bestFeatures: {
+    yellow: false,
+    squeaks: false,
+    logo: false,
+    big: false
   },
   review: "",
   username: "",
@@ -41,8 +48,14 @@ function Survey() {
     const { name, type, value, checked } = event.target;
     if (name !== undefined) {
       if (type === "checkbox") {
-        setUserData({ ...userData, spendTime: { ...userData.spendTime, [value]: checked }
-        });
+        if (name.startsWith("spend-time")) {
+          setUserData({ ...userData, spendTime: { ...userData.spendTime, [value]: checked }
+          });
+        }
+        if (name.startsWith("bestFeatures")) {
+          setUserData({ ...userData, bestFeatures: { ...userData.bestFeatures, [value]: checked }
+          });
+        }
       } else {
         setUserData({ ...userData, [name]: value });
       }
@@ -54,7 +67,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        ANSWERS HERE
+        EXTENSION HERE
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -66,6 +79,7 @@ function Survey() {
 
           {/*<!-- Checkboxes go here -->*/}
           <SpendTime handleChange={handleChange} userData={userData}/>
+          <BestFeatures handleChange={handleChange} userData={userData}/>
 
           {/*<!-- Text inputs go here -->*/}
           <Review handleChange={handleChange} userData={userData}/>
