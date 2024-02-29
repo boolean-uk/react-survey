@@ -28,6 +28,10 @@ h2 {
   text-align: center;
 }
 
+li {
+  justify-content: center;
+}
+
 #root {
   display: grid;
   min-height: 100vh;
@@ -42,28 +46,52 @@ h2 {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 2rem;
+  justify-content: center;
+  padding: 1rem;
   color: var(--primary-colour);
+  margin-bottom: 20px;
 }
 
 .survey {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: auto 1fr;
-}
-
-.survey__form {
-  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5rem 0 5rem;
 }
 
 .survey__list {
   width: 30vw;
-  margin: 4rem 0;
-  margin-left: 1rem;
-  padding: 1rem;
-  border-radius: 20px;
+  margin-left: 0.1rem;
   transition: width 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+  overflow: hidden;
+}
+
+.survey__list > ul {
+  width: 100%;
+  height: 100%;
+  padding-right: 1rem;
+  box-sizing: content-box;
+  overflow-y: scroll;
+}
+
+.survey__list > ul > li{
+  margin: 0 1rem 0 1rem;
+}
+
+.survey__list > ul > li:last-child{
+  margin-bottom: 5rem;
+}
+
+.module_header {
+  margin: 1rem;
+}
+
+.survey__list, .survey__form {
+  height: 80vh;
+  margin: 0 auto;
+  border-radius: 20px;
   box-shadow: var(--survey-shadow);
   background-color: var(--background-two);
 }
@@ -76,15 +104,26 @@ h2 {
   padding: 1rem;
   margin: 1rem 0;
   border: 1px solid grey;
+  border-radius: 10px;
   background-color: white;
 }
 
 .answer p {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .answer ul {
   margin: 0.5rem;
+}
+
+.answer span, .answer ul {
+  color: grey;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 5px;
 }
 
 .answer li {
@@ -96,13 +135,27 @@ h2 {
   margin: 0.5rem;
 }
 
+.survey__form {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  padding: 10px;
+}
+
 .form {
-  width: 80%;
-  margin: 3rem auto;
-  padding: 2rem;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   background-color: var(--background-two);
   border-radius: 20px;
   box-shadow: var(--survey-shadow);
+  overflow: hidden;
 }
 
 .form > h2 {
@@ -111,21 +164,36 @@ h2 {
 
 .form h3 {
   font-weight: normal;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
 }
 
-.form li {
-  display: inline;
+.form > label, .form > div {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
 }
 
-.form > label {
-  display: block;
+.text_label {
+  font-size: 0.9rem;
+}
+
+.side_label {
+  font-size: 0.75rem;
 }
 
 .form textarea {
   display: block;
   padding: 0.25rem;
   font-size: inherit;
+  padding: 0.5rem;
+  width: 80%;
+  font-size: 16px;
+  resize: none;
+  border-radius: 5px;
 }
 
 .form input[type="email"],
@@ -133,25 +201,43 @@ h2 {
   margin-top: 0.5rem;
   padding: 0.25rem;
   display: inline-block;
-  width: 100%;
+  width: 80%;
+  border-radius: 5px;
 }
 
-.form__group label {
-  display: inline-block;
-  margin-left: 2rem;
+.form__group {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.form__group li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem 0 1rem;
+}
+
+.form__group label, .form__group p {
   text-align: center;
 }
 
+.form__group ul, .form__group.radio ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
 .form__group.radio label {
-  margin: 0;
+  flex-shrink: 1;
   padding: 1rem;
-  margin-left: 15%;
   border-radius: 10px;
 }
 
 .form__group.radio label:hover {
   background-color: white;
 }
+
 
 .form__group input {
   display: block;
@@ -160,6 +246,13 @@ h2 {
 .form__group input[type="checkbox"] {
   display: inline-block;
   margin: 0.5rem;
+}
+
+
+.side_label {
+  font-size: 0.75rem;
+  width: 5rem;
+  margin: 0 auto;
 }
 
 .form__group.radio input[type="radio"]:checked + label {
@@ -171,22 +264,14 @@ h2 {
   display: none;
 }
 
-.form textarea {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: 16px;
-  resize: none;
-}
 
-.form > * + * {
-  margin-top: 2rem;
-}
 
 .form__submit {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   padding: 0.5rem;
   width: 50%;
   border-radius: 20px;
@@ -195,4 +280,13 @@ h2 {
 
 .form__submit:hover {
   background-color: white;
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid::before {
+  content: "*";
+  color: red;
 }
