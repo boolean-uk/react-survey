@@ -9,7 +9,11 @@ const activityText = {
 export default function AnswerList({ answers }) {
   return (
     <div className="answer">
-      <h3>{`${answers.name} said:`}</h3>
+      <h3>
+        {answers.name.trim().length === 0
+          ? `Some dude said:`
+          : `${answers.name} said:`}
+      </h3>
 
       <p className="question">How do you rate your rubber duck colour?</p>
       <p>{`${answers.radioValue}/4`}</p>
