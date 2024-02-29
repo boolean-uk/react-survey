@@ -47,6 +47,12 @@ function Survey() {
       ...answersList, answersItem
     ])
     console.log([...answersList, answersItem])
+    
+    setUsername('')
+    setEmail('')
+    setColour(1)
+    setTimeSpent([])
+    setReview('')
   }
 
   return (
