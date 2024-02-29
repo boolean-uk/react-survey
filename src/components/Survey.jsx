@@ -17,7 +17,25 @@ function Survey() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setAnswears([...answers, userData])
+    //Check if it has an id and update answ with said id 
+    if(Object.prototype.hasOwnProperty.call(userData, "id")){
+      const updatedAnswers = answers.map((answ) => {
+        console.log(answ.id)
+        if (answ.id === userData.id) {
+          return { ...userData };
+        } else {
+          return answ;
+        }
+      });
+      console.log(updatedAnswers)
+      setAnswears(updatedAnswers);
+    }
+    //Add new entry with id 
+    else{
+      console.log(false)
+      const id = answers.length + 1;
+      setAnswears([{ ...userData, id: id }, ...answers]);
+    }
     setUserData({
       color: "",
       spendtime: [],
@@ -25,11 +43,11 @@ function Survey() {
       username: "",
       email: ""
     });
-    console.log(answers)
   }
 
   
   const handleChange = (event) => {
+
     const { name, type, value, checked } = event.target;
 
       if (type === 'checkbox') {
@@ -50,7 +68,7 @@ function Survey() {
     <main className="survey" >
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers}></AnswersList>
+        <AnswersList answersList={answers} setUserData={setUserData} ></AnswersList>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
