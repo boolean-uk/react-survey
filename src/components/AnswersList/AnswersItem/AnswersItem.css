@@ -1,0 +1,51 @@
+.button_container {
+    position: relative;
+    top: 5px;
+    left: 88%;
+    border: none;
+}
+
+.button_container > * {
+    margin-left: 4px;
+}
+
+.button_container > div {
+    position: absolute;
+    left: -160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_container > div > * {
+    margin-left: 2px;
+}
+
+.button_container > * > img{
+    height: 25px;
+    border: none;
+}
+
+.answer {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid grey;
+    background-color: white;
+}
+  
+.answer p {
+    margin: 1rem 0;
+}
+  
+.answer ul {
+    margin: 0.5rem;
+}
+  
+.answer li {
+    margin: 0.25rem 0;
+}
+  
+.answer__line {
+    display: block;
+    margin: 0.5rem;
+}

@@ -1,0 +1,24 @@
+.form__group input[type="radio"] {
+    display: none;
+}
+
+.form__group.radio input[type="radio"]:checked  {
+    background-color: var(--primary-colour);
+    color: var(--background-two);
+}
+
+.form__group.radio label:has(input[type="radio"]:checked) {
+    background-color: var(--primary-colour);
+    color: var(--background-two);
+}
+
+.form__group.radio label:hover {
+    background-color: white;
+}
+
+.form__group.radio label {
+    margin: 0;
+    padding: 1rem;
+    margin-left: 15%;
+    border-radius: 10px;
+}
