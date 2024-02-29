@@ -1,15 +1,15 @@
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
-
-  const { answersList } = props;
-
+export default function AnswersList({ answers, onEdit }) {
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
-      ))}
+      {answers && answers.length > 0 ? (
+        answers.map((answer, i) => (
+          <AnswersItem answerItem={answer} key={i} onEdit={onEdit} />
+        ))
+      ) : (
+        <p>No answers available</p>
+      )}
     </ul>
   );
 }
