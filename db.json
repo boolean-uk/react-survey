@@ -1,7 +1,7 @@
 {
   "answers": [
     {
-      "id": "1a60",
+      "id": "bd00",
       "color": "",
       "consistency": "",
       "logo": "",
@@ -22,21 +22,378 @@
       "email": ""
     },
     {
-      "id": "81da",
+      "id": "0f3b",
       "color": "",
       "consistency": "",
       "logo": "",
       "spendTime": {
         "swimming": false,
-        "bathing": true,
-        "chatting": true,
-        "noTime": true
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
       },
       "bestFeatures": {
         "yellow": false,
-        "squeaks": true,
-        "logo": true,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "d63c",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "a615",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "611c",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "c49d",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": true,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": true,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "41c9",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "579c",
+      "color": "",
+      "consistency": "",
+      "logo": "4",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": true,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": true,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "137d",
+      "color": "4",
+      "consistency": "4",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "d83f",
+      "color": "4",
+      "consistency": "4",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "01fb",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "0e1a",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "9d09",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "6235",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "7995",
+      "color": "1",
+      "consistency": "1",
+      "logo": "1",
+      "spendTime": {
+        "swimming": true,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
         "big": true
+      },
+      "review": "2323",
+      "username": "2323",
+      "email": "little-nico@hotmail.com"
+    },
+    {
+      "id": "a109",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "8e54",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "ce47",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "bc23",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
       },
       "review": "",
       "username": "",

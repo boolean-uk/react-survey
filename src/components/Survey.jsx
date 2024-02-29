@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 import BestFeatures from "./FormQuestions/BestFeatures";
 import Color from "./FormQuestions/Color";
 import Consistency from "./FormQuestions/Consistency";
@@ -32,42 +33,60 @@ const initialFormData = {
 function Survey() {
   const [open, setOpen] = useState(false); // Ignore this state
   const [userData, setUserData] = useState(initialFormData);
+  const [submittedData, setSubmittedData] = useState([]);
+  const [editData, setEditData] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:3000/answers", {
-      method: "POST",
-      body: JSON.stringify(userData),
-    });
+    if (editData) {
+      const updatedData = submittedData.map(item => {
+        if (item.username === editData.username) {
+          return userData;
+        }
+        return item;
+      });
+
+      setSubmittedData(updatedData);
+      setEditData(null);
+    } else {
+      setSubmittedData([ ...submittedData, userData ]);
+      fetch("http://localhost:3000/answers", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
+    }
+
     console.log(userData)
     setUserData(initialFormData);
   };
+
+  const handleEdit = (data) => {
+    setUserData(data);
+    setEditData(data);
+  }
 
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     if (name !== undefined) {
       if (type === "checkbox") {
         if (name.startsWith("spend-time")) {
-          setUserData({ ...userData, spendTime: { ...userData.spendTime, [value]: checked }
-          });
-        }
-        if (name.startsWith("bestFeatures")) {
-          setUserData({ ...userData, bestFeatures: { ...userData.bestFeatures, [value]: checked }
-          });
+          setUserData({ ...userData, spendTime: { ...userData.spendTime, [value]: checked }});
+        } else if (name.startsWith("bestFeatures")) {
+          setUserData({ ...userData, bestFeatures: { ...userData.bestFeatures, [value]: checked }});
         }
       } else {
         setUserData({ ...userData, [name]: value });
       }
     }
   };
-  
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        EXTENSION HERE
+        {/* EXTENSION 1 */}
+        <AnswersList submittedData={submittedData} onEdit={handleEdit}/>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -86,7 +105,7 @@ function Survey() {
           <Username handleChange={handleChange} userData={userData}/>
           <Email handleChange={handleChange} userData={userData}/>
           
-          <input className="form__submit" type="submit" value="Submit Survey!" />
+          <input className="form__submit" type="submit" value={editData ? "Save Edited Answer!" : "Submit Survey!"} />
         </form>
       </section>
     </main>
