@@ -11,8 +11,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, i) => (
+        <li key = {i}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -32,10 +32,10 @@ export default function AnswersItem({
           <em>How do you rate your rubber duck colour?</em>
           <span className="answer__line">{colour}</span>
         </p>
-        <p>
+        <section>
           <em>How do you like to spend time with your rubber duck?</em>
           <ItemsList list={timeSpent} />
-        </p>
+        </section>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
