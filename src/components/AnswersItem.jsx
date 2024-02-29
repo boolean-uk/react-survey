@@ -11,8 +11,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,25 +22,61 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
+  answerItem: { username, color, timeSpent, review, email}, ...props
+
 }) {
+
+  const {index, setState, answersList, setAnswersList, deleteState} = props ?? {};
+
+  //Sets state to clicked item
+  const handleEdit = (e) => {
+    e.preventDefault();
+    let newState = {
+      id: index,
+      color: color,
+      timeSpent: timeSpent,
+      username: username,
+      review: review,
+      email: email,
+    };
+    setState(newState);
+  }
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+
+    //Deletes answer and sets all other ids after - 1
+    setAnswersList(prevAnswersList => prevAnswersList
+      .filter(answer => answer.id !== index)
+      .map(answer => answer.id > index ? ({...answer, id: answer.id -1}) : answer)
+    )
+
+    deleteState(index)
+    console.log(answersList)
+
+  }
+
   return (
     <li>
       <article className="answer">
         <h3>{username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
+          <span className="answer__line">{color}</span>
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <ItemsList list={Object.keys(timeSpent).filter((e) => timeSpent[e] === true)} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={(e) => handleEdit(e)}>Edit</button>
+        <button onClick={(e) => handleDelete(e)}>Remove</button>
+
       </article>
+
     </li>
   );
 }
