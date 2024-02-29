@@ -1,86 +1,55 @@
 {
   "answers": [
     {
-      "id": "c7c4",
+      "id": "e2ee",
       "color": "1",
-      "spendTime": {
-        "swimming": false,
-        "bathing": true,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "1212",
-      "username": "11",
-      "email": "11@dk"
-    },
-    {
-      "id": "3e50",
-      "color": "3",
-      "spendTime": {
-        "swimming": false,
-        "bathing": true,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "23",
-      "username": "323",
-      "email": "little-nico@hotmail.com"
-    },
-    {
-      "id": "9336",
-      "color": "4",
+      "consistency": "1",
+      "logo": "1",
       "spendTime": {
         "swimming": true,
         "bathing": true,
         "chatting": true,
         "noTime": true
       },
-      "review": "123",
-      "username": "123",
+      "review": "sad",
+      "username": "nk",
       "email": "little-nico@hotmail.com"
     },
     {
-      "id": "9283",
-      "color": "1",
-      "spendTime": {
-        "swimming": true,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "edwsa",
-      "username": "JACOB",
-      "email": "little-nico@hotmail.com"
-    },
-    {
-      "id": "c965",
+      "id": "0700",
       "color": "4",
+      "consistency": "4",
+      "logo": "4",
       "spendTime": {
-        "swimming": true,
+        "swimming": false,
         "bathing": false,
-        "chatting": false,
+        "chatting": true,
         "noTime": false
       },
-      "review": "fdf",
-      "username": "",
+      "review": "A",
+      "username": "A",
       "email": "little-nico@hotmail.com"
     },
     {
-      "id": "034e",
-      "color": "",
+      "id": "c3d2",
+      "color": "2",
+      "consistency": "2",
+      "logo": "2",
       "spendTime": {
         "swimming": false,
-        "bathing": false,
+        "bathing": true,
         "chatting": false,
         "noTime": false
       },
-      "review": "",
-      "username": "",
-      "email": ""
+      "review": "2",
+      "username": "2",
+      "email": "2@dk"
     },
     {
-      "id": "8101",
-      "color": "",
+      "id": "8647",
+      "color": "3",
+      "consistency": "3",
+      "logo": "3",
       "spendTime": {
         "swimming": false,
         "bathing": false,
@@ -88,73 +57,8 @@
         "noTime": false
       },
       "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": "929d",
-      "color": "",
-      "spendTime": {
-        "swimming": false,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": "fb19",
-      "color": "",
-      "spendTime": {
-        "swimming": false,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": "05f0",
-      "color": "",
-      "spendTime": {
-        "swimming": false,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": "df39",
-      "color": "",
-      "spendTime": {
-        "swimming": false,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "",
-      "username": "",
-      "email": ""
-    },
-    {
-      "id": "a6b9",
-      "color": "",
-      "spendTime": {
-        "swimming": false,
-        "bathing": false,
-        "chatting": false,
-        "noTime": false
-      },
-      "review": "",
-      "username": "",
-      "email": ""
+      "username": "Finish",
+      "email": "little-nico@hotmail.com"
     }
   ]
 }
