@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswersList from "./AnswersList";
 
 const checkboxes = ['swimming', 'bathing', 'chatting', 'noTime'];
@@ -6,7 +6,7 @@ const ratingOptions = ['1', '2', '3', '4'];
 
 // Add id field to be able to edit answers
 const initialFormData = {
-  id: -1,
+  id: undefined,
   colour: 0,
   review: "",
   username: "",
@@ -21,18 +21,42 @@ function Survey() {
 
   const [answersList, setAnswersList] = useState([])
 
-  const handleSubmit = (event) => {
+  // Get data from db and put into answersList
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/answers")
+      const answers = await response.json()
+      setAnswersList(answers)
+    } catch (error) {
+      console.error("Error fetching answers:", error)
+    }
+  }
+
+  // Get data from db on pageload
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Checks if userData has id assigned (AKA being edited or the form is new)
-    if (userData.id !== -1) {
-      setAnswersList(answersList.map(answer => answer.id === userData.id ? {id: answer.id , ...userData} : answer))
+    // If new, add to db, if not update db
+    if (userData.id === undefined) {
+      await fetch("http://localhost:3000/answers", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      }); 
     } else {
-      setAnswersList([...answersList, {...userData, id: answersList.length}])
+      await fetch(`http://localhost:3000/answers/${userData.id}`, {
+        method: "PUT",
+        body: JSON.stringify(userData),
+      }); 
     }
 
+    // update list on page with newest data
+    await fetchData()
     setUserData(initialFormData)
-  };
+  }
 
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target
@@ -57,11 +81,20 @@ function Survey() {
     setUserData(answerItem)
   }
 
+  // Delete answer with given id and update answersList
+  const deleteAnswer = async (id) => {
+    await fetch(`http://localhost:3000/answers/${id}`, {
+        method: "DELETE"
+      });
+
+    await fetchData()
+  }
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-       <AnswersList answersList={answersList} editAnswer={editAnswer} />
+       <AnswersList answersList={answersList} editAnswer={editAnswer} deleteAnswer={deleteAnswer} />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>

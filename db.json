@@ -1,0 +1,26 @@
+{
+  "answers": [
+    {
+      "username": "RubberDuckEnjoyer",
+      "colour": "4",
+      "timeSpent": [
+        "chatting",
+        "bathing",
+        "swimming"
+      ],
+      "review": "Very good duck",
+      "email": "ducks@are.awesome",
+      "id": "8af3"
+    },
+    {
+      "username": "RubberDucker",
+      "colour": "1",
+      "timeSpent": [
+        "noTime"
+      ],
+      "review": "Very bad duck",
+      "email": "ducks@suck.alot",
+      "id": "06ea"
+    }
+  ]
+}
