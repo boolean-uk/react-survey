@@ -1,14 +1,13 @@
 import React from 'react';
 
-export default function Checkboxes({ setRatingTimeSpent, ratingTimeSpent }) {
+export default function Checkboxes({setForm, form}) {
 
   const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setRatingTimeSpent(prevState => [...prevState, value]);
-    } else {
-      setRatingTimeSpent(prevState => prevState.filter(item => item !== value));
-    }
+    const { value } = event.target;
+    const newTimeSpent = form.ratingTimeSpent.includes(value)
+      ? form.ratingTimeSpent.filter((time) => time !== value)
+      : [...form.ratingTimeSpent, value];
+    setForm({ ...form, ratingTimeSpent: newTimeSpent });
   };
 
   return (
@@ -19,7 +18,7 @@ export default function Checkboxes({ setRatingTimeSpent, ratingTimeSpent }) {
             name="spend-time"
             type="checkbox"
             value="swimming"
-            checked={ratingTimeSpent.includes('swimming')}
+            checked={form.ratingTimeSpent.includes('swimming')}
             onChange={handleCheckboxChange}
           />Swimming
         </label>
@@ -30,7 +29,7 @@ export default function Checkboxes({ setRatingTimeSpent, ratingTimeSpent }) {
             name="spend-time"
             type="checkbox"
             value="bathing"
-            checked={ratingTimeSpent.includes('bathing')}
+            checked={form.ratingTimeSpent.includes('bathing')}
             onChange={handleCheckboxChange}
           />Bathing
         </label>
@@ -41,8 +40,9 @@ export default function Checkboxes({ setRatingTimeSpent, ratingTimeSpent }) {
             name="spend-time"
             type="checkbox"
             value="chatting"
-            checked={ratingTimeSpent.includes('chatting')}
+            checked={form.ratingTimeSpent.includes('chatting')}
             onChange={handleCheckboxChange}
+
           />Chatting
         </label>
       </li>
@@ -52,7 +52,7 @@ export default function Checkboxes({ setRatingTimeSpent, ratingTimeSpent }) {
             name="spend-time"
             type="checkbox"
             value="I don't like to spend time with it"
-            checked={ratingTimeSpent.includes(`I don't like to spend time with it`)}
+            checked={form.ratingTimeSpent.includes("I don't like to spend time with it")}
             onChange={handleCheckboxChange}
           />
           I don't like to spend time with it

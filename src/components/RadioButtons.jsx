@@ -1,7 +1,7 @@
 
-export default function RadioButtons({ setRatingColor }) {
+export default function RadioButtons({ setForm, form }) {
   const handleChange = (e) => {
-    setRatingColor(e.target.value);
+    setForm({ ...form, ratingColor: e.target.value });
   }
   return (
         <ul>
