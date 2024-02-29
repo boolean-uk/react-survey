@@ -1,0 +1,35 @@
+{
+  "answers": [
+    {
+      "id": 1,
+      "username": "User Numba1",
+      "email": "usermailer@maileduser.com",
+      "review": "10/10 duck!",
+      "activity": "",
+      "bestFeatures": "",
+      "worstFeatures": "",
+      "colorRate": "2",
+      "consistency": "4",
+      "logo": "1"
+    },
+    {
+      "id": "fd03",
+      "username": "Nammmme",
+      "email": "email@email.no",
+      "review": "ducker",
+      "activity": [
+        "chatting"
+      ],
+      "bestFeatures": [
+        "It has a logo!",
+        "It squeaks!"
+      ],
+      "worstFeatures": [
+        "It has a logo!"
+      ],
+      "colorRate": "3",
+      "consistency": "1",
+      "logo": "2"
+    }
+  ]
+}
