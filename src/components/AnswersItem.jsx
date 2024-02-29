@@ -19,17 +19,27 @@ function ItemsList({ list }) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem(props,{
+export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, color, timeSpent, review }
+  answerItem: { username, color, timeSpent, review, email}, ...props
 
 }) {
 
+  const {index, setState,} = props;
+
+  //Sets state to clicked item
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(key)
-
+    let newState = {
+      id: index,
+      color: color,
+      timeSpent: timeSpent,
+      username: username,
+      review: review,
+      email: email,
+    };
+    setState(newState);
   }
 
   return (
@@ -48,7 +58,7 @@ export default function AnswersItem(props,{
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
-        <button onClick={handleEdit}>Edit</button>
+        <button onClick={(e) => handleEdit(e)}>Edit</button>
       </article>
 
     </li>

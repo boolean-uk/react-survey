@@ -1,45 +1,64 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadoButtons";
 
 const Form = (props) => {
     
-    const {setAnswersList, answersList} = props ?? {}
-    const [state, setState] = useState(
-        {
-            id: 0,
-            color: "",
-            timeSpent: {
-                bathing: false,
-                swimming: false,
-                chatting: false,
-                noTime: false,    
-            },
-            username: "",
-            review: "",
-            email: "",
-        }
-    );
+    const {setAnswersList, answersList, state, setState} = props ?? {};
 
+
+    //Handles events in form and changes state accordingly
     const handleChange = (event) => {
         const {name, value, checked} = event.target;
-            if(name === "spend-time" ) {
-                setState({...state, timeSpent : {...state.timeSpent, [value] : checked}});
-            } else {
-                setState({...state, [name] : value})
-            }
-        
+        if(name === "spend-time" ) {
+            setState({...state, timeSpent : {...state.timeSpent, [value] : checked}});
+        } else {
+            setState({...state, [name] : value})
         }
+
+    }
     
 
 
+    
     const onSubmit = (event) => {
         event.preventDefault();
 
-        setState({...state, id: answersList.length})
-        setAnswersList([...answersList, state]);
+        //Find if state exists in answersList
+        const index = answersList.findIndex(item => item.id === state.id)
+
+
+        //If state dosen't exist
+        if(index !== -1) {
+            //Update props in state found in answers
+            setAnswersList(prevList => {
+                const newList = [...prevList];
+                newList[index] = {...prevList[index], 
+                    color: state.color,
+                    timeSpent: state.timeSpent,
+                    username: state.username,
+                    review: state.review,
+                    email: state.email
+                }
+                return newList;
+            })
+           
+        } else {
+            //Update id to be answersList.length
+            setState(prevState => ({
+                ...prevState,
+                id: answersList.length,
+            }));
+            console.log(state)
+            setAnswersList((prevList) => [...prevList, state])
+            
+        }
+
+
+        //Reset form state to base values, making id increment
         const resetState = 
         {
+            id: answersList.length,
             color: "",
             timeSpent: {
                 bathing: false,
@@ -54,6 +73,7 @@ const Form = (props) => {
         setState(resetState)
 
     }
+
 
 
 
