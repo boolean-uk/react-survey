@@ -1,0 +1,22 @@
+{
+  "Surveys": [
+    {
+      "colour": "2",
+      "timeSpent": [
+        "bathing"
+      ],
+      "review": "No",
+      "username": "",
+      "email": "",
+      "id": "7984"
+    },
+    {
+      "id": "f3b0",
+      "colour": null,
+      "timeSpent": [],
+      "review": "",
+      "username": "",
+      "email": ""
+    }
+  ]
+}
