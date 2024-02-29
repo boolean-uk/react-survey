@@ -33,7 +33,7 @@ function Survey() {
     } else {
       setAnswers([...answers, formData])
     }
-
+    console.log(formData)
     setFormData(initialFormData);
     formRef.current.reset()
   };
@@ -65,9 +65,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList 
-          answersList={answers} 
-          handleEditClick={handleEditClick}/>
+        <AnswersList answersList={answers} handleEditClick={handleEditClick} />
       </section>
 
       <section className="survey__form">
@@ -127,27 +125,52 @@ function Survey() {
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
 
-            {["swimming", "bathing", "chatting"].map((value) => (
-              <>
-                <input
-                  key={value}
-                  id={value}
-                  name={value}
-                  type="checkbox"
-                  onChange={handleCheck}
-                />
-                <label htmlFor={value}>{value}</label>
-              </>
-            ))}
-            
-            <input
-              id="noTime"
-              name="noTime"
-              type="checkbox"
-              onChange={handleCheck}
-            />
-
-            <label htmlFor="noTime">I do not</label>
+            <ul>
+              <li>
+                <label>
+                  <input
+                    name="swimming"
+                    type="checkbox"
+                    value="swimming"
+                    onChange={handleCheck}
+                  />
+                  Swimming
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="bathing"
+                    type="checkbox"
+                    value="bathing"
+                    onChange={handleCheck}
+                  />
+                  Bathing
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="chatting"
+                    type="checkbox"
+                    value="chatting"
+                    onChange={handleCheck}
+                  />
+                  Chatting
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input
+                    name="noTime"
+                    type="checkbox"
+                    value="noTime"
+                    onChange={handleCheck}
+                  />
+                  I do not like to spend time with it
+                </label>
+              </li>
+            </ul>
 
             <label>
               What else have you got to say about your rubber duck?
