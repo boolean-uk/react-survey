@@ -6,6 +6,9 @@ function Survey() {
 
   const [answers, setAnswers] = useState([]);
 
+  const [editMode, setEditMode] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+
   const [userData, setUserData] = useState({
     colour: "",
     timeSpent: [],
@@ -14,9 +17,11 @@ function Survey() {
     email: "",
   });
 
+
+
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
-    console.log(event.target)
+    console.log(event.target);
 
     if (type === "checkbox") {
       setUserData((prevUserData) => {
@@ -44,32 +49,47 @@ function Survey() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Copy userData object
-    const newAnswer = { ...userData }; 
-    // Add new answer to the list
-    setAnswers((prevAnswers) => [...prevAnswers, newAnswer]); 
-
-    // Reset form fields
-    setUserData({ 
+    const newAnswer = { ...userData };
+    if (editMode && editIndex !== null) {
+      // If in edit mode, update the existing answer
+      setAnswers((prevAnswers) => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[editIndex] = newAnswer;
+        return updatedAnswers;
+      });
+      setEditMode(false); // Exit edit mode after submission
+    } else {
+      // Otherwise, add a new answer
+      setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
+    }
+    setUserData({
       colour: "",
       timeSpent: [],
       review: "",
       username: "",
       email: "",
     });
-    console.log(userData)
   };
 
+  const handleEditClick = (index) => {
+    // Populate the form fields with the current answer data
+    const answerToEdit = answers[index];
+    setUserData(answerToEdit);
+    setEditIndex(index);
+    setEditMode(true);
+  };
+
+  
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* Answers should go here */}
-        <AnswersList answersList={answers}/>
+        <AnswersList answersList={answers} handleEditClick={handleEditClick}/>
       </section>
       <section className="survey__form">
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit} >
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
@@ -190,8 +210,7 @@ function Survey() {
           <input
             className="form__submit"
             type="submit"
-            value="Submit Survey!"
-           
+            value={"Submit Answer"}
           />
         </form>
       </section>
