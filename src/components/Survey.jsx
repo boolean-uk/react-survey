@@ -1,6 +1,26 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
 
+
+const colorChoices = [
+  {
+  id: "color-one",
+  value: 1
+  },
+  {
+  id: "color-two",
+  value: 2
+  },
+  {
+  id: "color-three",
+  value: 3
+  },
+  {
+  id: "color-four",
+  value: 4
+  }
+]
+
 function Survey() {
   const initialFormData = {
     color: null,
@@ -52,6 +72,7 @@ function Survey() {
     setAnswerData(initialFormData)
   }
 
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
@@ -61,50 +82,21 @@ function Survey() {
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
           <h2>Tell us what you think about your rubber duck!</h2>
-
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
-              <li>
+              {colorChoices.map((colorChoice, index) => (
+                <li key={index}>
                 <input 
-                  id="color-one" 
+                  id={colorChoice.id}
                   type="radio" 
                   name="color" 
-                  value={1}
-                  checked={answerData.color === "1"}
+                  value={colorChoice.value}
+                  checked={parseInt(answerData.color) === parseInt(colorChoice.value)}
                   onChange={handleChange}/>
-                <label htmlFor="color-one">1</label>
+                <label htmlFor={colorChoice.id}>{colorChoice.value}</label>
               </li>
-              <li>
-                <input 
-                  id="color-two" 
-                  type="radio" 
-                  name="color" 
-                  value={2}
-                  checked={answerData.color === "2"}
-                  onChange={handleChange} />
-                <label htmlFor="color-two">2</label>
-              </li>
-              <li>
-                <input 
-                  id="color-three" 
-                  type="radio" 
-                  name="color" 
-                  value={3}
-                  checked={answerData.color === "3"}
-                  onChange={handleChange}/>
-                <label htmlFor="color-three">3</label>
-              </li>
-              <li>
-                <input 
-                  id="color-four" 
-                  type="radio" 
-                  name="color" 
-                  value={4}
-                  checked={answerData.color === "4"}
-                  onChange={handleChange} />
-                <label htmlFor="color-four">4</label>
-              </li>
+              ))}
             </ul>
           </div>
 
