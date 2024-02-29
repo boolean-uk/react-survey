@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import RadioButtonRating from "./FormItems/RadioButtonRating";
 import CheckBoxGroup from "./FormItems/CheckboxGroup";
 import { SPEND_TIME_ANSWER_OPTIONS, RATING_ANSWER_OPTIONS, INITIAL_FORM_VALUES} from "@/misc/Consts"
 
-function Form() {
+function Form({submit}) {
     const [rating, setRating] = useState(INITIAL_FORM_VALUES.rating)
     const [timeSpendingPreferences, setTimeSpendingPreferences] = useState(INITIAL_FORM_VALUES.timeSpendingPreferences)
     const [additionalRemarks, setAdditionalRemarks] = useState(INITIAL_FORM_VALUES.additionalRemarks)
@@ -16,9 +17,10 @@ function Form() {
         validateInput(true)
     }
 
-    const submit = () => {
-        const submission = {email: email, name: name, rating: rating, timeSpendingPreferences: timeSpendingPreferences, remarks: additionalRemarks}
+    const submitForm = () => {
+        const submission = {username: name, email: email, colourRating: rating, timeSpent: timeSpendingPreferences, review: additionalRemarks}
         console.log("SUBMITTING:", submission)
+        submit(submission)
         resetForm()
     }
 
@@ -67,17 +69,19 @@ function Form() {
 
     useEffect(() => {
         if (Object.values(validation).every(value => value === true)) {
-            submit();
+            submitForm();
         }
     }, [validation])
 
     return (
+        <>
+        <h2 className="module_header">Review</h2>
         <form className="form" onSubmit={handleSubmitRequest}>
-            <RadioButtonRating title="How do you rate your rubber duck colour?" options={RATING_ANSWER_OPTIONS} value={rating} onChange={setRating} leftLabel="It's garbage" rightLabel="Love it!" isValid={(validation.isValidRating || !validation.hasSubmitted)} />
+            <RadioButtonRating title="How do you rate your rubber duck colour?" options={RATING_ANSWER_OPTIONS} value={rating} onChange={setRating} leftLabel="Room for improvement" rightLabel="I love it!" isValid={(validation.isValidRating || !validation.hasSubmitted)} />
             <CheckBoxGroup title="How do you like to spend time with your rubber duck?" options={SPEND_TIME_ANSWER_OPTIONS} values={timeSpendingPreferences} onChange={setTimeSpendingPreferences} />
             <label>
                 <h3>What else have you got to say about your rubber duck?</h3>
-                <textarea name="review" rows="10" onChange={(e) => setAdditionalRemarks(e.target.value)}></textarea>
+                <textarea name="review" rows="5" onChange={(e) => setAdditionalRemarks(e.target.value)}></textarea>
             </label>
             <label>
                 <h3 className={(validation.isValidName || !validation.hasSubmitted) ? "" : "invalid"}>Put your name here (if you feel like it):</h3>
@@ -89,7 +93,12 @@ function Form() {
             </label>
             <input className="form__submit" type="submit" value="Submit Survey!" />
         </form>
+        </>
     );
+}
+
+Form.propTypes = {
+    submission: PropTypes.func
 }
 
 export default Form;
