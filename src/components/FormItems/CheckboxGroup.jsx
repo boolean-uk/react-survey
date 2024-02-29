@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 
-function CheckBoxGroup({ title, options, onChange, isValid=true}) {
-    const [values, setValues] = useState([])
-
+function CheckBoxGroup({ title, options, values, onChange, isValid=true}) {
+    
     const handleChange = (selectedOption) => {
         let updatedValues = values.includes(selectedOption) ? values.filter(value => value !== selectedOption) : [...values, selectedOption]
-        setValues(updatedValues)
         onChange(updatedValues)
     }
 
@@ -17,7 +15,7 @@ function CheckBoxGroup({ title, options, onChange, isValid=true}) {
                 {Object.entries(options).map(([key, value]) => (
                     <li key={key}>
                         <label className="text_label" onClick={() => handleChange(key)}>
-                            <input type="checkbox" value={key} checked={values.includes(key)}/>
+                            <input type="checkbox" value={key} checked={values.includes(key)} readOnly/>
                             {value}
                         </label>
                   </li>
@@ -30,6 +28,7 @@ function CheckBoxGroup({ title, options, onChange, isValid=true}) {
 CheckBoxGroup.propTypes = {
   title: PropTypes.string.isRequired,
   options: PropTypes.object.isRequired,
+  values: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   isValid: PropTypes.bool
 };

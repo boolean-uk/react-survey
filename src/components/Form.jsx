@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import RadioButtonRating from "./FormItems/RadioButtonRating";
 import CheckBoxGroup from "./FormItems/CheckboxGroup";
-import { spendTimeAnswerOptions, ratingAnswerOptions } from "@/misc/Consts"
+import { SPEND_TIME_ANSWER_OPTIONS, RATING_ANSWER_OPTIONS, INITIAL_FORM_VALUES} from "@/misc/Consts"
 
 function Form() {
-    const [rating, setRating] = useState(-1)
-    const [timeSpendingPreferences, setTimeSpendingPreferences] = useState([])
-    const [additionalRemarks, setAdditionalRemarks] = useState("")
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [validation, setValidation] = useState({ isValidRating: false, isValidName: false, isValidEmail: false, isValidTimeSpendingPreferences: false, hasSubmitted: false, isSubmitting: false })
+    const [rating, setRating] = useState(INITIAL_FORM_VALUES.rating)
+    const [timeSpendingPreferences, setTimeSpendingPreferences] = useState(INITIAL_FORM_VALUES.timeSpendingPreferences)
+    const [additionalRemarks, setAdditionalRemarks] = useState(INITIAL_FORM_VALUES.additionalRemarks)
+    const [name, setName] = useState(INITIAL_FORM_VALUES.name)
+    const [email, setEmail] = useState(INITIAL_FORM_VALUES.email)
+    const [validation, setValidation] = useState(INITIAL_FORM_VALUES.validation)
 
     const handleSubmitRequest = (event) => {
         event.preventDefault();
@@ -17,7 +17,9 @@ function Form() {
     }
 
     const submit = () => {
-        console.log("SUBMITTED")
+        const submission = {email: email, name: name, rating: rating, timeSpendingPreferences: timeSpendingPreferences, remarks: additionalRemarks}
+        console.log("SUBMITTING:", submission)
+        resetForm()
     }
 
     const validateInput = (isSubmitting = false) => {
@@ -32,23 +34,36 @@ function Form() {
     };
 
     const isValidRating = () => {
-        return ratingAnswerOptions.includes(rating);
+        return RATING_ANSWER_OPTIONS.includes(rating);
     };
 
     const isValidTimeSpendingPreferences = () => {
         timeSpendingPreferences.forEach(item => {
-            if (!Object.keys(spendTimeAnswerOptions).includes(item)) return false;
+            if (!Object.keys(SPEND_TIME_ANSWER_OPTIONS).includes(item)) return false;
         })
         return true;
     }
 
     const isValidName = () => {
-        return name.length > 1
+        return true
     }
 
     const isValidEmail = () => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
+
+    const resetForm = () => {
+        setRating(INITIAL_FORM_VALUES.rating);
+        setTimeSpendingPreferences(INITIAL_FORM_VALUES.timeSpendingPreferences);
+        setAdditionalRemarks(INITIAL_FORM_VALUES.additionalRemarks);
+        setName(INITIAL_FORM_VALUES.name);
+        setEmail(INITIAL_FORM_VALUES.email);
+        setValidation(INITIAL_FORM_VALUES.validation);
+    }
+
+    useEffect(() => {
+        validateInput()
+    }, [rating, timeSpendingPreferences, name, email])
 
     useEffect(() => {
         if (Object.values(validation).every(value => value === true)) {
@@ -56,14 +71,10 @@ function Form() {
         }
     }, [validation])
 
-    useEffect(() => {
-        validateInput()
-    }, [rating, timeSpendingPreferences, name, email])
-
     return (
         <form className="form" onSubmit={handleSubmitRequest}>
-            <RadioButtonRating title="How do you rate your rubber duck colour?" options={ratingAnswerOptions} onChange={setRating} leftLabel="It's garbage" rightLabel="Love it!" isValid={(validation.isValidRating || !validation.hasSubmitted)} />
-            <CheckBoxGroup title="How do you like to spend time with your rubber duck?" options={spendTimeAnswerOptions} onChange={setTimeSpendingPreferences} />
+            <RadioButtonRating title="How do you rate your rubber duck colour?" options={RATING_ANSWER_OPTIONS} value={rating} onChange={setRating} leftLabel="It's garbage" rightLabel="Love it!" isValid={(validation.isValidRating || !validation.hasSubmitted)} />
+            <CheckBoxGroup title="How do you like to spend time with your rubber duck?" options={SPEND_TIME_ANSWER_OPTIONS} values={timeSpendingPreferences} onChange={setTimeSpendingPreferences} />
             <label>
                 <h3>What else have you got to say about your rubber duck?</h3>
                 <textarea name="review" rows="10" onChange={(e) => setAdditionalRemarks(e.target.value)}></textarea>
