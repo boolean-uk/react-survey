@@ -1,144 +1,111 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
 
-/*We are defining an initial state for the form. This object, initialFormState, holds the initial values for each field of the form.*/
-const initialFormState = {
-  bestFeatures: {
-    yellow: false,
-    squeaks: false,
-    logo: false,
-    big: false
-  },
-  worstBits: {
-    yellow: false,
-    squeaks: false,
-    logo: false,
-    big: false
-  },
-  colour: "",
-  spend_time: [],
-  review: "",
-  email: "",
-  username: "",
-  timeSpent: ""
-}; 
-
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
-  const [form, setForm] = useState(initialFormState);
-  const [formList, setFormList] = useState([]);
+  const [timeSpent, setTimeSpent] = useState([])
+  const [colour, setColour] = useState(1)
+  const [bestFeatures, setBestFeatures] = useState([]);
+  const [worstBits, setWorstBits] = useState([]);
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [review, setReview] = useState('');
+  const [answersList, setAnswersList] = useState([])
 
-  // handleChange function to update form state based on input changes
-  const handleChange = (event) => {
-    event.preventDefault();
-   const { name, value, type, checked } = event.target;
-
-    // Update the form state based on the type of input
-    if (type === "checkbox") {
-      if (name === "bestFeatures" || name === "worstBits") {
-        // For checkboxes in bestFeatures and worstBits
-        setForm((prev) => ({
-          ...prev,
-          [name]: { ...prev[name], [value]: checked }
-        }));
-
-      } else if (name === "spend-time") {
-        // For checkboxes in spend-time
-        if (value === "noTime") {
-          setForm((prev) => ({
-            ...prev,
-            spend_time: checked ? [] : ["swimming", "bathing", "chatting"]
-          }));
-        } else {
-          setForm((prev) => ({
-            ...prev,
-            spend_time: checked
-              ? [...prev.spend_time, value] // Add the activity to the array
-              : prev.spend_time.filter((activity) => activity !== value) // Remove the activity from the array
-          }));
-        }
-      } else {
-        // For other checkboxes
-        setForm((prev) => ({
-          ...prev,
-          [name]: checked
-        }));
-      }
+  const submittedForm = {
+    username : username,
+    colour : colour,
+    timeSpent : timeSpent,
+    review : review,
+    bestFeatures : bestFeatures,
+    worstBits : worstBits,
+  }
+ 
+  const handleChange2 = (event) => {
+    const { name, value, type, checked } = event.target;
+   setTimeSpent(prev => {
+    if(checked){
+      console.log([...prev, value])
+      return [...prev, value];
     } else {
-      // For other input types
-      setForm((prev) => ({
-        ...prev,
-        [name]: value
-      }));
+      console.log(prev.filter(item => item !== value))
+      return prev.filter(item => item !== value)
     }
-    console.log(form)
+   })
+  }
 
-    /*
-    if (type === "checkbox" && name === "bestFeatures"){
-      setForm((prev) => ({...prev, [name]: {...prev.bestFeatures, [value]:!prev.bestFeatures[value]}}))
-    }
-    
-    else if (type === "checkbox" && name === "worstBits"){
-      setForm((prev) => ({...prev, [name]: {...prev.worstBits, [value]:!prev.worstBits[value]}}))
-    }
-    setForm((prev) => ({...prev, [name]: value}))
-    */
+  //Bestfeatures
+  const handleChange3 = (event) => {
+    const {name, value, type, checked} = event.target;
+    setBestFeatures(prev =>{
+      if(checked){
+        console.log([...prev, value])
+        return [...prev, value];
+      }else{
+        console.log(prev.filter(item => item !== value))
+        return prev.filter(item => item !== value)
+      }
+    })    
+  }
 
+  //WorstBits
+  const handleChange4 = (event) => {
+    const {name, value, type, checked} = event.target;
+    setWorstBits(prev =>{
+      if(checked){
+        console.log([...prev, value])
+        return [...prev, value];
+      }else{
+        console.log(prev.filter(item => item !== value))
+        return prev.filter(item => item !== value)
+      }
+    })    
+  }
 
-    /*
-    setForm(prevForm => ({
-      ...prevForm,
-      [name]: type === 'checkbox' ? 
-        checked ? [...prevForm[name], value] : prevForm[name].filter(item => item !== value) : 
-        value
-    }));
-    */
+  //colorchange - radiobutton
+  const handleColorChange = (event) => {
+    const value = parseInt(event.target.value); // Parse the value as an integer
+    setColour(value); // Set the state with the selected value
+    console.log(value);
   };
 
+  // Separate change handlers for email, username, and review
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleReviewChange = (event) => {
+    setReview(event.target.value);
+  };
+  
+  
   // handleSubmit function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add the current form data to the form list
-    setFormList([...formList, form]);
-    // Reset the form to initial state
-    setForm(initialFormState);
+    // Add the current form data to the Answerlist
+    console.log(submittedForm)
+    setAnswersList([
+      ...answersList, submittedForm
+    ])
+    setEmail('');
+    setUsername('');
+    setColour(1);
+    setBestFeatures([]);
+    setWorstBits([]);
+    setReview('')
+    setTimeSpent([])
   };
-
-  console.log(formList)
-  {/*
-  // Function to handle consistency rating change
-const handleConsistencyChange = (event) => {
-  const value = event.target.value;
-  setForm(prevForm => ({
-    ...prevForm,
-    consistency: value
-  }));
-};
-
-// Function to handle color rating change
-const handleColorChange = (event) => {
-  const value = event.target.value;
-  setForm(prevForm => ({
-    ...prevForm,
-    color: value
-  }));
-};
-
-// Function to handle logo rating change
-const handleLogoRatingChange = (event) => {
-  const value = event.target.value;
-  setForm(prevForm => ({
-    ...prevForm,
-    logoRating: value
-  }));
-};
-*/}
-
+  
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
+         <AnswersList answersList={answersList} />
        
       </section>
       <section className="survey__form">{/* a form should be here */}
@@ -148,79 +115,78 @@ const handleLogoRatingChange = (event) => {
       <div className="form-group">
       <h3>What would you say that are the best features of your rubber duck?</h3>
         <label htmlFor="yellow">It's yellow!</label>
-        <input type="checkbox" id="yellow" name="bestFeatures" value="yellow" onChange={handleChange} checked={form.bestFeatures.yellow} />
+        <input type="checkbox" id="yellow" name="bestFeatures" value="yellow" onChange={handleChange3} checked={bestFeatures.includes("yellow")} />
 
         <label htmlFor="squeaks">It squeaks!</label>
-        <input type="checkbox" id="squeaks" name="bestFeatures" value="squeaks" onChange={handleChange} checked={form.bestFeatures.squeaks} />
+        <input type="checkbox" id="squeaks" name="bestFeatures" value="squeaks" onChange={handleChange3} checked={bestFeatures.includes("squeaks")} />
 
         <label htmlFor="logo">It has a logo!</label>
-        <input type="checkbox" id="logo" name="bestFeatures" value="logo" onChange={handleChange} checked={form.bestFeatures.logo} />
+        <input type="checkbox" id="logo" name="bestFeatures" value="logo" onChange={handleChange3} checked={bestFeatures.includes("logo")} />
 
         <label htmlFor="big">It's big!</label>
-         <input type="checkbox" id="big" name="bestFeatures" value="big" onChange={handleChange} checked={form.bestFeatures.big} />
+         <input type="checkbox" id="big" name="bestFeatures" value="big" onChange={handleChange3} checked={bestFeatures.includes("big")} />
       </div>
 
       <div className="form__group">
         <h3>What would you say that are the worst bits of your rubber duck?</h3>
           <label htmlFor="yellowWorst">It's yellow!</label>
-          <input type="checkbox" id="yellowWorst" name="worstBits" value="yellow" onChange={handleChange} checked={form.worstBits.yellow} />
+          <input type="checkbox" id="yellowWorst" name="worstBits" value="yellow" onChange={handleChange4} checked={worstBits.includes("yellow")}/>
 
           <label htmlFor="squeaksWorst">It squeaks!</label>
-          <input type="checkbox" id="squeaksWorst" name="worstBits" value="squeaks" onChange={handleChange} checked={form.worstBits.squeaks} />
+          <input type="checkbox" id="squeaksWorst" name="worstBits" value="squeaks" onChange={handleChange4} checked={worstBits.includes("squeaks")} />
 
           <label htmlFor="logoWorst">It has a logo!</label>
-          <input type="checkbox" id="logoWorst" name="worstBits" value="logo" onChange={handleChange} checked={form.worstBits.logo} />
+          <input type="checkbox" id="logoWorst" name="worstBits" value="logo" onChange={handleChange4} checked={worstBits.includes("logo")} />
 
           <label htmlFor="bigWorst">It's big!</label>
-          <input type="checkbox" id="bigWorst" name="worstBits" value="big" onChange={handleChange} checked={form.worstBits.big} />
+          <input type="checkbox" id="bigWorst" name="worstBits" value="big" onChange={handleChange4} checked={worstBits.includes("big")} />
       </div>
 
       
 
       <div className="form_group radio">
         <h3>How do you rate your rubber duck colour?</h3>
-        <input type="radio" id="1" name="colour" value="1" onChange={handleChange} checked={form.colour === "1"} />
+        <input type="radio" id="1" name="colour" value="1" onChange={handleColorChange} checked={colour === 1} />
         <label htmlFor="1">1</label>
 
-        <input type="radio" id="2" name="colour" value="2" onChange={handleChange} checked={form.colour === "2"} />
+        <input type="radio" id="2" name="colour" value="2" onChange={handleColorChange} checked={colour === 2} />
         <label htmlFor="2">2</label>
 
-        <input type="radio" id="3" name="colour" value="3" onChange={handleChange} checked={form.colour === "3"} />
+        <input type="radio" id="3" name="colour" value="3" onChange={handleColorChange} checked={colour === 3} />
         <label htmlFor="3">3</label>
 
-        <input type="radio" id="4" name="colour" value="4" onChange={handleChange} checked={form.colour === "4"} />
+        <input type="radio" id="4" name="colour" value="4" onChange={handleColorChange} checked={colour === 4} />
         <label htmlFor="4">4</label>
       </div>
     
-
       <div className="form_group">
         <h3>How do you like to spend time with your rubber duck</h3>
         <label htmlFor="swimming">Swimming</label>
-        <input type="checkbox" id="swimming" name="spend-time" value="swimming" onChange={handleChange} checked={form.spend_time.includes("swimming")} />
+        <input type="checkbox" id="swimming" name="spend-time" value="swimming" onChange={handleChange2} checked={timeSpent.includes("swimming")} />
 
         <label htmlFor="bathing">Bathing</label>
-        <input type="checkbox" id="bathing" name="spend-time" value="bathing" onChange={handleChange} checked={form.spend_time.includes("bathing")} />
+        <input type="checkbox" id="bathing" name="spend-time" value="bathing" onChange={handleChange2} checked={timeSpent.includes("bathing")} />
 
         <label htmlFor="chatting">Chatting</label>
-        <input type="checkbox" id="chatting" name="spend-time" value="chatting" onChange={handleChange} checked={form.spend_time.includes("chatting")} />
+        <input type="checkbox" id="chatting" name="spend-time" value="chatting" onChange={handleChange2} checked={timeSpent.includes("chatting")} />
 
         <label htmlFor="noTime">I don't like to spend time with it</label>
-        <input type="checkbox" id="noTime" name="spend-time" value="noTime" onChange={handleChange} checked={form.spend_time.includes("noTime")} />
+        <input type="checkbox" id="noTime" name="spend-time" value="noTime" onChange={handleChange2} checked={timeSpent.includes("noTime")} />
       </div>
 
       <label>
         What else have you got to say about your rubber duck?
-        <textarea name="review" cols="30" rows="10" value={form.review} onChange={handleChange}></textarea>
+        <textarea name="review" cols="30" rows="10" value={review} onChange={handleReviewChange}></textarea>
       </label>
 
       <label>
         Put your name here (if you feel like it):
-        <input type="text" name="username" value={form.username} onChange={handleChange} />
+        <input type="text" name="username" value={username} onChange={handleUsernameChange} />
       </label>
 
       <label>
         Leave us your email pretty please??
-        <input type="email" name="email" value={form.email} onChange={handleChange} />
+        <input type="email" name="email" value={email} onChange={handleEmailChange} />
       </label>
 
       <input className="form__submit" type="submit" value="Submit Survey!" />
