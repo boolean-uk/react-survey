@@ -57,7 +57,7 @@ const Form = (props) => {
         //Reset form state to base values, making id increment
         const resetState = 
         {
-            id: answersList.length,
+            id: answersList.length + 1,
             color: "",
             timeSpent: {
                 bathing: false,

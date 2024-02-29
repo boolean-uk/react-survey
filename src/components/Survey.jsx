@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "./form/form";
 import AnswersList from "./AnswersList";
 
@@ -23,6 +23,51 @@ function Survey() {
     }
 );
 
+
+const getForm = async () => {
+  const request = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(answersList)
+  }
+  await fetch("http://localhost:3000/forms", request)
+}
+
+const postForm = async (answersList) => {
+
+  const request = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(answersList)
+  }
+  await fetch("http://localhost:3000/forms", request)
+}
+
+
+const putForm = async (id, answersList) => {
+  const request = {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(answersList)
+  }
+  await fetch(`http://localhost:3000/forms/${id}`, request)
+}
+
+const deleteForm = async(id) => {
+  const request = {
+    method: "DELETE",
+  }
+  await fetch(`http://localhost:3000/forms/${id}`, request)
+
+}
+
+
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
@@ -32,7 +77,7 @@ function Survey() {
         }
       </section>
       <section className="survey__form">{
-        <Form setAnswersList= {setAnswersList} answersList={answersList} state={state} setState={setState}/>
+        <Form setAnswersList= {setAnswersList} answersList={answersList} state={state} setState={setState} postForm={postForm}/>
       }</section>
     </main>
   );

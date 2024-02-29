@@ -26,7 +26,7 @@ export default function AnswersItem({
 
 }) {
 
-  const {index, setState, answersList, setAnswersList} = props;
+  const {index, setState, answersList, setAnswersList} = props ?? {};
 
   //Sets state to clicked item
   const handleEdit = (e) => {
@@ -45,10 +45,12 @@ export default function AnswersItem({
   const handleDelete = (e) => {
     e.preventDefault();
 
+    //Deletes answer and sets all other ids after - 1
     setAnswersList(prevAnswersList => prevAnswersList
       .filter(answer => answer.id !== index)
-      .map(answer => ({...answer, id: answer.id -1}))
+      .map(answer => answer.id > index ? ({...answer, id: answer.id -1}) : answer)
     )
+    console.log(answersList)
 
   }
 
