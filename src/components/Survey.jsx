@@ -5,26 +5,39 @@ import Form from "./Form/Form";
 function Survey() {
   const [answers, setAnswers] = useState([]);
   const [editData, setEditData] = useState(null);
+  const [editId, setEditId] = useState(null); // Track the ID of the answer being edited
 
   const addAnswer = (newAnswer) => {
-    setAnswers((prevAnswers) => {
-      if (editData) {
-        return prevAnswers.map((answer) =>
-          answer.id === editData.id ? newAnswer : answer
-        );
-      } else {
-        return [...prevAnswers, newAnswer];
-      }
-    });
-    setEditData(null); // Clear edit data after adding/updating answer
+    if (editId !== null) {
+      // If an ID is present, update the specific answer
+      setAnswers((prevAnswers) =>
+        prevAnswers.map((answer) =>
+          answer.id === editId ? { ...answer, ...newAnswer } : answer
+        )
+      );
+      setEditId(null); // Reset the edit ID after editing
+    } else {
+      // Otherwise, add a new answer
+      setAnswers((prevAnswers) => [
+        ...prevAnswers,
+        { id: Date.now(), ...newAnswer },
+      ]);
+    }
+    setEditData(null);
   };
 
-  const handleEdit = (data) => {
-    setEditData(data);
+  const handleEdit = (id) => {
+    // Find the answer with the corresponding ID and set it as the edit data
+    const editAnswer = answers.find((answer) => answer.id === id);
+    if (editAnswer) {
+      setEditData(editAnswer);
+      setEditId(id); // Set the edit ID
+    }
   };
 
   const handleCancelEdit = () => {
     setEditData(null);
+    setEditId(null);
   };
 
   return (

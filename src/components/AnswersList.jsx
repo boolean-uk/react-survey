@@ -1,7 +1,6 @@
-import React from "react";
 import AnswersItem from "./AnswersItem";
 
-const AnswersList = ({ answers, onEdit }) => {
+export default function AnswersList({ answers, onEdit }) {
   return (
     <ul>
       {answers && answers.length > 0 ? (
@@ -13,6 +12,4 @@ const AnswersList = ({ answers, onEdit }) => {
       )}
     </ul>
   );
-};
-
-export default AnswersList;
+}

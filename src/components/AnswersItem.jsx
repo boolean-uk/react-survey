@@ -20,18 +20,13 @@ function ItemsList({ list }) {
   );
 }
 
+// AnswersItem.jsx
 export default function AnswersItem({
   answerItem: { id, username, colour, timeSpent, review },
   onEdit,
 }) {
   const handleEdit = () => {
-    onEdit({
-      id,
-      username,
-      colour,
-      timeSpent,
-      review,
-    });
+    onEdit(id); // Pass the ID to the onEdit function
   };
 
   return (
