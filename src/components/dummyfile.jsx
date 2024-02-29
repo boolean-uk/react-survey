@@ -5,8 +5,6 @@ export default function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const [userDataArray, setUserDataArray] = useState([]);
-
   const [userData, setUserData] = useState({
     best: [], // Initialize as an array for checkboxes
     worst: [], // Initialize as an array for checkboxes
@@ -21,29 +19,53 @@ export default function Survey() {
   
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
+    //const userData = { firstname, lastname, gender, terms }
     console.log("Form Submitted", { userData });
     setFormSubmitted(true);
+  }
+/*  const handleChange = (event) => {
+    const inputName = event.target.name
+    const inputValue = event.target.value
+    
+    if (inputName === "best") {
+      setUserData({...userData, best: event.target.checked})
+    }
+    if (inputName === "worst") {
+      setUserData({...userData, worst: event.target.checked})
+    }
+    if (inputName === "consistency") {
+      setUserData({...userData, consistency: inputValue})
+    }
+    if (inputName === "color") {
+      setUserData({...userData, color: inputValue})
+    }
+    if (inputName === "logo") {
+      setUserData({...userData, logo: inputValue})
+    }
+    if (inputName === "spend") {
+      setUserData({...userData, spend: event.target.checked})
+    }
+    if (inputName === "saying") {
+      setUserData({...userData, saying: inputValue})
+    }
+    if (inputName === "name") {
+      setUserData({...userData, name: inputValue})
+    }
+    if (inputName === "email") {
+      setUserData({...userData, email: inputValue})
+    }
+  }
 
-    const { name, color, spend, saying } = userData;
-
-    const userDataSubset = { name, color, spend, saying };
-
-    setUserDataArray((prevDataArray) => [...prevDataArray, userDataSubset]);
-    setUserData({
-      best: [],
-      worst: [],
-      consistency: "",
-      color: "",
-      logo: "",
-      spend: [],
-      saying: "",
-      name: "",
-      email: "",
-    });
+  /*const handleChange = (event) => {
+    const inputName = event.target.name;
+    const inputValue = event.target.type === "checkbox" ? event.target.checked : event.target.value;
   
-  };
-
+    setUserData((prevData) => ({
+      ...prevData,
+      [inputName]: inputValue,
+    }));
+  };*/
 
   const handleChange = (event) => {
     const inputName = event.target.name;
@@ -70,27 +92,21 @@ export default function Survey() {
     });
   };
 
-  const handleSpendCheckboxChange = (event) => {
+  /*const handleChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
   
-    setUserData((prevData) => {
-      const updatedArray = event.target.checked
-        ? [...prevData[inputName], inputValue]
-        : prevData[inputName].filter((value) => value !== inputValue);
-  
-      return {
-        ...prevData,
-        [inputName]: updatedArray,
-      };
-    });
-  };
+    setUserData((prevData) => ({
+      ...prevData,
+      [inputName]: inputValue,
+    }));
+  };*/
 
   return (
     <main className="survey">
      <section className={`survey__list ${open ? "open" : ""}`}>
   <h2>Answers list</h2>
-  {formSubmitted && <AnswersList userDataArray={userDataArray} />}
+  {formSubmitted && <AnswersList userData={userData} />}
 </section>
       <section className="survey__form">
       <form className="form" onSubmit={handleSubmit}>
@@ -367,5 +383,84 @@ export default function Survey() {
       
       </section>
     </main>
+  );
+}
+import React from "react";
+
+const answersSet = {
+  swimming: "Swimming",
+  bathing: "Bathing",
+  chatting: "Chatting",
+  noTime: "I don't like to spend time with it"
+};
+
+function ItemsList({ list }) {
+  return (
+    <>
+      {list && (
+        <div>
+          <strong>List:</strong>
+          <ul>
+            {list.map((item) => (
+              <li key={item}>{answersSet[item]}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default function AnswersItem({ answerItem = {} }) {
+  const {
+    best = [],
+    worst = [],
+    consistency = "",
+    color = "",
+    logo = "",
+    spend = [],
+    saying = "",
+    name = "Anon",
+    email = ""
+  } = answerItem;
+
+  return (
+    <li>
+      <article className="answer">
+        <h3>{name} said:</h3>
+        <p>
+          <em>What are the best features on the duck?</em>
+          <ItemsList list={best} />
+        </p>
+        <p>
+          <em>What are the worst features on the duck?</em>
+          <ItemsList list={worst} />
+        </p>
+        <p>
+          <em>How do you rate the rubber duck consistency?</em>
+          <span className="answer__line">{consistency}</span>
+        </p>
+        <p>
+          <em>How do you rate the rubber duck color?</em>
+          <span className="answer__line">{color}</span>
+        </p>
+        <p>
+          <em>How do you rate the rubber duck logo?</em>
+          <span className="answer__line">{logo}</span>
+        </p>
+        <p>
+          <em>How would you like to spend time with the duck?</em>
+          <ItemsList list={spend} />
+        </p>
+        <p>
+          <em>What else have you got to say about the rubber duck?</em>
+          <span className="answer__line">{saying}</span>
+        </p>
+        <p>
+          <em>Can we get your email?</em>
+          <span className="answer__line">{email}</span>
+        </p>
+      </article>
+    </li>
   );
 }

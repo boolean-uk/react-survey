@@ -3,12 +3,14 @@ import AnswersItem from "./AnswersItem";
 export default function AnswersList(props) {
   console.log("Inside AnswersList: ", props);
 
-  const { answersList } = props;
+  const { userDataArray } = props;
+
+  //console.log("The Array: ", userDataArray)
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {userDataArray.map((userData, i) => (
+        <AnswersItem answerItem={userData} key={i} />
       ))}
     </ul>
   );
