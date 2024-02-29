@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import AnswersList from './AnswersList'
 import surveyTemplate from '../data/surveyTemplate'
 import RadioButtons from './RadioButtons'
@@ -16,10 +16,13 @@ function Survey() {
   const [surveyAnswers, setSurveyAnswers] = useState(surveyTemplate)
   const [answersList, setAnswersList] = useState([])
 
+  const formRef = useRef(null); 
+
   const makeSubmission = (e) => {
     e.preventDefault()
     setAnswersList([...answersList, surveyAnswers])
     setSurveyAnswers(surveyTemplate)
+    formRef.current.reset();
   }
 
   const nameValidation = (e) => {
@@ -41,7 +44,7 @@ function Survey() {
         <AnswersList answersList={answersList}/>
       </section>
       <section className="survey__form">
-        <form className="form">
+        <form ref={formRef} className="form">
 
           <h2>Tell us what you think about your rubber duck!</h2>
           <div className="form__group radio">
@@ -60,6 +63,7 @@ function Survey() {
               name="review"
               cols="30"
               rows="10"
+              value={surveyAnswers.textareaInput}
               onChange={(e) => reviewValidation(e)}
             ></textarea>
           </label>

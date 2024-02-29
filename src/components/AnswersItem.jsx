@@ -40,6 +40,7 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{textareaInput}</span>
         </p>
+        <button>edit</button>
       </article>
     </li>
   );
