@@ -1,14 +1,14 @@
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
 
-  const { answersList } = props;
+export default function AnswersList(props) {
+  
+  console.log("Inside AnswersList: ", props.submittedForms);
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {props.submittedForms.map((answerItem, i) => (
+        <AnswersItem answerItem={answerItem} key={i} i={i} setIsEdited={props.setIsEdited}  />
       ))}
     </ul>
   );
