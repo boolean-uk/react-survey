@@ -19,6 +19,7 @@ function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(initialFormState)
   const [savedForms, setSavedForms] = useState([])
+  const [currentId, setCurrentId] = useState(null)
 
   
   useEffect(()=> {
@@ -31,16 +32,35 @@ function Survey() {
 
     console.log(formData)
 
-    setSavedForms([...savedForms, formData]);
+    if(currentId !== null)
+    {
+      let tempForms = savedForms
+      tempForms[currentId] = formData
+      setSavedForms(tempForms)
+      setCurrentId(null)
+    }
+    else
+    {
+      setSavedForms([...savedForms, formData]);
+    }
 
     setFormData(initialFormState)
+
+   
+  }
+
+  function loadForm(id)
+  {
+    //console.log(id)
+    setFormData(savedForms[id])
+    setCurrentId(id)
   }
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList savedForms={savedForms}/>
+        <AnswersList savedForms={savedForms} loadForm={loadForm}/>
       </section>
 
 

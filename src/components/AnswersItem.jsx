@@ -13,13 +13,10 @@ function TimeSpentSet({list}){
   //console.log({swimming, bathing, chatting, noTime})
 
   return (<>
-    
-      <li>{list[0] ? "Swimming" : "FALSE"}</li>
+      <li>{list[0] ? "Swimming" : ""}</li>
       <li>{list[1] ? "Bathing" : ""}</li>
       <li>{list[2] ? "Chatting" : ""}</li>
       <li>{list[3] ? "I don't like to spend time with it" : ""}</li>
-
-    
     </>
 
   )
@@ -36,10 +33,10 @@ function TimeSpentSet({list}){
 // }
 
 // This is the main component being exported from this file
-function AnswersItem({savedForms: {rating, swimming, bathing, chatting, noTime, feedback, name, email }}) 
+function AnswersItem({savedForms: {rating, swimming, bathing, chatting, noTime, feedback, name, email }, index, loadForm}) 
 {
   let list = [swimming, bathing, chatting, noTime]
-  console.log(list)
+  // console.log(list)
   return (
     <li>
       <article className="answer">
@@ -56,6 +53,7 @@ function AnswersItem({savedForms: {rating, swimming, bathing, chatting, noTime, 
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{feedback}</span>
         </p>
+        <button onClick={() => {loadForm(index)}}>Edit</button>
       </article>
     </li>
   );
