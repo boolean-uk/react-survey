@@ -1,0 +1,160 @@
+{
+  "answers": [
+    {
+      "id": "c7c4",
+      "color": "1",
+      "spendTime": {
+        "swimming": false,
+        "bathing": true,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "1212",
+      "username": "11",
+      "email": "11@dk"
+    },
+    {
+      "id": "3e50",
+      "color": "3",
+      "spendTime": {
+        "swimming": false,
+        "bathing": true,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "23",
+      "username": "323",
+      "email": "little-nico@hotmail.com"
+    },
+    {
+      "id": "9336",
+      "color": "4",
+      "spendTime": {
+        "swimming": true,
+        "bathing": true,
+        "chatting": true,
+        "noTime": true
+      },
+      "review": "123",
+      "username": "123",
+      "email": "little-nico@hotmail.com"
+    },
+    {
+      "id": "9283",
+      "color": "1",
+      "spendTime": {
+        "swimming": true,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "edwsa",
+      "username": "JACOB",
+      "email": "little-nico@hotmail.com"
+    },
+    {
+      "id": "c965",
+      "color": "4",
+      "spendTime": {
+        "swimming": true,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "fdf",
+      "username": "",
+      "email": "little-nico@hotmail.com"
+    },
+    {
+      "id": "034e",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "8101",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "929d",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "fb19",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "05f0",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "df39",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    },
+    {
+      "id": "a6b9",
+      "color": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "review": "",
+      "username": "",
+      "email": ""
+    }
+  ]
+}
