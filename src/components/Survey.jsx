@@ -1,15 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Form from "./Form";
+import AnswersList from "./AnswersList";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
+  const [answers, setAnswers] = useState([])
+  const [formData, setFormData] = useState({
+    color: 0,
+    timeSpent: [],
+    review: "",
+    name: "",
+    email: "",
+  });
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+
+  const handleEdit = (index) => {
+    setSelectedAnswerIndex(index);
+    setFormData(answers[index]);
+  };
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answers} handleEdit={handleEdit}/>
       </section>
-      <section className="survey__form">{/* a form should be here */}</section>
+      <section className="survey__form">
+        <Form setAnswers ={setAnswers} answers={answers} setFormData = {setFormData} formData={formData} selectedAnswerIndex={selectedAnswerIndex} setSelectedAnswerIndex={setSelectedAnswerIndex}/>
+      </section>
     </main>
   );
 }
