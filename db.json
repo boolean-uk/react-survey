@@ -57,10 +57,10 @@
     {
       "id": "3e46",
       "bestFeatures": {
-        "color": false,
-        "sound": true,
+        "color": true,
+        "sound": false,
         "logo": true,
-        "size": false
+        "size": true
       },
       "nagFeatures": {
         "color": true,
