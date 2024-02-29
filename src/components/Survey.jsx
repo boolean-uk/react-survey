@@ -47,13 +47,21 @@ function Survey() {
     setSurveyData(initSurveyData)
   }
 
+  const handleEdit = (target) => {
+    const newArray = surveyDataList.filter(item => item.username !== target)
+    const answer =  surveyDataList.filter(item => item.username === target)[0]
+
+    setSurveyDataList([...newArray])
+    setSurveyData(answer)
+  }
+
   console.log(surveyData)
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        < AnswersList answersList={surveyDataList}/>
+        < AnswersList answersList={surveyDataList} handleEdit={handleEdit}/>
       </section>
       <section className="survey__form">
         < Form handleChange={handleChange} surveyData={surveyData} handleSubmit={handleSubmit}/>
