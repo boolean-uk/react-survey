@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FormCheckboxes from "./FormCheckboxes";
 import FormRadioButtons from "./FormRadioButtons";
+import AnswerList from "./AnswerList";
 
 function Survey() {
   const [open] = useState(false); //Ignore this state
@@ -21,7 +22,7 @@ function Survey() {
     email: email,
     feedback: feedback,
     radioValue: radioValue,
-    checkboxes: checkboxValues,
+    checkboxValues: checkboxValues,
   };
 
   const handleRadioChange = (value) => {
@@ -44,7 +45,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswerList answers={formObject} />
       </section>
       <section className="survey__form">
         <form className="form">

@@ -91,6 +91,10 @@ h2 {
   margin: 0.25rem 0;
 }
 
+.question {
+  font-style: italic;
+}
+
 .answer__line {
   display: block;
   margin: 0.5rem;
