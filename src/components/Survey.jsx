@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 function Survey() {
   const ratings = [1, 2, 3, 4];
@@ -23,9 +24,12 @@ function Survey() {
     email: "",
   });
 
+  let answersList = []
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Userdata from handleSubmit: ", { userData });
+    console.log("Userdata from handleSubmit: ", { userData })
+    answersList.push(userData)
   };
 
   const handleChange = (event) => {
@@ -63,7 +67,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answersList} />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
