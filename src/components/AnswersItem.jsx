@@ -11,33 +11,34 @@ const answersSet = {
 function ItemsList(list) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>
+      {list.map((item, i) => (
+        <li key={i}> 
           {answersSet[item]}
-          </li>
+        </li>
       ))}
     </ul>
   );
 }
 
-export default function AnswersItem({
-  answerItem: { username, ratingColour, timeSpent, review }
-}) {
+export default function AnswersItem(properties){
+  // eslint-disable-next-line react/prop-types
+  //answerItem: { username, ratingColour, timeSpent, review }
+//}) {
   return (
     <li>
       <article className="answer">
-        <h3>{username || "Anon"} said:</h3>
+        <h3>{properties.username || "Anon"} said:</h3>
         <p>
           <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{ratingColour}</span> 
+          <span className="answer__line">{properties.ratingColour}</span> 
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
+          <ItemsList list={properties.timeSpent} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
-          <span className="answer__line">{review}</span>
+          <span className="answer__line">{properties.review}</span>
         </p>
       </article>
     </li>
