@@ -17,6 +17,8 @@ function Survey() {
     noTime: false,
   });
 
+  const [submittedValues, setSubmittedValues] = useState(null);
+
   const formObject = {
     name: name,
     email: email,
@@ -38,6 +40,7 @@ function Survey() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSubmittedValues(formObject);
     console.log("Submitted form!", formObject);
   };
 
@@ -45,7 +48,11 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswerList answers={formObject} />
+        {submittedValues ? (
+          <AnswerList answers={submittedValues} />
+        ) : (
+          <p></p>
+        )}
       </section>
       <section className="survey__form">
         <form className="form">
