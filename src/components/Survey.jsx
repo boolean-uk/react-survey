@@ -1,32 +1,50 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 function Survey() {
-  const [open, setOpen] = useState(false); //Ignore this state
-  const [answers, setAnswers] = useState([])
-  const [answerData, setAnswerData] = useState({
-    color: 1,
-    spendTime: '',
+  const initialFormData = {
+    color: null,
+    spendTime: [],
     review: '',
     username: '',
     email: ''
-  })
+  }
+
+  const [open, setOpen] = useState(false); //Ignore this state
+  const [answers, setAnswers] = useState([])
+  const [answerData, setAnswerData] = useState(initialFormData)
 
   const handleChange = (event) => {
-    const { name, type, value, checked } = event.target
-    if (name !== undefined) 
+    const { name, value } = event.target
+    if (name !== undefined) {
+      if (name === "spendTime") {
+        handleSpendTime(event)
+        console.log("How it should look ", answerData.spendTime)
+      } else
       setAnswerData({...answerData, [name]: value})
+    }
+  }
+
+  const handleSpendTime = (event) => {
+    if (answerData.spendTime.includes(event.target.value))
+      setAnswerData({...answerData, spendTime: answerData.spendTime.filter((val) => val !== event.target.value)})
+    else 
+      setAnswerData({...answerData, spendTime: [...answerData.spendTime, event.target.value]})
   }
   
   const handleSubmit = (event) => {
     event.preventDefault()
     console.log(answerData)
+    setAnswers([...answers, answerData])
+    setAnswerData(initialFormData)
+    console.log("Answers list ", answers)
   }
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answers} />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -40,7 +58,8 @@ function Survey() {
                   id="color-one" 
                   type="radio" 
                   name="color" 
-                  value="1" 
+                  value={1}
+                  checked={answerData.color === "1"}
                   onChange={handleChange}/>
                 <label htmlFor="color-one">1</label>
               </li>
@@ -49,7 +68,8 @@ function Survey() {
                   id="color-two" 
                   type="radio" 
                   name="color" 
-                  value="2"
+                  value={2}
+                  checked={answerData.color === "2"}
                   onChange={handleChange} />
                 <label htmlFor="color-two">2</label>
               </li>
@@ -58,7 +78,8 @@ function Survey() {
                   id="color-three" 
                   type="radio" 
                   name="color" 
-                  value="3" 
+                  value={3}
+                  checked={answerData.color === "3"}
                   onChange={handleChange}/>
                 <label htmlFor="color-three">3</label>
               </li>
@@ -67,7 +88,8 @@ function Survey() {
                   id="color-four" 
                   type="radio" 
                   name="color" 
-                  value="4"
+                  value={4}
+                  checked={answerData.color === "4"}
                   onChange={handleChange} />
                 <label htmlFor="color-four">4</label>
               </li>
@@ -82,8 +104,9 @@ function Survey() {
                 <input 
                   name="spendTime" 
                   type="checkbox" 
-                  value="swimming"
-                  onChange={handleChange} />
+                  value='swimming'
+                  checked={answerData.spendTime.includes("swimming")}
+                  onChange={handleChange}/>
                 Swimming</label>
               </li>
               <li>
@@ -91,7 +114,8 @@ function Survey() {
                   <input 
                     name="spendTime" 
                     type="checkbox" 
-                    value="bathing"
+                    value='bathing'
+                    checked={answerData.spendTime.includes("bathing")}
                     onChange={handleChange}/>
                   Bathing
                 </label>
@@ -101,7 +125,8 @@ function Survey() {
                   <input 
                     name="spendTime" 
                     type="checkbox" 
-                    value="noTime" 
+                    value='noTime'
+                    checked={answerData.spendTime.includes("noTime")}
                     onChange={handleChange}/>
                   I don't like to spend time with it
                 </label>
