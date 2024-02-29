@@ -7,7 +7,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        {/* The AnswersList component should be here */}
       </section>
       <section className="survey__form">{/* a form should be here */}</section>
     </main>
