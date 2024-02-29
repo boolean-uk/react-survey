@@ -3,7 +3,7 @@ import RadioButtons from "./RadoButtons";
 
 const Form = (props) => {
     
-    const {setAnswersList, answersList, state, setState} = props ?? {};
+    const {setAnswersList, answersList, state, setState, postState} = props ?? {};
 
 
     //Handles events in form and changes state accordingly
@@ -39,8 +39,10 @@ const Form = (props) => {
                     review: state.review,
                     email: state.email
                 }
+               
                 return newList;
             })
+            postState(state);
            
         } else {
             //Update id to be answersList.length
@@ -48,8 +50,8 @@ const Form = (props) => {
                 ...prevState,
                 id: answersList.length,
             }));
-            console.log(state)
-            setAnswersList((prevList) => [...prevList, state])
+            setAnswersList((prevList) => [...prevList, state]);
+            postState(state);
             
         }
 

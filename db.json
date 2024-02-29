@@ -1,7 +1,30 @@
 {
   "forms": [
     {
-      "id": "bac0"
+      "id": 0,
+      "color": "",
+      "timeSpent": {
+        "bathing": false,
+        "swimming": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "username": "",
+      "review": "",
+      "email": ""
+    },
+    {
+      "id": 1,
+      "color": "",
+      "timeSpent": {
+        "bathing": false,
+        "swimming": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "username": "",
+      "review": "asdasd",
+      "email": ""
     }
   ]
 }

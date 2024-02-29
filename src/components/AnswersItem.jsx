@@ -26,7 +26,7 @@ export default function AnswersItem({
 
 }) {
 
-  const {index, setState, answersList, setAnswersList} = props ?? {};
+  const {index, setState, answersList, setAnswersList, deleteState} = props ?? {};
 
   //Sets state to clicked item
   const handleEdit = (e) => {
@@ -50,6 +50,8 @@ export default function AnswersItem({
       .filter(answer => answer.id !== index)
       .map(answer => answer.id > index ? ({...answer, id: answer.id -1}) : answer)
     )
+
+    deleteState(index)
     console.log(answersList)
 
   }
