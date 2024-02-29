@@ -4,6 +4,7 @@ import AnswersList from "./AnswersList";
 const checkboxes = ['swimming', 'bathing', 'chatting', 'noTime'];
 const ratingOptions = ['1', '2', '3', '4'];
 
+// Add id field to be able to edit answers
 const initialFormData = {
   id: -1,
   colour: 0,
@@ -23,6 +24,7 @@ function Survey() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Checks if userData has id assigned (AKA being edited or the form is new)
     if (userData.id !== -1) {
       setAnswersList(answersList.map(answer => answer.id === userData.id ? {id: answer.id , ...userData} : answer))
     } else {
@@ -37,6 +39,7 @@ function Survey() {
     if (name !== undefined) {
       if (type === "checkbox") {
         if (name === "timeSpent") {
+          // Adds and removes the different checkbox options to spentTime array
           if (userData.timeSpent.includes(value)) {
             setUserData({...userData, timeSpent: userData.timeSpent.filter(ts => ts !== value)})
           } else {
@@ -49,6 +52,7 @@ function Survey() {
     }
   }
 
+  // sets user data to the one in the answerItem passed from AnswersItem
   const editAnswer = (answerItem) => {
     setUserData(answerItem)
   }
@@ -65,25 +69,29 @@ function Survey() {
           <div className="form__group radio">
             <h3>How do you rate your rubber duck colour?</h3>
             <ul>
-              {ratingOptions.map((option, index) => (
+              {// Add all rating levels to form
+              ratingOptions.map((option, index) => (
                 <li key={index}>
                   <input id={`color-${option}`} type="radio" name="colour" value={option} onChange={handleChange} checked={userData.colour === option}/>
                   <label htmlFor={`color-${option}`}>{option}</label>
                 </li>
-              ))}
+              ))
+              }
             </ul>
           </div>
           <div className="form__group">
             <h3>How do you like to spend time with your rubber duck</h3>
             <ul>
-              {checkboxes.map((option, index) => (
+              { // Add all spentTime activities to form
+              checkboxes.map((option, index) => (
                 <li key={index}>
                   <label>
                     <input name='timeSpent' type="checkbox" value={option} onChange={handleChange} checked={userData.timeSpent.includes(option)}/>
                     {option.charAt(0).toUpperCase() + option.slice(1)}
                   </label>
                 </li>
-              ))}
+              ))
+              }
             </ul>
           </div>
           <label>
