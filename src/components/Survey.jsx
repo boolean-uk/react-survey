@@ -19,12 +19,17 @@ function Survey() {
     if (name !== undefined) {
       if (name === "spendTime") {
         handleSpendTime(event)
-        console.log("How it should look ", answerData.spendTime)
       } else
       setAnswerData({...answerData, [name]: value})
     }
   }
 
+  /**
+   * Toggles spendTime checkboxes. 
+   * If set to true, add to list. 
+   * If set to false, remove.
+   * @param {*} event 
+   */
   const handleSpendTime = (event) => {
     if (answerData.spendTime.includes(event.target.value))
       setAnswerData({...answerData, spendTime: answerData.spendTime.filter((val) => val !== event.target.value)})
@@ -34,17 +39,24 @@ function Survey() {
   
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(answerData)
-    setAnswers([...answers, answerData])
+    // Update answer if the email is the same
+    if (answers.filter((answer) => answer.email === answerData.email).length > 0) {
+      const updatedAnswers = answers.map((answer) => 
+        answer.email !== answerData.email ? answer : answerData
+      )
+      setAnswers(updatedAnswers)
+    } else {
+      // Otherwise, add new
+      setAnswers([...answers, answerData])
+    }
     setAnswerData(initialFormData)
-    console.log("Answers list ", answers)
   }
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList answersList={answers} setAnswerData={setAnswerData}/>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
