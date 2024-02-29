@@ -1,27 +1,37 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
+import answersDB from "../../db.json";
 
 const initialFormState = {
-  best: "",
-  worst: "",
+  best: [],
+  worst: [],
   color: "",
   consistancy: "",
   logo: "",
-  spend_time: "",
+  spendTime: [],
   review: "",
   name: "",
   email: "",
 }
 
+
+
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [form, setForm] = useState(initialFormState)
+  const [answer, setAnswer] = useState(answersDB.answers)
 
+  // functions
   const handleSubmit = (event) => {
     event.preventDefault()
     setForm(initialFormState)
-    
+    setAnswer([...answer, form])
     console.log(form)
+
+    fetch("http://localhost:3000/answers", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
   }
 
   const handleChange = (event) => {
@@ -30,6 +40,7 @@ function Survey() {
     const inputType = event.target.type
     const checked = event.target.checked
 
+    // Able to add multiple checkboxes to by making a new array and pushing all checkboxes in, and set on the new array
     if (inputName === 'best' && inputType === "checkbox"){
       if (checked){
         const newArray = [...form.best]
@@ -65,14 +76,14 @@ function Survey() {
     }
     if (inputName === 'spend-time' && inputType === "checkbox"){
       if (checked){
-        const newArray = [...form.spend_time]
+        const newArray = [...form.spendTime]
         newArray.push(inputValue)
-        setForm({...form, spend_time: newArray})
+        setForm({...form, spendTime: newArray})
       } else if (!checked){
-        const newArray = form.spend_time.filter(
+        const newArray = form.spendTime.filter(
           (item) => item !== inputValue
         );
-        setForm({...form, spend_time: newArray})
+        setForm({...form, spendTime: newArray})
       }
     }
     if (inputName === 'review'){
@@ -92,7 +103,10 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {
-          <AnswersList></AnswersList>
+          <AnswersList
+          answer = {answer}
+          setAnswer = {setAnswer}
+          />
         }
       </section>
 

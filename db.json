@@ -1,0 +1,50 @@
+{
+  "answers": [
+    {
+      "best": [],
+      "worst": [],
+      "color": "2",
+      "consistancy": "3",
+      "logo": "1",
+      "spendTime": [],
+      "review": "nice duck",
+      "name": "jam",
+      "email": "dsa@no.no"
+    },
+    {
+      "id": "1739",
+      "best": [],
+      "worst": [],
+      "color": "",
+      "consistancy": "",
+      "logo": "1",
+      "spendTime": [
+        "swimming"
+      ],
+      "review": "sad",
+      "name": "jamie",
+      "email": "no@no.no"
+    },
+    {
+      "id": "d076",
+      "best": [
+        "yellow",
+        "big"
+      ],
+      "worst": [
+        "squeak",
+        "logo"
+      ],
+      "color": "4",
+      "consistancy": "3",
+      "logo": "1",
+      "spendTime": [
+        "chatting",
+        "swimming"
+      ],
+      "review": "nice fren",
+      "name": "steven",
+      "email": "steven@gmail.no"
+    }
+  ]
+}
