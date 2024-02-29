@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Input from "./Input";
+import AnswersList from "./AnswersList";
 
 const initialFormData = {
-  // bestFeatures: [],
-  // worstFeatures: [],
   consistency: "",
   colour: "",
   logo: "",
@@ -24,6 +23,7 @@ function Survey() {
     console.log(formData);
     setAnswers([...answers, formData]);
     setFormData(initialFormData);
+    console.log(answers);
   };
 
   const handleChange = (event) => {
@@ -47,7 +47,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here */}
+        <AnswersList answersList={answers} />
       </section>
 
       <section className="survey__form">
