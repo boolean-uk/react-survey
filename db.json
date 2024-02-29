@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "best": [],
+      "worst": [],
+      "consistency": 1,
+      "color": 2,
+      "logo": 2,
+      "time": [],
+      "text": "Text",
+      "email": "example@example.com",
+      "name": "Name",
+      "id": "d338"
+    },
+    {
+      "id": "af50",
+      "best": [
+        "It's Yellow",
+        "It squeaks!"
+      ],
+      "worst": [
+        "It squeaks!"
+      ],
+      "consistency": "2",
+      "color": "3",
+      "logo": "3",
+      "time": [
+        "Chatting"
+      ],
+      "text": "Text",
+      "email": "mail@example.com",
+      "name": "A Name"
+    }
+  ]
+}
