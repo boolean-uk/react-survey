@@ -234,3 +234,12 @@ li {
 .form__submit:hover {
   background-color: white;
 }
+
+.invalid {
+  color: red;
+}
+
+.invalid::before {
+  content: "*";
+  color: red;
+}

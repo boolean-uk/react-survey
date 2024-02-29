@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-function RadioButtonRating({ title, options, onChange, leftLabel, rightLabel }) {
+function RadioButtonRating({ title, options, onChange, leftLabel, rightLabel, isValid=true}) {
     const [value, setValue] = useState(-1)
 
     const handleChange = (selectedOption) => {
@@ -11,7 +11,7 @@ function RadioButtonRating({ title, options, onChange, leftLabel, rightLabel }) 
 
     return (
         <div className="form__group radio">
-            <h3>{title}</h3>
+            <h3 className={isValid? "" : "invalid"}>{title}</h3>
             <ul>
                 {leftLabel !== undefined ? <li key="l1"><p className="side_label">{leftLabel}</p></li> : null}
                 {options.map((option, index) => (
@@ -31,7 +31,8 @@ RadioButtonRating.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   leftLabel: PropTypes.string,
-  rightLabel: PropTypes.string
+  rightLabel: PropTypes.string,
+  isValid: PropTypes.bool
 };
 
 export default RadioButtonRating;
