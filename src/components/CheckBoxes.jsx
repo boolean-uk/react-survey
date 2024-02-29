@@ -14,6 +14,7 @@ function CheckBoxes(props) {
             type="checkbox"
             value="swimming"
             onChange={updateAnswers}
+            checked={props.value["swimming"] === true}
           />
           Swimming
         </label>
@@ -25,6 +26,7 @@ function CheckBoxes(props) {
             type="checkbox"
             value="bathing"
             onChange={updateAnswers}
+            checked={props.value["bathing"] === true}
           />
           Bathing
         </label>
@@ -36,6 +38,7 @@ function CheckBoxes(props) {
             type="checkbox"
             value="chatting"
             onChange={updateAnswers}
+            checked={props.value["chatting"] === true}
           />
           Chatting
         </label>
@@ -47,6 +50,7 @@ function CheckBoxes(props) {
             type="checkbox"
             value="noTime"
             onChange={updateAnswers}
+            checked={props.value["noTime"] === true}
           />
           {"I don't like to spend time with it"}
         </label>
@@ -57,5 +61,6 @@ function CheckBoxes(props) {
 
 CheckBoxes.propTypes = {
   setCheck: PropTypes.func.isRequired,
+  value: PropTypes.object.isRequired,
 };
 export default CheckBoxes;

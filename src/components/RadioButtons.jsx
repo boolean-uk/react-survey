@@ -12,6 +12,7 @@ function RadioButtons(props) {
           name="color"
           value="1"
           onChange={updateAnswer}
+          checked={props.value==='1'}
         />
         <label htmlFor="color-one">1</label>
       </li>
@@ -22,6 +23,8 @@ function RadioButtons(props) {
           name="color"
           value="2"
           onChange={updateAnswer}
+          checked={props.value==='2'}
+
         />
         <label htmlFor="color-two">2</label>
       </li>
@@ -32,6 +35,8 @@ function RadioButtons(props) {
           name="color"
           value="3"
           onChange={updateAnswer}
+          checked={props.value==='3'}
+
         />
         <label htmlFor="color-three">3</label>
       </li>
@@ -42,6 +47,8 @@ function RadioButtons(props) {
           name="color"
           value="4"
           onChange={updateAnswer}
+          checked={props.value==='4'}
+
         />
         <label htmlFor="color-four">4</label>
       </li>
@@ -50,5 +57,6 @@ function RadioButtons(props) {
 }
 RadioButtons.propTypes = {
   setRadio: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 };
 export default RadioButtons;
