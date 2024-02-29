@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
 
-const radioButtonValues = [1, 2, 3, 4];
+const radioButtonValues = ["1", "2", "3", "4"];
 const bestOrWorstThings = [
   "It's yellow!",
   "It squeaks!",
@@ -30,6 +30,8 @@ function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
   const [userData, setUserData] = useState(initialUserData);
   const [answers, setAnswers] = useState([]);
+  const [currentlyEditing, setCurrentlyEditing] = useState(null);
+  const [resubmitting, setResubmitting] = useState(false);
 
   function handleChange(event) {
     const inputName = event.target.name;
@@ -39,7 +41,6 @@ function Survey() {
     if (event.target.type !== "checkbox") {
       setUserData({ ...userData, [inputName]: inputValue });
     } else {
-      //TODO: why doesnt thiw work the second time i try too submit a form
       if (inputChecked) {
         setUserData({
           ...userData,
@@ -63,16 +64,52 @@ function Survey() {
     //   method: "POST",
     //   body: JSON.stringify(userData),
     // });
-    setAnswers([...answers, userData]);
-    event.target.reset();
-    setUserData(initialUserData);
+    if (resubmitting) {
+      updateAnswer();
+      setResubmitting(false);
+      event.target.reset();
+      setUserData(initialUserData);
+    } else {
+      setAnswers([...answers, userData]);
+      event.target.reset();
+      setUserData(initialUserData);
+    }
+  }
+
+  function updateAnswer() {
+    const updateIndex = userData.index;
+
+    if (updateIndex === 0) {
+      if (answers.length === 1) {
+        setAnswers([userData]);
+      } else {
+        setAnswers([userData, ...answers.slice(1)]);
+      }
+    } else if (updateIndex === answers.length - 1) {
+      setAnswers([...answers.slice(0, answers.length - 1), userData]);
+    } else {
+      setAnswers([
+        ...answers.slice(0, updateIndex),
+        userData,
+        ...answers.slice(updateIndex + 1),
+      ]);
+    }
+  }
+
+  if (currentlyEditing !== null) {
+    setUserData(currentlyEditing);
+    setCurrentlyEditing(null);
+    setResubmitting(true);
   }
 
   return (
     <main className="survey" onSubmit={handleSubmit}>
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList
+          answersList={answers}
+          setCurrentlyEditing={setCurrentlyEditing}
+        />
       </section>
       <section className="survey__form">
         <form className="form">
@@ -120,6 +157,7 @@ function Survey() {
                     value={value}
                     id={"consistency" + value}
                     onChange={handleChange}
+                    checked={userData.consistency === value}
                   />
                   <label key={index} htmlFor={"consistency" + value}>
                     {value}
@@ -138,6 +176,7 @@ function Survey() {
                     value={value}
                     id={"colour" + value}
                     onChange={handleChange}
+                    checked={userData.colour === value}
                   />
                   <label key={index} htmlFor={"colour" + value}>
                     {value}
@@ -155,6 +194,7 @@ function Survey() {
                     value={value}
                     id={"logo" + value}
                     onChange={handleChange}
+                    checked={userData.logo === value}
                   />
                   <label key={index} htmlFor={"logo" + value}>
                     {value}
@@ -173,7 +213,6 @@ function Survey() {
                   value={value}
                   onChange={handleChange}
                   checked={userData.timeSpent.includes(value)}
-
                 />
                 {value}
               </label>
@@ -186,15 +225,26 @@ function Survey() {
               cols="30"
               rows="10"
               onChange={handleChange}
+              value={userData.review}
             ></textarea>
           </label>
           <label>
             Put your name here (if you feel like it):
-            <input type="text" name="username" onChange={handleChange} />
+            <input
+              type="text"
+              name="username"
+              value={userData.username}
+              onChange={handleChange}
+            />
           </label>
           <label>
             Leave us your email pretty please??
-            <input type="email" name="email" onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              value={userData.email}
+              onChange={handleChange}
+            />
           </label>
           <input
             className="form__submit"

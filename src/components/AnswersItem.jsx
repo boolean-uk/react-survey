@@ -28,7 +28,21 @@ export default function AnswersItem({
     consistency,
     logo,
   },
+  setCurrentlyEditing: setCurrentlyEditing,
+  index: index,
 }) {
+  const answerItem = {
+    username: username,
+    colour: colour,
+    timeSpent: timeSpent,
+    review: review,
+    bestThings: bestThings,
+    worstThings: worstThings,
+    consistency: consistency,
+    logo: logo,
+    index: index,
+  };
+
   return (
     <li>
       <article className="answer">
@@ -65,6 +79,13 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button
+          onClick={() => {
+            setCurrentlyEditing(answerItem);
+          }}
+        >
+          Edit
+        </button>
       </article>
     </li>
   );
