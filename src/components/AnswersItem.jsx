@@ -1,46 +1,57 @@
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
-const answersSet = {
-  swimming: "Swimming",
-  bathing: "Bathing",
-  chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
-};
-
-function ItemsList({ list }) {
-  return (
-    <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
-      ))}
-    </ul>
-  );
-}
+import PropTypes from "prop-types";
 
 // This is the main component being exported from this file
-export default function AnswersItem({
-  // Feel free to change this props names to what suits you best
-  // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: { username, colour, timeSpent, review }
-}) {
+export default function AnswersItem(props) {
+  const keys = Object.keys(props.answer);
   return (
     <li>
       <article className="answer">
-        <h3>{username || "Anon"} said:</h3>
-        <p>
-          <em>How do you rate your rubber duck colour?</em>
-          <span className="answer__line">{colour}</span>
-        </p>
-        <p>
-          <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={timeSpent} />
-        </p>
-        <p>
-          <em>What else have you got to say about your rubber duck?</em>
-          <span className="answer__line">{review}</span>
-        </p>
+        <h3>{props.answer[keys[8]] || "Anon"} said:</h3>
+
+        {keys.map(
+          (key, index) =>
+            index !== 7 &&
+            index !== 0 && (
+              <p key={`answer-${index}`}>
+                <em>{key}</em>
+                {Array.isArray(props.answer[key]) ? (
+                  <ul className="itemList">
+                    {props.answer[key].map((item, idx) => (
+                      <li key={`answer-${index}-${idx}`}>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span className="answer__line">{props.answer[key]}</span>
+                )}
+              </p>
+            )
+        )}
+        <button
+          onClick={() =>
+            props.editList({
+              index: props.answer[keys[0]],
+              firstLine: props.answer[keys[1]],
+              secondLine: props.answer[keys[2]],
+              thirdLine: props.answer[keys[3]],
+              fourthLine: props.answer[keys[4]],
+              fifthLine: props.answer[keys[5]],
+              sixthLine: props.answer[keys[6]],
+              seventhLine: props.answer[keys[7]],
+              eighthLine: props.answer[keys[8]],
+              ninthLine: props.answer[keys[9]],
+            })
+          }>
+          Edit
+        </button>
       </article>
     </li>
   );
 }
+
+AnswersItem.propTypes = {
+  answer: PropTypes.object.isRequired,
+  editList: PropTypes.func.isRequired,
+};

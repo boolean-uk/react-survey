@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-
+import { useEffect } from "react";
 export default function RadioButtons(props) {
   // Initialize state to manage the selected value for this group
   const [selectedValue, setSelectedValue] = useState(
     props.additionalProp.userData[props.line]
   );
+
+  useEffect(() => {
+    setSelectedValue(props.additionalProp.userData[props.line]); // Reset selectedValue when props change
+  }, [props.additionalProp.userData, props.line]);
 
   const handleRadioChange = (event) => {
     const newValue = event.target.value;

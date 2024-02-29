@@ -7,8 +7,12 @@ export default function Form(data) {
 
   const submitForm = (e) => {
     e.preventDefault();
+    console.log(data.userData);
+
     for (const key in data.userData) {
-      if (
+      if (key === "eighthLine" && data.userData[key] === "") {
+        continue;
+      } else if (
         data.userData[key] === "" ||
         data.userData[key].length === 0 ||
         data.userData[key] === 0
@@ -18,11 +22,74 @@ export default function Form(data) {
       }
     }
 
-    //add userdata to listUserData
+    const updatedList = { ...data.listUserData };
 
-    data.setUserData({ ...data.userData, ...tempData });
+    const indexToFind = data.userData.index; // Assuming userData contains the user's input
+    const dataList = data.listUserData.data;
 
-    console.log(data.listUserData);
+    let indexExists = false;
+    for (const obj of dataList) {
+      if (obj["index"] === indexToFind) {
+        indexExists = true;
+        break;
+      }
+    }
+
+    if (indexExists) {
+      console.log("Index exists");
+      updatedList.data.forEach((element) => {
+        if (element.index === indexToFind) {
+          // Update the existing entry with new data
+          element[
+            "What would you say that are the best features of your rubber duck?"
+          ] = data.userData.firstLine;
+          element[
+            "What would you say that are the worst bits of your rubber duck!"
+          ] = data.userData.secondLine;
+          element["How do you rate your rubberduck consistency?"] =
+            data.userData.thirdLine;
+          element["How do you rate your rubber duck colour?"] =
+            data.userData.fourthLine;
+          element["How do you rate your rubber duck logo?"] =
+            data.userData.fifthLine;
+          element["How do you like to spend time with your rubber duck"] =
+            data.userData.sixthLine;
+          element["What else have you got to say about your rubber duck?"] =
+            data.userData.seventhLine;
+          element["Put your name here (if you feel like it):"] =
+            data.userData.eighthLine;
+          element["Leave us your email pretty please??"] =
+            data.userData.ninthLine;
+        }
+      });
+    } else {
+      // If the index doesn't exist, increment currentIndex and assign it to userData.index
+      const newIndex = data.currentIndex + 1;
+      data.setCurrentIndex(newIndex);
+      data.userData.index = newIndex;
+
+      // Add a new entry to the list with the new index
+      updatedList.data.push({
+        index: newIndex,
+        "What would you say that are the best features of your rubber duck?":
+          data.userData.firstLine,
+        "What would you say that are the worst bits of your rubber duck!":
+          data.userData.secondLine,
+        "How do you rate your rubberduck consistency?": data.userData.thirdLine,
+        "How do you rate your rubber duck colour?": data.userData.fourthLine,
+        "How do you rate your rubber duck logo?": data.userData.fifthLine,
+        "How do you like to spend time with your rubber duck":
+          data.userData.sixthLine,
+        "What else have you got to say about your rubber duck?":
+          data.userData.seventhLine,
+        "Put your name here (if you feel like it):": data.userData.eighthLine,
+        "Leave us your email pretty please??": data.userData.ninthLine,
+      });
+    }
+
+    // Update the state with the modified list
+    data.setListUserData({ ...updatedList });
+    data.setUserData({ ...tempData });
   };
 
   return (
@@ -113,8 +180,7 @@ export default function Form(data) {
               ...prevUserData,
               seventhLine: e.target.value,
             }));
-          }}
-        ></textarea>
+          }}></textarea>
       </label>
       <label>
         8. Put your name here (if you feel like it):
