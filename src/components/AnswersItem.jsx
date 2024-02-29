@@ -26,7 +26,7 @@ export default function AnswersItem({
 
 }) {
 
-  const {index, setState,} = props;
+  const {index, setState, answersList, setAnswersList} = props;
 
   //Sets state to clicked item
   const handleEdit = (e) => {
@@ -40,6 +40,16 @@ export default function AnswersItem({
       email: email,
     };
     setState(newState);
+  }
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+
+    setAnswersList(prevAnswersList => prevAnswersList
+      .filter(answer => answer.id !== index)
+      .map(answer => ({...answer, id: answer.id -1}))
+    )
+
   }
 
   return (
@@ -59,6 +69,8 @@ export default function AnswersItem({
           <span className="answer__line">{review}</span>
         </p>
         <button onClick={(e) => handleEdit(e)}>Edit</button>
+        <button onClick={(e) => handleDelete(e)}>Remove</button>
+
       </article>
 
     </li>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadoButtons";
 

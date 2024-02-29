@@ -28,7 +28,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {
-          <AnswersList answersList={answersList} setState={setState}/>
+          <AnswersList answersList={answersList} setAnswersList={setAnswersList} setState={setState}/>
         }
       </section>
       <section className="survey__form">{
