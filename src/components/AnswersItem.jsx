@@ -1,5 +1,5 @@
 // This is the main component being exported from this file
-export default function AnswersItem({answer}) {
+export default function AnswersItem({answer, setForm, form, index, setAnswers, answers}) {
 
   // map through answer.ratingTimeSpent and return a list item for each item
   const ItemsList = ({ list }) => {
@@ -10,6 +10,25 @@ export default function AnswersItem({answer}) {
         ))}
       </ul>
     );
+  };
+
+
+  const handleEdit = () => {
+    console.log(answer)
+    setForm(answer)
+  };
+  
+  const handleUpdateAnswer = () => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = form;
+    setAnswers(updatedAnswers);
+    setForm({
+      ratingColor: "0",
+      ratingTimeSpent: "",
+      text: "",
+      name: "",
+      email: "",
+    })
   };
 
   return (
@@ -29,6 +48,8 @@ export default function AnswersItem({answer}) {
           <span className="answer__line">{answer.text}</span>
         </p>
       </article>
+      <button onClick={handleEdit}>SELECT</button>
+      <button onClick={handleUpdateAnswer}>SUBMIT</button>
     </li>
   );
 }
