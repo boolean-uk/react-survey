@@ -27,9 +27,9 @@ export default function Survey() {
 
     const { name, color, spend, saying } = userData;
 
-    const userDataSubset = { name, color, spend, saying };
+    //const userDataSubset = { name, color, spend, saying };
 
-    setUserDataArray((prevDataArray) => [...prevDataArray, userDataSubset]);
+    setUserDataArray((prevDataArray) => [...prevDataArray, userData]);
     setUserData({
       best: [],
       worst: [],
@@ -44,8 +44,9 @@ export default function Survey() {
   
   };
 
+  
 
-  const handleChange = (event) => {
+ const handleChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
   
@@ -61,6 +62,8 @@ export default function Survey() {
           [inputName]: updatedArray,
         };
       }
+
+
   
       // For other input types, update the state as usual
       return {
@@ -70,27 +73,17 @@ export default function Survey() {
     });
   };
 
-  const handleSpendCheckboxChange = (event) => {
-    const inputName = event.target.name;
-    const inputValue = event.target.value;
-  
-    setUserData((prevData) => {
-      const updatedArray = event.target.checked
-        ? [...prevData[inputName], inputValue]
-        : prevData[inputName].filter((value) => value !== inputValue);
-  
-      return {
-        ...prevData,
-        [inputName]: updatedArray,
-      };
-    });
+  const handleEdit = (editedData, index) => {
+    const updatedArray = [...userDataArray];
+    updatedArray[index] = editedData;
+    setUserDataArray(updatedArray);
   };
 
   return (
     <main className="survey">
      <section className={`survey__list ${open ? "open" : ""}`}>
   <h2>Answers list</h2>
-  {formSubmitted && <AnswersList userDataArray={userDataArray} />}
+  {formSubmitted && <AnswersList userDataArray={userDataArray} onEdit={handleEdit}/>}
 </section>
       <section className="survey__form">
       <form className="form" onSubmit={handleSubmit}>
@@ -193,8 +186,11 @@ export default function Survey() {
 </label>
 </div>
 
-      <p>How do you rate the rubber duck consistency? </p>
-      <div className="form__group radio">
+      
+    <div className="form__group radio">
+    <h3>How do you rate your rubber duck colour?</h3>
+    
+
       <label>
         <input type="radio" name="consistency"
         onChange={handleChange} value="1"
