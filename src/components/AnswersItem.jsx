@@ -5,14 +5,14 @@ const answersSet = {
   swimming: "Swimming",
   bathing: "Bathing",
   chatting: "Chatting",
-  noTime: "I don't like to spend time with it"
+  noTime: "I don't like to spend time with it",
 };
 
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -30,13 +30,13 @@ export default function AnswersItem({
     whatElseText,
     fullName,
     email,
-  },
+  }
 }) {
   return (
     <li>
       <article className="answer">
         <h3>{fullName || "Anon"} said:</h3>
-        <h3>{email || "Anon"} said:</h3>
+        <h4>Email: {email || "No email added :("}</h4>
         <p>
           <em>How do you rate your rubber duck consistency?</em>
           <span className="answer__line">{rateConsistency}</span>

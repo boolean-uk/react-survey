@@ -12,24 +12,27 @@ function Survey() {
     "I don't like to spend time with it",
   ];
 
-  const [open, setOpen] = useState(false); //Ignore this state
+  const [open, ] = useState(false); //Ignore this state
 
-  const [userData, setUserData] = useState({
+  const initState = {
     rateConsistency: 0,
     rateColour: 0,
     rateLogo: 0,
-    preferedTimeSpent: "",
+    preferedTimeSpent: [],
     whatElseText: "",
     fullName: "",
     email: "",
-  });
+  };
 
-  let answersList = []
+  const [userData, setUserData] = useState(initState);
+
+  const [answersList, setAnswersList] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Userdata from handleSubmit: ", { userData })
-    answersList.push(userData)
+    setAnswersList([...answersList, userData]);
+    event.target.reset()
+    setUserData(initState);
   };
 
   const handleChange = (event) => {
@@ -48,14 +51,17 @@ function Survey() {
         setUserData({ ...userData, rateLogo: parseInt(inputValue) });
       }
     }
-
     if (inputName === "spend-time") {
-      setUserData({ ...userData, preferedTimeSpent: inputValue });
+      setUserData({
+        ...userData,
+        preferedTimeSpent: [...userData.preferedTimeSpent, inputValue],
+      });
     }
     if (inputName === "review") {
       setUserData({ ...userData, whatElseText: inputValue });
     }
     if (inputName === "name") {
+      console.log("Input value = ", inputValue)
       setUserData({ ...userData, fullName: inputValue });
     }
     if (inputName === "email") {
@@ -67,7 +73,7 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answersList} />
+        {answersList && <AnswersList answersList={answersList} />}
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
@@ -161,8 +167,8 @@ function Survey() {
             Put your name here (if you feel like it):
             <input
               type="text"
-              name="username"
-              //value={userData.fullName}
+              name="name"
+              value={userData.fullName}
               onChange={handleChange}
             />
           </label>
