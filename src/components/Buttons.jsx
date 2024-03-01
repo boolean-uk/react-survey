@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function Buttons({handleChange, prop}) {
+function Buttons({handleChange, prop, data}) {
     
     return ( 
         <ul>
@@ -10,6 +10,7 @@ function Buttons({handleChange, prop}) {
                     name={prop}
                     value="1" 
                     onClick={handleChange}
+                    checked={data[prop] === "1"}
                 />
                 <label htmlFor={`${prop}-one`} >1</label
                 >
@@ -21,6 +22,7 @@ function Buttons({handleChange, prop}) {
                     name={prop}
                     value="2" 
                     onClick={handleChange}
+                    checked={data[prop] === "2"}
                 />
                 <label htmlFor={`${prop}-two`} >2</label
                 >
@@ -32,6 +34,7 @@ function Buttons({handleChange, prop}) {
                     name={prop}
                     value="3" 
                     onClick={handleChange}
+                    checked={data[prop] === "3"}
                 />
                 <label htmlFor={`${prop}-three`} >3</label
                 >
@@ -43,6 +46,7 @@ function Buttons({handleChange, prop}) {
                     name={prop}
                     value="4" 
                     onClick={handleChange}
+                    checked={data[prop] === "4"}
                 />
                 <label htmlFor={`${prop}-four`} >4</label
                 >

@@ -19,15 +19,15 @@ function Form({handleChange, surveyData, handleSubmit}) {
 
             <div className="form__group radio">
                 <h3>How do you rate your rubber duck consistency?</h3>
-                < Buttons handleChange={handleChange} prop="consistency" />
+                < Buttons handleChange={handleChange} prop="consistency" data={surveyData} />
             </div>
             <div className="form__group radio">
                 <h3>How do you rate your rubber duck colour?</h3>
-                < Buttons handleChange={handleChange} prop="colour" />
+                < Buttons handleChange={handleChange} prop="colour" data={surveyData} />
             </div>
             <div className="form__group radio">
                 <h3>How do you rate your rubber duck logo?</h3>
-                < Buttons handleChange={handleChange} prop="logo" />
+                < Buttons handleChange={handleChange} prop="logo" data={surveyData}/>
             </div>
 
             <div className="form__group">
