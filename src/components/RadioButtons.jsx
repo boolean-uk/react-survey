@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 function RadioButtons(props) {
   function updateAnswer(event) {
-    props.setRadio(event.target.value);
+    props.setRadio(event);
   }
   return (
     <ul>
@@ -57,6 +57,6 @@ function RadioButtons(props) {
 }
 RadioButtons.propTypes = {
   setRadio: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string
 };
 export default RadioButtons;

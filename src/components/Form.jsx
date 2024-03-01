@@ -1,22 +1,10 @@
-import { useState } from "react";
 import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadioButtons";
 import PropTypes from "prop-types";
 
 function Form(props) {
-  const [answers, setAnswers] = useState({
-    color: null,
-    timeSpent: {
-      swimming: false,
-      bathing: false,
-      chatting: false,
-      noTime: false,
-    },
-    review: "",
-    username: "",
-    email: "",
-  });
 
+const {answers, setAnswers} = props
   function updateAnswers(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -44,7 +32,6 @@ function Form(props) {
       username: "",
       email: "",
     });
-    event.target.form.reset();
   }
 
   return (
@@ -53,7 +40,7 @@ function Form(props) {
         <h2>Tell us what you think about your rubber duck!</h2>
         <div className="form__group radio">
           <h3>How do you rate your rubber duck colour?</h3>
-          <RadioButtons setRadio={updateAnswers} value={answers.name} />
+          <RadioButtons setRadio={updateAnswers} value={answers.color} />
         </div>
         <div className="form__group">
           <h3>How do you like to spend time with your rubber duck</h3>
@@ -99,5 +86,7 @@ function Form(props) {
 }
 Form.propTypes = {
   submit: PropTypes.func.isRequired,
+  answers: PropTypes.object.isRequired,
+  setAnswers: PropTypes.func.isRequired
 };
 export default Form;

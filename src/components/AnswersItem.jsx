@@ -8,7 +8,6 @@ const answersSet = {
   noTime: "I don't like to spend time with it",
 };
 function itemLine(key, value) {
-  console.log(key, value);
   return <li key={key}>{key+": "+value}</li>;
 }
 function ItemsList(props) {
@@ -30,6 +29,10 @@ export default function AnswersItem(props) {
   const colour = props.answerItem.color;
   const timeSpent = props.answerItem.timeSpent;
   const review = props.answerItem.review;
+
+  function onEdit(){
+    props.onEdit(props.id)
+  }
   return (
     <li>
       <article className="answer">
@@ -46,7 +49,9 @@ export default function AnswersItem(props) {
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+      <button onClick={onEdit}>Edit</button>
       </article>
+      
     </li>
   );
 }
@@ -61,4 +66,6 @@ AnswersItem.propTypes = {
     email: PropTypes.string.isRequired,
     review: PropTypes.string.isRequired,
   }),
+  onEdit: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired
 };
