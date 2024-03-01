@@ -91,13 +91,12 @@ function Survey() {
 
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* answers should go here 
-        <ul>
-          {answersList.map((answerItem, i) => (
-            <AnswersItem answerItem={answerItem} key={i} />
-          ))}
-        </ul>
-        */}
+        {/* answers should go here */}
+        {savedAnswers.length > 0 &&
+          <AnswersList
+            answersList={savedAnswers}
+          />}
+
       </section>
 
       <section className="survey__form">
