@@ -21,16 +21,11 @@ function ItemsList({ list }) {
 
 // This is the main component being exported from this file
 
-export default function AnswersItem({answerItem: { username, color, spendtime, review, email, id }, setUserData}){
-
+export default function AnswersItem({answerItem, setUserData, /* handleDelete */}){
+  const { username, color, spendtime, review } = answerItem;
   const handleEdit = () =>{
     setUserData({   
-      color: color,
-      spendtime: spendtime,
-      review: review,
-      username: username,
-      email: email,
-      id: id
+      answerItem
     })
   }
 
@@ -51,6 +46,7 @@ export default function AnswersItem({answerItem: { username, color, spendtime, r
           <span className="answer__line">{review}</span>
         </p>
         <button onClick={handleEdit}>Edit</button>
+       {/*  <button onClick={handleDelete(answerItem)}>Delete</button> */}
       </article>
     </li>
   );
@@ -58,7 +54,8 @@ export default function AnswersItem({answerItem: { username, color, spendtime, r
 
 AnswersItem.propTypes = {
   answerItem: PropTypes.object,
-  setUserData: PropTypes.func
+  setUserData: PropTypes.func,
+/*   handleDelete: PropTypes.func */
 }
 
 ItemsList.propTypes = {

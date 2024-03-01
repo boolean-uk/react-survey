@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AnswersList from "./AnswersList";
 
 
@@ -19,7 +19,8 @@ function Survey() {
     event.preventDefault()
     //Check if it has an id and update answ with said id 
     if(Object.prototype.hasOwnProperty.call(userData, "id")){
-      const updatedAnswers = answers.map((answ) => {
+
+      /* const updatedAnswers = answers.map((answ) => {
         console.log(answ.id)
         if (answ.id === userData.id) {
           return { ...userData };
@@ -29,13 +30,52 @@ function Survey() {
       });
       console.log(updatedAnswers)
       setAnswears(updatedAnswers);
+    } */
+
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      };
+      fetch(
+        "http://localhost:3000/answers/" + userData.id,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then(() => {
+          fetchSurveyResponses();
+        });
     }
     //Add new entry with id 
     else{
-      console.log(false)
+   /*    console.log(false)
       const id = answers.length + 1;
-      setAnswears([{ ...userData, id: id }, ...answers]);
+      setAnswears([{ ...userData, id: id }, ...answers]); */
+      const fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      };
+
+      fetch("http://localhost:3000/answers", fetchOptions)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              `Network response was not ok, status: ${response.status}`
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .then(() => {
+          fetchSurveyResponses();
+        });
     }
+      
     setUserData({
       color: "",
       spendtime: [],
@@ -45,6 +85,17 @@ function Survey() {
     });
   }
 
+ /*  const handleDelete = (answer) => {
+    fetch("http://localhost:3000/answers/" + answer.id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res))
+      .then(() => {
+        fetchSurveyResponses();
+      });
+  }
+  */
   
   const handleChange = (event) => {
 
@@ -63,12 +114,33 @@ function Survey() {
         setUserData({ ...userData, [name]: value });
       }
     }
+
+    useEffect(() => {
+      fetchSurveyResponses();
+    }, []);
+  
+    const fetchSurveyResponses = () => {
+      fetch("http://localhost:3000/answers")
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Network response was not ok, status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setAnswears(data);
+        })
+        .catch((error) => {
+          console.error("Fetch error:", error);
+        });
+    };
   
   return (
     <main className="survey" >
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} setUserData={setUserData} ></AnswersList>
+        <AnswersList answersList={answers} setUserData={setUserData} /* handleDelete={handleDelete} */ ></AnswersList>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
