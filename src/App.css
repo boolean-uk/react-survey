@@ -196,3 +196,19 @@ h2 {
 .form__submit:hover {
   background-color: white;
 }
+.answer-btn{
+  border-radius: 8px;
+  padding: 5px;
+  margin-right: 3px;
+}
+.answer-btn:hover {
+  background-color: white;
+}
+
+.answer-btn:hover {
+  background-color: white;
+}
+
+.active {
+  background-color: rgb(151, 213, 224);
+}
