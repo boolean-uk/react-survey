@@ -18,12 +18,32 @@ function Survey() {
   const [open] = useState(false); //Ignore this state
   const [formData, setFormData] = useState(initialFormData);
   const [answers, setAnswers] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Survey answerd: ", { formData });
-    setAnswers([...answers, { ...formData }]);
-    setFormData(initialFormData);
+    // Code for editing an answer
+    if (isEditing) {
+      console.log("Survey edited: ", { formData });
+      // EditingIndex is the index of the answer (that is being edited) in the answers array
+      setAnswers([
+        ...answers.slice(0, editingIndex),
+        { ...formData },
+        ...answers.slice(editingIndex + 1),
+      ]);
+      // Resets states
+      setIsEditing(false);
+      setEditingIndex(null);
+      setFormData(initialFormData);
+    }
+    // Code for submitting a new answer
+    else {
+      console.log("Survey answerd: ", { formData });
+      setAnswers([...answers, { ...formData }]);
+      // Resets state
+      setFormData(initialFormData);
+    }
   };
 
   const handleChange = (event) => {
@@ -44,7 +64,12 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        <AnswersList answersList={answers} />
+        <AnswersList
+          answersList={answers}
+          setFormData={setFormData}
+          setIsEditing={setIsEditing}
+          setEditingIndex={setEditingIndex}
+        />
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit}>
