@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AnswersList from "./AnswersList";
+import { v4 as uuidv4 } from "uuid";
 
 const radioButtonValues = ["1", "2", "3", "4"];
 const bestOrWorstThings = [
@@ -24,6 +25,7 @@ const initialUserData = {
   worstThings: [],
   consistency: "",
   logo: "",
+  email: ""
 };
 
 function Survey() {
@@ -57,19 +59,33 @@ function Survey() {
     }
   }
 
+  const deleteAnswer = (data) => {
+    fetch("http://localhost:3000/users/" + data.id, {
+      method: "DELETE",
+    });
+
+    setAnswers(answers.filter((ans) => ans.id !== data.id));
+  };
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log(userData);
-    // fetch("http://localhost:3000/users", {
-    //   method: "POST",
-    //   body: JSON.stringify(userData),
-    // });
+
     if (resubmitting) {
+      fetch("http://localhost:3000/users/" + userData.id, {
+        method: "PUT",
+        body: JSON.stringify(userData),
+      });
       updateAnswer();
       setResubmitting(false);
       event.target.reset();
       setUserData(initialUserData);
     } else {
+      userData.id = uuidv4();
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        body: JSON.stringify(userData),
+      });
       setAnswers([...answers, userData]);
       event.target.reset();
       setUserData(initialUserData);
@@ -109,6 +125,7 @@ function Survey() {
         <AnswersList
           answersList={answers}
           setCurrentlyEditing={setCurrentlyEditing}
+          deleteAnswer={deleteAnswer}
         />
       </section>
       <section className="survey__form">

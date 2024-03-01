@@ -27,9 +27,12 @@ export default function AnswersItem({
     worstThings,
     consistency,
     logo,
+    email,
+    id,
   },
   setCurrentlyEditing: setCurrentlyEditing,
   index: index,
+  deleteAnswer: deleteAnswer,
 }) {
   const answerItem = {
     username: username,
@@ -40,6 +43,8 @@ export default function AnswersItem({
     worstThings: worstThings,
     consistency: consistency,
     logo: logo,
+    id: id,
+    email: email,
     index: index,
   };
 
@@ -85,6 +90,13 @@ export default function AnswersItem({
           }}
         >
           Edit
+        </button>
+        <button
+          onClick={() => {
+            deleteAnswer(answerItem);
+          }}
+        >
+          Delete
         </button>
       </article>
     </li>

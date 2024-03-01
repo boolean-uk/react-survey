@@ -3,7 +3,7 @@ import AnswersItem from "./AnswersItem";
 export default function AnswersList(props) {
  // console.log("Inside AnswersList: ", props);
 
-  const { answersList, setCurrentlyEditing } = props;
+  const { answersList, setCurrentlyEditing, deleteAnswer } = props;
 
   return (
     <ul>
@@ -11,7 +11,8 @@ export default function AnswersList(props) {
         <AnswersItem
           answerItem={answerItem}
           setCurrentlyEditing={setCurrentlyEditing}
-          index = {i}
+          deleteAnswer = {deleteAnswer}
+          index={i}
           key={i}
         />
       ))}
