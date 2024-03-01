@@ -8,11 +8,17 @@ const answersSet = {
   noTime: "I don't like to spend time with it"
 };
 
-function ItemsList({ list }) {
+
+function ItemsList({ time }) {
+  // Check if time is an array before mapping over it
+  if (!Array.isArray(time)) {
+    return null;
+  }
+
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {time.map((item) => (
+        <li key={item}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -22,15 +28,8 @@ function ItemsList({ list }) {
 export default function AnswersItem({
   // Feel free to change this props names to what suits you best
   // Rememeber here we're destructuring answerItem, which is the prop name that we've passed
-  answerItem: {  best_feature, 
-      worst_feature,
-      consistency,
-      colour,
-      logo,
-      time,
-      review,
-      username,
-      email }
+  answerItem: {best_feature, worst_feature, consistency,
+  colour, logo, time, review, username, email}
 }) {
   return (
     <li>
@@ -42,7 +41,7 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList list={time} />
+          <ItemsList time={time} />
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>

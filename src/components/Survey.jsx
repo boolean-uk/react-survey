@@ -66,7 +66,8 @@ function Survey() {
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
-        {/* <AnswersList answerList={answerList}/> */}
+        <AnswersList answersList = {answerList}/>
+        {/*  */}
 
       </section>
       <section className="survey__form">
