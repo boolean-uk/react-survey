@@ -41,12 +41,13 @@ export default function AnswersItem({
         </p>
         <p>
           <em>How do you like to spend time with your rubber duck?</em>
-          <ItemsList time={time} />
+          <ItemsList time={time} /> 
         </p>
         <p>
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button>edit</button>
       </article>
     </li>
   );

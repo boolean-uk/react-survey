@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
 import AnswersList from "./AnswersList";
+
 const initialAnswers = {
   best_feature: "", 
   worst_feature: "",
   consistency: 0,
   colour: 0,
   logo: 0,
-  time: "",
+  time: [],
   review: "",
   username: "",
   email: ""
@@ -37,11 +38,19 @@ function Survey() {
     if(inputName ==="logo"){
       setAnswer({...answer, logo: inputValue})
     }
-    if(inputName ==="time"){
-      setAnswer({...answer, time: inputValue})
-    }
     if(inputName ==="review"){
       setAnswer({...answer, review: inputValue})
+    }
+    if(inputName === "time"){
+        const selectedTimes = answer.time || [];
+        if (event.target.checked) {
+          setAnswer({ ...answer, time: [...selectedTimes, event.target.value] });
+        } else {
+          setAnswer({
+            ...answer,
+            time: selectedTimes.filter((time) => time !== event.target.value)
+          });
+        }
     }
     if(inputName ==="username"){
       setAnswer({...answer, username: inputValue})
@@ -50,6 +59,7 @@ function Survey() {
       setAnswer({...answer, email: inputValue})
     }
   }
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
