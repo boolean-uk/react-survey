@@ -1,0 +1,46 @@
+{
+  "answers": [
+    {
+      "id": "ff05",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "Nicolai",
+      "email": ""
+    },
+    {
+      "id": "2e3b",
+      "color": "",
+      "consistency": "",
+      "logo": "",
+      "spendTime": {
+        "swimming": false,
+        "bathing": false,
+        "chatting": false,
+        "noTime": false
+      },
+      "bestFeatures": {
+        "yellow": false,
+        "squeaks": false,
+        "logo": false,
+        "big": false
+      },
+      "review": "",
+      "username": "Nicolai",
+      "email": ""
+    }
+  ]
+}
