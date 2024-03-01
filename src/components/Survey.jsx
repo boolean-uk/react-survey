@@ -52,16 +52,23 @@ function Survey() {
       }
     }
     if (inputName === "spend-time") {
-      setUserData({
-        ...userData,
-        preferedTimeSpent: [...userData.preferedTimeSpent, inputValue],
-      });
+      if (!event.target.checked) {
+        setUserData({
+          ...userData,
+          preferedTimeSpent: userData.preferedTimeSpent.filter((item) => (item !== inputValue))
+        });
+        
+      } else {
+        setUserData({
+          ...userData,
+          preferedTimeSpent: [...userData.preferedTimeSpent, inputValue],
+        })
+      }
     }
     if (inputName === "review") {
       setUserData({ ...userData, whatElseText: inputValue });
     }
     if (inputName === "name") {
-      console.log("Input value = ", inputValue)
       setUserData({ ...userData, fullName: inputValue });
     }
     if (inputName === "email") {
