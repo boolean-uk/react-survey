@@ -2,13 +2,6 @@ import { useState } from "react";
 import ReactModal from 'react-modal'
 import EditAnswer from "./EditAnswer";
 
-// const answersSet = {
-//   swimming: "Swimming",
-//   bathing: "Bathing",
-//   chatting: "Chatting",
-//   noTime: "I don't like to spend time with it"
-// };
-
 function ItemsList(list) {
   return (
     <ul>
@@ -19,8 +12,6 @@ function ItemsList(list) {
   );
 }
 
-
-// This is the main component being exported from this file
 export default function AnswersItem({answerItem: { username, color, spendTime = [], review }, setSubmissions}) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -61,7 +52,7 @@ export default function AnswersItem({answerItem: { username, color, spendTime = 
             color={color}
             spendTime={spendTime}
             review={review}
-            setSubmissions={setSubmissions} // This prop must be passed down from the parent
+            setSubmissions={setSubmissions}
           />
         </ReactModal>
       </article>

@@ -9,7 +9,7 @@ const initialFormData = {
   review: "",
 };
 export default function Survey() {
-  const [open, setOpen] = useState(false); //Ignore this state
+  const [open, setOpen] = useState(false); //Ignore
 
   const [userData, setUserData] = useState(initialFormData);
 
@@ -22,25 +22,22 @@ const colorOptions = ["1", "2", "3", "4"];
 const spendTimeOptions = ["Swimming", "Bathing", "Chatting", "NoTime"];
 const [submissions, setSubmissions] = useState([]);
 
-  // Updated handleChange method
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     if (type === "checkbox") {
       if (checked) {
-        // Add the checkbox value to the array
         setUserData({
           ...userData,
           [name]: [...userData[name], value],
         });
       } else {
-        // Remove the checkbox value from the array
         setUserData({
           ...userData,
           [name]: userData[name].filter((item) => item !== value),
         });
       }
     } else {
-      // Handle other input types
+ 
       setUserData({ ...userData, [name]: value });
       setFormChanged({ ...formChanged, [name]: true });
     }
@@ -49,8 +46,8 @@ const [submissions, setSubmissions] = useState([]);
 const handleSubmit = (event) => {
   event.preventDefault();
   console.log("Form submitted: ", { userData });
-  setSubmissions([...submissions, userData]); // Add userData to submissions array
-  setUserData(initialFormData); // Reset form data after submission
+  setSubmissions([...submissions, userData]); 
+  setUserData(initialFormData); 
 };
   
 

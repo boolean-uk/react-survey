@@ -7,7 +7,6 @@ export default function EditAnswer({ closeModal, username, color, spendTime, rev
   const [editedReview, setEditedReview] = useState(review);
 
   const handleSave = () => {
-    // Update the submission with the new details
     setSubmissions((prevSubmissions) =>
       prevSubmissions.map((submission) =>
         submission.id === submissionId
@@ -15,7 +14,7 @@ export default function EditAnswer({ closeModal, username, color, spendTime, rev
           : submission
       )
     );
-    closeModal(); // Close the modal
+    closeModal();
   };
 
   return (
