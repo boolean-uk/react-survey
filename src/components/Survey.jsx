@@ -19,7 +19,7 @@ function Survey() {
     rateColour: 0,
     rateLogo: 0,
     preferedTimeSpent: [],
-    whatElseText: "",
+    whatElseText: "Nothing...",
     fullName: "",
     email: "",
   };
@@ -42,13 +42,13 @@ function Survey() {
 
     if (inputType === "radio") {
       if (inputName === "consistency-rating") {
-        setUserData({ ...userData, rateConsistency: parseInt(inputValue) });
+        setUserData({ ...userData, rateConsistency: inputValue });
       }
       if (inputName === "colour-rating") {
-        setUserData({ ...userData, rateColour: parseInt(inputValue) });
+        setUserData({ ...userData, rateColour: inputValue });
       }
       if (inputName === "logo-rating") {
-        setUserData({ ...userData, rateLogo: parseInt(inputValue) });
+        setUserData({ ...userData, rateLogo: inputValue });
       }
     }
     if (inputName === "spend-time") {

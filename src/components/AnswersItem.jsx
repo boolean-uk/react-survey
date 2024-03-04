@@ -32,11 +32,12 @@ export default function AnswersItem({
     email,
   }
 }) {
+
   return (
     <li>
       <article className="answer">
         <h3>{fullName || "Anon"} said:</h3>
-        <h4>Email: {email || "No email added :("}</h4>
+
         <p>
           <em>How do you rate your rubber duck consistency?</em>
           <span className="answer__line">{rateConsistency}</span>
@@ -57,6 +58,8 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{whatElseText}</span>
         </p>
+        <h4>Email: {email || "No email added :("}</h4>
+        
       </article>
     </li>
   );
