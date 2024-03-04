@@ -2,10 +2,11 @@
     "answers": [
       {
         "id": "1",
-        "firstName": "Albert",
-        "lastName": "Einstein",
-        "gender": "male",
-        "terms": true
+        "colour": "1",
+        "time": "swimming",
+        "else": "male",
+        "name": "Albert",
+        "email": "Albert@as.com"
       }  
     ]
   }
