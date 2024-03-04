@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AnswersList from "./AnswersList";
+
 
 function Survey() {
   const [open, setOpen] = useState(false); // Ignore this state
-
   const [answers, setAnswers] = useState([]);
-
-  const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
-
   const [userData, setUserData] = useState({
     colour: "",
     timeSpent: [],
@@ -17,11 +14,19 @@ function Survey() {
     email: "",
   });
 
+  const fetchData = () => {
+    fetch("http://localhost:3000/answer")
+      .then((response) => response.json())
+      .then((data) => setAnswers(data))
+      .catch((error) => console.error("Error fetching data", error));
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
-    console.log(event.target);
 
     if (type === "checkbox") {
       setUserData((prevUserData) => {
@@ -47,20 +52,45 @@ function Survey() {
     }
   };
 
+  const addANewAnswer = () => {
+    fetch("http://localhost:3000/answer", {
+      method: "POST",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(fetchData) // Fetch data after adding a new answer
+      .catch((error) => console.error("Error adding new answer", error));
+  };
+
+  const updateAnswer = () => {
+    fetch(`http://localhost:3000/answer/${answers[editIndex].id}`, {
+      method: "PUT",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(fetchData) // Fetch data after updating the answer
+      .catch((error) => console.error("Error updating answer", error));
+  };
+
+  const deleteAnswer = (index) => {
+    const answerId = answers[index].id;
+    fetch(`http://localhost:3000/answer/${answerId}`, {
+      method: "DELETE",
+    })
+      .then(fetchData) // Fetch data again after deleting the answer
+      .catch((error) => console.error("Error deleting answer", error));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newAnswer = { ...userData };
-    if (editMode && editIndex !== null) {
-      // If in edit mode, update the existing answer
-      setAnswers((prevAnswers) => {
-        const updatedAnswers = [...prevAnswers];
-        updatedAnswers[editIndex] = newAnswer;
-        return updatedAnswers;
-      });
-      setEditMode(false); // Exit edit mode after submission
+    if ( editIndex !== null) {
+      updateAnswer();
     } else {
-      // Otherwise, add a new answer
-      setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
+      addANewAnswer();
     }
     setUserData({
       colour: "",
@@ -72,21 +102,21 @@ function Survey() {
   };
 
   const handleEditClick = (index) => {
-    // Populate the form fields with the current answer data
     const answerToEdit = answers[index];
     setUserData(answerToEdit);
     setEditIndex(index);
-    setEditMode(true);
   };
 
-  
+  const handleDeleteClick = (index) => {
+    deleteAnswer(index);
+  };
 
   return (
     <main className="survey">
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* Answers should go here */}
-        <AnswersList answersList={answers} handleEditClick={handleEditClick}/>
+        <AnswersList answersList={answers} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick}/>
       </section>
       <section className="survey__form">
         <form className="form" onSubmit={handleSubmit} >

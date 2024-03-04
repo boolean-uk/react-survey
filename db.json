@@ -1,11 +1,25 @@
 {
-    "users": [
-      {
-        "id": "1",
-        "firstName": "Albert",
-        "lastName": "Einstein",
-        "gender": "male",
-        "terms": true
-      }  
-    ]
-  }
+  "answer": [
+    {
+      "id": "57ff",
+      "colour": "2",
+      "timeSpent": [
+        "chatting"
+      ],
+      "review": "first test update",
+      "username": "a",
+      "email": "a@gmail.com"
+    },
+    {
+      "id": "5532",
+      "colour": "4",
+      "timeSpent": [
+        "chatting",
+        "bathing"
+      ],
+      "review": "second test",
+      "username": "b",
+      "email": "b@gmail.com"
+    }
+  ]
+}
