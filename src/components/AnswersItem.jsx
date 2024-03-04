@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 // Components don't need to be separeted into individual files
 // Here we have a smaller component that helps compose the AnswersItem below
 
@@ -11,8 +12,8 @@ const answersSet = {
 function ItemsList({ list }) {
   return (
     <ul>
-      {list.map((item) => (
-        <li>{answersSet[item]}</li>
+      {list.map((item, index) => (
+        <li key={index}>{answersSet[item]}</li>
       ))}
     </ul>
   );
@@ -43,4 +44,7 @@ export default function AnswersItem({
       </article>
     </li>
   );
+}
+AnswersItem.PropTypes = {
+  answersItem: PropTypes.object
 }
