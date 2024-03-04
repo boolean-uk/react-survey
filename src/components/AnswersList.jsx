@@ -1,15 +1,22 @@
+import PropTypes from 'prop-types'
+
 import AnswersItem from "./AnswersItem";
 
-export default function AnswersList(props) {
-  console.log("Inside AnswersList: ", props);
+export default function AnswersList({ answersList, setUserData, /* handleDelete */}) {
 
-  const { answersList } = props;
+/*   console.log("Inside AnswersList: ", answersList); */
 
   return (
     <ul>
-      {answersList.map((answerItem, i) => (
-        <AnswersItem answerItem={answerItem} key={i} />
+      {answersList.map((answerItem, id) => (
+        <AnswersItem answerItem={answerItem} key={id} setUserData={setUserData} /* handleDelete={handleDelete} */ />
       ))}
     </ul>
   );
+}
+
+AnswersList.propTypes = {
+  answersList: PropTypes.array,
+  setUserData: PropTypes.func,
+  /* handleDelete: PropTypes.func */
 }
