@@ -1,0 +1,26 @@
+{
+    "answers": [
+      {
+        "id": "2",
+        "firstName": "Marie",
+        "lastName": "Curie",
+        "gender": "female",
+        "terms": true
+      },
+      {
+        "id": "3",
+        "firstName": "Isaac",
+        "lastName": "Newton",
+        "gender": "male",
+        "terms": true
+      },
+      {
+        "id": "4",
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "gender": "female",
+        "terms": false
+      }
+    ]
+  }
+  
