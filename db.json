@@ -1,0 +1,12 @@
+{
+    "answers": [
+      {
+        "id": "1",
+        "colour": "1",
+        "time": "swimming",
+        "else": "male",
+        "name": "Albert",
+        "email": "Albert@as.com"
+      }  
+    ]
+  }
